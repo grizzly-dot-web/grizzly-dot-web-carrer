@@ -1,6 +1,5 @@
 
-import React from 'react'
-import moment from 'moment'
+import React from 'react';
 
 class Header extends React.Component {
 
@@ -9,8 +8,6 @@ class Header extends React.Component {
 	}
 
 	render() {
-		let birthday = moment(this.props.profile.birth_date, 'DD.MM.YYYY');
-
 		let socialLinks = [];
 		for (let link of this.props.profile.social_links) {
 			socialLinks.push((
@@ -22,8 +19,8 @@ class Header extends React.Component {
 		for (let language of this.props.profile.languages) {
 			languages.push((
 				<div key={language.code} className="progress">
-					<span className="level">{language.level +"%"}</span>
-					<div className="bar" style={{width: language.level +"%"}}><span className="title">{language.title}</span></div>
+					<span className="level">{language.level +'%'}</span>
+					<div className="bar" style={{width: language.level +'%'}}><span className="title">{language.title}</span></div>
 				</div>
 			));
 		}

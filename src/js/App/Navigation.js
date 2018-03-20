@@ -1,5 +1,4 @@
-
-import React from 'react'
+import React from 'react';
 
 class Navigation extends React.Component {
 
@@ -12,11 +11,9 @@ class Navigation extends React.Component {
 
 		for (let date of this.props.dates) {
 			list.push((
-				<li key={date}><a href={"#"+ date}>{date}</a></li>
-			))
+				<li key={date}><a href={`#${date}`}>{date}</a></li>
+			));
 		}
-
-		let height = window.height;
 
 		return (
 			<ul>

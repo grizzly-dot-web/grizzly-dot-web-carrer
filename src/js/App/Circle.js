@@ -1,5 +1,5 @@
-import React from 'react'
-import check from 'check-types'
+import React from 'react';
+import check from 'check-types';
 
 class Circle extends React.Component {
 
@@ -21,29 +21,29 @@ class Circle extends React.Component {
 		};
 
 		if (check.function(this.props.changeLastCirclePosition)) {
-				this.state.position = this.getCirclePosition(this.state.lastCirclePosition);
-				this.props.changeLastCirclePosition(this.state.position);
+			this.state.position = this.getCirclePosition(this.state.lastCirclePosition);
+			this.props.changeLastCirclePosition(this.state.position);
 		}
 	}
 
 	render() {
 		let defaultScaleFactor = check.number(this.state.scaleFactor) ? this.state.scaleFactor : 0;
-		let scaleFactor = (check.object(this.state.data) && check.number(this.state.data.scaleFactor)) ? this.state.data.scaleFactor : 0;
+		let scaleFactor = (check.object(this.state.data) && check.number(this.state.data.scaleFactor)) ? this.state.data.scaleFactor : defaultScaleFactor;
 
 		if (check.greater(scaleFactor, 1)) {
 			scaleFactor = 1;
 		}
 
-		this.state.circleDimension = this.getCircleDimension(this.state.defaultRadius, this.state.scaleMax, scaleFactor);
+		let circleDimension = this.getCircleDimension(this.state.defaultRadius, this.state.scaleMax, scaleFactor);
 
 		let styles = {
 			position: 'relative',
-			width: this.state.circleDimension + 'px',
-			height:	this.state.circleDimension + 'px',
+			width: circleDimension + 'px',
+			height: circleDimension + 'px',
 		};
 
 		if (this.state.position > 50) {
-			styles.marginLeft = this.state.circleDimension * -1
+			styles.marginLeft = circleDimension * -1;
 		}
 
 		if (this.state.data != null && check.nonEmptyString(this.state.data.color)) {
@@ -63,31 +63,31 @@ class Circle extends React.Component {
 		}
 
 		return (
-			<SpecifiedTag className={"circle "+ this.state.additionalClasses.join(" ")} href={href} target={target} style={styles}>
+			<SpecifiedTag className={`circle ${this.state.additionalClasses.join(' ')}`} href={href} target={target} style={styles}>
 				{this.props.children}
 			</SpecifiedTag>
 		);
 	}
 
 	getCircleDimension(radius, scaleMax, scaleFactor) {
-			if (!check.number(scaleFactor)) {
-				scaleFactor = 0;
-			}
+		if (!check.number(scaleFactor)) {
+			scaleFactor = 0;
+		}
 
-			if (scaleFactor > 1) {
-				scaleFactor = 1;
-			}
+		if (scaleFactor > 1) {
+			scaleFactor = 1;
+		}
 
-			let dimension = (radius * 2) + scaleMax * scaleFactor;
+		let dimension = (radius * 2) + scaleMax * scaleFactor;
 
-			if (!check.number(dimension)) {
-				return 0;
-			}
+		if (!check.number(dimension)) {
+			return 0;
+		}
 
-			return dimension;
+		return dimension;
 	}
 
-	getCirclePosition(lastPosition, circleWidth) {
+	getCirclePosition(lastPosition) {
 		let newPosition = lastPosition;
 		let forbiddenPositionDifference = 30;
 

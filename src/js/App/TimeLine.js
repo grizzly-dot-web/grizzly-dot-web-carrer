@@ -1,7 +1,7 @@
 
-import React from 'react'
-import Navigation from './Navigation'
-import HistoryEntry from './HistoryEntry'
+import React from 'react';
+import Navigation from './Navigation';
+import HistoryEntry from './HistoryEntry';
 
 class TimeLine extends React.Component {
 
@@ -14,6 +14,7 @@ class TimeLine extends React.Component {
 
 		let dates = [];
 		let first = true;
+
 		for (let item of this.props.history) {
 			let classes = [];
 			dates.push(item.begin_date);

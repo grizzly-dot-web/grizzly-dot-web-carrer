@@ -1,8 +1,8 @@
 
-import React from 'react'
-import moment from 'moment'
+import React from 'react';
+import moment from 'moment';
 
-import Circle from './Circle.js'
+import Circle from './Circle.js';
 
 class HistoryEntry extends React.Component {
 
@@ -11,25 +11,24 @@ class HistoryEntry extends React.Component {
 
 		this.state = {
 			lastCirclePosition: 0
-		}
+		};
 	}
 
-	getCircles(data, type) {
+	getCircles(data) {
 		const CircleScaleMax = 100;
 		const CircleDefaultRadius = 40;
 
 		let
-			circle,
 			circles = []
 		;
 
 		for (let item of this.shuffle(data)) {
 			circles.push((
-				<Circle key={item.title} additionalClasses={["experience", item.type]} data={item} scaleMax={CircleScaleMax} defaultRadius={CircleDefaultRadius} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
+				<Circle key={item.title} additionalClasses={['experience', item.type]} data={item} scaleMax={CircleScaleMax} defaultRadius={CircleDefaultRadius} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
 					<span className="title">{item.title}</span>
 					<span className="type">{' ('+ item.type +')'}</span>
 				</Circle>
-		));
+			));
 		}
 
 		return circles;
@@ -58,23 +57,23 @@ class HistoryEntry extends React.Component {
 		let scaleFactor = workedMonth / 12;
 
 		let experienceCircles = this.getCircles(this.props.entry.experiences);
-		let halfWayThough = Math.floor(experienceCircles.length / 2)
+		let halfWayThough = Math.floor(experienceCircles.length / 2);
 
 		let experienceCirclesFirstHalf = experienceCircles.slice(0, halfWayThough);
 		let experienceCirclesSecondHalf = experienceCircles.slice(halfWayThough, experienceCircles.length);
 
 		// render the prepared section
 		return (
-			<section id={this.props.entry.begin_date} className={"history-entry "+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultRadius * 2 + CircleScaleMax }}>
+			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultRadius * 2 + CircleScaleMax }}>
 				<header>
 					<h1>{this.props.entry.institution.title}</h1>
 					<h2>{this.props.entry.institution.job_title}</h2>
 				</header>
 				<div className="flex-container">
 					<div className="flex-item flex-grow-2 flex-order-2">
-					<Circle additionalClasses={["main"]} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultRadius={CircleDefaultRadius} >
-						<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
-					</Circle>
+						<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultRadius={CircleDefaultRadius} >
+							<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
+						</Circle>
 					</div>
 					<div className="experience-circles flex-item flex-order-1">{experienceCirclesFirstHalf}</div>
 					<div className="experience-circles experience-circles-right flex-item flex-order-3">{experienceCirclesSecondHalf}</div>
@@ -132,24 +131,24 @@ class HistoryEntry extends React.Component {
 		return formattedYear + formattedMonth + formattedDay;
 	}
 
-  //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	// Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 	shuffle(array) {
-	  let currentIndex = array.length, temporaryValue, randomIndex;
+		let currentIndex = array.length, temporaryValue, randomIndex;
 
-	  // While there remain elements to shuffle...
-	  while (0 !== currentIndex) {
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
 
-	    // Pick a remaining element...
-	    randomIndex = Math.floor(Math.random() * currentIndex);
-	    currentIndex -= 1;
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
 
-	    // And swap it with the current element.
-	    temporaryValue = array[currentIndex];
-	    array[currentIndex] = array[randomIndex];
-	    array[randomIndex] = temporaryValue;
-	  }
+			// And swap it with the current element.
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
 
-	  return array;
+		return array;
 	}
 }
 

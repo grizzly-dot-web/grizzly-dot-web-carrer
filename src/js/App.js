@@ -1,9 +1,8 @@
+import React from 'react';
 
-import React from 'react'
-
-import Profile from './App/Header'
-import TimeLine from './App/TimeLine'
-import JobRequest from './App/JobRequest'
+import Profile from './App/Header';
+import TimeLine from './App/TimeLine';
+import JobRequest from './App/JobRequest';
 
 class App extends React.Component {
 
