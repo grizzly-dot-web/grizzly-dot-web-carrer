@@ -2,7 +2,7 @@
 import React from 'react'
 import moment from 'moment'
 
-class Profile extends React.Component {
+class Header extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -66,4 +66,4 @@ class Profile extends React.Component {
 	}
 }
 
-export default Profile;
+export default Header;

@@ -1,9 +1,9 @@
 
 import React from 'react'
 
-import Profile from './App/Profile'
-import JobOffer from './App/JobOffer'
+import Profile from './App/Header'
 import TimeLine from './App/TimeLine'
+import JobRequest from './App/JobRequest'
 
 class App extends React.Component {
 
@@ -15,7 +15,7 @@ class App extends React.Component {
 		return (
 			<main>
 				<Profile visual={null} profile={this.props.carrer.profile} />
-				<JobOffer data={ this.props.carrer.jobOffer } />
+				<JobRequest data={ this.props.carrer.jobRequest } />
 				<TimeLine history={this.props.carrer.history} />
 			</main>
 		);

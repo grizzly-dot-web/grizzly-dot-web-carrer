@@ -1,0 +1,12 @@
+$ColorPrimary: #ff9c00;
+$ColorSecondary: #9B9B9B;
+
+$ColorSecondaryDark: darken($ColorSecondary, 5%);
+$ColorSecondaryDarker: darken($ColorSecondary, 25%);
+
+$ColorSecondaryLight: lighten($ColorSecondary, 20%);
+$ColorSecondaryLighter: lighten($ColorSecondary, 35%);
+
+$ColorCopy: $ColorSecondaryDark;
+$ColorBackgroundLight: $ColorSecondaryLighter;
+$ColorBackgroundDark: $ColorSecondaryDarker;

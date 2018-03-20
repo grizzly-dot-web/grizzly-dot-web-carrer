@@ -1,0 +1,10 @@
+.content {
+	@extend %BoxShadow;
+
+	margin-bottom: 100px;
+	z-index: 5;
+	padding: 30px;
+	position: relative;
+	border: 1px solid $ColorBackgroundDark;
+	background-color: $ColorBackgroundLight;
+}

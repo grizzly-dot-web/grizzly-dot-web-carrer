@@ -65,7 +65,7 @@ class HistoryEntry extends React.Component {
 
 		// render the prepared section
 		return (
-			<section id={this.props.entry.begin_date} className={"date-section "+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultRadius * 2 + CircleScaleMax }}>
+			<section id={this.props.entry.begin_date} className={"history-entry "+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultRadius * 2 + CircleScaleMax }}>
 				<header>
 					<h1>{this.props.entry.institution.title}</h1>
 					<h2>{this.props.entry.institution.job_title}</h2>

@@ -1,0 +1,18 @@
+
+@keyframes loading-pulse {
+	49% {
+		opacity: 0;
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 1;
+	}
+	75% {
+		transform: translate(-50%, -50%) scale(1.4);
+		opacity: 0.4;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1.65);
+		opacity: 0;
+	}
+}
