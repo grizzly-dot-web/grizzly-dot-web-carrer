@@ -1,5 +1,6 @@
 import React from 'react';
 import marked from 'marked';
+import renderHtml from 'react-render-html';
 import check from 'check-types';
 
 class Content extends React.Component {
@@ -39,7 +40,7 @@ class Content extends React.Component {
 
 	convertMarkdown(content) {
 		return (
-			<div key={content} dangerouslySetInnerHTML={{ __html: marked(content) }} />
+			renderHtml(marked(content))
 		);
 	}
 }
