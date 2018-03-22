@@ -6,7 +6,6 @@ import 'moment/locale/de';
 
 moment.locale('de');
 
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 

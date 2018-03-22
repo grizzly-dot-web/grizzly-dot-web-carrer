@@ -18,12 +18,31 @@ module.exports = {
         "react"
     ],
     "rules": {
+         "no-unused-vars": [
+             "error",
+             {
+                 "vars": "all",
+                 "args": "none"
+             }
+         ],
+        "no-multiple-empty-lines": [
+            "warn",
+            {
+                "max": 1,
+                "maxBOF": 0,
+                "maxEOF": 1,
+            }
+
+        ],
         "react/prop-types": [
           "off"
         ],
         "indent": [
             "error",
-            "tab"
+            "tab",
+            {
+                "SwitchCase": 1
+            }
         ],
         "linebreak-style": [
             "error",
@@ -33,11 +52,12 @@ module.exports = {
             "error",
             "single",
             {
-              "allowTemplateLiterals": true
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
             }
         ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ]
     }
