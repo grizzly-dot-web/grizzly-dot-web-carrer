@@ -1,13 +1,14 @@
-
 import React from 'react';
-import marked from 'marked';
+
+import Article from './JobRequest/Article';
+import Content from './JobRequest/AccessModeratedContent';
 
 class JobRequest extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			content: this.props.data.content,
+			data: this.props.data
 		};
 	}
 
@@ -15,10 +16,33 @@ class JobRequest extends React.Component {
 		return (
 			<div className="wrapper">
 				<section className="content job-request">
-					<div dangerouslySetInnerHTML={{ __html: marked(this.state.content) }} />
+					{this.renderArticles()}
 				</section>
 			</div>
 		);
+	}
+
+	renderArticles() {
+		let items = [];
+
+		for (let item of this.state.data.articles) {
+			let headings = {};
+			let headingTags = [
+				'h3', 'h4', 'h5'
+			];
+
+			for (let i; i <= item.headings.length; i++) {
+				headings[headingTags] = item.headings[i];
+			}
+
+			items.push((
+				<Article key={item.content} data={item} headings={headings} >
+					<Content data={item.content} />
+				</Article>
+			));
+		}
+
+		return items;
 	}
 
 }
