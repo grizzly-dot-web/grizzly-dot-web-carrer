@@ -9,13 +9,15 @@ class HistoryEntry extends React.Component {
 		super(props);
 
 		this.state = {
-			lastCirclePosition: 0
+			lastCirclePosition: 0,
+			timescaleEnd: this.props.timescaleEnd,
+			timescaleStart: this.props.timescaleStart,
 		};
 	}
 
 	getCircles(data) {
-		const CircleScaleMax = 100;
-		const CircleDefaultRadius = 40;
+		const CircleScaleMax = 6;
+		const CircleDefaultWidth = 2;
 
 		let
 			circles = []
@@ -23,7 +25,7 @@ class HistoryEntry extends React.Component {
 
 		for (let item of this.shuffle(data)) {
 			circles.push((
-				<Circle key={item.title} additionalClasses={['experience', item.type]} data={item} scaleMax={CircleScaleMax} defaultRadius={CircleDefaultRadius} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
+				<Circle key={item.title} additionalClasses={['experience', item.type]} data={item} scaleMax={CircleScaleMax} defaultWidth={CircleDefaultWidth} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
 					<span className="title">{item.title}</span>
 					<span className="type">{' ('+ item.type +')'}</span>
 				</Circle>
@@ -46,14 +48,14 @@ class HistoryEntry extends React.Component {
 			endDate = moment();
 		}
 
-		let duration = moment.duration(endDate.diff(startDate), 'months');
-		let workedMonth = Math.ceil(duration);
+		let duration = moment.duration(endDate.diff(startDate));
+		let timescale = moment.duration(this.state.timescaleStart.diff(this.state.timescaleEnd));
 
 		//prepare circles
-		const CircleScaleMax = 100;
-		const CircleDefaultRadius = 300;
+		const CircleScaleMax = 50;
+		const CircleDefaultWidth = 20;
 
-		let scaleFactor = workedMonth / 12;
+		let scaleFactor = duration / timescale;
 
 		let experienceCircles = this.getCircles(this.props.entry.experiences);
 		let halfWayThough = Math.floor(experienceCircles.length / 2);
@@ -63,14 +65,14 @@ class HistoryEntry extends React.Component {
 
 		// render the prepared section
 		return (
-			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultRadius * 2 + CircleScaleMax }}>
+			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultWidth * 2 + CircleScaleMax }}>
 				<header>
 					<h1>{this.props.entry.institution.title}</h1>
 					<h2>{this.props.entry.institution.job_title}</h2>
 				</header>
 				<div className="flex-container">
 					<div className="flex-item flex-grow-2 flex-order-2">
-						<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultRadius={CircleDefaultRadius} >
+						<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultWidth={CircleDefaultWidth} >
 							<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
 						</Circle>
 					</div>

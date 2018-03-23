@@ -7,14 +7,14 @@ class Circle extends React.Component {
 		super(props);
 
 		let data = check.object(this.props.data) ? this.props.data : null;
-		let defaultScaleFactor = !check.maybe(this.props.defaultScaleFactor) ? this.props.defaultScaleFactor : null;
-		let lastCirclePosition = !check.maybe(this.props.lastCirclePosition) ? this.props.lastCirclePosition : 0;
+		let defaultScaleFactor = check.assigned(this.props.defaultScaleFactor) ? this.props.defaultScaleFactor : null;
+		let lastCirclePosition = check.assigned(this.props.lastCirclePosition) ? this.props.lastCirclePosition : 0;
 
 		this.state = {
 			data: data,
 			scaleFactor: defaultScaleFactor,
 			scaleMax: this.props.scaleMax,
-			defaultRadius: this.props.defaultRadius,
+			defaultWidth: this.props.defaultWidth,
 			circleDimension: null,
 			additionalClasses: this.props.additionalClasses,
 			lastCirclePosition: lastCirclePosition,
@@ -34,12 +34,12 @@ class Circle extends React.Component {
 			scaleFactor = 1;
 		}
 
-		let circleDimension = this.getCircleDimension(this.state.defaultRadius, this.state.scaleMax, scaleFactor);
+		let circleDimension = this.getCircleDimension(this.state.defaultWidth, this.state.scaleMax, scaleFactor);
 
 		let styles = {
 			position: 'relative',
-			width: circleDimension + 'px',
-			height: circleDimension + 'px',
+			width: circleDimension + 'vw',
+			height: circleDimension + 'vw',
 		};
 
 		if (this.state.position > 50) {
@@ -69,7 +69,7 @@ class Circle extends React.Component {
 		);
 	}
 
-	getCircleDimension(radius, scaleMax, scaleFactor) {
+	getCircleDimension(width, scaleMax, scaleFactor) {
 		if (!check.number(scaleFactor)) {
 			scaleFactor = 0;
 		}
@@ -78,7 +78,7 @@ class Circle extends React.Component {
 			scaleFactor = 1;
 		}
 
-		let dimension = (radius * 2) + scaleMax * scaleFactor;
+		let dimension = width + (scaleMax * scaleFactor);
 
 		if (!check.number(dimension)) {
 			return 0;
