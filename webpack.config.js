@@ -1,11 +1,12 @@
+/* eslint-disable */  // --> OFF
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
-const debug = process.env.NODE_ENV !== "production";
+const debug = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-	devtool: debug ? "inline-source-map" : null,
+	devtool: debug ? "inline-source-map" : false,
 	entry: {
 		main: ['./src/js/main.js', './src/styles/main.scss'],
 	},
