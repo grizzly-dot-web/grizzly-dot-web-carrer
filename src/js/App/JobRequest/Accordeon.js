@@ -9,29 +9,29 @@ class Accordeon extends React.Component {
 		super(props);
 
 		this.state = {
-			headings: this.props.headings,
+			data: this.props.data,
 			allowedTags: this.props.allowedTags,
 			contentHeight: 'auto',
-			visibleContent: check.boolean(this.props.visibleContent) ? this.props.visibleContent : false,
+			visibleContent: check.boolean(this.props.data.visibleContent) ? this.props.data.visibleContent : false,
 		};
 	}
 
 	render() {
 		return (
-			<div className="accordeon">
-				<header className="title" onClick={ (e) => { this.toggleContent(); this.props.onAccordeonHeaderClick(e, this.state.headings); } }>
-					<Headings data={this.state.headings} allowedTags={this.state.allowedTags} />
+			<section className={`accordeon ${(this.state.visibleContent) ? 'accordeon-open' : 'accordeon-closed'}`}>
+				<header className="title" onClick={ (e) => { this.toggleContent(); this.props.onAccordeonHeaderClick(e, this.state.data.headings); } }>
+					<Headings data={this.state.data.headings} allowedTags={this.state.allowedTags} />
 				</header>
-				<div ref={ (accordeonContentElement) => this.accordeonContentElement = accordeonContentElement } className="accordeon-content" style={{ height: this.state.contentHeight }}>
+				<div ref={ (accordeonContentElement) => this.accordeonContentElement = accordeonContentElement } className={`accordeon-content`} style={{ height: this.state.contentHeight }}>
 					{this.props.children}
 				</div>
-			</div>
+			</section>
 		);
 	}
 
 	componentDidMount() {
 		this.originalContentHeight = this.accordeonContentElement.clientHeight;
-		this.toggleContent();
+		this.toggleContent(this.state.visibleContent);
 	}
 
 	toggleContent(show) {

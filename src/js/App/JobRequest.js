@@ -1,4 +1,5 @@
 import React from 'react';
+import check from 'check-types';
 
 import Article from './JobRequest/Article';
 import Content from './JobRequest/AccessModeratedContent';
@@ -25,7 +26,9 @@ class JobRequest extends React.Component {
 	renderArticles() {
 		let items = [];
 
+		let counter = 0;
 		for (let item of this.state.data.articles) {
+			counter++;
 			let headings = {};
 			let headingTags = [
 				'h3', 'h4', 'h5'
@@ -35,9 +38,14 @@ class JobRequest extends React.Component {
 				headings[headingTags] = item.headings[i];
 			}
 
+			let content = null;
+			if (check.assigned(item.content)) {
+				content = <Content data={item.content} />
+			}
+
 			items.push((
-				<Article key={item.content} data={item} headings={headings} >
-					<Content data={item.content} />
+				<Article key={counter} data={item} allowedTags={['h1', 'h2', 'h3']} >
+					{content}
 				</Article>
 			));
 		}

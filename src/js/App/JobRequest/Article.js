@@ -1,4 +1,5 @@
 import React from 'react';
+import check from 'check-types';
 
 import Headings from './Headings';
 import Accordeon from './Accordeon';
@@ -15,10 +16,16 @@ class Article extends React.Component {
 	}
 
 	render() {
+		let accordeons = null;
+		if (check.assigned(this.state.data.accordeons)) {
+			accordeons = this.renderAccordeons();
+		}
+
 		return (
 			<article>
 				<Headings data={this.state.data.headings} allowedTags={['h1', 'h2', 'h3']} />
-				{this.renderAccordeons()}
+				{this.props.children}
+				{accordeons}
 			</article>
 		);
 	}
@@ -26,9 +33,11 @@ class Article extends React.Component {
 	renderAccordeons() {
 		let accordeons = [];
 
+		let counter = 0;
 		for (let item of this.state.data.accordeons) {
+			counter++;
 			accordeons.push((
-				<Accordeon key={item.content} headings={item.headings} allowedTags={['h2', 'h3', 'h4']} onAccordeonHeaderClick={this.handleAccordeonHeaderClick}>
+				<Accordeon key={counter} data={item} allowedTags={['h2', 'h3', 'h4']} onAccordeonHeaderClick={this.handleAccordeonHeaderClick}>
 					<Content data={item.content} />
 				</Accordeon>
 			));
