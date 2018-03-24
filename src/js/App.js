@@ -10,11 +10,11 @@ class App extends React.Component {
 		super(props);
 	}
 
+	// TODO rewrite jobRequest and Accordeon	<JobRequest data={ this.props.carrer.jobRequest } />
 	render() {
 		return (
 			<main>
 				<Profile visual={null} profile={this.props.carrer.profile} />
-				<JobRequest data={ this.props.carrer.jobRequest } />
 				<TimeLine history={this.props.carrer.history} />
 			</main>
 		);

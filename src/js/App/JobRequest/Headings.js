@@ -7,13 +7,13 @@ class Headlines extends React.Component  {
 		super(props);
 
 		this.state = {
-			data: this.props.data,
-			allowedTags: this.props.allowedTags
+			config: this.props.config,
+			allowedTags: check.array(this.props.allowedTags) ? this.props.allowedTags : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 		};
 	}
 
 	render() {
-		return (this.html(this.state.data, this.state.allowedTags));
+		return (this.html(this.state.config.data, this.state.allowedTags));
 	}
 
 	html(data, headerTags) {
@@ -22,17 +22,17 @@ class Headlines extends React.Component  {
 			headings = []
 		;
 
-		object = this.object(data);
-
+		object = this.object(data, headerTags);
 		if (check.object(object)) {
-			for (let CustomTag in data) {
+			let counter = 0;
+			for (let CustomTag in object) {
 				let inner = object[CustomTag];
 				if (check.object(inner)) {
-					inner = this.html(inner);
+					inner = this.html(inner, headerTags);
 				}
 
 				headings.push(
-					(<CustomTag key={inner}>{inner}</CustomTag>)
+					(<CustomTag key={counter++}>{inner}</CustomTag>)
 				);
 			}
 
@@ -51,7 +51,7 @@ class Headlines extends React.Component  {
 			return data;
 		}
 
-		for (let i; i <= data.length; i++) {
+		for (let i = 0; i < data.length; i++) {
 			let tag = headerTags[i];
 
 			if (i > headerTags.length) {
@@ -61,6 +61,7 @@ class Headlines extends React.Component  {
 			} else {
 				headings[tag] = data[i];
 			}
+
 		}
 
 		return headings;

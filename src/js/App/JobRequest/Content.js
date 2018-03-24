@@ -9,12 +9,12 @@ class Content extends React.Component {
 		super(props);
 
 		this.state = {
-			data: this.props.data
+			config: this.props.config
 		};
 	}
 
 	render() {
-		let contentObj = this.state.data;
+		let contentObj = this.state.config.data;
 
 		if (check.array(contentObj)) {
 			let content = [];

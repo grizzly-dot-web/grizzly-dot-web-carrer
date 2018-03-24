@@ -1,7 +1,9 @@
 import React from 'react';
+import check from 'check-types';
 import moment from 'moment';
 
-import Circle from './Circle.js';
+import Circle from './Circle';
+import Article from './JobRequest/Article';
 
 class HistoryEntry extends React.Component {
 
@@ -12,6 +14,7 @@ class HistoryEntry extends React.Component {
 			lastCirclePosition: 0,
 			timescaleEnd: this.props.timescaleEnd,
 			timescaleStart: this.props.timescaleStart,
+			detailsVisible:  false,
 		};
 	}
 
@@ -52,35 +55,45 @@ class HistoryEntry extends React.Component {
 		let timescale = moment.duration(this.state.timescaleStart.diff(this.state.timescaleEnd));
 
 		//prepare circles
-		const CircleScaleMax = 50;
-		const CircleDefaultWidth = 20;
+		const CircleScaleMax = 140;
+		const CircleDefaultWidth = 50;
 
 		let scaleFactor = duration / timescale;
 
-		let experienceCircles = this.getCircles(this.props.entry.experiences);
-		let halfWayThough = Math.floor(experienceCircles.length / 2);
-
-		let experienceCirclesFirstHalf = experienceCircles.slice(0, halfWayThough);
-		let experienceCirclesSecondHalf = experienceCircles.slice(halfWayThough, experienceCircles.length);
+		// prepare child rendering
+		let details = null;
+		if (check.assigned(this.props.entry.details)) {
+			details = (<Article config={this.props.entry.details.config} allowedTags={['h3', 'h4', 'h5', 'h6']} />);
+		}
 
 		// render the prepared section
 		return (
 			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultWidth * 2 + CircleScaleMax }}>
-				<header>
-					<h1>{this.props.entry.institution.title}</h1>
+				<header className="history-header">
+					<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
+					<h1>{this.props.entry.institution.title.replace('\n', (<br />))}</h1>
 					<h2>{this.props.entry.institution.job_title}</h2>
 				</header>
-				<div className="flex-container">
-					<div className="flex-item flex-grow-2 flex-order-2">
-						<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultWidth={CircleDefaultWidth} >
-							<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
-						</Circle>
+				<div className="history-circle">
+					<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultWidth={CircleDefaultWidth} >
+						<a className="detail-toggle" onClick={(e) => this.onDetailsToggleClick(e)}>Details</a>
+					</Circle>
+				</div>
+				<div className={`history-content
+						${check.assigned(details) ? 'details-exists' : ''} ${this.detailsVisible ? 'details-visible' : ''}`}>
+					{details}
+					<div className={`experience-circles`}>
+						{this.getCircles(this.props.entry.experiences)}
 					</div>
-					<div className="experience-circles flex-item flex-order-1">{experienceCirclesFirstHalf}</div>
-					<div className="experience-circles experience-circles-right flex-item flex-order-3">{experienceCirclesSecondHalf}</div>
 				</div>
 			</section>
 		);
+	}
+
+	onDetailsToggleClick(e) {
+		this.setState(Object.assign(this.state, {
+			detailsVisible: !this.state.detailsVisible
+		}));
 	}
 
 	getFormattedTime(startDate, endDate) {

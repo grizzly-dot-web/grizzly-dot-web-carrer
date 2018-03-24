@@ -1,9 +1,13 @@
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, time {
 	margin: 0;
+	font-weight: 300;
+	color: $ColorSecondary;
 }
 
-h1, time {
-  font-size: 40px;
-  font-weight: 400;
-  //margin: 0 0 50px;
+h1 {
+	font-size: 24px;
+}
+
+h2, time {
+  font-size: 17px;
 }

@@ -11,44 +11,46 @@ class Article extends React.Component {
 		super(props);
 
 		this.state = {
-			data: this.props.data
+			config: this.props.config,
+			allowedTags: this.props.allowedTags,
 		};
 	}
 
-	render() {
-		let accordeons = null;
-		if (check.assigned(this.state.data.accordeons)) {
-			accordeons = this.renderAccordeons();
+	renderComponents() {
+		let components = this.state.config.components;
+		if (!check.object(this.state.config.components)) {
+			return null;
 		}
 
+		let render = [], counter = 0;
+		for (let key in components) {
+			render.push(this.renderComponentByType(key, components[key], counter++));
+		}
+
+		return render;
+	}
+
+	renderComponentByType(component, config, key) {
+		switch (component) {
+			case 'Accordeon':
+				return null; //(<Content key={key} config={config}  allowedTags={this.state.allowedTags} />);
+			case 'Headings':
+				return (<Headings key={key} config={config} allowedTags={this.state.allowedTags} />);
+			case 'Content':
+				return (<Content key={key} config={config} />);
+			default:
+				throw new Error(`Invalid Component: ${config.type}`);
+		}
+	}
+
+	render() {
 		return (
 			<article>
-				<Headings data={this.state.data.headings} allowedTags={['h1', 'h2', 'h3']} />
-				{this.props.children}
-				{accordeons}
+				{this.renderComponents()}
 			</article>
 		);
 	}
 
-	renderAccordeons() {
-		let accordeons = [];
-
-		let counter = 0;
-		for (let item of this.state.data.accordeons) {
-			counter++;
-			accordeons.push((
-				<Accordeon key={counter} data={item} allowedTags={['h2', 'h3', 'h4']} onAccordeonHeaderClick={this.handleAccordeonHeaderClick}>
-					<Content data={item.content} />
-				</Accordeon>
-			));
-		}
-
-		return accordeons;
-	}
-
-	handleAccordeonHeaderClick(e, headings) {
-
-	}
 }
 
 export default Article;

@@ -11,14 +11,14 @@ class TimeLine extends React.Component {
 		super(props);
 
 		let entries = this.props.history.sort((a, b) => {
-			let aDate = new Date(a.begin_date);
-			let bDate = new Date(b.begin_date);
+			let aDate = moment(a.begin_date);
+			let bDate = moment(b.begin_date);
 
-			if (aDate > bDate) {
+			if (aDate < bDate) {
 				return -1;
 			}
 
-			if (aDate < bDate) {
+			if (aDate > bDate) {
 				return 1;
 			}
 
@@ -27,8 +27,8 @@ class TimeLine extends React.Component {
 
 		this.state = {
 			historyEntries: entries,
-			timescaleStart: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
-			timescaleEnd: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
+			timescaleEnd: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
+			timescaleStart: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
 		};
 	}
 

@@ -37,9 +37,9 @@ class Circle extends React.Component {
 		let circleDimension = this.getCircleDimension(this.state.defaultWidth, this.state.scaleMax, scaleFactor);
 
 		let styles = {
-			position: 'relative',
-			width: circleDimension + 'vw',
-			height: circleDimension + 'vw',
+			width: circleDimension + '%',
+			paddingTop: circleDimension / 2 + '%',
+			paddingBottom: circleDimension / 2 + '%',
 		};
 
 		if (this.state.position > 50) {
