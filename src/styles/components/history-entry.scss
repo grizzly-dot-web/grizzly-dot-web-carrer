@@ -18,6 +18,21 @@
 	.history-content {
 		order: 3;
 		width: 40%;
+
+		article {
+			header {
+				h3, h4 {
+					display: inline-block;
+				}
+
+				h4 {
+					&:before {
+						content: ' | ';
+						white-space: pre;
+					}
+				}
+			}
+		}
 	}
 	.history-circle {
 		order: 2;

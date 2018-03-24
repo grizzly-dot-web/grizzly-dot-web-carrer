@@ -14,13 +14,19 @@
 	box-sizing: border-box;
 }
 
+pre {
+	margin: 0;
+	font-size: inherit;
+	font-family: inherit;
+}
+
 html, body {
 	width: 100%;
 	height: 100%;
 }
 
 body {
-	color: $ColorCopy;
+	color: $ColorBackgroundLight;
 	font-family: 'Roboto', sans-serif;
 	background-color: $ColorBackgroundLight;
 }
