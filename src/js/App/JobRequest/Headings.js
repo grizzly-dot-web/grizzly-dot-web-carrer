@@ -44,7 +44,7 @@ class Headlines extends React.Component  {
 		let headings = {};
 
 		if (!check.array(data) && !check.object(data)) {
-			throw new Error(`headings must be an object se { h1: "foo", h2: "bar" } given: ${data}`);
+			throw new Error(`headings must be an object see { h1: "foo", h2: "bar" } given: ${data}`);
 		}
 
 		if (check.object(data)) {
