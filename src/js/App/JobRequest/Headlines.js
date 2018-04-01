@@ -1,19 +1,25 @@
 import React from 'react';
 import check from 'check-types';
 
-class Headlines extends React.Component  {
+import FrontendComponent from './../Components/FrontendComponent';
+
+class Headlines extends FrontendComponent  {
 
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			config: this.props.config,
+		this.state = Object.assign(this.state, {
 			allowedTags: check.array(this.props.allowedTags) ? this.props.allowedTags : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-		};
+		});
 	}
 
 	render() {
-		return (this.html(this.state.config.data, this.state.allowedTags));
+		let headings = (this.html(this.state.data, this.state.allowedTags));
+
+		if (!this.state.config.isHeader) {
+			return headings;
+		}
+		return (<header>{headings}</header>);
 	}
 
 	html(data, headerTags) {

@@ -1,20 +1,21 @@
-import React from 'react';
 import marked from 'marked';
 import renderHtml from 'react-render-html';
 import check from 'check-types';
 
-class Content extends React.Component {
+import FrontendComponent from './../Components/FrontendComponent';
+
+class Content extends FrontendComponent {
 
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			config: this.props.config
-		};
+		this.state = Object.assign(this.state, {
+			allowedTags: check.array(this.props.allowedTags) ? this.props.allowedTags : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+		});
 	}
 
 	render() {
-		let contentObj = this.state.config.data;
+		let contentObj = this.state.data;
 
 		if (check.array(contentObj)) {
 			let content = [];
@@ -39,9 +40,7 @@ class Content extends React.Component {
 	}
 
 	convertMarkdown(content) {
-		return (
-			renderHtml(marked(content))
-		);
+		return (renderHtml(marked(content)));
 	}
 }
 

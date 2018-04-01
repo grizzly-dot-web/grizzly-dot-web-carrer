@@ -1,52 +1,37 @@
 import React from 'react';
-import check from 'check-types';
 
-import Headings from './Headings';
-import Accordeon from './Accordeon';
+import FrontendComponent from './../Components/FrontendComponent';
+
+import Headlines from './Headlines';
+import Accordeon from './Accordeon'; //TODO make Accordeon to dynamic FrontendComponent
 import Content from './AccessModeratedContent';
 
-class Article extends React.Component {
+class Article extends FrontendComponent {
 
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			config: this.props.config,
+		this.state = Object.assign(this.state, {
 			allowedTags: this.props.allowedTags,
+		});
+	}
+
+	allowedComponents() {
+		return {
+			'Headings': {
+				class: Headlines,
+				props: { allowedTags: this.state.allowedTags },
+			},
+			'Content': {
+				class: Content,
+			}
 		};
-	}
-
-	renderComponents() {
-		let components = this.state.config.components;
-		if (!check.object(this.state.config.components)) {
-			return null;
-		}
-
-		let render = [], counter = 0;
-		for (let key in components) {
-			render.push(this.renderComponentByType(key, components[key], counter++));
-		}
-
-		return render;
-	}
-
-	renderComponentByType(component, config, key) {
-		switch (component) {
-			case 'Accordeon':
-				return null; //(<Content key={key} config={config}  allowedTags={this.state.allowedTags} />);
-			case 'Headings':
-				return (<Headings key={key} config={config} allowedTags={this.state.allowedTags} />);
-			case 'Content':
-				return (<Content key={key} config={config} />);
-			default:
-				throw new Error(`Invalid Component: ${config.type}`);
-		}
 	}
 
 	render() {
 		return (
 			<article>
-				{this.renderComponents()}
+				{this.renderComponents(this.state.data.ChildComponents)}
 			</article>
 		);
 	}

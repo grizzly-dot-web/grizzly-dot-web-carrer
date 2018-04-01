@@ -2,19 +2,30 @@ import React from 'react';
 import check from 'check-types';
 import moment from 'moment';
 
+import FrontendComponent from './Components/FrontendComponent';
+
 import Circle from './Circle';
 import Article from './JobRequest/Article';
 
-class HistoryEntry extends React.Component {
+class HistoryEntry extends FrontendComponent {
 
 	constructor(props) {
 		super(props);
 
-		this.state = {
+		this.state = Object.assign(this.state, {
 			lastCirclePosition: 0,
 			timescaleEnd: this.props.timescaleEnd,
 			timescaleStart: this.props.timescaleStart,
 			detailsVisible:  false,
+		});
+	}
+
+	allowedComponents() {
+		return {
+			'Article': {
+				class: Article,
+				props: { allowedTags: ['h3', 'h4', 'h5', 'h6'] }
+			}
 		};
 	}
 
@@ -62,29 +73,36 @@ class HistoryEntry extends React.Component {
 
 		// prepare child rendering
 		let details = null;
-		if (check.assigned(this.props.entry.details)) {
-			details = (<Article config={this.props.entry.details.config} allowedTags={['h3', 'h4', 'h5', 'h6']} />);
+		let detailComponents = this.props.entry.ChildComponents;
+		if (check.assigned(detailComponents)) {
+			details = (<div className="content">{this.renderComponents(detailComponents)}</div>);
 		}
 
 		// render the prepared section
 		return (
-			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')} style={{ minHeight: CircleDefaultWidth * 2 + CircleScaleMax }}>
-				<header className="history-header">
-					<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
-					<h1>{this.props.entry.institution.title.replace('\n', (<br />))}</h1>
-					<h2>{this.props.entry.institution.job_title}</h2>
-				</header>
-				<div className="history-circle">
-					<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultWidth={CircleDefaultWidth} >
-						<a className="detail-toggle" onClick={(e) => this.onDetailsToggleClick(e)}>Details</a>
-					</Circle>
-				</div>
-				<div className={`history-content
-						${check.assigned(details) ? 'details-exists' : ''} ${this.detailsVisible ? 'details-visible' : ''}`}>
-					{details}
-					<div className={`experience-circles`}>
-						{this.getCircles(this.props.entry.experiences)}
+			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}
+				style={{ minHeight: CircleDefaultWidth * 2 + CircleScaleMax }}
+			>
+				<div className="history-content-wrapper">
+					<header className="history-header">
+						<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
+						<h1><pre>{this.props.entry.institution.title}</pre></h1>
+						<h2><pre>{this.props.entry.institution.job_title}</pre></h2>
+					</header>
+					<div className="history-circle">
+						<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultWidth={CircleDefaultWidth} >
+							<a className="detail-toggle" onClick={(e) => this.onDetailsToggleClick(e)}>Details</a>
+						</Circle>
 					</div>
+					<div className={`history-content
+						${check.assigned(details) ? 'details-exists' : ''}
+						${this.detailsVisible ? 'details-visible' : ''}`}
+					>
+						{details}
+					</div>
+				</div>
+				<div className={`experience-circles`}>
+					{this.getCircles(this.props.entry.experiences)}
 				</div>
 			</section>
 		);

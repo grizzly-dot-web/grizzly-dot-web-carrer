@@ -1,7 +1,7 @@
 import React from 'react';
 import check from 'check-types';
 
-import Headings from './Headings';
+import Headlines from './Headlines';
 
 class Accordeon extends React.Component {
 
@@ -20,7 +20,7 @@ class Accordeon extends React.Component {
 		return (
 			<section className={`accordeon ${(this.state.visibleContent) ? 'accordeon-open' : 'accordeon-closed'}`}>
 				<header className="title" onClick={ (e) => { this.toggleContent(); this.props.onAccordeonHeaderClick(e, this.state.config.headings); } }>
-					<Headings config={this.state.config.headings} allowedTags={this.state.allowedTags} />
+					<Headlines config={this.state.config.headings} allowedTags={this.state.allowedTags} />
 				</header>
 				<div ref={ (accordeonContentElement) => this.accordeonContentElement = accordeonContentElement } className={`accordeon-content`} style={{ height: this.state.contentHeight }}>
 				</div>
