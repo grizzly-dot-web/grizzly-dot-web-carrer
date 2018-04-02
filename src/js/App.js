@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Profile from './App/Header';
-import TimeLine from './App/TimeLine';
-import JobRequest from './App/JobRequest';
+import Header from './App/Header';
+import Footer from './App/Footer';
+import Histroy from './App/History';
 
 class App extends React.Component {
 
@@ -13,10 +13,13 @@ class App extends React.Component {
 	// TODO rewrite jobRequest and Accordeon	<JobRequest data={ this.props.carrer.jobRequest } />
 	render() {
 		return (
-			<main>
-				<Profile visual={null} profile={this.props.carrer.profile} />
-				<TimeLine history={this.props.carrer.history} />
-			</main>
+			<div>
+				<Header data={this.props.data.header} />
+				<main>
+					<Histroy data={this.props.data.history} />
+				</main>
+				<Footer data={this.props.data.footer} />
+			</div>
 		);
 	}
 }

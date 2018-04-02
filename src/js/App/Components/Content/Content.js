@@ -2,7 +2,7 @@ import marked from 'marked';
 import renderHtml from 'react-render-html';
 import check from 'check-types';
 
-import FrontendComponent from './../Components/FrontendComponent';
+import FrontendComponent from './../_FrontendComponent';
 
 class Content extends FrontendComponent {
 

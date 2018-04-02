@@ -64,9 +64,9 @@ class FrontendComponent extends React.Component {
 
 			let comp = React.createElement(allowedComponents[data.type].class, props, allowedComponents[data.type].props, children);
 			//TODO Renders only one Article WTF why!?!?!! maybe ChildComponents must be rendered recursive?
-			console.log('json data type', data.type);
-			console.log('component data type', comp.type.name);
-			console.log('component', comp);
+			//console.log('json data type', data.type);
+			//console.log('component data type', comp.type.name);
+			//console.log('component', comp);
 			return comp;
 		});
 

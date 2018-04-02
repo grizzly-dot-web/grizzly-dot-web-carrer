@@ -2,10 +2,10 @@ import React from 'react';
 import check from 'check-types';
 import moment from 'moment';
 
-import FrontendComponent from './Components/FrontendComponent';
+import FrontendComponent from '../_FrontendComponent';
 
-import Circle from './Circle';
-import Article from './JobRequest/Article';
+import Experience from './Experience';
+import Article from '../Content/Article';
 
 class HistoryEntry extends FrontendComponent {
 
@@ -39,10 +39,10 @@ class HistoryEntry extends FrontendComponent {
 
 		for (let item of this.shuffle(data)) {
 			circles.push((
-				<Circle key={item.title} additionalClasses={['experience', item.type]} data={item} scaleMax={CircleScaleMax} defaultWidth={CircleDefaultWidth} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
+				<Experience key={item.title} additionalClasses={[item.type]} data={item} scaleMax={CircleScaleMax} defaultWidth={CircleDefaultWidth} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
 					<span className="title">{item.title}</span>
 					<span className="type">{' ('+ item.type +')'}</span>
-				</Circle>
+				</Experience>
 			));
 		}
 
@@ -80,7 +80,7 @@ class HistoryEntry extends FrontendComponent {
 
 		// render the prepared section
 		return (
-			<section id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}
+			<article id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}
 				style={{ minHeight: CircleDefaultWidth * 2 + CircleScaleMax }}
 			>
 				<div className="history-content-wrapper">
@@ -90,9 +90,6 @@ class HistoryEntry extends FrontendComponent {
 						<h2><pre>{this.props.entry.institution.job_title}</pre></h2>
 					</header>
 					<div className="history-circle">
-						<Circle additionalClasses={['main']} scaleMax={CircleScaleMax} defaultScaleFactor={scaleFactor} defaultWidth={CircleDefaultWidth} >
-							<a className="detail-toggle" onClick={(e) => this.onDetailsToggleClick(e)}>Details</a>
-						</Circle>
 					</div>
 					<div className={`history-content
 						${check.assigned(details) ? 'details-exists' : ''}
@@ -104,7 +101,7 @@ class HistoryEntry extends FrontendComponent {
 				<div className={`experience-circles`}>
 					{this.getCircles(this.props.entry.experiences)}
 				</div>
-			</section>
+			</article>
 		);
 	}
 

@@ -2,15 +2,15 @@ import React from 'react';
 import moment from 'moment';
 import check from 'check-types';
 
-import Navigation from './Navigation';
-import HistoryEntry from './HistoryEntry';
+import TimeLine from './Components/History/TimeLine';
+import HistoryEntry from './Components/History/HistoryEntry';
 
-class TimeLine extends React.Component {
+class History extends React.Component {
 
 	constructor(props) {
 		super(props);
 
-		let entries = this.props.history.sort((a, b) => {
+		let entries = this.props.data.sort((a, b) => {
 			let aDate = moment(a.begin_date);
 			let bDate = moment(b.begin_date);
 
@@ -60,14 +60,14 @@ class TimeLine extends React.Component {
 		}
 
 		return (
-			<div className="time-line">
-				<Navigation dates={dates} />
-				<div className="history">
+			<section className="history">
+				<div className="history-item-wrapper">
 					{history}
 				</div>
-			</div>
+				<TimeLine dates={dates} />
+			</section>
 		);
 	}
 }
 
-export default TimeLine;
+export default History;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Navigation extends React.Component {
+class TimeLine extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -23,4 +23,4 @@ class Navigation extends React.Component {
 	}
 }
 
-export default Navigation;
+export default TimeLine;

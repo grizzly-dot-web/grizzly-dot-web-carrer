@@ -19,7 +19,7 @@ fetch('/career.json').then((response) => {
 
 	response.text().then((xingResponse) => {
 		ReactDOM.render(
-			<App carrer={JSON.parse(xingResponse)} />,
+			<App data={JSON.parse(xingResponse)} />,
 			document.getElementById('app')
 		);
 	});

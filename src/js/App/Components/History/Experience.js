@@ -1,7 +1,7 @@
 import React from 'react';
 import check from 'check-types';
 
-class Circle extends React.Component {
+class Experience extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -100,4 +100,4 @@ class Circle extends React.Component {
 
 }
 
-export default Circle;
+export default Experience;

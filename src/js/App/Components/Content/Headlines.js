@@ -1,7 +1,7 @@
 import React from 'react';
 import check from 'check-types';
 
-import FrontendComponent from './../Components/FrontendComponent';
+import FrontendComponent from './../_FrontendComponent';
 
 class Headlines extends FrontendComponent  {
 

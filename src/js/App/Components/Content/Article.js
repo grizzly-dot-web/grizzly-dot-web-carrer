@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FrontendComponent from './../Components/FrontendComponent';
+import FrontendComponent from './../_FrontendComponent';
 
 import Headlines from './Headlines';
 import Accordeon from './Accordeon'; //TODO make Accordeon to dynamic FrontendComponent
