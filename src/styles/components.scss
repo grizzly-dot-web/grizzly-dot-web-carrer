@@ -1,7 +1,5 @@
-@import './components/header';
-@import './components/progress';
+@import './components/content/progress';
+@import './components/content/content';
+@import './components/content/accordeon';
 
-@import './components/content';
-@import './components/accordeon';
-
-@import './components/history-entry';
+@import './components/history/history-entry';
