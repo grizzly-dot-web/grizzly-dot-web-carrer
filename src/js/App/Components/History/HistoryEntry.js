@@ -13,7 +13,7 @@ class HistoryEntry extends FrontendComponent {
 		super(props);
 
 		this.state = Object.assign(this.state, {
-			lastCirclePosition: 0,
+			lastPosition: 0,
 			timescaleEnd: this.props.timescaleEnd,
 			timescaleStart: this.props.timescaleStart,
 			detailsVisible:  false,
@@ -29,9 +29,9 @@ class HistoryEntry extends FrontendComponent {
 		};
 	}
 
-	getCircles(data) {
-		const CircleScaleMax = 6;
-		const CircleDefaultWidth = 2;
+	getExperinces(data) {
+		const ScaleMax = 6;
+		const DefaultWidth = 2;
 
 		let
 			circles = []
@@ -39,9 +39,8 @@ class HistoryEntry extends FrontendComponent {
 
 		for (let item of this.shuffle(data)) {
 			circles.push((
-				<Experience key={item.title} additionalClasses={[item.type]} data={item} scaleMax={CircleScaleMax} defaultWidth={CircleDefaultWidth} lastCirclePosition={this.state.lastCirclePosition} changeLastCirclePosition={(position) => this.handleLastCirclePositionChange(this, position)}>
+				<Experience key={item.title} additionalClasses={[item.type]} data={item} scaleMax={ScaleMax} defaultWidth={DefaultWidth} lastPosition={this.state.lastPosition} changeLastPosition={(position) => this.handleLastExperiencePositionChange(this, position)}>
 					<span className="title">{item.title}</span>
-					<span className="type">{' ('+ item.type +')'}</span>
 				</Experience>
 			));
 		}
@@ -49,8 +48,8 @@ class HistoryEntry extends FrontendComponent {
 		return circles;
 	}
 
-	handleLastCirclePositionChange(self, position) {
-		self.setState({ lastCirclePosition: position });
+	handleLastExperiencePositionChange(self, position) {
+		self.setState({ lastPosition: position });
 	}
 
 	render() {
@@ -66,8 +65,8 @@ class HistoryEntry extends FrontendComponent {
 		let timescale = moment.duration(this.state.timescaleStart.diff(this.state.timescaleEnd));
 
 		//prepare circles
-		const CircleScaleMax = 140;
-		const CircleDefaultWidth = 50;
+		const ScaleMax = 140;
+		const DefaultWidth = 50;
 
 		let scaleFactor = duration / timescale;
 
@@ -80,26 +79,22 @@ class HistoryEntry extends FrontendComponent {
 
 		// render the prepared section
 		return (
-			<article id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}
-				style={{ minHeight: CircleDefaultWidth * 2 + CircleScaleMax }}
-			>
-				<div className="history-content-wrapper">
+			<article id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
+				<div className={'history-main'}>
 					<header className="history-header">
 						<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
 						<h1><pre>{this.props.entry.institution.title}</pre></h1>
 						<h2><pre>{this.props.entry.institution.job_title}</pre></h2>
 					</header>
-					<div className="history-circle">
-					</div>
-					<div className={`history-content
-						${check.assigned(details) ? 'details-exists' : ''}
-						${this.detailsVisible ? 'details-visible' : ''}`}
-					>
-						{details}
+					<div className={`experience-circles`}>
+						{this.getExperinces(this.props.entry.experiences)}
 					</div>
 				</div>
-				<div className={`experience-circles`}>
-					{this.getCircles(this.props.entry.experiences)}
+				<div className={`history-content
+					${check.assigned(details) ? 'details-exists' : ''}
+					${this.detailsVisible ? 'details-visible' : ''}`}
+				>
+					{details}
 				</div>
 			</article>
 		);

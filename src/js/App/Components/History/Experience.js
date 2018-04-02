@@ -8,7 +8,7 @@ class Experience extends React.Component {
 
 		let data = check.object(this.props.data) ? this.props.data : null;
 		let defaultScaleFactor = check.assigned(this.props.defaultScaleFactor) ? this.props.defaultScaleFactor : null;
-		let lastCirclePosition = check.assigned(this.props.lastCirclePosition) ? this.props.lastCirclePosition : 0;
+		let lastPosition = check.assigned(this.props.lastPosition) ? this.props.lastPosition : 0;
 
 		this.state = {
 			data: data,
@@ -17,12 +17,12 @@ class Experience extends React.Component {
 			defaultWidth: this.props.defaultWidth,
 			circleDimension: null,
 			additionalClasses: this.props.additionalClasses,
-			lastCirclePosition: lastCirclePosition,
+			lastPosition: lastPosition,
 		};
 
-		if (check.function(this.props.changeLastCirclePosition)) {
-			this.state.position = this.getCirclePosition(this.state.lastCirclePosition);
-			this.props.changeLastCirclePosition(this.state.position);
+		if (check.function(this.props.changeLastPosition)) {
+			this.state.position = this.getPosition(this.state.lastPosition);
+			this.props.changeLastPosition(this.state.position);
 		}
 	}
 
@@ -34,7 +34,7 @@ class Experience extends React.Component {
 			scaleFactor = 1;
 		}
 
-		let circleDimension = this.getCircleDimension(this.state.defaultWidth, this.state.scaleMax, scaleFactor);
+		let circleDimension = this.getDimension(this.state.defaultWidth, this.state.scaleMax, scaleFactor);
 
 		let styles = {
 			width: circleDimension + '%',
@@ -69,7 +69,7 @@ class Experience extends React.Component {
 		);
 	}
 
-	getCircleDimension(width, scaleMax, scaleFactor) {
+	getDimension(width, scaleMax, scaleFactor) {
 		if (!check.number(scaleFactor)) {
 			scaleFactor = 0;
 		}
@@ -87,7 +87,7 @@ class Experience extends React.Component {
 		return dimension;
 	}
 
-	getCirclePosition(lastPosition) {
+	getPosition(lastPosition) {
 		let newPosition = lastPosition;
 		let forbiddenPositionDifference = 30;
 
