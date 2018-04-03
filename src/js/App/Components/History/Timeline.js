@@ -63,25 +63,25 @@ class Timeline extends React.Component {
 			additionalClasses.push('has-next-entries');
 		}
 
-		let currentStyles = {
-//			height: this.state.currentTimeSpanHeight +'%'
-		}
-
 		return (
 			<nav className={`timeline ${additionalClasses.join(' ')}`}>
 				<ul className={'inner'}>
-					<ul className={'prev'}>
-						{prevEntries}
-					</ul>
-					<li className={'current'} ref={(currentElement) => this.currentElement = currentElement } style={ currentStyles }>
-						<span className={'current-date-marker begin-marker'}>
-							<span className={'date'}>{this.state.startDate.format('MM.YYYY')}</span>
+					<li>
+						<span className={'timespan timespan-previous'}>
+							<span className={'current-date-marker begin-marker'}>
+								<span className={'date'}>{this.state.startDate.format('MM.YYYY')}</span>
+							</span>
 						</span>
-						<span className={'current-date-marker end-marker'}>
-							<span className={'date'}>{this.state.endDate.format('MM.YYYY')}</span>
+						<span className={'timespan timespan-next'}>
+							<span className={'current-date-marker end-marker'}>
+								<span className={'date'}>{this.state.endDate.format('MM.YYYY')}</span>
+							</span>
 						</span>
 					</li>
-					<ul className={'next'}>
+					<ul className={'navigation-previous'}>
+						{prevEntries}
+					</ul>
+					<ul className={'navigation-next'}>
 						{nextEntries}
 					</ul>
 				</ul>

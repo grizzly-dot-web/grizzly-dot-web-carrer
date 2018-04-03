@@ -16,11 +16,11 @@
 
 	.history-header {
 		order: 1;
-		bottom: $HeaderBottomPosition;
-		height: $HeightCurrent;
+		bottom: map-get($Timespan_Height, Next);
+		height: $CurrentTimeSpan_Height;
 		width: 20%;
 		position: absolute;
-		left: $PositionTimelineLeft;
+		left: $Timeline_PositionLeft;
 		transform: translateX(-50%);
 		transition: bottom 0.55s linear;
 

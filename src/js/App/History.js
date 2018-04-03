@@ -73,7 +73,7 @@ class History extends React.Component {
 	render() {
 		let additionalClasses = [];
 		if (this.state.navigationActive) {
-			additionalClasses.push('navigation-active');
+			additionalClasses.push('navigation-next-active');
 
 			let delay = setTimeout(()=> {
 				additionalClasses.push('navigation-show');
