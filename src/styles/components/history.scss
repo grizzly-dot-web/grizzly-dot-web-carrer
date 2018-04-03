@@ -1,0 +1,11 @@
+$SizeTimelineLine: 6px;
+$PositionTimelineLeft: 20%;
+$ColorTimeline: $ColorBackgroundContent;
+$PositionBottomCurrent: 10%;
+$HeightCurrent: 30%;
+$CurrentSpace: 20%;
+
+$MinHeightCurrentTimeSpan: $HeightCurrent + $CurrentSpace;
+
+@import './history/history-entry';
+@import './history/timeLine';

@@ -4,8 +4,8 @@ import moment from 'moment';
 
 import FrontendComponent from '../_FrontendComponent';
 
-import Experience from './Experience';
 import Article from '../Content/Article';
+import Experience from './Experience';
 
 class HistoryEntry extends FrontendComponent {
 
@@ -14,8 +14,6 @@ class HistoryEntry extends FrontendComponent {
 
 		this.state = Object.assign(this.state, {
 			lastPosition: 0,
-			timescaleEnd: this.props.timescaleEnd,
-			timescaleStart: this.props.timescaleStart,
 			detailsVisible:  false,
 		});
 	}
@@ -61,15 +59,6 @@ class HistoryEntry extends FrontendComponent {
 			endDate = moment();
 		}
 
-		let duration = moment.duration(endDate.diff(startDate));
-		let timescale = moment.duration(this.state.timescaleStart.diff(this.state.timescaleEnd));
-
-		//prepare circles
-		const ScaleMax = 140;
-		const DefaultWidth = 50;
-
-		let scaleFactor = duration / timescale;
-
 		// prepare child rendering
 		let details = null;
 		let detailComponents = this.props.entry.ChildComponents;
@@ -80,20 +69,20 @@ class HistoryEntry extends FrontendComponent {
 		// render the prepared section
 		return (
 			<article id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
+				{this.props.children}
 				<div className={'history-main'}>
 					<header className="history-header">
-						<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
-						<h1><pre>{this.props.entry.institution.title}</pre></h1>
-						<h2><pre>{this.props.entry.institution.job_title}</pre></h2>
+						<div className={'inner'}>
+							<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
+							<h1><pre>{this.props.entry.institution.title}</pre></h1>
+							<h2><pre>{this.props.entry.institution.job_title}</pre></h2>
+						</div>
 					</header>
 					<div className={`experience-circles`}>
 						{this.getExperinces(this.props.entry.experiences)}
 					</div>
 				</div>
-				<div className={`history-content
-					${check.assigned(details) ? 'details-exists' : ''}
-					${this.detailsVisible ? 'details-visible' : ''}`}
-				>
+				<div className={`history-content ${check.assigned(details) ? 'details-exists' : ''} ${this.detailsVisible ? 'details-visible' : ''}`} >
 					{details}
 				</div>
 			</article>

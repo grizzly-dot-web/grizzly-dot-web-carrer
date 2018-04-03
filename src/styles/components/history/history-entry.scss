@@ -1,154 +1,67 @@
 .history-entry {
-	width: 100%;
-	padding: 0 25px;
+	width: 100vw;
+	height: 100vh;
 	position: relative;
 	color: $ColorSecondaryDarker;
 
-	.history-content-wrapper {
-		@extend %FlexGridContainer;
-
-		.history-header {
-			order: 1;
-			width: 40%;
-
-			h1 {
-				margin-bottom: 20px;
-			}
-		}
-		.history-content {
-			order: 3;
-			width: 40%;
-
-			article {
-				header {
-					h3, h4 {
-						display: inline-block;
-					}
-
-					h4 {
-						&:before {
-							content: ' | ';
-							white-space: pre;
-						}
-					}
-				}
-			}
-		}
-		.history-circle {
-			order: 2;
-			width: 20%;
-		}
+	.history-main {
+		width: 70%;
+		height: 100%;
+		background-image: radial-gradient(
+			circle at 65% 50%,
+			$Color2 1%,
+			$Color1 75%
+    );
 	}
 
-	&:nth-child(even) {
-		.history-header {
-			order: 3;
-			flex-grow: 2;
-		}
-		.history-content {
-			order: 1;
-		}
-	}
+	.history-header {
+		order: 1;
+		bottom: $PositionBottomCurrent + ($CurrentSpace / 2);
+		height: $HeightCurrent;
+		width: 20%;
+		position: absolute;
+		left: $PositionTimelineLeft;
+		transform: translateX(-50%);
 
-	&.first-entry {
-		.circle.main {
-			border: 1px solid $ColorPrimary;
-
-			&:after, &:before {
-				content: '';
-				z-index: -1;
-				top: 50%;
-				left: 50%;
-				width: 100%;
-				padding-top: 100%;
-				display: block;
-				position: absolute;
-				border-radius: 50%;
-				transform-origin: 50% 50%;
-				border: 2px solid $ColorPrimary;
-				transform: translate(-50%, -50%);
-				animation: loading-pulse 2s linear infinite;
-			}
-
-			&:before {
-				animation-delay: 0.4s;
-			}
-		}
-	}
-
-	.experience-circles {
-		width: 25%;
-		margin: 150px 0;
-
-		&.experience-circles-right {
-			margin-left: 0;
-
-			.circle {
-				.type {
-					left: -10%;
-					right: auto;
-				}
-			}
-		}
-	}
-
-	.circle {
-		height: 0;
-		padding-top: 100%;
-		display: block;
-		border-radius: 50%;
-		text-align: center;
-		position: relative;
-		border: 2px solid $ColorSecondary;
-		background-color: $ColorSecondary;
-
-		.title {
+		.inner {
 			top: 50%;
-			left: 50%;
-			width: 80%;
-			display: block;
 			position: absolute;
-			transform: translate(-50%, -50%);
+			transform: translateY(-50%);
 		}
 
-		&.main {
-			margin: 0 auto;
-			color: $ColorSecondaryLighter;
+		h1 {
+			margin-bottom: 20px;
+		}
+	}
+
+	.history-content {
+		order: 3;
+		width: 40%;
+
+		&.details-exists {
+			width: 70%;
+			right: -30%;
+			height: 100%;
+			position: absolute;
+
+			.content {
+				height: 100%;
+			}
 		}
 
-		&.experience {
-			.type {
-				z-index: 1;
-				top: -10%;
-				right: -10%;
-				width: 30px;
-				height: 30px;
-				position: absolute;
-				border-radius: 50%;
-				text-indent: 9001px;
-				background: no-repeat center center;
-				background-color: inherit;
-				border: inherit;
-			}
+		article {
+			header {
+				h3,
+				h4 {
+					display: inline-block;
+				}
 
-			&.Skill .type {
-				background-image: url('../img/svg/icon-book.svg');
-				background-size: 70%;
-			}
-
-			&.Reference .type {
-				background-image: url('../img/svg/icon-reference2.svg');
-				background-color: inherit;
-				background-size: 70%;
-			}
-
-			.title {
-				left: 0;
-				width: auto;
-				min-width: 100%;
-				white-space: nowrap;
-				background-color: inherit;
-				transform: translateY(-50%);
+				h4 {
+					&:before {
+						content: ' | ';
+						white-space: pre;
+					}
+				}
 			}
 		}
 	}

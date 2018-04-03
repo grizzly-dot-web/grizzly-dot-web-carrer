@@ -1,0 +1,151 @@
+%TimelineEntry {
+	color: $ColorTimeline;
+	left: 50%;
+	width: 50%;
+	display: block;
+	padding-left: 25%;
+	position: relative;
+	transform: translateX(50%);
+
+	&:before {
+		content: '';
+		top: 50%;
+		left: -100%;
+		width: 100%;
+		display: block;
+		position: absolute;
+		height: $SizeTimelineLine;
+		background-color: $ColorTimeline;
+		transform: translateY(-50%);
+	}
+
+	a {
+		display: block;
+		position: relative;
+	}
+}
+
+.timeline {
+	top: 0;
+	width: 20%;
+	height: 100%;
+	opacity: 0.5;
+	overflow: hidden;
+	position: absolute;
+	left: $PositionTimelineLeft;
+	transform: translateX(-50%);
+
+	.inner {
+		width: 20%;
+		height: 100%;
+		position: relative;
+
+		&:before, &:after {
+			content: '';
+			left: 50%;
+			width: $SizeTimelineLine;
+			display: block;
+			position: absolute;
+			background-color: $ColorTimeline;
+			transform: translateX(-50%);
+		}
+
+		&:before {
+			top: 0;
+			height: ($PositionBottomCurrent * -1 + 100) - ($HeightCurrent + ($CurrentSpace / 2));
+		}
+
+		&:after {
+			bottom: 0;
+			height: $PositionBottomCurrent + ($CurrentSpace / 2);
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		display: block;
+		list-style: none;
+
+		li {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			transition: top 0.5s ease-in-out;
+		}
+	}
+
+	.prev, .next {
+		left: 0;
+		position: absolute;
+
+		li {
+			@extend %TimelineEntry;
+		}
+	}
+
+	.current {
+		--current-time-span-min-height: $MinHeightCurrentTimeSpan;
+
+		display: block;
+		bottom: $PositionBottomCurrent;
+		left: 0;
+		min-height: $MinHeightCurrentTimeSpan;
+		min-height: var(--current-time-span-min-height);
+		position: absolute;
+
+		.current-date-marker {
+			width: 100%;
+			display: block;
+			position: absolute;
+
+			&:before, &:after {
+				@extend %TimelineEntry:before;
+				content: '';
+				left: 50%;
+				width: 50%;
+				position: relative;
+				transform: translateX(-50%);
+			}
+
+			.date {
+				@extend %TimelineEntry;
+				width: 100%;
+			}
+
+			&.begin-marker {
+				top: 0;
+
+
+			}
+
+			&.end-marker {
+				bottom: 0;
+			}
+		}
+	}
+
+	&:not(.has-prev-entries) .begin-marker:before {
+		display: none;
+	}
+	&:not(.has-next-entries) .end-marker:after {
+		display: none;
+	}
+
+	&.navigation-active {
+		.prev, .next {
+				li {
+					top: 0 !important;
+				}
+		}
+	}
+
+	.prev {
+		top: 0;
+	}
+
+	.next {
+		bottom: 0;
+	}
+}

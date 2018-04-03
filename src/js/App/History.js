@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import check from 'check-types';
 
-import TimeLine from './Components/History/TimeLine';
+import Timeline from './Components/History/TimeLine';
 import HistoryEntry from './Components/History/HistoryEntry';
 
 class History extends React.Component {
@@ -35,14 +35,12 @@ class History extends React.Component {
 	render() {
 		let history = [];
 
-		let dates = [];
 		let first = true;
-
-		let counter = 0;
-		for (let item of this.state.historyEntries) {
-			counter++;
+		for (let i = 0; i < this.state.historyEntries.length; i++) {
 			let classes = [];
-			dates.push(item.begin_date);
+			let item = this.state.historyEntries[i];
+			let prevEntries = this.state.historyEntries.slice(0, i);
+			let nextEntries = this.state.historyEntries.slice(i, this.state.historyEntries.length);
 
 			if (first) {
 				classes.push('first-entry');
@@ -50,21 +48,27 @@ class History extends React.Component {
 			}
 
 			history.push((
-				<HistoryEntry key={counter}
+				<HistoryEntry
+					key={i}
 					entry={item}
+					prevEntries={prevEntries}
+					nextEntries={nextEntries}
 					additionalClasses={classes}
-					timescaleStart={this.state.timescaleStart}
-					timescaleEnd={this.state.timescaleEnd}
-				/>
+				>
+					<Timeline
+						prevEntries={prevEntries}
+						nextEntries={nextEntries}
+						currentEntry={item}
+						timescaleStart={this.state.timescaleStart}
+						timescaleEnd={this.state.timescaleEnd}
+					/>
+				</HistoryEntry>
 			));
 		}
 
 		return (
 			<section className="history">
-				<div className="history-item-wrapper">
-					{history}
-				</div>
-				<TimeLine dates={dates} />
+				{history}
 			</section>
 		);
 	}
