@@ -37,9 +37,13 @@ class Timeline extends React.Component {
 			counter++;
 
 			let date = moment(entry.begin_date, 'YYYY-MM');
+			let style = {
+				top: (topPosition * counter),
+				transitionDelay: `${(counter-1)/8}s` ,
+			};
 
 			links.push((
-				<li key={counter} style={ {top: (topPosition * counter)} }><a href={`#${entry.begin_date}`}>{date.format('MM.YYYY')}</a></li>
+				<li key={counter} style={ style }><a href={`#${entry.begin_date}`}>{date.format('MM.YYYY')}</a></li>
 			));
 		}
 
@@ -59,13 +63,17 @@ class Timeline extends React.Component {
 			additionalClasses.push('has-next-entries');
 		}
 
+		let currentStyles = {
+//			height: this.state.currentTimeSpanHeight +'%'
+		}
+
 		return (
 			<nav className={`timeline ${additionalClasses.join(' ')}`}>
 				<ul className={'inner'}>
 					<ul className={'prev'}>
 						{prevEntries}
 					</ul>
-					<li className={'current'} ref={(currentElement) => this.currentElement = currentElement } style={ {height: this.state.currentTimeSpanHeight +'%'} }>
+					<li className={'current'} ref={(currentElement) => this.currentElement = currentElement } style={ currentStyles }>
 						<span className={'current-date-marker begin-marker'}>
 							<span className={'date'}>{this.state.startDate.format('MM.YYYY')}</span>
 						</span>

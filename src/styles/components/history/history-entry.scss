@@ -16,12 +16,13 @@
 
 	.history-header {
 		order: 1;
-		bottom: $PositionBottomCurrent + ($CurrentSpace / 2);
+		bottom: $HeaderBottomPosition;
 		height: $HeightCurrent;
 		width: 20%;
 		position: absolute;
 		left: $PositionTimelineLeft;
 		transform: translateX(-50%);
+		transition: bottom 0.55s linear;
 
 		.inner {
 			top: 50%;

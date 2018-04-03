@@ -1,11 +1,43 @@
-$SizeTimelineLine: 6px;
-$PositionTimelineLeft: 20%;
 $ColorTimeline: $ColorBackgroundContent;
+
+$SizeTimelineLine: 6px;
+
+$PositionTimelineLeft: 20%;
+
 $PositionBottomCurrent: 10%;
 $HeightCurrent: 30%;
 $CurrentSpace: 20%;
+$PositionBottomCurrent_NavigationActive: 50% - $HeightCurrent;
+
 
 $MinHeightCurrentTimeSpan: $HeightCurrent + $CurrentSpace;
 
+$HeaderBottomPosition: $PositionBottomCurrent + ($CurrentSpace / 2);
+
 @import './history/history-entry';
 @import './history/timeLine';
+
+.history {
+	&.navigation-active {
+		.timeline {
+			.current-date-marker {
+				&.begin-marker {
+					height: ($PositionBottomCurrent_NavigationActive * -1 + 100) - ($HeightCurrent + ($CurrentSpace / 2))
+				}
+				&.end-marker {
+						height: $PositionBottomCurrent_NavigationActive + ($CurrentSpace / 2)
+				}
+			}
+
+			.navigation-show & .prev, .next {
+					li {
+						top: 0 !important;
+					}
+			}
+		}
+
+		.history-entry .history-header {
+			bottom: $PositionBottomCurrent_NavigationActive + ($CurrentSpace / 2);
+		}
+	}
+}

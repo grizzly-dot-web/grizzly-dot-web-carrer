@@ -27,12 +27,13 @@ class History extends React.Component {
 
 		this.state = {
 			historyEntries: entries,
+			navigationActive: false,
 			timescaleEnd: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
 			timescaleStart: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
 		};
 	}
 
-	render() {
+	renderHistoryEntries() {
 		let history = [];
 
 		let first = true;
@@ -66,11 +67,34 @@ class History extends React.Component {
 			));
 		}
 
+		return history;
+	}
+
+	render() {
+		let additionalClasses = [];
+		if (this.state.navigationActive) {
+			additionalClasses.push('navigation-active');
+
+			let delay = setTimeout(()=> {
+				additionalClasses.push('navigation-show');
+
+				clearTimeout(delay);
+			}, 500);
+		}
+
 		return (
-			<section className="history">
-				{history}
+			<section className={`history ${additionalClasses.join(' ')}`}>
+				{this.renderHistoryEntries()}
 			</section>
 		);
+	}
+
+	componentDidMount() {
+		setTimeout(() => {
+			this.setState(Object.assign(this.state, {
+				navigationActive: true,
+			}));
+		}, 1000);
 	}
 }
 
