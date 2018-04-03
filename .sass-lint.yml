@@ -1,0 +1,10 @@
+rules:
+    pseudo-element: false
+    property-sort-order: false
+    variable-name-format:
+      -
+          convention: camelcase
+    indentation:
+      - 2
+      -
+          size: 'tab'
