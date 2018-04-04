@@ -41,7 +41,7 @@ class History extends React.Component {
 			let classes = [];
 			let item = this.state.historyEntries[i];
 			let prevEntries = this.state.historyEntries.slice(0, i);
-			let nextEntries = this.state.historyEntries.slice(i, this.state.historyEntries.length);
+			let nextEntries = this.state.historyEntries.slice(i+1, this.state.historyEntries.length);
 
 			if (first) {
 				classes.push('first-entry');
