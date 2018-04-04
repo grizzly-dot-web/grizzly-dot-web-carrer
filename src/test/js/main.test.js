@@ -10,7 +10,7 @@ moment.locale('de');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import App from '../../js/App';
 
 it('fetches /carrer.json and renders App', () => {
 	fetch('/career.json').then((response) => {
