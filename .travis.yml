@@ -1,0 +1,4 @@
+before_install:
+  - npm install
+install:
+  - npm run build:prod
