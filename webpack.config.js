@@ -21,13 +21,7 @@ module.exports = {
 				test: /\.js$/,
 				use: [
 					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								'env',
-								'react'
-							]
-						}
+						loader: 'babel-loader'
 					}
 				]
 			},
