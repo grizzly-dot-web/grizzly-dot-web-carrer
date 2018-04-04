@@ -3,31 +3,30 @@
 $Timeline_BackgroundColor: $ColorBackgroundContent;
 $Timeline-Active_BackgroundColor: $ColorBackgroundContent;
 //#endsubregion
-//#endregion
 
 //#subregion Sizes and Positions
 $Timeline-Line_Width: 6px;
-$Timeline_PositionLeft: 20%;
+$Timeline_PositionLeft: getGridSize(16, vertical);
 
 
-$EndMarker_PositionTop: 0;
-$BeginMarker_PositionBottom: 0;
+$EndMarker_PositionTop: getGridSize(3, horizontal);
+$BeginMarker_PositionBottom:getGridSize(3, horizontal);
 
 $Timespan_Height: (
-	Previous: 60%,
-	Next: 10%,
+	Previous: getGridSize(19, horizontal),
+	Next: getGridSize(10, horizontal),
 );
 
 $CurrentTimeSpan_Height: 100 - (map-get($Timespan_Height, Previous) + map-get($Timespan_Height, Next));
 
 //#subregion after Animation
 $Timespan-NavigationPrevActive_Height: (
-	Previous: 10%,
-	Next: 60%,
+	Previous: getGridSize(20, horizontal),
+	Next: getGridSize(9, horizontal),
 );
 $Timespan_NavigationNextActive_Height: (
-	Previous: 40%,
-	Next: 40%,
+	Previous: getGridSize(9, horizontal),
+	Next: getGridSize(20, horizontal),
 );
 //#endsubregion
 
@@ -62,9 +61,14 @@ $Timespan_NavigationNextActive_Height: (
 //#endregion
 
 @import './history/history-entry';
+@import './history/experience';
 @import './history/timeLine';
 
 .history {
 	@include NavigationState('previous', $Timespan-NavigationPrevActive_Height);
 	@include NavigationState('next', $Timespan_NavigationNextActive_Height);
+
+	width: 100vw;
+	overflow: hidden;
+	padding: $Viewport_Padding_Horizontal $Viewport_Padding_Vertical;
 }

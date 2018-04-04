@@ -69,12 +69,12 @@ class Timeline extends React.Component {
 					<li>
 						<span className={'timespan timespan-previous'}>
 							<span className={'current-date-marker begin-marker'}>
-								<span className={'date'}>{this.state.startDate.format('MM.YYYY')}</span>
+								<span className={'date'}><span>{this.state.startDate.format('MM.YYYY')}</span></span>
 							</span>
 						</span>
 						<span className={'timespan timespan-next'}>
 							<span className={'current-date-marker end-marker'}>
-								<span className={'date'}>{this.state.endDate.format('MM.YYYY')}</span>
+								<span className={'date'}><span>{this.state.endDate.format('MM.YYYY')}</span></span>
 							</span>
 						</span>
 					</li>

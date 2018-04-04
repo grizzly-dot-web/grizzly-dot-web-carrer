@@ -7,10 +7,12 @@ $ColorSecondaryDarker: darken($ColorSecondary, 25%);
 $ColorSecondaryLight: lighten($ColorSecondary, 20%);
 $ColorSecondaryLighter: lighten($ColorSecondary, 35%);
 
-$ColorCopy: $ColorSecondaryDark;
 $ColorBackgroundContent: #fff;
 $ColorBackgroundLight: #f4f4f4;
 $ColorBackgroundDark: $ColorSecondaryDarker;
+
+$DarkCopy_Color: $ColorSecondaryDark;
+$LightCopy_Color: $ColorBackgroundContent;
 
 
 
