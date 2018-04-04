@@ -62,7 +62,7 @@ $Timespan_NavigationNextActive_Height: (
 
 @import './history/history-entry';
 @import './history/experience';
-@import './history/timeLine';
+@import './history/timeline';
 
 .history {
 	@include NavigationState('previous', $Timespan-NavigationPrevActive_Height);
