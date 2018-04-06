@@ -191,11 +191,4 @@
 			}
 		}
 	}
-
-	&:not(.has-prev-entries) .current-date-marker.begin-marker .date:after {
-		display: none;
-	}
-	&:not(.has-next-entries) .current-date-marker.end-marker .date:after {
-		display: none;
-	}
 }

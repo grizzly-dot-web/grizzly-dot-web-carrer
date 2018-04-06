@@ -27,7 +27,10 @@ class History extends React.Component {
 
 		this.state = {
 			historyEntries: entries,
-			navigationActive: false,
+			navigationActive: {
+				previous: false,
+				next: false,
+			},
 			timescaleEnd: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
 			timescaleStart: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
 		};
@@ -47,7 +50,6 @@ class History extends React.Component {
 				classes.push('first-entry');
 				first = false;
 			}
-
 			history.push((
 				<HistoryEntry
 					key={i}
@@ -57,6 +59,7 @@ class History extends React.Component {
 					additionalClasses={classes}
 				>
 					<Timeline
+						onClickNavigation = { this.handleNavigationClick.bind(this) }
 						prevEntries={prevEntries}
 						nextEntries={nextEntries}
 						currentEntry={item}
@@ -70,16 +73,32 @@ class History extends React.Component {
 		return history;
 	}
 
+	handleNavigationClick(e, direction) {
+		let navigationActive = {};
+		if (direction == 'previous') {
+			navigationActive = {
+				previous: !this.state.navigationActive.previous,
+				next: false,
+			};
+		} else {
+			navigationActive = {
+				previous: false,
+				next: !this.state.navigationActive.next,
+			};
+		}
+
+		this.setState(Object.assign(this.state, {
+			navigationActive: navigationActive
+		}));
+	}
+
 	render() {
 		let additionalClasses = [];
-		if (this.state.navigationActive) {
+		if (this.state.navigationActive.next) {
 			additionalClasses.push('navigation-next-active');
-
-			let delay = setTimeout(()=> {
-				additionalClasses.push('navigation-show');
-
-				clearTimeout(delay);
-			}, 500);
+		}
+		if (this.state.navigationActive.previous) {
+			additionalClasses.push('navigation-previous-active');
 		}
 
 		return (
@@ -87,14 +106,6 @@ class History extends React.Component {
 				{this.renderHistoryEntries()}
 			</section>
 		);
-	}
-
-	componentDidMount() {
-		setTimeout(() => {
-			this.setState(Object.assign(this.state, {
-				navigationActive: true,
-			}));
-		}, 1000);
 	}
 }
 

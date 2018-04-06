@@ -56,23 +56,27 @@ class Timeline extends React.Component {
 		let nextEntries = this.renderLinks(this.props.nextEntries, window.innerHeight);
 
 		let additionalClasses = [];
+		let handleNavigationClickNext = null;
+		let handleNavigationClickPrevious = null;
 		if (prevEntries.length > 0) {
-			additionalClasses.push('has-prev-entries');
+			additionalClasses.push('has-previous-entries');
+			handleNavigationClickPrevious = (e) => this.props.onClickNavigation(e, 'previous');
 		}
 		if (nextEntries.length > 0) {
 			additionalClasses.push('has-next-entries');
+			handleNavigationClickNext = (e) => this.props.onClickNavigation(e, 'next');
 		}
 
 		return (
 			<nav className={`timeline ${additionalClasses.join(' ')}`}>
 				<ul className={'inner'}>
 					<li>
-						<span className={'timespan timespan-previous'}>
+						<span className={'timespan timespan-previous'} onClick={ handleNavigationClickPrevious }>
 							<span className={'current-date-marker begin-marker'}>
 								<span className={'date'}><span>{this.state.startDate.format('MM.YYYY')}</span></span>
 							</span>
 						</span>
-						<span className={'timespan timespan-next'}>
+						<span className={'timespan timespan-next'} onClick={ handleNavigationClickNext }>
 							<span className={'current-date-marker end-marker'}>
 								<span className={'date'}><span>{this.state.endDate.format('MM.YYYY')}</span></span>
 							</span>
