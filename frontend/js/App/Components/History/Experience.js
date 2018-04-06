@@ -63,7 +63,7 @@ class Experience extends React.Component {
 		}
 
 		return (
-			<SpecifiedTag className={`circle ${this.state.additionalClasses.join(' ')}`} href={href} target={target} style={styles}>
+			<SpecifiedTag className={`experience ${this.state.additionalClasses.join(' ')}`} href={href} target={target} style={styles}>
 				{this.props.children}
 			</SpecifiedTag>
 		);
