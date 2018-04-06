@@ -1,5 +1,8 @@
-dest
-career.json
+
+/compiled/*
+!/compiled/public/data/*
+!/compiled/public/img/*
+!/compiled/public/index.html
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
