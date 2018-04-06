@@ -8,7 +8,7 @@ node_js:
 cache:
   directories:
     - "node_modules"
-on:
-  tags: true
 deploy:
   provider: azure_web_apps
+	on:
+		tags: true

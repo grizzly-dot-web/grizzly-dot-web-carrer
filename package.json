@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "jest",
+    "test": "",
     "start": "nodemon server/index.js --exec babel-node",
     "watch": "webpack --watch",
     "build:prod": "webpack -p"
