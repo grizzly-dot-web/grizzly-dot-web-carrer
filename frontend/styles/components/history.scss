@@ -68,7 +68,8 @@ $Timespan_NavigationNextActive_Height: (
 	@include NavigationState('previous', $Timespan-NavigationPrevActive_Height);
 	@include NavigationState('next', $Timespan_NavigationNextActive_Height);
 
-	width: 100vw;
+	width: 100vw + $Viewport_Padding_Vertical;
 	overflow: hidden;
+	margin: $Viewport_Padding_Horizontal * -1 $Viewport_Padding_Vertical * -1;
 	padding: $Viewport_Padding_Horizontal $Viewport_Padding_Vertical;
 }
