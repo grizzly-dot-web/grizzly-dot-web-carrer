@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
 import 'whatwg-fetch';
 import moment from 'moment';

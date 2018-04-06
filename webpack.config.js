@@ -8,7 +8,7 @@ const debug = process.env.NODE_ENV !== 'production';
 module.exports = {
 	devtool: debug ? "inline-source-map" : false,
 	entry: {
-		main: ['./src/js/main.js', './src/styles/main.scss'],
+		main: ['./frontend/js/main.js', './frontend/styles/main.scss'],
 	},
 	output: {
 		path: path.resolve(__dirname, 'dest'),
@@ -36,8 +36,12 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin('main.css'),
 		new BrowserSyncPlugin({
-			port: 3000,
-			server: { baseDir: ['.'] }
+			port: 3000, // you can specify the port here
+						 // can't use the same port that nodemon uses.
+			 proxy: {
+					 target: 'localhost:9000', // original port
+					 ws: true // enables websockets
+			 }
 		})
 	],
 };
