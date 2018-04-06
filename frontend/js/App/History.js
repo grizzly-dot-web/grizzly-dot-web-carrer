@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import check from 'check-types';
 
-import Timeline from './Components/History/TimeLine';
+import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
 
 class History extends React.Component {
