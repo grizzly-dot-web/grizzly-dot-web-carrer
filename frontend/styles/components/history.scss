@@ -1,6 +1,6 @@
 //#region Configuration
 //#subregion Colors
-$Timeline_BackgroundColor: $ColorBackgroundContent;
+$Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.5);
 $Timeline-Active_BackgroundColor: $ColorBackgroundContent;
 //#endsubregion
 
@@ -14,19 +14,19 @@ $BeginMarker_PositionBottom:getGridSize(3, horizontal);
 
 $Timespan_Height: (
 	Previous: getGridSize(19, horizontal),
-	Next: getGridSize(10, horizontal),
+	Next: getGridSize(9, horizontal),
 );
 
 $CurrentTimeSpan_Height: 100 - (map-get($Timespan_Height, Previous) + map-get($Timespan_Height, Next));
 
 //#subregion after Animation
 $Timespan-NavigationPrevActive_Height: (
-	Previous: getGridSize(20, horizontal),
-	Next: getGridSize(9, horizontal),
+	Previous: getGridSize(19, horizontal),
+	Next: getGridSize(8, horizontal),
 );
 $Timespan_NavigationNextActive_Height: (
-	Previous: getGridSize(9, horizontal),
-	Next: getGridSize(20, horizontal),
+	Previous: getGridSize(8, horizontal),
+	Next: getGridSize(19, horizontal),
 );
 //#endsubregion
 
@@ -41,9 +41,21 @@ $Timespan_NavigationNextActive_Height: (
 			.timespan {
 				&.timespan-previous {
 					height: map-get($timespan_height, Previous);
+
+					@if ($type == 'previous') {
+						&:after {
+							height: 100%;
+						}
+					}
 				}
 				&.timespan-next {
 						height: map-get($timespan_height, Next);
+
+						@if ($type == 'next') {
+							&:after {
+								height: 100%;
+							}
+						}
 				}
 			}
 

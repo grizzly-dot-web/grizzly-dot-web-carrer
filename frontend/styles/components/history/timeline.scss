@@ -1,5 +1,4 @@
 %TimelineEntry {
-	color: $Timeline_BackgroundColor;
 	left: 50%;
 	width: 50%;
 	font-size: 0.7em;
@@ -18,9 +17,19 @@
 		display: block;
 		position: absolute;
 		height: $Timeline-Line_Width;
-		background-color: $Timeline_BackgroundColor;
 		transform: translate(-50%, -50%);
+		background-image: linear-gradient(
+			to right,
+			$Timeline_BackgroundColor 0%,
+			$Timeline_BackgroundColor calc(50% - 3px),
+			transparent calc(50% - 3px),
+			transparent calc(50% + 3px),
+			$Timeline_BackgroundColor calc(50% + 3px),
+			$Timeline_BackgroundColor 100%
+		);
 	}
+
+	transition: background 1s ease-in-out;
 
 	a, span {
 		min-width: 3.7em;
@@ -34,10 +43,10 @@
 	top: 0;
 	width: 30%;
 	height: 100%;
-	opacity: 0.5;
 	display: block;
 	overflow: hidden;
 	position: absolute;
+	color: $Timeline_BackgroundColor;
 	left: $Timeline_PositionLeft;
 
 	.inner {
@@ -68,6 +77,12 @@
 
 		li {
 			@extend %TimelineEntry;
+			color: $Timeline-Active_BackgroundColor;
+
+			&:before {
+				z-index: 1;
+				background-color: $Timeline-Active_BackgroundColor;
+			}
 		}
 	}
 	.navigation-previous {
@@ -80,10 +95,11 @@
 	.timespan {
 		width: 100%;
 		display: block;
+		cursor: pointer;
 		position: absolute;
 		transition: height 0.55s linear;
 
-		&:before {
+		&:before, &:after {
 			content: '';
 			left: 50%;
 			height: 100%;
@@ -91,14 +107,59 @@
 			display: block;
 			position: absolute;
 			width: $Timeline-Line_Width;
-			background-color: $Timeline_BackgroundColor;
+			opacity: 0.5;
+			background-color: $Timeline-Active_BackgroundColor;
 			transform: translateX(-50%);
-			transition: height 0.5s linear;
+			transition: height 0.5s linear, opacity 1s ease-in-out;
+		}
+		&:after {
+			height: 0;
+			bottom: 0;
+			background-color: transparent;
+			background-image: linear-gradient(
+				to top,
+				$Timeline-Active_BackgroundColor 0%,
+				$Timeline-Active_BackgroundColor 30%,
+				transparent 100%
+			);
+		}
+
+		&:hover {
+			&:after {
+				height: 100%;
+			}
+		}
+
+		&.timespan-previous {
+			top: 1px;
+			height: map-get($Timespan_Height, Previous);
+
+			&:after {
+				top: 0;
+				background-image: linear-gradient(
+					to bottom,
+					$Timeline-Active_BackgroundColor 0%,
+					$Timeline-Active_BackgroundColor 40%,
+					transparent 100%
+				);
+			}
+
+			.current-date-marker {
+				bottom: $BeginMarker_PositionBottom;
+			}
+		}
+
+		&.timespan-next {
+			bottom: 0;
+			height: map-get($Timespan_Height, Next);
+
+			.current-date-marker {
+				top: $EndMarker_PositionTop;
+			}
 		}
 
 		.current-date-marker {
 			width: 100%;
-			cursor: pointer;
 			position: absolute;
 
 			&:before, &:after {
@@ -106,8 +167,8 @@
 
 				content: '';
 				top: getGridSize(0.5, horizontal) * -1;
-				width: 50%;
 				left: 50%;
+				width: 50%;
 				position: absolute;
 				transform: translateX(-50%);
 			}
@@ -127,24 +188,6 @@
 
 			&:hover {
 				opacity: 1;
-			}
-		}
-
-		&.timespan-previous {
-			top: 0;
-			height: map-get($Timespan_Height, Previous);
-
-			.current-date-marker {
-				bottom: $BeginMarker_PositionBottom;
-			}
-		}
-
-		&.timespan-next {
-			bottom: 0;
-			height: map-get($Timespan_Height, Next);
-
-			.current-date-marker {
-				top: $EndMarker_PositionTop;
 			}
 		}
 	}
