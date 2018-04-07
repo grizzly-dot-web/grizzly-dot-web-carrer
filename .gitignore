@@ -1,5 +1,5 @@
 
-/compiled/*
+compiled/*
 !/compiled/public/data/*
 !/compiled/public/img/*
 !/compiled/public/index.html

@@ -5,15 +5,15 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const debug = process.env.NODE_ENV !== 'production';
 
-module.exports = {
+var frontendConfig = {
 	devtool: debug ? "inline-source-map" : false,
 	entry: {
-		main: ['./frontend/js/main.js', './frontend/styles/main.scss'],
+		main: ['./src/frontend/js/main.js', './src/frontend/styles/main.scss']
 	},
 	output: {
-		path: path.resolve(__dirname, 'dest'),
-		filename: 'main.js',
-		publicPath: './'
+			path: path.resolve(__dirname, 'compiled/public/compiled'),
+			filename: 'main.js',
+			publicPath: './'
 	},
 	module: {
 		rules: [
@@ -43,5 +43,38 @@ module.exports = {
 					 ws: true // enables websockets
 			 }
 		})
-	],
+	]
+}
+
+var serverConfig = {
+	target: 'node',
+	devtool: debug ? "inline-source-map" : false,
+	entry: {
+		main: ['./src/server/index.js'],
+	},
+	output: {
+			path: path.resolve(__dirname, 'compiled/server'),
+			filename: 'index.js',
+			publicPath: './'
+	},
+	module: {
+		loaders: [
+			{
+					test: /\.js$/,
+					query: {
+						presets: [
+							["env", { "modules": false }]
+						],
+						babelrc: false,
+					},
+					exclude: '/node_modules',
+					loader: 'babel-loader',
+			}
+		]
+	}
 };
+
+module.exports = [
+	serverConfig,
+	frontendConfig
+];

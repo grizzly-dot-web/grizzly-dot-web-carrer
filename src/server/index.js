@@ -14,9 +14,8 @@ server.listen(PORT);
 app.use(
 	morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms')
 );
-
 // Serve static assets
-app.use(express.static(path.resolve(__dirname, '../public')));
+app.use(express.static(path.resolve('.', 'compiled/public')));
 app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
+	res.sendFile(path.resolve('.', 'compiled/public', 'index.html'));
 });

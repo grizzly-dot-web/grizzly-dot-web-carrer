@@ -4,9 +4,10 @@
   "description": "",
   "scripts": {
     "test": "",
-    "start": "nodemon server/index.js --exec babel-node",
-    "watch": "webpack --watch",
-    "build:prod": "webpack -p"
+    "start": "node compiled/server/index.js",
+    "build": "webpack -p --progress",
+    "watch": "webpack --watch --progress",
+    "server:watch": "nodemon compiled/server/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0",
     "browser-sync": "^2.23.6",
     "browser-sync-webpack-plugin": "^2.0.1",
     "css-loader": "^0.28.9",

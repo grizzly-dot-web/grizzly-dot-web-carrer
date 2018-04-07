@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 
-fetch('/career.json').then((response) => {
+fetch('/data/career.json').then((response) => {
 
 	if (response.status !== 200) {
 		throw new Error(response);
