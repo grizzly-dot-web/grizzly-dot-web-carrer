@@ -18,7 +18,7 @@ var frontendConfig = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /(?!.*src\/server)\/.*\.js$|/,
 				use: [
 					{
 						loader: 'babel-loader'
@@ -60,7 +60,7 @@ var serverConfig = {
 	module: {
 		loaders: [
 			{
-					test: /\.js$/,
+					test: /(?!.*src\/frontend)\/.*\.js$/,
 					query: {
 						presets: [
 							["env", { "modules": false }]
