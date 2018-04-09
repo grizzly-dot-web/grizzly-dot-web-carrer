@@ -6,6 +6,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const debug = process.env.NODE_ENV !== 'production';
 
 var frontendConfig = {
+	name: 'Frontend side Changes',
 	devtool: debug ? "inline-source-map" : false,
 	entry: {
 		main: ['./src/frontend/js/main.js', './src/frontend/styles/main.scss']
@@ -47,8 +48,8 @@ var frontendConfig = {
 }
 
 var serverConfig = {
+	name: 'Server side Changes',
 	target: 'node',
-	devtool: debug ? "inline-source-map" : false,
 	entry: {
 		main: ['./src/server/index.js'],
 	},
