@@ -4,6 +4,10 @@ compiled/*
 !/compiled/public/img/*
 !/compiled/public/index.html
 
+
+
+.vscode/*
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
