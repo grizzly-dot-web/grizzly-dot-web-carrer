@@ -4,6 +4,7 @@ import scroll from 'scroll';
 import ease from 'ease-component';
 
 import Router from './ScrollRouter/Router';
+import Route from './ScrollRouter/Route';
 import ScrollWatcher from'./ScrollRouter/ScrollWatcher';
 
 class ScrollRouter extends Router {
@@ -30,24 +31,38 @@ class ScrollRouter extends Router {
         
 		this._watcher = new ScrollWatcher();
 
+		this.dispatch(window.location.pathname);
 		this._watcher.on(document.scrollingElement, () => {
-			console.log(this.lastDispatchedRoute.parts[this.lastDispatchedRoute.parts.length -1].slug);
+			this.getNextRoute().then((route) => {
+				if (route instanceof Route) {
+					this.goto(route);
+				}
+			});
+
 			return false;
 		});
-        
-		this.dispatch(window.location.pathname);
-		window.onpopstate = this.dispatch.bind(this);
+
+		window.onpopstate = (e) => {
+			this.dispatch();
+			e.preventDefault();
+		};
 	}
 
 	dispatch(pathname) {
-		super.dispatch(pathname).then(
-			() => {
-				console.log('successfull dispatched');
-			},
-			() => {
-				console.log('unsuccessfull dispatched');
-			}
-		);
+		try {
+			super.dispatch(pathname).then(
+				() => {
+					console.log('successfull dispatched');
+				},
+				() => {
+					console.log('unsuccessfull dispatched');
+				}
+			);
+		} catch(e) {
+			//TODO: bring this message to frontend 
+			console.log(`404 Sry but your page could not be found //TODO: bring this message to frontend`);
+			throw e;
+		}
 	}
 
 	handleFirstRoutePart(slug, depth, element) {

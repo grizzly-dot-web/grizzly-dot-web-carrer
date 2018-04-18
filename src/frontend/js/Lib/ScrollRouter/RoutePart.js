@@ -1,6 +1,6 @@
 class RoutePart {
 
-	constructor(slug, targetElement, parent, children, index) {
+	constructor(slug, targetElement, parent, children) {
 		if (slug instanceof HTMLElement) {
 			this._slug = slug.getAttribute('data-route');
 			this._target = slug;
@@ -9,7 +9,6 @@ class RoutePart {
 			this._target = targetElement;
 		}
 
-		this._index = index;
 		this._parent = parent ? parent : null;
 		this._children = children ? children : {};
 	}
@@ -30,15 +29,6 @@ class RoutePart {
 			this._slug = string;
 		}
 	}
-    
-	get index() {
-		return this._index;
-	}
-	set index(number) {
-		if(number){ 
-			this._index = number;
-		}
-	}
 
 	get target() {
 		return this._target;
@@ -49,7 +39,7 @@ class RoutePart {
 		}
 	}
 
-	get partent() {
+	get parent() {
 		return this._parent;
 	}
 	set parent(object) {

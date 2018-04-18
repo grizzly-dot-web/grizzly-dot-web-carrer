@@ -1,9 +1,7 @@
 class Route {
 
-	constructor() {
-		this._parts = [];
-		this._target = null;
-		this._pathname = '';
+	constructor(parts) {
+		this._parts = parts ? parts : [];
 	}
     
 	dispatch(callback, depth, calledDepth) {
@@ -23,11 +21,23 @@ class Route {
 	}
 
 	get target() {
-		return this.parts[this.parts.length -1].target;
+		if (!this._target) {
+			this._target = this.parts[this.parts.length -1].target;
+		}
+
+		return this._target;
 	}
     
 	get pathname() {
-		return this.parts.join('/');
+		if (!this._pathnme) {
+			let partSlugArray = Object.keys(this.parts).map((key) => {
+				return this.parts[key].slug;
+			});
+
+			this._pathname =  '/'+ partSlugArray.join('/');
+		}
+
+		return this._pathname;
 	}
 
 }

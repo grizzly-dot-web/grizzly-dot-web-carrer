@@ -13,8 +13,9 @@ class Router {
 	}
 
 	constructor(options) {
-		this._routes = this._assignRoutes();
-		this.lastDispatchedRoute = null;
+		this._dispatchCalled = false;
+		this._startRoute = this._assignRoutes();
+		this._currentRoute = null;
 
 		this.dispatchingTimeout = null;
 		this._options = Object.assign({
@@ -25,12 +26,94 @@ class Router {
 		}, options);
 	}
 
-	dispatch(path) {
-		let successfull = true;
+	getNextRoute() {
+		return this._getRouteByRelativeIndex(1);
+	}
+
+	getPreviousRoute() {
+		return this._getRouteByRelativeIndex(-1);
+	}
+
+	_getRouteByRelativeIndex(wantedIndex) {
+		return this.workWithCurrentRoute().then(
+			(currentRoute) => {
+				let depth = currentRoute.parts.length;
+				let currentPart = currentRoute.parts[depth -1];
+
+				let routes = this._startRoute.children;
+				if (depth > 1 && currentPart.parent) {
+					routes = currentPart.parent.children;
+				}
+			
+				let keys = Object.keys(routes);
+				let key = currentPart.slug;
+				let i = keys.indexOf(key) + wantedIndex;
+			
+				let destinationRoutePart = undefined;
+				if (i !== -1 && keys[i] && routes[keys[i]]) {
+					destinationRoutePart = routes[keys[i]];
+				}
+
+				if (!(destinationRoutePart instanceof RoutePart)) {
+					if (!currentPart.parent || !currentPart.parent.parent) {
+						return undefined;
+					}
+
+					return this._getRouteByRelativeIndex(wantedIndex, currentPart.parent.parent.children);
+				}
+
+				let parts = currentRoute.parts.slice(0, currentRoute.parts.length-1);
+				parts.push(destinationRoutePart);
+
+				let routeToDispatch = new Route(parts);
+
+				return routeToDispatch;
+			}
+		);
+	}
+
+	goto(route) {
+		let routeToDispatch = route;
+		if (!(route instanceof Route)) {
+			routeToDispatch = this.getRoutyByPath(route);
+		}
+
+		let state = {};
+		let title = route.parts[route.parts.length -1].slug;
+		let url = routeToDispatch.pathname;
+
+		window.history.replaceState(state, title, url);
+		return this.dispatch(routeToDispatch);
+	}
+
+	dispatch(route) {
+		this._dispatchCalled = true;
+
+		if (!route) {
+			throw new Error('no route or path specified');
+		}
+
+		let routeToDispatch = route;
+		if (!(route instanceof Route)) {
+			routeToDispatch = this.getRoutyByPath(route);
+		}
+		if (route === null) {
+			return new Promise((resolve, reject) => {
+				this.dispatchingTimeout = setTimeout(() => {
+					callback(null, '', 0);
+					return resolve();
+				}, duration);
+			});
+		}
 
 		if (this.dispatchingTimeout != null) {
-			successfull = false;
+			return new Promise((resolve, reject) => {
+				console.log('dispatching in progress');
+				return reject();
+			});
 		}
+
+		let successfull = true;
 
 		let callback = this.options.routingBehaviourPerRouteDepth[0];
 		if (!callback) {
@@ -42,26 +125,10 @@ class Router {
 			duration = this.options.duration;
 		}
 
-		let preparedPath = path;
-		if (path.charAt(0) == '/') {
-			preparedPath = preparedPath.substr(1);
-		}
-		
-		let routeSlugs = preparedPath.split('/');
-		if (preparedPath == '' || (routeSlugs.length <= 0 || routeSlugs[0] == '')) {
-			return new Promise((resolve, reject) => {
-				this.dispatchingTimeout = setTimeout(() => {
-					callback(null, '', 0);
-					return resolve();
-				}, duration);
-			});
-		}
-
 		let routePart = null;
 		return new Promise((resolve, reject) => {
-			for (let depth = 0; depth < routeSlugs.length; depth++) {
-				let slug = routeSlugs[depth];
-
+			for (let depth = 0; depth < routeToDispatch.parts.length; depth++) {
+				routePart = routeToDispatch.parts[depth];
 				if (this.options.durationPerRouteDepth[depth]) {
 					duration = this.options.durationPerRouteDepth[depth];
 				}
@@ -69,39 +136,85 @@ class Router {
 				if (this.options.routingBehaviourPerRouteDepth[depth]) {
 					callback = this.options.routingBehaviourPerRouteDepth[depth];
 				}
-			
-				if (routePart === null) {
-					routePart = this._routes[slug];
-				} else {
-					if (routePart.children) {
-						routePart = routePart.children[slug];
-					}
-				}
 
 				if (!(routePart instanceof RoutePart)) {
 					throw new Error('404 no matching root');
 				}
 				
 				if (successfull) {
-					if (!(this.lastDispatchedRoute instanceof Route)) {
-						this.lastDispatchedRoute = new Route();
+					if (!(this._currentRoute instanceof Route)) {
+						this._currentRoute = new Route();
 					}
 					
-					this.lastDispatchedRoute.addPart(routePart);
+					this._currentRoute.addPart(routePart);
 				}
 
 				this.dispatchingTimeout = setTimeout(() =>  {
-					routePart.dispatch(callback, depth, routeSlugs.length);
+					routePart.dispatch(callback, depth, routeToDispatch.parts.length);
 
-					if (depth >= routeSlugs.length -1) {
+					if (depth >= routeToDispatch.parts.length -1) {
 						clearTimeout(this.dispatchingTimeout);
 						this.dispatchingTimeout = null;
 
 						return successfull ? resolve() : reject();
 					}
+
+					this._currentRoute = routeToDispatch;
 				}, duration);
 			}
 		});
+	}
+
+	workWithCurrentRoute() {
+		if (this._currentRoute instanceof Route) {
+			return new Promise((resolve, reject) => {
+				return resolve(this._currentRoute);
+			});
+		}
+
+		if (this._dispatchCalled !== true) {
+			throw new Error('you have to call dispatch once before accessing the current route');
+		}
+
+		return new Promise((resolve, reject) => {
+			let timeout = null;
+			
+			while(this._currentRoute != null) {
+				if (timeout != null) {
+					return resolve(this._currentRoute);
+				}
+			}
+		});
+	}
+
+	getRoutyByPath(pathname) {
+		let preparedPath = pathname;
+		if (pathname.charAt(0) == '/') {
+			preparedPath = preparedPath.substr(1);
+		}
+		if (pathname.charAt(pathname.length -1) == '/') {
+			preparedPath = preparedPath.substr(pathname.length -1, 1);
+		}
+		
+		let routeSlugs = preparedPath.split('/');
+
+		let parts = [];
+		let routePart = this._startRoute;
+		for (let depth = 0; depth < routeSlugs.length; depth++) {
+			let slug = routeSlugs[depth];
+
+			if (routePart.slug !== slug && routePart.children) {
+				routePart = routePart.children[slug];
+			}
+
+			if (!routePart) {
+				throw new Error(`404 path did not exist: "${pathname}" could not match: "${slug}"`);
+			}
+
+			parts.push(routePart);
+		}
+
+		return new Route(parts);
 	}
 
 	_assignRoutes() {
@@ -140,9 +253,6 @@ class Router {
 			if (!object) {
 				object = {};
 			}
-
-			let childIndex = 0;
-			let parentIndex = 0;
 			for (let element of elements) {
 				
 				let parent = element.parentElement;
@@ -152,12 +262,10 @@ class Router {
 
 				if (!object[parent.getAttribute('data-route')]) {
 					object[parent.getAttribute('data-route')] = new RoutePart(parent);
-					object[parent.getAttribute('data-route')].index = parentIndex;
 				}
 
 				if (!object[parent.getAttribute('data-route')].children[element.getAttribute('data-route')]) {
 					object[parent.getAttribute('data-route')].children[element.getAttribute('data-route')] = new RoutePart(element);
-					object[parent.getAttribute('data-route')].children[element.getAttribute('data-route')].index = childIndex;
 				}
 				object[parent.getAttribute('data-route')].children[element.getAttribute('data-route')].parent = object[parent.getAttribute('data-route')];
 
@@ -165,14 +273,12 @@ class Router {
 					return convertToRouteParts(parent, object);
 				}
 
-				childIndex++;
-				parentIndex++;
 			}
 
 			return object;
 		};
 
-		return convertToRouteParts(deppestNestedRoutePartElements);
+		return new RoutePart('', document.body, null, convertToRouteParts(deppestNestedRoutePartElements));
 	}
 }
 
