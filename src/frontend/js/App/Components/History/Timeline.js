@@ -9,10 +9,10 @@ class Timeline extends React.Component {
 		super(props);
 
 		//prepare working duration
-		let startDate = moment(this.props.currentEntry.begin_date, 'YYYY-MM');
-		let endDate = moment(this.props.currentEntry.end_date, 'YYYY-MM');
+		let startDate = moment(this.props.entry.begin_date, 'YYYY-MM');
+		let endDate = moment(this.props.entry.end_date, 'YYYY-MM');
 
-		if (this.props.currentEntry.end_date === null) {
+		if (this.props.entry.end_date === null) {
 			endDate = moment();
 		}
 
@@ -43,7 +43,7 @@ class Timeline extends React.Component {
 			};
 
 			links.push((
-				<li key={counter} style={ style }><a href={`#${entry.begin_date}`}>{date.format('MM.YYYY')}</a></li>
+				<li key={counter} style={ style }><a href={`/karriere/${entry.slug}`}>{`${date.format('MM.YYYY')}`}</a></li>
 			));
 		}
 
@@ -51,13 +51,13 @@ class Timeline extends React.Component {
 	}
 
 	render() {
-
 		let prevEntries = this.renderLinks(this.props.prevEntries, window.innerHeight * -1);
 		let nextEntries = this.renderLinks(this.props.nextEntries, window.innerHeight);
 
 		let additionalClasses = [];
 		let handleNavigationClickNext = null;
 		let handleNavigationClickPrevious = null;
+
 		if (prevEntries.length > 0) {
 			additionalClasses.push('has-previous-entries');
 			handleNavigationClickPrevious = (e) => this.props.onClickNavigation(e, 'previous');

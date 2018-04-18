@@ -11,7 +11,6 @@ class HistoryEntry extends FrontendComponent {
 
 	constructor(props) {
 		super(props);
-
 		this.state = Object.assign(this.state, {
 			lastPosition: 0,
 			detailsVisible:  false,
@@ -68,7 +67,7 @@ class HistoryEntry extends FrontendComponent {
 
 		// render the prepared section
 		return (
-			<article id={this.props.entry.begin_date} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
+			<article ref={this.props.entryRef} id={this.props.entry.begin_date} data-route={this.props.entry.slug} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
 				{this.props.children}
 				<div className={'history-main'}>
 					<header className="history-header">

@@ -16,6 +16,6 @@ app.use(
 );
 // Serve static assets
 app.use(express.static(path.resolve('.', 'compiled/public')));
-app.get('*', (req, res) => {
+app.get(['*'], (req, res) => {
 	res.sendFile(path.resolve('.', 'compiled/public', 'index.html'));
 });

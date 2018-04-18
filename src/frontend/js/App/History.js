@@ -1,4 +1,5 @@
 import React from 'react';
+
 import moment from 'moment';
 import check from 'check-types';
 
@@ -9,6 +10,9 @@ class History extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.lastScrollTop = 0;
+		this.scrollWaitTimeout = null;
+		this.historyElementRefs = [];
 
 		let entries = this.props.data.sort((a, b) => {
 			let aDate = moment(a.begin_date);
@@ -26,11 +30,13 @@ class History extends React.Component {
 		});
 
 		this.state = {
-			historyEntries: entries,
 			navigationActive: {
 				previous: false,
 				next: false,
 			},
+			routeName: 'karriere',
+			disableScroll: false,
+			historyEntries: entries,
 			timescaleEnd: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
 			timescaleStart: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
 		};
@@ -40,32 +46,40 @@ class History extends React.Component {
 		let history = [];
 
 		let first = true;
+		this.historyElementRefs = [];
 		for (let i = 0; i < this.state.historyEntries.length; i++) {
 			let classes = [];
 			let item = this.state.historyEntries[i];
 			let prevEntries = this.state.historyEntries.slice(0, i);
-			let nextEntries = this.state.historyEntries.slice(i+1, this.state.historyEntries.length);
+			let nextEntries = this.state.historyEntries.slice(i + 1, this.state.historyEntries.length);
 
 			if (first) {
 				classes.push('first-entry');
 				first = false;
 			}
-			history.push((
-				<HistoryEntry
-					key={i}
-					entry={item}
-					prevEntries={prevEntries}
-					nextEntries={nextEntries}
-					additionalClasses={classes}
-				>
-					<Timeline
+
+			let assignHistoryElementsReference = (ref) => {
+				if (ref == null) {
+					return;
+				}
+			};
+			
+			history.push(( 
+				<HistoryEntry 
+					entryRef = { assignHistoryElementsReference }
+					key = { i }
+					entry = { item }
+					prevEntries = { prevEntries }
+					nextEntries = { nextEntries }
+					additionalClasses = { classes } >
+					<Timeline 
+						entry = { item }
 						onClickNavigation = { this.handleNavigationClick.bind(this) }
-						prevEntries={prevEntries}
-						nextEntries={nextEntries}
-						currentEntry={item}
-						timescaleStart={this.state.timescaleStart}
-						timescaleEnd={this.state.timescaleEnd}
-					/>
+						prevEntries = { prevEntries }
+						nextEntries = { nextEntries }
+						timescaleStart = { this.state.timescaleStart }
+						timescaleEnd = { this.state.timescaleEnd }
+					/>  
 				</HistoryEntry>
 			));
 		}
@@ -75,6 +89,7 @@ class History extends React.Component {
 
 	handleNavigationClick(e, direction) {
 		let navigationActive = {};
+
 		if (direction == 'previous') {
 			navigationActive = {
 				previous: !this.state.navigationActive.previous,
@@ -94,6 +109,7 @@ class History extends React.Component {
 
 	render() {
 		let additionalClasses = [];
+
 		if (this.state.navigationActive.next) {
 			additionalClasses.push('navigation-next-active');
 		}
@@ -101,9 +117,9 @@ class History extends React.Component {
 			additionalClasses.push('navigation-previous-active');
 		}
 
-		return (
-			<section className={`history ${additionalClasses.join(' ')}`}>
-				{this.renderHistoryEntries()}
+		return ( 
+			<section data-route={this.state.routeName} className = { `history ${additionalClasses.join(' ')}` }> 
+				{ this.renderHistoryEntries() } 
 			</section>
 		);
 	}
