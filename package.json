@@ -7,7 +7,7 @@
     "start": "node compiled/server/index.js",
     "build": "webpack -p --progress",
     "watch": "webpack --watch --progress",
-    "server:watch": "nodemon compiled/server/index.js"
+    "watch:server": "nodemon compiled/server/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -38,6 +38,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "check-types": "^7.3.0",
+    "ease-component": "^1.0.0",
     "express": "^4.16.3",
     "http": "0.0.0",
     "marked": "^0.3.17",
@@ -48,6 +49,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-render-html": "^0.6.0",
+    "scroll": "^2.0.3",
+    "scrollingelement": "^1.5.2",
     "whatwg-fetch": "^2.0.3",
     "ws": "^5.1.1"
   }
