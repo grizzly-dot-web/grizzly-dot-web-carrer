@@ -1,28 +1,30 @@
+import { Module } from './Module';
+
 class Route {
 
-	constructor(parts) {
-		this._parts = parts ? parts : [];
+	constructor(modules) {
+		this._modules = modules ? modules : [];
 	}
     
 	dispatch(callback, depth, calledDepth) {
 		callback(this._slug, depth, this._target, calledDepth);        
 	}
 
-	get parts() {
-		return this._parts;
+	get modules() {
+		return this._modules;
 	}
-	set parts(array) {
+	set modules(array) {
 		if(array){ 
-			this._parts = array;
+			this._modules = array;
 		}
 	}
 	addPart(string) {
-		this._parts.push(string);
+		this._modules.push(string);
 	}
 
 	get target() {
 		if (!this._target) {
-			this._target = this.parts[this.parts.length -1].target;
+			this._target = this.modules[this.modules.length -1].target;
 		}
 
 		return this._target;
@@ -30,13 +32,13 @@ class Route {
     
 	get pathname() {
 		if (!this._pathnme) {
-			let partSlugArray = Object.keys(this.parts).map((key) => {
-				return this.parts[key].slug;
+			let moduleSlugArray = this._modules.map((module) => {
+				return module.slug;
 			});
 
-			this._pathname =  '/'+ partSlugArray.join('/');
+			this._pathname =  '/'+ moduleSlugArray.join('/');
 		}
-
+		
 		return this._pathname;
 	}
 

@@ -118,7 +118,7 @@ class History extends React.Component {
 		}
 
 		return ( 
-			<section data-route={this.state.routeName} className = { `history ${additionalClasses.join(' ')}` }> 
+			<section data-gzly-routing-module={this.state.routeName} className={ `history ${additionalClasses.join(' ')}` }> 
 				{ this.renderHistoryEntries() } 
 			</section>
 		);

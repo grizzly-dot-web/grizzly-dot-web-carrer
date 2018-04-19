@@ -1,8 +1,8 @@
-class RoutePart {
+class Module {
 
 	constructor(slug, targetElement, parent, children) {
 		if (slug instanceof HTMLElement) {
-			this._slug = slug.getAttribute('data-route');
+			this._slug = slug.getAttribute('data-gzly-routing-module');
 			this._target = slug;
 		} else {
 			this._slug = slug;
@@ -43,7 +43,7 @@ class RoutePart {
 		return this._parent;
 	}
 	set parent(object) {
-		if(object instanceof RoutePart){ 
+		if(object instanceof Module){ 
 			this._parent = object;
 		} else {
 			throw new ReferenceError('invalid type parent have to be Route Part');
@@ -54,7 +54,7 @@ class RoutePart {
 		return this._children;
 	}
 	addChild(object) {
-		if(object instanceof RoutePart){ 
+		if(object instanceof Module){ 
 			this._children[object.slug] = object;
 		} else {
 			throw new ReferenceError('invalid type parent have to be Route Part');
@@ -63,4 +63,4 @@ class RoutePart {
 
 }
 
-export default RoutePart;
+export default Module;

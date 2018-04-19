@@ -67,7 +67,7 @@ class HistoryEntry extends FrontendComponent {
 
 		// render the prepared section
 		return (
-			<article ref={this.props.entryRef} id={this.props.entry.begin_date} data-route={this.props.entry.slug} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
+			<article ref={this.props.entryRef} id={this.props.entry.begin_date} data-gzly-routing-module={this.props.entry.slug} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
 				{this.props.children}
 				<div className={'history-main'}>
 					<header className="history-header">
