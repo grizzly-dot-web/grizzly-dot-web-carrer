@@ -102,7 +102,7 @@ class ScrollWatcher {
 	handleWheel(e) {
 		let preventDefault = this.options.disableWheel;
 		if (typeof this.callback !== 'undefined') {
-			preventDefault = this.callback(e, e.type);
+			preventDefault = !this.callback(e, e.type);
 		}
 
 		if (preventDefault) {
@@ -116,7 +116,7 @@ class ScrollWatcher {
 	handleScroll(e) {
 		let preventDefault = this.options.disableScroll;
 		if (typeof this.callback !== 'undefined') {
-			preventDefault = this.callback(e, e.type);
+			preventDefault = !this.callback(e, e.type);
 		}
 
 		if (preventDefault) {
@@ -145,7 +145,7 @@ class ScrollWatcher {
 
 		let preventDefault = this.options.disableKeys;
 		if (typeof this.callback !== 'undefined') {
-			preventDefault = this.callback(e, e.type, e.keyCode);
+			preventDefault = !this.callback(e, e.type, e.keyCode);
 		}
 
 		if (preventDefault) {

@@ -40,7 +40,6 @@ class Router {
 	_getRouteByRelativeIndex(wantedIndex) {
 		return this.workWithCurrentRoute().then(
 			(currentRoute) => {			
-				console.log('Current Route', currentRoute);	
 				let depth = currentRoute.modules.length;
 				let currentPart = currentRoute.modules[depth -1];
 
@@ -62,10 +61,11 @@ class Router {
 					return null;
 				}
 				
-				let routeModules = currentRoute.modules.slice(0, currentRoute.modules.length-1);
-				routeModules.push(destinationModule);
-
-				let routeToDispatch = new Route(routeModules);
+				let routeToDispatch = new Route();
+				routeToDispatch.modules = [
+					...currentRoute.modules.slice(currentRoute.modules.length-2, currentRoute.modules.length-1),
+					destinationModule
+				];
 
 				return routeToDispatch;
 			}
@@ -84,19 +84,19 @@ class Router {
 		let routeSlugs = preparedPath.split('/');
 
 		let modules = [];
-		let module = this._pageModule;
+		let routeModule = this._pageModule;
 		for (let depth = 0; depth < routeSlugs.length; depth++) {
 			let slug = routeSlugs[depth];
 
-			if (module.slug !== slug && module.children) {
-				module = module.children[slug];
+			if (routeModule.slug !== slug && routeModule.children) {
+				routeModule = routeModule.children[slug];
 			}
 
-			if (!module) {
+			if (!routeModule) {
 				throw new Error(`404 path did not exist: "${pathname}" could not match: "${slug}"`);
 			}
 
-			modules.push(module);
+			modules.push(routeModule);
 		}
 		
 		return this._forceRouteToHaveDeepestChildPath(new Route(modules));
@@ -167,43 +167,40 @@ class Router {
 			duration = this.options.duration;
 		}
 
-		let module = null;
-		return new Promise((resolve, reject) => {
-			for (let depth = 0; depth < routeToDispatch.modules.length; depth++) {
-				module = routeToDispatch.modules[depth];
-				if (this.options.durationPerRouteDepth[depth]) {
-					duration = this.options.durationPerRouteDepth[depth];
-				}
-	
-				if (this.options.routingBehaviourPerRouteDepth[depth]) {
-					callback = this.options.routingBehaviourPerRouteDepth[depth];
-				}
-
-				if (!(module instanceof Module)) {
-					throw new Error('404 no matching root');
-				}
-				
-				if (successfull) {
-					if (!(this._currentRoute instanceof Route)) {
-						this._currentRoute = new Route();
-					}
-					
-					this._currentRoute.addPart(module);
-				}
-
-				this.dispatchingTimeout = setTimeout(() =>  {
-					module.dispatch(callback, depth, routeToDispatch.modules.length);
-
-					if (depth >= routeToDispatch.modules.length -1) {
-						clearTimeout(this.dispatchingTimeout);
-						this.dispatchingTimeout = null;
-
-						return successfull ? resolve(routeToDispatch) : reject(routeToDispatch);
-					}
-
-					this._currentRoute = routeToDispatch;
-				}, duration);
+		let routeModule = null;
+		let process = (depth, resolve, reject) => {
+			if (this.options.durationPerRouteDepth[depth]) {
+				duration = this.options.durationPerRouteDepth[depth];
 			}
+
+			if (this.options.routingBehaviourPerRouteDepth[depth]) {
+				callback = this.options.routingBehaviourPerRouteDepth[depth];
+			}
+
+			routeModule = routeToDispatch.modules[depth];
+			if (!(routeModule instanceof Module)) {
+				throw new Error('404 no matching route');
+			}
+
+			return setTimeout(() =>  {
+				routeModule.dispatch(callback, depth, routeToDispatch.modules.length);
+
+				this._currentRoute = routeToDispatch;
+				if (depth >= routeToDispatch.modules.length -1) {
+					clearTimeout(this.dispatchingTimeout);
+					this.dispatchingTimeout = null;
+					return successfull ? resolve(routeToDispatch) : reject(routeToDispatch);
+				}
+
+				depth++;
+				if (depth < routeToDispatch.modules.length) {
+					process(depth, resolve, reject);
+				}
+			}, duration);
+		};
+
+		return new Promise((resolve, reject) => {
+			this.dispatchingTimeout = process(0, resolve, reject);
 		});
 	}
 
@@ -230,15 +227,16 @@ class Router {
 	}
 
 	_registerModules() {
+		let dataAttribute = 'data-gzly-routing-module';
 		let deepestRouteCount = 10;
 		let deppestNestedModuleElements = [];
 
 		for(var queryMultiplier = deepestRouteCount; queryMultiplier > 0; queryMultiplier--) {
-			let query = Array.apply(null, {length: queryMultiplier}).map(() => { return '[data-gzly-routing-module]';}).join(' ');
+			let query = Array.apply(null, {length: queryMultiplier}).map(() => { return `[${dataAttribute}]`;}).join(' ');
 
 			for (let element of document.querySelectorAll(query)) {
 				// if HTMLElement has no data-route attribute with a value 
-				if (element.getAttribute('data-gzly-routing-module') === null || element.getAttribute('data-gzly-routing-module').length < 0) {
+				if (element.getAttribute(dataAttribute) === null || element.getAttribute(dataAttribute).length < 0) {
 					continue;
 				}
 		
@@ -268,18 +266,18 @@ class Router {
 			for (let element of elements) {
 
 				let parent = element.parentElement;
-				while((parent.getAttribute('data-gzly-routing-module') === null || parent.getAttribute('data-gzly-routing-module').length < 0)) {
+				while((parent.getAttribute(dataAttribute) === null || parent.getAttribute(dataAttribute).length < 0)) {
 					parent = parent.parentElement;
 				}
 
-				if (!object[parent.getAttribute('data-gzly-routing-module')]) {
-					object[parent.getAttribute('data-gzly-routing-module')] = new Module(parent);
+				if (!object[parent.getAttribute(dataAttribute)]) {
+					object[parent.getAttribute(dataAttribute)] = new Module(parent);
 				}
 
-				if (!object[parent.getAttribute('data-gzly-routing-module')].children[element.getAttribute('data-gzly-routing-module')]) {
-					object[parent.getAttribute('data-gzly-routing-module')].children[element.getAttribute('data-gzly-routing-module')] = new Module(element);
+				if (!object[parent.getAttribute(dataAttribute)].children[element.getAttribute(dataAttribute)]) {
+					object[parent.getAttribute(dataAttribute)].children[element.getAttribute(dataAttribute)] = new Module(element);
 				}
-				object[parent.getAttribute('data-gzly-routing-module')].children[element.getAttribute('data-gzly-routing-module')].parent = object[parent.getAttribute('data-gzly-routing-module')];
+				object[parent.getAttribute(dataAttribute)].children[element.getAttribute(dataAttribute)].parent = object[parent.getAttribute(dataAttribute)];
 
 				if (parent.parent != null) {
 					return convertToModules(parent, object);
