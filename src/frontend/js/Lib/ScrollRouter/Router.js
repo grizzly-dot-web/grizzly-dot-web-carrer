@@ -99,7 +99,20 @@ class Router {
 			modules.push(routeModule);
 		}
 		
-		return new Route(modules);
+		return this._forceRouteToHaveDeepestChildPath(new Route(modules));
+	}
+
+	_forceRouteToHaveDeepestChildPath(route, returnLastChild) {
+		let lastModule = route.modules[route.modules.length -1];
+		while (lastModule) {
+			lastModule = lastModule.children[Object.keys(lastModule.children)[0]];
+			
+			if (lastModule) {
+				route.addPart(lastModule);
+			}
+		}
+
+		return route;
 	}
 
 	goto(route, then) {
