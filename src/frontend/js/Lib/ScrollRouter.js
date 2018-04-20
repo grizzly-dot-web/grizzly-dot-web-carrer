@@ -11,9 +11,8 @@ class ScrollRouter extends Router {
 	constructor(options) {
 		super(options);
 		this.durationPerRouteDepth = [
-			1000,
-			2000,
-			1000
+			0,
+			500,
 		];
 
 		this.handleFirstRoutePart = this.handleFirstRoutePart.bind(this);
@@ -30,42 +29,41 @@ class ScrollRouter extends Router {
 		};
         
 		this._watcher = new ScrollWatcher();
-
 		this.dispatch(window.location.pathname);
-		this._watcher.on(document.scrollingElement, () => {
-			this.getNextRoute().then((route) => {
-				if (route instanceof Route) {
-					this.goto(route);
-				}
-			});
+		
+		let changeRoute = (route) => {
+			console.log('[NEXT_ROUTE] start');
+			if (route instanceof Route) {
+				this.goto(route, {
+					resolve: () => {
+						console.log('[NEXT_ROUTE] finish');
+					}, 
+					reject: () => {
+						console.log('[NEXT_ROUTE] reject');
+					}
+				});
+			}
+		};
+		this._watcher.on(document.scrollingElement, (e, type, key) => {
+			if (type !== ScrollWatcher.EventType.keydown) {
+				return;
+			}
+
+			switch(key) {
+				case ScrollWatcher.Key.Down || ScrollWatcher.Key.PageDown:
+					this.getNextRoute().then(changeRoute);
+					break;
+				case ScrollWatcher.Key.Up || ScrollWatcher.Key.PageUp:
+					this.getPreviousRoute().then(changeRoute);
+					break;
+			}
 
 			return false;
 		});
-
-		window.onpopstate = (e) => {
-			this.dispatch();
-			e.preventDefault();
-		};
-	}
-
-	dispatch(pathname) {
-		try {
-			super.dispatch(pathname).then(
-				() => {
-					console.log('successfull dispatched');
-				},
-				() => {
-					console.log('unsuccessfull dispatched');
-				}
-			);
-		} catch(e) {
-			//TODO: bring this message to frontend 
-			console.log(`404 Sry but your page could not be found //TODO: bring this message to frontend`);
-			throw e;
-		}
 	}
 
 	handleFirstRoutePart(slug, depth, element) {
+		console.log('dispatch first part');
 		if (element && !element.classList.contains('is-active')) {
 			scroll.top(document.scrollingElement, element.offsetTop, {
 				duration: this.durationPerRouteDepth[depth]
@@ -74,13 +72,14 @@ class ScrollRouter extends Router {
 	}
     
 	handleSecondRoutePart(slug, depth, element) {
+		console.log('dispatch second part');
 		scroll.top(document.scrollingElement, element.offsetTop, {
 			duration: this.durationPerRouteDepth[depth]
 		}, ease.inOutBounce);
 	}
     
 	handleThirdRoutePart() {
-        
+		console.log('dispatch third part');        
 	}
 }
 
