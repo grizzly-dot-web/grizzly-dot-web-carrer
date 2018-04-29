@@ -37,12 +37,13 @@ var frontendConfig = {
 	plugins: [
 		new ExtractTextPlugin('main.css'),
 		new BrowserSyncPlugin({
-			port: 3000, // you can specify the port here
-						 // can't use the same port that nodemon uses.
-			 proxy: {
-					 target: 'localhost:9000', // original port
-					 ws: true // enables websockets
-			 }
+			port: 3000, 
+			// you can specify the port here
+			// can't use the same port that nodemon uses.
+			proxy: {
+					target: 'localhost:9000', // original port
+					ws: true // enables websockets
+			}
 		})
 	]
 }

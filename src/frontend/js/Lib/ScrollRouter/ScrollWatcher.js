@@ -1,5 +1,8 @@
 import 'scrollingelement';
 
+import Scroll from 'scroll';
+import Ease from 'ease-component';
+
 const canUseDOM = !!(
 	typeof window !== 'undefined' &&
   window.document &&
@@ -38,13 +41,22 @@ class ScrollWatcher {
 			disableWheel: true,
 			disableScroll: true,
 			disableKeys: true,
-			keyboardKeys: [32, 33, 34, 35, 36, 37, 38, 39, 40],
-			authorizedInInputs: [32, 37, 38, 39, 40]
-			// space: 32, page up: 33, page down: 34, end: 35, home: 36
-			// left: 37, up: 38, right: 39, down: 40
+			callbackExecutionTime: 1000,
+			keyboardKeys: Object.keys(ScrollWatcher.Key).map((keyName) => ScrollWatcher.Key[keyName]),
+			authorizedInInputs: [
+				ScrollWatcher.Key.Left,
+				ScrollWatcher.Key.Right,
+				ScrollWatcher.Key.Up,
+				ScrollWatcher.Key.Down,
+				ScrollWatcher.Key.Space
+			]
+			// space: 32, left: 37, up: 38, right: 39, down: 40, page up: 33, page down: 34, end: 35, home: 36
 		}, options);
 
 		this.lockToScrollPos = [0, 0];
+
+		this.executingCallback = null;
+		this.firstCallAfterCallback = true;
 
 		this.handleScroll = this.handleScroll.bind(this);
 		this.handleWheel = this.handleWheel.bind(this);
@@ -75,8 +87,8 @@ class ScrollWatcher {
 
 		if (watchScroll) {
 			this.lockToScrollPos = [
-				this.element.scrollLeft || this.element.scrollX,
-				this.element.scrollTop || this.element.scrollY
+				this.element.scrollX || this.element.scrollTop,
+				this.element.scrollY || this.element.scrollLeft
 			];
 
 			document.addEventListener('scroll', this.handleScroll);
@@ -100,12 +112,12 @@ class ScrollWatcher {
 	}
 
 	handleWheel(e) {
-		let preventDefault = this.options.disableWheel;
+		let allowDefaultBehaviour = this.options.disableWheel;
 		if (typeof this.callback !== 'undefined') {
-			preventDefault = !this.callback(e, e.type);
+			allowDefaultBehaviour = this.handleCallback(e, e.type);
 		}
 
-		if (preventDefault) {
+		if (!allowDefaultBehaviour) {
 			e.preventDefault();
 			return false;
 		}
@@ -114,12 +126,13 @@ class ScrollWatcher {
 	}
 
 	handleScroll(e) {
-		let preventDefault = this.options.disableScroll;
+		let allowDefaultBehaviour = this.options.disableScroll;
 		if (typeof this.callback !== 'undefined') {
-			preventDefault = !this.callback(e, e.type);
+			allowDefaultBehaviour = this.handleCallback(e, e.type);
 		}
 
-		if (preventDefault) {
+		if (!allowDefaultBehaviour) {
+			console.log(this.lockToScrollPos);
 			window.scrollTo(...this.lockToScrollPos);
 			return false;
 		}
@@ -143,17 +156,68 @@ class ScrollWatcher {
 			return false;
 		}
 
-		let preventDefault = this.options.disableKeys;
+		let allowDefaultBehaviour = this.options.disableKeys;
 		if (typeof this.callback !== 'undefined') {
-			preventDefault = !this.callback(e, e.type, e.keyCode);
+			allowDefaultBehaviour = this.handleCallback(e, e.type, e.keyCode);
 		}
 
-		if (preventDefault) {
+		if (!allowDefaultBehaviour) {
 			e.preventDefault();
 			return false;
 		}
 
-		return true;
+		return this.scrollingBehaviourEnabled;
+	}
+
+	enableDefaultBehaviour() {
+		this.scrollingBehaviourEnabled = false;
+	}
+
+	preventDefaultBehaviour() {
+		this.scrollingBehaviourEnabled = false;
+	}
+
+	handleCallback(e, type, key) {
+		let callbackProps = [e, type, key];
+		this.allowScrollForDuration(this.callback, this.options.callbackExecutionTime, callbackProps);
+	}
+
+	scroll(element, to, duration, options) {
+		this.allowScrollForDuration(() => {
+			Scroll(element, to, options);
+		}, duration);
+
+	}
+	
+	allowScrollForDuration(callback, duration, callbackProps) {
+		console.log('SCROLLING ALLOWED '+ this.firstCallAfterCallback);
+		if (this.executingCallback != null && !this.firstCallAfterCallback) {
+			return this.scrollingBehaviourEnabled;
+		}
+
+		let returnBool = this.firstCallAfterCallback;
+		this.firstCallAfterCallback = false;
+		
+		this.executingCallback = () => {
+			clearTimeout(this.executingCallback);
+			this.executingCallback = null;
+
+			if (this.disableScroll) {
+				this.lockToScrollPos = [
+					this.element.scrollX || this.element.scrollTop,
+					this.element.scrollY || this.element.scrollLeft
+				];
+			}
+			if (callbackProps) {
+				callback(...callbackProps);
+			} else {
+				callback();
+			}
+
+			this.firstCallAfterCallback = true;
+		}, duration;
+
+		return returnBool;
 	}
 }
 

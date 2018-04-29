@@ -1,8 +1,3 @@
-import 'scrollingelement';
-
-import scroll from 'scroll';
-import ease from 'ease-component';
-
 import Router from './ScrollRouter/Router';
 import Route from './ScrollRouter/Route';
 import ScrollWatcher from'./ScrollRouter/ScrollWatcher';
@@ -45,6 +40,8 @@ class ScrollRouter extends Router {
 			}
 		};
 		this._watcher.on(document.scrollingElement, (e, type, key) => {
+			console.log(e, type, key);
+			
 			if (type !== ScrollWatcher.EventType.keydown) {
 				return;
 			}
@@ -65,7 +62,7 @@ class ScrollRouter extends Router {
 	handleFirstRoutePart(slug, depth, element) {
 		console.log('dispatch first part');
 		if (element && !element.classList.contains('is-active')) {
-			scroll.top(document.scrollingElement, element.offsetTop, {
+			this._watcher.scroll.top(document.scrollingElement, element.offsetTop, {
 				duration: this.durationPerRouteDepth[depth]
 			}, ease.inOutBounce);
 		}
