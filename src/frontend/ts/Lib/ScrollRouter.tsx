@@ -1,10 +1,14 @@
-import Router from './ScrollRouter/Router';
-import Route from './ScrollRouter/Route';
 import ScrollWatcher from'./ScrollRouter/ScrollWatcher';
+/*
+class ScrollRouter {
 
-class ScrollRouter extends Router {
-	constructor(options) {
-		super(options);
+	private _watcher : ScrollWatcher;
+
+	options: any;
+
+	durationPerRouteDepth: Array<number>
+
+	constructor(options : any) {
 		this.durationPerRouteDepth = [
 			0,
 			500,
@@ -24,7 +28,7 @@ class ScrollRouter extends Router {
 		};
         
 		this._watcher = new ScrollWatcher();
-		this.dispatch(window.location.pathname);
+	//	this.dispatch(window.location.pathname);
 		
 		let changeRoute = (route) => {
 			console.log('[NEXT_ROUTE] start');
@@ -81,3 +85,4 @@ class ScrollRouter extends Router {
 }
 
 export default ScrollRouter;
+*/

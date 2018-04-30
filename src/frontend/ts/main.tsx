@@ -1,7 +1,7 @@
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
 if (!Array.prototype.includes) {
 	Object.defineProperty(Array.prototype, 'includes', {
-		value: function(searchElement, fromIndex) {
+		value: function(searchElement: Array<any>, fromIndex: number) {
   
 			if (this == null) {
 				throw new TypeError('"this" is null or not defined');
@@ -29,7 +29,7 @@ if (!Array.prototype.includes) {
 			//  b. If k < 0, let k be 0.
 			var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
   
-			function sameValueZero(x, y) {
+			function sameValueZero(x:any, y:any) {
 				return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
 			}
   
@@ -58,23 +58,20 @@ import 'moment/locale/de';
 
 moment.locale('de');
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 import App from './App';
 
 fetch('/data/career.json').then((response) => {
-
-	if (response.status !== 200) {
-		throw new Error(response);
+	if (response.ok) {
+		response.json().then((data) => {
+			ReactDOM.render(
+				<App data={data} />,
+				document.getElementById('app')
+			);
+		})
 	}
-
-	response.text().then((xingResponse) => {
-		ReactDOM.render(
-			<App data={JSON.parse(xingResponse)} />,
-			document.getElementById('app')
-		);
-	});
 
 });
 

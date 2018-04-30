@@ -1,16 +1,25 @@
-import React from 'react';
-import check from 'check-types';
+import * as React from 'react';
+import * as check from 'check-types';
 
-import FrontendComponent from './../_FrontendComponent';
+import {FrontendComponent, FrontendComponentProps} from './../_FrontendComponent';
 
-class Headlines extends FrontendComponent  {
+export interface HeadlinesProps extends FrontendComponentProps {
+	config: any
+	allowedTags: Array<string>
+}
 
-	constructor(props) {
+class Headlines extends FrontendComponent<HeadlinesProps>  {
+
+	constructor(props : any) {
 		super(props);
 
 		this.state = Object.assign(this.state, {
 			allowedTags: check.array(this.props.allowedTags) ? this.props.allowedTags : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 		});
+	}
+
+	allowedComponents() {
+
 	}
 
 	render() {
@@ -22,11 +31,9 @@ class Headlines extends FrontendComponent  {
 		return (<header>{headings}</header>);
 	}
 
-	html(data, headerTags) {
-		let
-			object,
-			headings = []
-		;
+	html(data : any, headerTags : Array<string>) : any {
+		let object : {[tag: string]: string|HTMLElement};
+		let headings = [];
 
 		object = this.object(data, headerTags);
 		if (check.object(object)) {
@@ -46,8 +53,8 @@ class Headlines extends FrontendComponent  {
 		}
 	}
 
-	object(data, headerTags) {
-		let headings = {};
+	object(data : Array<any>, headerTags : Array<string>) : any {
+		let headings : any = {};
 
 		if (!check.array(data) && !check.object(data)) {
 			throw new Error(`headings must be an object see { h1: "foo", h2: "bar" } given: ${data}`);
@@ -57,15 +64,16 @@ class Headlines extends FrontendComponent  {
 			return data;
 		}
 
-		for (let i = 0; i < data.length; i++) {
+		let array : Array<any> = data;
+		for (let i = 0; i < array.length; i++) {
 			let tag = headerTags[i];
 
 			if (i > headerTags.length) {
 				tag = headerTags[headerTags.length -1];
-				headings[tag] = data[i];
+				headings[tag] = array[i];
 
 			} else {
-				headings[tag] = data[i];
+				headings[tag] = array[i];
 			}
 
 		}

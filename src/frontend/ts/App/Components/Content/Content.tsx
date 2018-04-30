@@ -1,17 +1,24 @@
+import * as React from 'react';
 import marked from 'marked';
-import renderHtml from 'react-render-html';
 import check from 'check-types';
 
-import FrontendComponent from './../_FrontendComponent';
+import { FrontendComponent, FrontendComponentProps } from './../_FrontendComponent';
 
-class Content extends FrontendComponent {
+export interface ContentProps extends FrontendComponentProps {
+	allowedTags: Array<string>
+}
 
-	constructor(props) {
+class Content extends FrontendComponent<ContentProps> {
+
+	constructor(props : any) {
 		super(props);
 
 		this.state = Object.assign(this.state, {
 			allowedTags: check.array(this.props.allowedTags) ? this.props.allowedTags : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 		});
+	}
+
+	allowedComponents() {
 	}
 
 	render() {
@@ -30,7 +37,7 @@ class Content extends FrontendComponent {
 		return this.prepareRender(contentObj);
 	}
 
-	prepareRender(item) {
+	prepareRender(item : any) {
 		switch (item.type) {
 			case 'markdown':
 				return this.convertMarkdown(item.content);
@@ -39,8 +46,8 @@ class Content extends FrontendComponent {
 		}
 	}
 
-	convertMarkdown(content) {
-		return (renderHtml(marked(content)));
+	convertMarkdown(content : any) {
+		return (<div dangerouslySetInnerHTML={{__html: marked(content)}}></div>);
 	}
 }
 

@@ -1,14 +1,18 @@
-import React from 'react';
-
-import FrontendComponent from './../_FrontendComponent';
+import * as React from 'react';
 
 import Headlines from './Headlines';
 import Accordeon from './Accordeon'; //TODO make Accordeon to dynamic FrontendComponent
 import Content from './AccessModeratedContent';
 
-class Article extends FrontendComponent {
+import { FrontendComponent, FrontendComponentProps } from './../_FrontendComponent';
 
-	constructor(props) {
+export interface ArticleProps extends FrontendComponentProps {
+	allowedTags: Array<string>
+}
+
+class Article extends FrontendComponent<ArticleProps> {
+
+	constructor(props : any) {
 		super(props);
 
 		this.state = Object.assign(this.state, {

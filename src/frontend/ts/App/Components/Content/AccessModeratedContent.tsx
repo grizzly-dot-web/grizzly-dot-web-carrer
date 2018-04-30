@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 
 import Content from './Content';
 
 class AccessModeratedContent extends Content {
 
-	constructor(props) {
+	constructor(props : any) {
 		super(props);
 	}
 
-	prepareRender(item) {
+	prepareRender(item : any) {
 		let currentRight = this.getCurrentAccessRights();
 		let requiredRight = item.access_rights;
 
@@ -23,7 +23,7 @@ class AccessModeratedContent extends Content {
 		return null;
 	}
 
-	checkAccessRights(item) {
+	checkAccessRights(item : any) {
 	}
 
 	getCurrentAccessRights() {

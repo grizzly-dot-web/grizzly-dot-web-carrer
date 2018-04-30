@@ -1,7 +1,10 @@
+/// <reference path="../../../../typings/scroll.d.ts" />
+
 import 'scrollingelement';
 
-import Scroll from 'scroll';
-import Ease from 'ease-component';
+import { Scroll } from 'scroll';
+import * as Ease from 'ease-component';
+
 
 const canUseDOM = !!(
 	typeof window !== 'undefined' &&
@@ -10,7 +13,24 @@ const canUseDOM = !!(
 );
 
 class ScrollWatcher {
-	static get Key() {
+
+	options: any
+
+	callback: Function
+
+	element: any
+
+	disableScroll: boolean
+
+	lockToScrollPos: Array<number>
+
+	executingCallback: number
+
+	firstCallAfterCallback: boolean
+
+	scrollingBehaviourEnabled: boolean
+
+	static get Key() : { [key : string] : number} {
 		return {
 			Left: 37,
 			Up: 38,
@@ -24,7 +44,7 @@ class ScrollWatcher {
 		};
 	}
 
-	static get EventType() {
+	static get EventType() : { [event : string] : string} {
 		return {
 			wheel: 'wheel',
 			touchmove: 'touchmove',
@@ -33,7 +53,7 @@ class ScrollWatcher {
 		};
 	}
 
-	constructor(options) {
+	constructor(options : any = {}) {
 		this.options = Object.assign({
 			watchWheel: true,
 			watchScroll: true,
@@ -63,14 +83,7 @@ class ScrollWatcher {
 		this.handleKeydown = this.handleKeydown.bind(this);
 	}
 
-	/**
-   * watch Page Scroll
-   * @external Node
-   *
-   * @param {HTMLElement} [element] - DOM Element, usually document.body
-   * @param {function} [callback] - Change the initial options
-   */
-	on(element, callback) {
+	on(element : HTMLElement, callback: Function) {
 		if (!canUseDOM) return;
 
 		this.callback = callback;
@@ -111,7 +124,7 @@ class ScrollWatcher {
 		document.removeEventListener('keydown', this.handleKeydown);
 	}
 
-	handleWheel(e) {
+	handleWheel(e : Event) {
 		let allowDefaultBehaviour = this.options.disableWheel;
 		if (typeof this.callback !== 'undefined') {
 			allowDefaultBehaviour = this.handleCallback(e, e.type);
@@ -125,7 +138,7 @@ class ScrollWatcher {
 		return true;
 	}
 
-	handleScroll(e) {
+	handleScroll(e : Event) {
 		let allowDefaultBehaviour = this.options.disableScroll;
 		if (typeof this.callback !== 'undefined') {
 			allowDefaultBehaviour = this.handleCallback(e, e.type);
@@ -140,9 +153,10 @@ class ScrollWatcher {
 		return true;
 	}
 
-	handleKeydown(e) {
+	handleKeydown(e : KeyboardEvent) {
 		let keys = this.options.keyboardKeys;
-		let eventTarget = e.target.tagName;
+		let target : any = e.target;
+		let eventTarget = target.tagName;
 
 		if (!eventTarget) {
 			eventTarget = '';
@@ -177,19 +191,19 @@ class ScrollWatcher {
 		this.scrollingBehaviourEnabled = false;
 	}
 
-	handleCallback(e, type, key) {
+	handleCallback(e : Event, type : string, key : number = null) {
 		let callbackProps = [e, type, key];
 		this.allowScrollForDuration(this.callback, this.options.callbackExecutionTime, callbackProps);
 	}
 
-	scroll(element, to, duration, options) {
+	scroll(element : HTMLElement, to : number, duration : number, options : any) {
 		this.allowScrollForDuration(() => {
 			Scroll(element, to, options);
 		}, duration);
 
 	}
 	
-	allowScrollForDuration(callback, duration, callbackProps) {
+	allowScrollForDuration(callback: Function, duration: number, callbackProps: any = null) {
 		console.log('SCROLLING ALLOWED '+ this.firstCallAfterCallback);
 		if (this.executingCallback != null && !this.firstCallAfterCallback) {
 			return this.scrollingBehaviourEnabled;
@@ -198,7 +212,7 @@ class ScrollWatcher {
 		let returnBool = this.firstCallAfterCallback;
 		this.firstCallAfterCallback = false;
 		
-		this.executingCallback = () => {
+		this.executingCallback = window.setTimeout(() => {
 			clearTimeout(this.executingCallback);
 			this.executingCallback = null;
 
@@ -215,7 +229,7 @@ class ScrollWatcher {
 			}
 
 			this.firstCallAfterCallback = true;
-		}, duration;
+		}, duration);
 
 		return returnBool;
 	}

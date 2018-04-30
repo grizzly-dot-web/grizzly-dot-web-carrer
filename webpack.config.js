@@ -1,16 +1,19 @@
 /* eslint-disable */  // --> OFF
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const debug = process.env.NODE_ENV !== 'production';
 
 var frontendConfig = {
 	name: 'Frontend side Changes',
-	devtool: debug ? "inline-source-map" : false,
+	mode: debug ? 'development' : 'production',
+	devtool: debug ? "cheap-source-map" : false,
 	entry: {
-		main: ['./src/frontend/js/main.js', './src/frontend/styles/main.scss']
+		main: ['./src/frontend/ts/main.tsx']
 	},
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.json']
+    },
 	output: {
 			path: path.resolve(__dirname, 'compiled/public/compiled'),
 			filename: 'main.js',
@@ -19,64 +22,58 @@ var frontendConfig = {
 	module: {
 		rules: [
 			{
-				test: /(?!.*src\/server)\/.*\.js$|/,
-				use: [
-					{
-						loader: 'babel-loader'
-					}
-				]
+				// Include ts, tsx, and js files.
+				test: /((?!backend).).*\.(js|tsx?)$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
 			},
 			{
 				test: /\.(css|scss)/,
-				use: ExtractTextPlugin.extract({
-					use: ['css-loader?url=false', 'sass-loader?url=false']
-				})
+				use: ['style-loader', 'css-loader?url=false', 'sass-loader?url=false']
 			}
 		]
 	},
 	plugins: [
-		new ExtractTextPlugin('main.css'),
 		new BrowserSyncPlugin({
 			port: 3000, 
-			// you can specify the port here
-			// can't use the same port that nodemon uses.
 			proxy: {
-					target: 'localhost:9000', // original port
-					ws: true // enables websockets
+				target: 'localhost:9000', // nodemon port
+				ws: true
 			}
 		})
 	]
 }
 
-var serverConfig = {
+var backendConfig = {
 	name: 'Server side Changes',
+	mode: debug ? 'development' : 'production',
 	target: 'node',
 	entry: {
-		main: ['./src/server/index.js'],
+		main: ['./src/backend/index.ts'],
 	},
 	output: {
-			path: path.resolve(__dirname, 'compiled/server'),
+			path: path.resolve(__dirname, 'compiled/backend'),
 			filename: 'index.js',
 			publicPath: './'
 	},
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.json']
+    },
 	module: {
-		loaders: [
+		rules: [
 			{
-					test: /(?!.*src\/frontend)\/.*\.js$/,
-					query: {
-						presets: [
-							["env", { "modules": false }]
-						],
-						babelrc: false,
-					},
-					exclude: '/node_modules',
-					loader: 'babel-loader',
+				test: /((?!frontend).).*\.(js|tsx?)$/,
+				query: {
+					presets: [
+						["@babel/env", { "modules": false }]
+					],
+					babelrc: false,
+				},
+				exclude: /node_modules/,
+				loader: 'babel-loader',
 			}
 		]
 	}
 };
 
-module.exports = [
-	serverConfig,
-	frontendConfig
-];
+module.exports = [ frontendConfig, backendConfig];

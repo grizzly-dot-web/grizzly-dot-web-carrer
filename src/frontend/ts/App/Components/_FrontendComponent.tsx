@@ -1,9 +1,19 @@
-import React from 'react';
-import check from 'check-types';
+import * as React from 'react';
+import * as check from 'check-types';
 
-class FrontendComponent extends React.Component {
 
-	constructor(props) {
+export interface FrontendComponentProps {
+	data? : any
+	config? : any
+}
+
+export abstract class FrontendComponent<P extends FrontendComponentProps> extends React.Component<P> {
+
+	state: any
+
+	abstract allowedComponents() : any
+
+	constructor(props : any) {
 		super(props);
 
 		this.state = {
@@ -12,7 +22,7 @@ class FrontendComponent extends React.Component {
 		};
 	}
 
-	renderComponents(compnentsData) {
+	renderComponents(compnentsData : Array<any>) {
 		if (!check.array(compnentsData)) {
 			return null;
 		}

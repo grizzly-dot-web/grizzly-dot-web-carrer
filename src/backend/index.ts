@@ -1,8 +1,9 @@
 import express from 'express';
 import morgan from 'morgan';
-import WebSocket from 'ws';
-import path from 'path';
-import http from 'http';
+
+import * as WebSocket from 'ws';
+import * as path from 'path';
+import * as http from 'http';
 
 const PORT = process.env.PORT || 9000;
 

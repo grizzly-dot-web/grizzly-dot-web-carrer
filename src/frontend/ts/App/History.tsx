@@ -1,20 +1,38 @@
-import React from 'react';
+import * as React from 'react';
 
 import moment from 'moment';
-import check from 'check-types';
+import * as check from 'check-types';
 
 import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
 
-class History extends React.Component {
 
-	constructor(props) {
+export interface HistoryProps {
+	data : any
+}
+export interface HistoryState {
+	routeName: string
+	historyEntries: any
+	disableScroll: boolean
+	navigationActive : any
+	timescaleEnd: moment.Moment
+	timescaleStart: moment.Moment
+}
+
+class History extends React.Component<HistoryProps, HistoryState> {
+
+	lastScrollTop : number = 0;
+	scrollWaitTimeout : number|null = null;
+	historyElementRefs : HTMLElement[] = [];
+
+	constructor(props : any) {
 		super(props);
+
 		this.lastScrollTop = 0;
 		this.scrollWaitTimeout = null;
 		this.historyElementRefs = [];
 
-		let entries = this.props.data.sort((a, b) => {
+		let entries = this.props.data.sort((a: any, b: any) => {
 			let aDate = moment(a.begin_date);
 			let bDate = moment(b.begin_date);
 
@@ -58,7 +76,7 @@ class History extends React.Component {
 				first = false;
 			}
 
-			let assignHistoryElementsReference = (ref) => {
+			let assignHistoryElementsReference = (ref : HTMLElement) => {
 				if (ref == null) {
 					return;
 				}
@@ -68,12 +86,14 @@ class History extends React.Component {
 				<HistoryEntry 
 					entryRef = { assignHistoryElementsReference }
 					key = { i }
-					entry = { item }
+					config = {{}}
+					data = { item }
 					prevEntries = { prevEntries }
 					nextEntries = { nextEntries }
 					additionalClasses = { classes } >
 					<Timeline 
-						entry = { item }
+						data = { item }
+						config = {{}}
 						onClickNavigation = { this.handleNavigationClick.bind(this) }
 						prevEntries = { prevEntries }
 						nextEntries = { nextEntries }
@@ -87,7 +107,7 @@ class History extends React.Component {
 		return history;
 	}
 
-	handleNavigationClick(e, direction) {
+	handleNavigationClick(direction: string) {
 		let navigationActive = {};
 
 		if (direction == 'previous') {

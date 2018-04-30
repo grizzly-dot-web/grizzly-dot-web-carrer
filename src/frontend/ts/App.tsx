@@ -1,15 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 
 import Header from './App/Header';
 import Footer from './App/Footer';
 import Histroy from './App/History';
 
-import ScrollRouter from './Lib/ScrollRouter';
+//import ScrollRouter from './Lib/ScrollRouter';
 
-class App extends React.Component {
+export interface AppProps {
+	data : any
+}
 
-	constructor(props) {
+class App extends React.Component<AppProps> {
+
+	wrapperRef : HTMLDivElement|null
+
+	constructor(props : any) {
 		super(props);
+
+		this.wrapperRef = null;
 	}
 
 	// TODO rewrite jobRequest and Accordeon	<JobRequest data={ this.props.carrer.jobRequest } />
@@ -20,22 +28,18 @@ class App extends React.Component {
 				<main>
 					<Histroy data={this.props.data.history} />
 				</main>
-				<Footer data={this.props.data.footer} />
+				<Footer data={this.props.data.footer} />	
 			</div>
 		);
 	}
 
 	componentDidMount() {
-		new ScrollRouter();
+	//	new ScrollRouter({});
 	}
 
-	componentWillUnmount() {
-		this._watcher.off();
+	componentWillUnmount() {}
 
-		this.scrollContorl.off();
-	}
-
-	handleInternalLinkClick(e) {
+	handleInternalLinkClick(e : Event) {
 		e.preventDefault();
 		return false;
 	}

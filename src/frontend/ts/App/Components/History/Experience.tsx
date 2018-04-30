@@ -1,9 +1,33 @@
-import React from 'react';
-import check from 'check-types';
+import * as React from 'react';
+import * as check from 'check-types';
 
-class Experience extends React.Component {
 
-	constructor(props) {
+export interface ExperienceProps {
+	key : any
+	data : any
+	scaleMax : number
+	defaultWidth : number
+	defaultScaleFactor? : number
+	additionalClasses : Array<string>
+	lastPosition : number
+	changeLastPosition : Function
+}
+export interface ExperienceState {
+	data : any
+	scaleFactor : number
+	scaleMax : number
+	defaultWidth : number
+	circleDimension : number
+	additionalClasses : Array<string>
+	lastPosition : number
+	position : number
+}
+
+class Experience extends React.Component<ExperienceProps, ExperienceState> {
+
+	state : any;
+
+	constructor(props : any) {
 		super(props);
 
 		let data = check.object(this.props.data) ? this.props.data : null;
@@ -36,7 +60,7 @@ class Experience extends React.Component {
 
 		let circleDimension = this.getDimension(this.state.defaultWidth, this.state.scaleMax, scaleFactor);
 
-		let styles = {
+		let styles : any = {
 			width: circleDimension + '%',
 			paddingTop: circleDimension / 2 + '%',
 			paddingBottom: circleDimension / 2 + '%',
@@ -69,7 +93,7 @@ class Experience extends React.Component {
 		);
 	}
 
-	getDimension(width, scaleMax, scaleFactor) {
+	getDimension(width : number, scaleMax : number, scaleFactor : number) {
 		if (!check.number(scaleFactor)) {
 			scaleFactor = 0;
 		}
@@ -87,7 +111,7 @@ class Experience extends React.Component {
 		return dimension;
 	}
 
-	getPosition(lastPosition) {
+	getPosition(lastPosition : number) {
 		let newPosition = lastPosition;
 		let forbiddenPositionDifference = 30;
 

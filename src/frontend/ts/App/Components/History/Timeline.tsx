@@ -1,35 +1,45 @@
-import React from 'react';
+import * as React from 'react';
 
 import check from 'check-types';
 import moment from 'moment';
 
-class Timeline extends React.Component {
+export interface TimelineProps {
+	data : any
+	config : any
+	prevEntries: any
+	nextEntries: any
+	onClickNavigation: Function
+	timescaleEnd: moment.Moment
+	timescaleStart: moment.Moment
+}
 
-	constructor(props) {
+class Timeline extends React.Component<TimelineProps, any> {
+
+	constructor(props : any) {
 		super(props);
 
 		//prepare working duration
-		let startDate = moment(this.props.entry.begin_date, 'YYYY-MM');
-		let endDate = moment(this.props.entry.end_date, 'YYYY-MM');
+		let startDate = moment(this.props.data.begin_date, 'YYYY-MM');
+		let endDate = moment(this.props.data.end_date, 'YYYY-MM');
 
-		if (this.props.entry.end_date === null) {
+		if (this.props.data.end_date === null) {
 			endDate = moment();
 		}
 
 		let duration = moment.duration(endDate.diff(startDate));
 		let timescale = moment.duration(this.props.timescaleStart.diff(this.props.timescaleEnd));
 
-		let scaleFactor = duration / timescale;
+		let scaleFactor = duration.asMilliseconds() / timescale.asMilliseconds();
 
-		this.state ={
+		this.state = {
 			endDate: endDate,
 			startDate: startDate,
 			scaleFactor: scaleFactor,
-			currentTimeSpanHeight: this.getDefaultHeight(),
+			currentTimeSpanHeight: 40,
 		};
 	}
 
-	renderLinks(entries, topPosition) {
+	renderLinks(entries : any, topPosition : number) {
 		let links = [];
 
 		let counter = 0;
@@ -55,16 +65,16 @@ class Timeline extends React.Component {
 		let nextEntries = this.renderLinks(this.props.nextEntries, window.innerHeight);
 
 		let additionalClasses = [];
-		let handleNavigationClickNext = null;
-		let handleNavigationClickPrevious = null;
+		let handleNavigationClickNext : any;
+		let handleNavigationClickPrevious : any;
 
 		if (prevEntries.length > 0) {
 			additionalClasses.push('has-previous-entries');
-			handleNavigationClickPrevious = (e) => this.props.onClickNavigation(e, 'previous');
+			handleNavigationClickPrevious = () => this.props.onClickNavigation('previous');
 		}
 		if (nextEntries.length > 0) {
 			additionalClasses.push('has-next-entries');
-			handleNavigationClickNext = (e) => this.props.onClickNavigation(e, 'next');
+			handleNavigationClickNext = () => this.props.onClickNavigation('next');
 		}
 
 		return (
@@ -99,18 +109,9 @@ class Timeline extends React.Component {
 		}));
 	}
 
-	getDefaultHeight() {
-		let height = 40;
-		if (this.currentElement && this.currentElement.style.getPropertyValue('--current-time-span-min-height')) {
-			height = this.currentElement.style.getPropertyValue('--current-time-span-min-height');
-		}
-
-		return height;
-	}
-
 	getScaledHeight() {
 		const ScaleMax = 40;
-		let height = this.getDefaultHeight();
+		let height = ScaleMax;
 
 		let scaleFactor = 0;
 		if (check.number(this.state.scaleFactor)) {

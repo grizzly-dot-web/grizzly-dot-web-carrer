@@ -1,8 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
-class Header extends React.Component {
+export interface AppProps {
+	data : any
+}
+class Header extends React.Component<AppProps> {
 
-	constructor(props) {
+	constructor(props : any) {
 		super(props);
 	}
 

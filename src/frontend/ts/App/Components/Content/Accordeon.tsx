@@ -1,11 +1,30 @@
-import React from 'react';
-import check from 'check-types';
+import * as React from 'react';
+import * as check from 'check-types';
 
 import Headlines from './Headlines';
 
-class Accordeon extends React.Component {
+import { FrontendComponent, FrontendComponentProps } from './../_FrontendComponent';
 
-	constructor(props) {
+export interface AccordeonProps extends FrontendComponentProps {
+	config: any
+	allowedTags: any
+	onAccordeonHeaderClick: Function
+}
+export interface AccordeonState {
+	config?: any
+	allowedTags?: any
+	contentHeight?: string
+	visibleContent?: boolean
+	originalContentHeight?: number
+}
+
+class Accordeon extends React.Component<AccordeonProps, AccordeonState> {
+
+	originalContentHeight : number
+
+	accordeonContentElement : HTMLElement
+
+	constructor(props : any) {
 		super(props);
 
 		this.state = {
@@ -33,7 +52,7 @@ class Accordeon extends React.Component {
 		this.toggleContent(this.state.visibleContent);
 	}
 
-	toggleContent(show) {
+	toggleContent(show : boolean = null) {
 		let showOrHide = check.boolean(show) ? show : !this.state.visibleContent;
 
 		if (showOrHide) {
