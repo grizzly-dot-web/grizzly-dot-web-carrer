@@ -7,7 +7,7 @@ const debug = process.env.NODE_ENV !== 'production';
 var frontendConfig = {
 	name: 'Frontend side Changes',
 	mode: debug ? 'development' : 'production',
-	devtool: debug ? "cheap-source-map" : false,
+	devtool: debug ? "inline-source-map" : false,
 	entry: {
 		main: ['./src/frontend/ts/main.tsx']
 	},
@@ -45,7 +45,7 @@ var frontendConfig = {
 }
 
 var backendConfig = {
-	name: 'Server side Changes',
+	name: 'Backend side Changes',
 	mode: debug ? 'development' : 'production',
 	target: 'node',
 	entry: {
