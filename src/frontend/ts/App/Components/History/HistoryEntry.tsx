@@ -128,13 +128,13 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 			formattedDay = days +' '+ pluralDay
 		;
 
-		if (years < 1) {
+		if (years <= 1) {
 			formattedYear = years +' '+ singularYear +' ';
 		}
-		if (months < 1) {
+		if (months <= 1) {
 			formattedMonth = months +' '+ singularMonth +' ';
 		}
-		if (days < 1) {
+		if (days <= 1) {
 			formattedDay = days +' '+ singularDay +' ';
 		}
 
