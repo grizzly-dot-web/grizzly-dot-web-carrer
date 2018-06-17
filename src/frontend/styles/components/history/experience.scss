@@ -4,14 +4,16 @@
 }
 
 .experience {
+	opacity: 0;
 	position: absolute;
 	border-radius: 20px;
 	padding: 10px 15px;
 	display: inline-block;
 	background-color: #fff;
 
-	top: 30px;
-	left: 50px;
+	top: map-get($Timespan_Height, Previous) + $CurrentTimeSpan_Height / 2;
+	left: $Timeline_PositionLeft;
+	transform: translateY(-50%);
 
 	.title {
 		z-index: 1;
