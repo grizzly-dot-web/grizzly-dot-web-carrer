@@ -5,7 +5,7 @@ import moment from 'moment';
 import {FrontendComponent, FrontendComponentProps} from '../_FrontendComponent';
 
 import Article from '../Content/Article';
-import Experience from './Experience';
+import Experiences from './Experiences';
 
 export interface HistoryEntryProps extends FrontendComponentProps {
 	data : any
@@ -32,25 +32,6 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 				props: { allowedTags: ['h3', 'h4', 'h5', 'h6'] }
 			}
 		};
-	}
-
-	getExperinces(data : Array<any>) {
-		const ScaleMax = 6;
-		const DefaultWidth = 2;
-
-		let
-			circles = []
-		;
-
-		for (let item of this.shuffle(data)) {
-			circles.push((
-				<Experience key={item.title} additionalClasses={[item.type]} data={item} scaleMax={ScaleMax} defaultWidth={DefaultWidth} lastPosition={this.state.lastPosition} changeLastPosition={(position : number) => this.handleLastExperiencePositionChange(this, position)}>
-					<span className="title">{item.title}</span>
-				</Experience>
-			));
-		}
-
-		return circles;
 	}
 
 	handleLastExperiencePositionChange(self : HistoryEntry, position: number) {
@@ -85,15 +66,19 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 							<h2><pre>{this.props.data.institution.job_title}</pre></h2>
 						</div>
 					</header>
-					<div className={`experience-circles`}>
-						{this.getExperinces(this.props.data.experiences)}
-					</div>
+					<Experiences data={ this.props.data.experiences } originCenter={null}  blockedPositions={[]} />
 				</div>
 				<div className={`history-content ${check.assigned(details) ? 'details-exists' : ''} ${this.state.detailsVisible ? 'details-visible' : ''}`} >
 					{details}
 				</div>
 			</article>
 		);
+	}
+
+	componentDidMount() {
+		this.setState(Object.assign(this.state, {
+
+		}));
 	}
 
 	onDetailsToggleClick(e : Event) {

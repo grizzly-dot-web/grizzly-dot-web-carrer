@@ -142,7 +142,7 @@
 					"title": "React",
 					"color": "#61dafb",
 					"scaleFactor": 1,
-					"type": "Skill"
+					"type": "skill"
 				},
 				{
 					"icon": null,
@@ -150,7 +150,7 @@
 					"title": "WebSockets",
 					"color": "#61dafb",
 					"scaleFactor": 0.3,
-					"type": "Skill"
+					"type": "skill"
 				},
 				{
 					"icon": null,
@@ -158,7 +158,7 @@
 					"title": "Webpack",
 					"color": "#61dafb",
 					"scaleFactor": 0.5,
-					"type": "Skill"
+					"type": "skill"
 				},
 				{
 					"icon": null,
@@ -166,14 +166,14 @@
 					"title": "Babel, ES6",
 					"color": "#61dafb",
 					"scaleFactor": 0.6,
-					"type": "Skill"
+					"type": "skill"
 				},
 				{
 					"icon": null,
 					"url": null,
 					"title": "Aktuelle Seite",
 					"color": "#ff9c00",
-					"type": "Reference"
+					"type": "reference"
 				}
 			]
 		},
@@ -296,7 +296,7 @@
 					"url": "https://reactjs.org/",
 					"title": "React",
 					"color": "#61dafb",
-					"type": "experience"
+					"type": "skill"
 				}
 			]
 		},
@@ -318,8 +318,13 @@
 					"icon": null,
 					"url": "https://reactjs.org/",
 					"title": "React",
-					"color": "#61dafb",
-					"type": "experience"
+					"type": "skill"
+				},
+				{
+					"icon": null,
+					"url": "",
+					"title": "Keine",
+					"type": "reference"
 				}
 			]
 		}
