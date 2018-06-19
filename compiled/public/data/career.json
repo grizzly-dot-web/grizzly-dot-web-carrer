@@ -149,7 +149,7 @@
 					"url": "https://www.w3.org/TR/2009/WD-websockets-20091222/",
 					"title": "WebSockets",
 					"color": "#61dafb",
-					"scaleFactor": 0.3,
+					"scaleFactor": 1.2,
 					"type": "skill"
 				},
 				{
@@ -157,7 +157,7 @@
 					"url": "https://www.w3.org/TR/2009/WD-websockets-20091222/",
 					"title": "Webpack",
 					"color": "#61dafb",
-					"scaleFactor": 0.5,
+					"scaleFactor": 0.8,
 					"type": "skill"
 				},
 				{

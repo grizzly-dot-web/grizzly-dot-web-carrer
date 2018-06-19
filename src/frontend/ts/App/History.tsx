@@ -102,7 +102,6 @@ class History extends React.Component<HistoryProps, HistoryState> {
 					/>  
 				</HistoryEntry>
 			));
-			return history;
 		}
 
 		return history;

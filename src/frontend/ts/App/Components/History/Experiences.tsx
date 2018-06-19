@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as check from 'check-types';
+import Outlayer from 'outlayer';
 
-import PositioningHelper from '../../Helper/PositioningHelper';
+import Packager from '../../Helper/PositioningHelper';
 import { calcAngle } from '../../Helper/AngleCalculation';
 
 export interface ExperienceProps {
@@ -18,15 +19,12 @@ export interface ExperienceState {
 class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 
 	state : any;
-
-	experienceRefs : HTMLElement[];
 	
 	experienceRefContainer : HTMLElement|null;
 
 	constructor(props : any) {
 		super(props);
 
-		this.experienceRefs = [];
 		this.experienceRefContainer = null;
 		this.state = {
 			data: this.props.data,
@@ -52,8 +50,12 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 				SpecifiedTag = 'a';
 			}
 	
+			let style = {
+				transform: `scale(${item.scaleFactor})`
+			}
+
 			experiences.push((
-				<SpecifiedTag key={item.title} className={`experience ${item.type}`} href={href} target={target}>
+				<SpecifiedTag key={item.title} className={`experience ${item.type}`} href={href} target={target} style={style}>
 					<span className="title">{item.title}</span>
 					<span className="appereance-pointer" aria-hidden></span>
 				</SpecifiedTag>
@@ -67,50 +69,56 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		);
 	}
 	
-	componentDidMount() {
-		this.rearrangeRenderedExperiences();
+	componentDidUpdate() {
+		this.rearrangeExperiences();
 	}
 
-	rearrangeRenderedExperiences() {
-		let blockedOffsets = [];
-		
+	rearrangeExperiences() {
+		let blockingElements = [];
+
+		let container = this.experienceRefContainer as HTMLElement;
 		let timeline = document.querySelector('.timeline') as HTMLElement; 
 		let header = document.querySelector('.history-header') as HTMLElement;
-		let experiences = document.querySelectorAll('.experiences .experience');
+		let experiences = container.querySelectorAll('.experiences .experience');
 
 		let center = {
-			top: header.scrollTop + (header.clientHeight / 2),
-			left: header.scrollLeft + (header.clientWidth / 2),
+			x: header.scrollTop + (header.clientHeight / 2),
+			y: header.scrollLeft + (header.clientWidth / 2),
 		};
 
-		blockedOffsets.push(timeline)
-		blockedOffsets.push(header)
+		blockingElements.push(timeline)
+		blockingElements.push(header)
 
-		let positioningHelper = new PositioningHelper(this.experienceRefContainer as HTMLElement, blockedOffsets)
+		let packager = new Packager(container as HTMLElement, {
+			blockingElements: blockingElements
+		});
+
+		let big = false;
 		for (let element of experiences) {
-			let ref = element as HTMLElement;
+			big = !big;
+			let item = packager.addItem(element as HTMLElement);			
 
-			ref.classList.remove('is-positioned')
-			let position = positioningHelper.positionElement(ref);
-
-			if (position.left + (ref.clientWidth / 2) < center.left) {
-				ref.classList.add('experience__align-left');
+			item.originElement.classList.remove('is-positioned')
+			if (item.left + (item.originElement.clientWidth / 2) < center.x) {
+				item.originElement.classList.add('experience__align-left');
 			} else {
-				ref.classList.add('experience__align-right');
+				item.originElement.classList.add('experience__align-right');
 			}
 
-			if (position.top + (ref.clientHeight / 2) < center.top) {
-				ref.classList.add('experience__align-top');
+			if (item.top + (item.originElement.clientHeight / 2) < center.y) {
+				item.originElement.classList.add('experience__align-top');
 			} else {
-				ref.classList.add('experience__align-bottom');
+				item.originElement.classList.add('experience__align-bottom');
 			}
 
-			let pointer = ref.querySelector('.appereance-pointer') as HTMLElement;
+			let pointer = item.originElement.querySelector('.appereance-pointer') as HTMLElement;
 
-			pointer.style.translate = `rotate(${calcAngle(position, center)}deg)`;
-			ref.classList.add('is-positioned')
+			let angle = calcAngle({ x: item.left, y: item.top}, center);
+			pointer.style.setProperty('transform', `rotate(${angle}deg)`);
+			item.originElement.classList.add('is-positioned')
 		}
-		positioningHelper.debug();
+
+		packager.layout();
 	}
 
 }

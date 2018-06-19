@@ -1,166 +1,153 @@
-export class Blocker {
+export class PackageItem {
+
+    private _top : number
+
+    private _left : number
+
+    shouldRearrange : boolean
+    
+    originElement : HTMLElement
+
+	constructor(element: HTMLElement, shouldRearrange: boolean = true) {
+        this._top = 0;
+        this._left = 0;
+		this.originElement = element; 
+		this.shouldRearrange = shouldRearrange;
+	}
+	
+	set top(value: number) {
+		this._top = value;
+	}
+	get top() {
+		return this._top;
+	}
+	
+	set left(value: number) {
+		this._left = value;
+	}
+	get left() {
+		return this._left;
+	}
+	
+	get right() {
+		return this.left + this.width;
+	}
+	get bottom() {
+		return this.top + this.height;
+	}
+	
+	get width() {
+		return this.originElement.clientWidth;
+	}
+	get height() {
+		return this.originElement.clientHeight;
+	}
+	
+	collides(items : PackageItem[]) {
+        let collision = false;
+		for (let blocker of items) {
+			
+			if (this.left > blocker.left && this.left < blocker.right && this.top > blocker.top && this.top < blocker.bottom) {
+                collision = true;
+            }
+			
+			if (this.right > blocker.left && this.right < blocker.right && this.bottom > blocker.top && this.bottom < blocker.bottom) {
+                collision = true;
+            }
+		}
+		
+		return collision;
+	}
+	
+}
+
+export interface PackagerOptions {
+    maxTriesPerItem? : number
+    blockingElements? : HTMLElement[]
+    debug? : boolean
+}
+
+export default class Packager {
+    
+    items : PackageItem[]
 
     container : HTMLElement
 
-    originElement : HTMLElement
+    options : PackagerOptions
+
+    private _lastAddedItem : PackageItem|null
     
-    constructor(element : HTMLElement, container : HTMLElement) {
-        this.originElement = element;
-        this.container = container; 
-    }
-
-    get left() {
-        return this._getGlobalOffset(this.originElement, this.container).left
-    }
-
-    get top() {
-        return this._getGlobalOffset(this.originElement, this.container).top
-    }
-
-    get right() {
-        return this.left + this.width      
-    }
-
-    get bottom() {
-        return this.top + this.height
-    }
-
-    get width() {
-        return this.originElement.clientWidth
-    }
-
-    get height() {
-        return this.originElement.clientHeight
-    }
-
-    public collidateWith(coordinate : { x: number, y:number }) {
-        return (
-            (
-                coordinate.y > this.top && 
-                coordinate.y < this.bottom
-            ) && (
-                coordinate.x > this.left && 
-                coordinate.y < this.right
-            )
-        );
-    }
-
-    private _getGlobalOffset(element : HTMLElement, container : HTMLElement) : { left : number, top: number} {
-        var left = 0, top = 0
-        let el = element;
-        
-        while (el && el !== container) {
-            left += el.offsetLeft
-            top += el.offsetTop
-            el = el.offsetParent as HTMLElement
-        }
-
-        return { left: left, top: top }
-    }
-
-}
-
-export default class PositioningHelper {
-
-    blockingOffsets : Blocker[];
-
-    container : HTMLElement;
-
-    static GridItemWidth = 40; 
-
-    constructor(container : HTMLElement, blockingElements : HTMLElement[]|null = null) {
+	constructor(container : HTMLElement, options: PackagerOptions) {
+		this.items = [];
         this.container = container;
+        this._lastAddedItem = null;
 
-        this.blockingOffsets = [];
-        if (blockingElements != null) {
-            for (let element of blockingElements) {
-                this.blockingOffsets.push(new Blocker(element, this.container));
-            }
+        this.options = Object.assign({
+            maxTriesPerItem: 1000,
+            blockingElements: [],
+            debug: false
+        }, options);
+		
+		for (let element of this.options.blockingElements as HTMLElement[]) {
+			let item = new PackageItem(element, false);
+			item.top = element.offsetTop;
+            item.left = element.offsetLeft;
+            
+			this.items.push(item);
+		}
+	}
+	
+	_getPosition(maxHeight: number, maxWidth: number) : { top: number, left: number} {
+		return {
+            top: Math.round(maxHeight * (Math.random() % 1)),
+            left: Math.round(maxWidth * (Math.random() % 1)),
         }
-    }
-
-    positionElement(element : HTMLElement) {
-        let position = this._getUniqueAssignedPostion(element);
-
-        console.log('before: ', element.offsetTop);
-
-        element.style.top = position.top +'px';
-        element.style.left = position.left +'px';
-
-        console.log('after: ', element.offsetTop);
-
-        this.blockingOffsets.push(new Blocker(element, this.container));
+	}
+	
+	addItems(elements: HTMLElement[]) {
+		for (let element of elements) {
+			this.addItem(element);
+        }
         
-        return position;
-    }
-
-    private _getUniqueAssignedPostion(element : HTMLElement) {
-        const min_x = 0;
-        const min_y = 0;
-
-        const max_x = this.container.clientWidth - element.clientWidth;
-        const max_y = this.container.clientHeight - element.clientWidth;
+        return this.items;
+	}
+	
+	addItem(element: HTMLElement) {
+		let item = new PackageItem(element);
         
-        let upperLeftCornerCoordinate : { x: number, y:number };
-        let lowerRightCornerCoordinate : { x: number, y:number };
+        let tryCounter = 0;
+		do {
+            tryCounter++
 
-        let shouldReturnHighValue = false;
-        let collision = true;
-        
-        do {
-            upperLeftCornerCoordinate = {
-                x: Math.round(min_x + ((max_x - min_x) * (Math.random() % 1))),
-                y: Math.round(min_y + ((max_y - min_y) * (Math.random() % 1)))
+            let position = this._getPosition(this.container.clientHeight, this.container.clientWidth);
+            item.top = position.top > item.height ? position.top - item.height : position.top;
+            item.left = position.left > item.width ? position.left - item.width : position.left;
+            
+            let maxTries = this.options.maxTriesPerItem as number;
+            if (tryCounter >= maxTries) {
+                throw new Error('Tried repositioning more than allowed! Change options.maxTriesPerItem to exceed better Results');
             }
 
-            lowerRightCornerCoordinate = {
-                x: upperLeftCornerCoordinate.x + element.clientWidth,
-                y: upperLeftCornerCoordinate.y + element.clientHeight,
-            }
-
-            console.log('COLLISION DEBUGGING ________________')
-            console.log('ELEMENT: left', upperLeftCornerCoordinate.x, 'right', lowerRightCornerCoordinate.x, 'top', upperLeftCornerCoordinate.x, 'bottom', lowerRightCornerCoordinate.y)
-
-            for (let blocker of this.blockingOffsets) {
-                if (blocker.collidateWith(upperLeftCornerCoordinate) || blocker.collidateWith(lowerRightCornerCoordinate)) {
-                    console.log('BLOCKER: left', blocker.left, 'right', blocker.left + blocker.width, 'top', blocker.top, 'bottom', blocker.top + blocker.height);
-                    collision = true;
-                } else {
-                    collision = false;
-                }
-            }
-        } while(collision)
-
-        return {
-            top: upperLeftCornerCoordinate.y,
-            left:  upperLeftCornerCoordinate.x,
-        }
-    }
-
-    getRandomGridPosition(maxValue: number, shouldReturnHighValue : boolean): number {
-        let columnWidth = maxValue / PositioningHelper.GridItemWidth;
+		} while(item.collides(this.items))
         
-        let column = Math.floor(Math.random() * columnWidth); 
-        if (shouldReturnHighValue) {
-            column = Math.floor(Math.random() * columnWidth - columnWidth / 2 + 1) + columnWidth / 2; 
-        }
+        this._lastAddedItem = item;
+        this.items.push(item);
 
-        return Math.round(column * PositioningHelper.GridItemWidth);
+        return item;
+	}
+    
+    reset() {
+        
     }
-
-    debug() {
-        for (let blocker of this.blockingOffsets) {
-            let foo = document.createElement('div');
-            foo.style.setProperty('top', `${blocker.top}px`);
-            foo.style.setProperty('left', `${blocker.left}px`);
-            foo.style.setProperty('height', `${blocker.height}px`);
-            foo.style.setProperty('width', `${blocker.width}px`);
-            foo.style.setProperty('opacity', `0.5`);
-            foo.style.setProperty('position', `absolute`);
-            foo.style.setProperty('background-color', `rgba(255, 0, 0, 0.5)`);
-
-            this.container.appendChild(foo);
-        }
-    }
-
+    
+	layout() {
+		for (let item of this.items) {
+			if (!item.shouldRearrange || !item.originElement) {
+					continue;
+			}
+			
+			item.originElement.style.top = item.top +'px';
+			item.originElement.style.left = item.left +'px';
+		}
+	}
 }

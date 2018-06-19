@@ -15,18 +15,25 @@
 
 	top: map-get($Timespan_Height, Previous) + $CurrentTimeSpan_Height / 2;
 	left: $Timeline_PositionLeft;
-	transform: translateY(-50%);
+
+	.appereance-pointer {
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		padding-left: 100%;
+		display: block;
+		position: absolute;
+		transform-origin: center center;
+	}
 
 	&.skill {
 		.appereance-pointer {
-			width: 30px;
-			height: 30px;
-			transform: translateX(-120%);
-
 			&:after, &:before {
 				content: '';
 				top: 50%;
-				left: 50%;
+				left: calc(100%);
 				width: 15px;
 				height: 15px;
 				display: block;
@@ -34,12 +41,11 @@
 				border-radius: 50%;
 				background-color: #fff;
 				transform: translateY(-50%);
-				transform-origin: 150% center;
 			}
 		
 			&:before {
 				top: 50%;
-				left: 0;
+				left: calc(100% + 20px);
 				width: 10px;
 				height: 10px;
 			}
@@ -48,29 +54,19 @@
 
 	&.reference {
 		.appereance-pointer {
-			top: 50%;
-			transform-origin: 100% center;
-			transform: translate(-75%, -50%);
 
 			&:before {
 				content: '';
-				left: 0;
 				width: 0;
+				top: 50%;
+				left: calc(100% - 50px);
 				height: 0;
 				display: block;
+				position: absolute;
 				border-style: solid;
-				border-width: 0 0 30px 60px;
-				border-color: transparent transparent #fff transparent;
-			}
-
-			&.align-right {
-				transform-origin: 0 center;
-				transform: translate(-75%, -50%);
-
-				&:before {
-					border-width: 30px 60px 0 0;
-					border-color: #fff transparent transparent transparent;
-				}
+				border-width: 30px 60px 0 0;
+				transform: translateY(-50%);
+				border-color: #fff transparent transparent transparent;
 			}
 		}
 	}
@@ -82,13 +78,5 @@
 	.title {
 		z-index: 1;
 		position: relative;		
-	}
-
-	.appereance-pointer {
-		z-index: -1;
-		top: 0;
-		left: 0;
-		display: block;
-		position: absolute;
 	}
 }
