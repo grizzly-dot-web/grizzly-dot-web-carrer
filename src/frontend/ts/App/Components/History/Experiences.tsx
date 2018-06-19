@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as check from 'check-types';
 
+import PositioningHelper from '../../Helper/PositioningHelper';
+import { calcAngle } from '../../Helper/AngleCalculation';
 
 export interface ExperienceProps {
 	data : any
@@ -10,29 +12,36 @@ export interface ExperienceProps {
 
 export interface ExperienceState {
 	data : any
+	blockingElements : HTMLElement[]
 }
 
 class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 
 	state : any;
 
+	experienceRefs : HTMLElement[];
+	
+	experienceRefContainer : HTMLElement|null;
+
 	constructor(props : any) {
 		super(props);
 
-		let data = check.array(this.props.data) ? this.props.data : null;
+		this.experienceRefs = [];
+		this.experienceRefContainer = null;
 		this.state = {
-			data: data
+			data: this.props.data,
+			blockingElements: this.props.blockedPositions  
 		};
 	}
 
 	render() {
 		let experiences = [];
 
-		if (this.state.data == null) {
+		if (check.array(this.state.data) == null) {
 			return null;
 		}
 
-		for (let item of this.shuffle(this.state.data)) {
+		for (let item of this.state.data) {
 			let href = null;
 			let target = null;
 			let SpecifiedTag = 'span';
@@ -52,59 +61,56 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		}
 
 		return (
-			<div className={`experiences`}>
+			<div ref={ (ref) => this.experienceRefContainer = ref } className={`experiences`}>
 				{experiences}
 			</div>
 		);
 	}
-
-	getDimension(width : number, scaleMax : number, scaleFactor : number) {
-		if (!check.number(scaleFactor)) {
-			scaleFactor = 0;
-		}
-
-		if (scaleFactor > 1) {
-			scaleFactor = 1;
-		}
-
-		let dimension = width + (scaleMax * scaleFactor);
-
-		if (!check.number(dimension)) {
-			return 0;
-		}
-
-		return dimension;
+	
+	componentDidMount() {
+		this.rearrangeRenderedExperiences();
 	}
 
-	getPosition(lastPosition : number) {
-		let newPosition = lastPosition;
-		let forbiddenPositionDifference = 30;
+	rearrangeRenderedExperiences() {
+		let blockedOffsets = [];
+		
+		let timeline = document.querySelector('.timeline') as HTMLElement; 
+		let header = document.querySelector('.history-header') as HTMLElement;
+		let experiences = document.querySelectorAll('.experiences .experience');
 
-		while (newPosition + forbiddenPositionDifference > lastPosition && newPosition - forbiddenPositionDifference < lastPosition) {
-			newPosition =  Math.random() * (100 - 0);
+		let center = {
+			top: header.scrollTop + (header.clientHeight / 2),
+			left: header.scrollLeft + (header.clientWidth / 2),
+		};
+
+		blockedOffsets.push(timeline)
+		blockedOffsets.push(header)
+
+		let positioningHelper = new PositioningHelper(this.experienceRefContainer as HTMLElement, blockedOffsets)
+		for (let element of experiences) {
+			let ref = element as HTMLElement;
+
+			ref.classList.remove('is-positioned')
+			let position = positioningHelper.positionElement(ref);
+
+			if (position.left + (ref.clientWidth / 2) < center.left) {
+				ref.classList.add('experience__align-left');
+			} else {
+				ref.classList.add('experience__align-right');
+			}
+
+			if (position.top + (ref.clientHeight / 2) < center.top) {
+				ref.classList.add('experience__align-top');
+			} else {
+				ref.classList.add('experience__align-bottom');
+			}
+
+			let pointer = ref.querySelector('.appereance-pointer') as HTMLElement;
+
+			pointer.style.translate = `rotate(${calcAngle(position, center)}deg)`;
+			ref.classList.add('is-positioned')
 		}
-
-		return newPosition;
-	}
-
-	// Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-	shuffle(array: Array<any>) {
-		let currentIndex = array.length, temporaryValue, randomIndex;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
-
-		return array;
+		positioningHelper.debug();
 	}
 
 }

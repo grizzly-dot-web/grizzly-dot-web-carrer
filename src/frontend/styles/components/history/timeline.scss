@@ -41,7 +41,7 @@
 .timeline {
 	z-index: 2;
 	top: 0;
-	width: 30%;
+	width: 20%;
 	height: 100%;
 	display: block;
 	overflow: hidden;
@@ -50,7 +50,7 @@
 	left: $Timeline_PositionLeft;
 
 	.inner {
-		width: 30%;
+		width: 50%;
 		height: 100%;
 		position: relative;
 

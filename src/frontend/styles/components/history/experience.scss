@@ -1,6 +1,7 @@
 .experiences {
 	width: 100%;
 	height: 100%;
+	position: relative;
 }
 
 .experience {
@@ -10,23 +11,11 @@
 	padding: 10px 15px;
 	display: inline-block;
 	background-color: #fff;
+	transition: top 1s, left 1s, opacity 0.5s;
 
 	top: map-get($Timespan_Height, Previous) + $CurrentTimeSpan_Height / 2;
 	left: $Timeline_PositionLeft;
 	transform: translateY(-50%);
-
-	.title {
-		z-index: 1;
-		position: relative;		
-	}
-
-	.appereance-pointer {
-		z-index: -1;
-		top: 0;
-		left: 0;
-		display: block;
-		position: absolute;
-	}
 
 	&.skill {
 		.appereance-pointer {
@@ -84,5 +73,22 @@
 				}
 			}
 		}
+	}
+
+	&.is-positioned {
+		opacity: 1;
+	}
+
+	.title {
+		z-index: 1;
+		position: relative;		
+	}
+
+	.appereance-pointer {
+		z-index: -1;
+		top: 0;
+		left: 0;
+		display: block;
+		position: absolute;
 	}
 }
