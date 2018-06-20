@@ -81,8 +81,8 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		let experiences = container.querySelectorAll('.experiences .experience');
 
 		let center = {
-			x: header.scrollTop + (header.clientHeight / 2),
-			y: header.scrollLeft + (header.clientWidth / 2),
+			x: header.offsetLeft + (header.clientWidth / 2),
+			y: header.offsetTop + (header.clientHeight / 2),
 		};
 
 		blockingElements.push(timeline)
