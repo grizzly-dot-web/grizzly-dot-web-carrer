@@ -32,8 +32,8 @@
 		.appereance-pointer {
 			&:after, &:before {
 				content: '';
-				top: 50%;
-				left: calc(100%);
+				top: 0;
+				left: 0;
 				width: 15px;
 				height: 15px;
 				display: block;

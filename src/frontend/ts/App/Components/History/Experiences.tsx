@@ -106,14 +106,9 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 			} else {
 				item.originElement.classList.add('experience__align-bottom');
 			}
-
-			let pointer = item.originElement.querySelector('.appereance-pointer') as HTMLElement;
-
-			let angle = calcAngle({ x: item.left, y: item.top}, center);
-			pointer.style.setProperty('transform', `rotate(${angle}deg)`);
 		}
 
-		packager.layout();
+		packager.layout()
 	}
 
 }
