@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as check from 'check-types';
-import Outlayer from 'outlayer';
 
-import Packager from '../../Helper/PositioningHelper';
+import { RandomPackager } from '../../Helper/PositioningHelper';
 import { calcAngle } from '../../Helper/AngleCalculation';
 
 export interface ExperienceProps {
@@ -51,7 +50,7 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 			}
 	
 			let style = {
-				transform: `scale(${item.scaleFactor})`
+				transform: `scale(${item.scaleFactor / 5 + 1})`
 			}
 
 			experiences.push((
@@ -89,16 +88,13 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		blockingElements.push(timeline)
 		blockingElements.push(header)
 
-		let packager = new Packager(container as HTMLElement, {
+		let packager = new RandomPackager(container as HTMLElement, {
 			blockingElements: blockingElements
 		});
 
-		let big = false;
 		for (let element of experiences) {
-			big = !big;
 			let item = packager.addItem(element as HTMLElement);			
 
-			item.originElement.classList.remove('is-positioned')
 			if (item.left + (item.originElement.clientWidth / 2) < center.x) {
 				item.originElement.classList.add('experience__align-left');
 			} else {
@@ -115,7 +111,6 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 
 			let angle = calcAngle({ x: item.left, y: item.top}, center);
 			pointer.style.setProperty('transform', `rotate(${angle}deg)`);
-			item.originElement.classList.add('is-positioned')
 		}
 
 		packager.layout();
