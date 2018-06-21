@@ -1,5 +1,7 @@
+//#region Colors
 $ColorPrimary: #ff9c00;
 $ColorSecondary: #9c9b9b;
+$ColorThird: #07034a;
 
 $ColorSecondaryDark: darken($ColorSecondary, 5%);
 $ColorSecondaryDarker: darken($ColorSecondary, 25%);
@@ -14,7 +16,44 @@ $ColorBackgroundDark: $ColorSecondaryDarker;
 $DarkCopy_Color: $ColorSecondaryDark;
 $LightCopy_Color: $ColorBackgroundContent;
 
-
-
 $Color1: #7f18ff;
 $Color2: #005aff;
+
+$Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.5);
+$Timeline-Active_BackgroundColor: $ColorBackgroundContent;
+
+//#endregion
+
+//#region Sizes and Positions
+$HistoryMainWidth: 70%;
+
+$Timeline-Line_Width: 6px;
+$Timeline_PositionLeft: getGridSize(16, vertical);
+
+
+$EndMarker_PositionTop: getGridSize(3, horizontal);
+$BeginMarker_PositionBottom: getGridSize(3, horizontal);
+
+$Timespan_Height: (
+	Previous: getGridSize(18, horizontal),
+	Next: getGridSize(10, horizontal),
+);
+
+$CurrentTimeSpan_Height: 100 - (map-get($Timespan_Height, Previous) + map-get($Timespan_Height, Next));
+
+//#subregion after Animation
+$Timespan-NavigationPrevActive_Height: (
+	Previous: getGridSize(19, horizontal),
+	Next: getGridSize(8, horizontal),
+);
+$Timespan_NavigationNextActive_Height: (
+	Previous: getGridSize(8, horizontal),
+	Next: getGridSize(19, horizontal),
+);
+//#endsubregion
+
+//#endsubregion
+//#endregion
+
+//Transitions
+$HeaderColorTansition: color 0.3s ease-in-out, background-color 0.4s ease-in-out;

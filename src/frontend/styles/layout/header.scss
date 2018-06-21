@@ -1,3 +1,104 @@
-main > header {
+header#page-header {
 	z-index: 1;
+	width: 100%;
+	position: fixed;
+	transition: $HeaderColorTansition;
+	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
+
+	&:after {
+		content: '';
+		z-index: 1;
+		top: 0;
+		left: 0;
+		height: 10vh;
+		min-height: 150%;
+		width: $HistoryMainWidth;
+		position: absolute;
+		background-image: linear-gradient(to bottom, rgba($Color1,1) 30%,rgba($Color1,0) 100%);
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.container {
+		z-index: 2;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		flex-direction: row;
+		justify-content: space-between;
+		position: relative;
+
+		.logo {	
+			float: left;
+
+			h1 {
+				font-size: 1em;
+				text-transform: uppercase;
+				margin-bottom: 5px;
+				padding-bottom: 5px;
+				border-bottom: 3px $ColorPrimary solid;
+			}
+			h2 {
+				font-size: 0.5em;
+			}
+		}
+
+		.experience-link {
+			left: calc(#{$Timeline_PositionLeft} - #{getGridSize(2, horizontal)});
+			position: absolute;
+		}
+
+		.main-nav {
+			a {
+				color: $ColorBackgroundLight;
+				font-size: 0.9em;
+				margin-left: getGridSize(1, horizontal);
+				transition: $HeaderColorTansition;
+				background-color: $ColorBackgroundLight;
+
+				&:hover {
+					color: $ColorPrimary;
+				}
+				&.active {
+					color: $ColorPrimary;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	&.header__bg-active {
+		background-color: black;
+
+		&:after {
+			display: block;
+		}
+		
+		.main-nav a {
+			background-color: transparent;
+		}
+	}
+
+	&.header__left-dark {
+		.logo, .experience-link {
+			color: $ColorThird;
+			background-color: $ColorBackgroundLight;
+		}
+	}
+
+	&.header__right-dark {
+		.main-nav a {
+			color: $ColorThird;
+			background-color: transparent;
+		}
+	}
+}
+
+.justify-chars {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: space-between;
 }

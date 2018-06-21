@@ -11,8 +11,7 @@
 	}
 
 	.history-main {
-		z-index: 1;
-		width: 75%;
+		width: $HistoryMainWidth;
 		height: 100%;
 		position: relative;
 		background-image: radial-gradient(
