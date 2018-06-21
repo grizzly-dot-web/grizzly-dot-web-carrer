@@ -27,8 +27,9 @@ $Timeline-Active_BackgroundColor: $ColorBackgroundContent;
 //#region Sizes and Positions
 $HistoryMainWidth: 70%;
 
+$Timeline_Width: 10%;
 $Timeline-Line_Width: 6px;
-$Timeline_PositionLeft: getGridSize(16, vertical);
+$Timeline_PositionLeft: getGridSize(20, vertical);
 
 
 $EndMarker_PositionTop: getGridSize(3, horizontal);

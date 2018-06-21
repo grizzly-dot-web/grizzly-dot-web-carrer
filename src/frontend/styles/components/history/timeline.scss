@@ -41,20 +41,14 @@
 .timeline {
 	z-index: 2;
 	top: 0;
-	width: 20%;
+	width: $Timeline_Width;
+	margin-left: $Timeline_Width / 2 * -1;
 	height: 100%;
 	display: block;
 	overflow: hidden;
 	position: absolute;
 	color: $Timeline_BackgroundColor;
 	left: $Timeline_PositionLeft;
-
-	.inner {
-		width: 50%;
-		height: 100%;
-		position: relative;
-
-	}
 
 	ul {
 		margin: 0;

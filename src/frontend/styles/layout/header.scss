@@ -1,5 +1,5 @@
 header#page-header {
-	z-index: 1;
+	z-index: 3;
 	width: 100%;
 	position: fixed;
 	transition: $HeaderColorTansition;
@@ -23,6 +23,10 @@ header#page-header {
 			float: left;
 			transition: $HeaderColorTansition;
 
+			h1, h2 {
+				font-weight: bold;
+			}
+
 			h1 {
 				font-size: 1em;
 				text-transform: uppercase;
@@ -37,14 +41,31 @@ header#page-header {
 
 		.experience-link {
 			left: calc(#{$Timeline_PositionLeft} - #{getGridSize(2, horizontal)});
+			margin-left: -3.9em;
 			transition: $HeaderColorTansition;
 			position: absolute;
+
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+
+			.skills, .references {
+				display: inline-block;
+			}
+			.skills {
+				transform: translateY(-20%);
+			}
+			.references {
+				transform: translateY(20%);
+			}
 
 			.circle {
 				color: $ColorThird;
 				position: relative;
 				display: inline-block;
-				padding: 0 getGridSize(1, horizontal);
+				padding: 0 1.1em;
 
 				&:after {
 					content: '';
@@ -55,8 +76,8 @@ header#page-header {
 					border-radius: 50%;
 					position: absolute;
 					background-color: $ColorBackgroundLight;
-					width: getGridSize(2, horizontal);
-					height: getGridSize(2, horizontal);
+					width: 2em;
+					height: 2em;
 					background-color: $ColorBackgroundContent;
 					transform: translate(-50%, -50%);
 				}
@@ -109,7 +130,7 @@ header#page-header {
 	}
 }
 
-html.history__is-active #page-header {
+#app.history__is-active #page-header {
 	&:after {
 		content: '';
 		z-index: 1;

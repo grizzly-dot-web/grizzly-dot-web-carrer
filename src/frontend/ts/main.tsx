@@ -63,12 +63,14 @@ import * as ReactDOM from 'react-dom';
 
 import App from './App';
 
+let appElement = document.getElementById('app');
+
 fetch('/data/career.json').then((response) => {
 	if (response.ok) {
 		response.json().then((data) => {
 			ReactDOM.render(
-				<App data={data} />,
-				document.getElementById('app')
+				<App element={appElement} data={data} />,
+				appElement
 			);
 		})
 	}

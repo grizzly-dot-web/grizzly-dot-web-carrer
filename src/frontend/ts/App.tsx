@@ -8,6 +8,7 @@ import Histroy from './App/History';
 
 export interface AppProps {
 	data : any
+	element : HTMLElement
 }
 
 class App extends React.Component<AppProps> {
@@ -18,6 +19,7 @@ class App extends React.Component<AppProps> {
 		super(props);
 
 		this.wrapperRef = null;
+		this.props.element.classList.add('history__is-active')
 	}
 
 	// TODO rewrite jobRequest and Accordeon	<JobRequest data={ this.props.carrer.jobRequest } />
