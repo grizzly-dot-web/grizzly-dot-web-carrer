@@ -20,14 +20,17 @@
 	"footer": {
 		"social_links": [
 			{
+				"name": "Github",
 				"icon": "/img/svg/github-logo.svg",
 				"url": "https://github.com/grizzly-web"
 			},
 			{
+				"name": "Xing",
 				"icon": "/img/svg/xing-logo.svg",
 				"url": "https://www.xing.com/profile/Sebastian_Mueller498"
 			},
 			{
+				"name": "Codepen",
 				"icon": "/img/svg/codepen-logo.svg",
 				"url": "https://codepen.io/grizzly-web"
 			}

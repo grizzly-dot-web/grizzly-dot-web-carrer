@@ -104,7 +104,7 @@ header#page-header {
 	}
 
 	&.header__bg-active {
-		background-color: black;
+		background-color: $ColorBackgroundDark;
 
 		&:after {
 			display: block;

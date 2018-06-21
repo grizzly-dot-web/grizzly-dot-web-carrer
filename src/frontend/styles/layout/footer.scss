@@ -1,11 +1,52 @@
 footer {
+	z-index: 3;
+	width: 100%;
+	background-color: $ColorBackgroundDark;
+	transition: $HeaderColorTansition;
+	padding:  getGridSize(3, vertical) getGridSize(2, horizontal) getGridSize(1, vertical);
+
+	.container {
+		z-index: 2;
+		display: flex;
+		align-content: center;
+		flex-wrap: nowrap;
+		flex-direction: row;
+		justify-content: space-between;
+		position: relative;
+	}
+
+	h4 {
+		margin-bottom: 0.3em;
+	}
+
 	.social-links {
+		width: 50vw;
 
 		a {
-			width: 40px;
-			height: 40px;
-			display: block;
-			margin-bottom: 10px;
+			width: auto;
+			height: 1.5em;
+			margin-right: 10px;
+			display: inline-block;
+
+			img {
+				width: 1.5em;
+				height: 1.5em;
+				margin-right: 0.5em;
+				display: inline-block;
+				transform: translateY(25%);
+			}
 		}
 	}
+
+	.meta-nav {
+		width: 30vw;
+
+		a {
+			display: block;
+			font-size: 0.8em;
+			text-align: right;
+			margin-bottom: 0.35em;
+		}
+	}
+
 }
