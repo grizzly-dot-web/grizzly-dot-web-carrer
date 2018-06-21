@@ -8,11 +8,11 @@ footer {
 	.container {
 		z-index: 2;
 		display: flex;
-		align-content: center;
 		flex-wrap: nowrap;
-		flex-direction: row;
-		justify-content: space-between;
 		position: relative;
+		flex-direction: row;
+		align-content: center;
+		justify-content: space-between;
 	}
 
 	h4 {
