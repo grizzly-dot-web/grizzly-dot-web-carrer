@@ -43,7 +43,7 @@ class Header extends React.Component<AppProps> {
 						Skills <span className="circle">&</span> Referenzen
 					</a>
 					<nav className="main-nav">
-						<a href="/">Start</a>
+						<a className="active" href="/">Start</a>
 						<a href="/career">Karriere</a>
 						<a href="/booking">Beauftragen</a>
 					</nav>

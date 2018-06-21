@@ -5,17 +5,6 @@ header#page-header {
 	transition: $HeaderColorTansition;
 	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
 
-	&:after {
-		content: '';
-		z-index: 1;
-		top: 0;
-		left: 0;
-		height: 10vh;
-		min-height: 150%;
-		width: $HistoryMainWidth;
-		position: absolute;
-		background-image: linear-gradient(to bottom, rgba($Color1,1) 30%,rgba($Color1,0) 100%);
-	}
 
 	a {
 		text-decoration: none;
@@ -32,6 +21,7 @@ header#page-header {
 
 		.logo {	
 			float: left;
+			transition: $HeaderColorTansition;
 
 			h1 {
 				font-size: 1em;
@@ -47,12 +37,35 @@ header#page-header {
 
 		.experience-link {
 			left: calc(#{$Timeline_PositionLeft} - #{getGridSize(2, horizontal)});
+			transition: $HeaderColorTansition;
 			position: absolute;
+
+			.circle {
+				color: $ColorThird;
+				position: relative;
+				display: inline-block;
+				padding: 0 getGridSize(1, horizontal);
+
+				&:after {
+					content: '';
+					z-index: -1;
+					top: 50%;
+					left: 50%;
+					display: block;
+					border-radius: 50%;
+					position: absolute;
+					background-color: $ColorBackgroundLight;
+					width: getGridSize(2, horizontal);
+					height: getGridSize(2, horizontal);
+					background-color: $ColorBackgroundContent;
+					transform: translate(-50%, -50%);
+				}
+			}
 		}
 
 		.main-nav {
 			a {
-				color: $ColorBackgroundLight;
+				color: $ColorBackgroundContent;
 				font-size: 0.9em;
 				margin-left: getGridSize(1, horizontal);
 				transition: $HeaderColorTansition;
@@ -82,7 +95,7 @@ header#page-header {
 	}
 
 	&.header__left-dark {
-		.logo, .experience-link {
+		.logo, .experience-link, .experience-link .circle {
 			color: $ColorThird;
 			background-color: $ColorBackgroundLight;
 		}
@@ -93,6 +106,20 @@ header#page-header {
 			color: $ColorThird;
 			background-color: transparent;
 		}
+	}
+}
+
+html.history__is-active #page-header {
+	&:after {
+		content: '';
+		z-index: 1;
+		top: 0;
+		left: 0;
+		height: 10vh;
+		min-height: 150%;
+		width: $HistoryMainWidth;
+		position: absolute;
+		background-image: linear-gradient(to bottom, rgba($Color1,1) 30%,rgba($Color1,0) 100%);
 	}
 }
 
