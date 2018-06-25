@@ -62,8 +62,11 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './App';
+import { Router } from './AbstractRoutingComponent';
 
 let appElement = document.getElementById('app');
+
+let router = Router.Instance;
 
 fetch('/data/career.json').then((response) => {
 	if (response.ok) {
@@ -72,9 +75,14 @@ fetch('/data/career.json').then((response) => {
 				<App element={appElement} data={data} />,
 				appElement
 			);
+
+			router.detectActiveComponentByUrl();
 		})
 	}
+});
 
+window.addEventListener('scroll', () => {
+	router.detectActiveComponentByItsCondition();
 });
 
 export default App;

@@ -1,33 +1,39 @@
 import * as React from 'react';
 import * as check from 'check-types';
 
-import { RandomPackager } from '../../Helper/PositioningHelper';
 import { calcAngle } from '../../Helper/AngleCalculation';
+import { RandomPackager, PackageItem } from '../../Helper/PositioningHelper';
 
 export interface ExperienceProps {
 	data : any
-	originCenter : any
-	blockedPositions : any
+	show: boolean
+	originPosition: { x : number, y : number }|null
+	blockingElements : HTMLElement[]
 }
 
 export interface ExperienceState {
 	data : any
+	show: boolean
+	originPosition: { x : number, y : number }|null
 	blockingElements : HTMLElement[]
 }
 
 class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 
-	state : any;
-	
-	experienceRefContainer : HTMLElement|null;
+	ref : HTMLElement|null;
+
+	packager : RandomPackager|null
 
 	constructor(props : any) {
 		super(props);
 
-		this.experienceRefContainer = null;
+		this.ref = null;
+		this.packager = null;
 		this.state = {
 			data: this.props.data,
-			blockingElements: this.props.blockedPositions  
+			show: this.props.show,
+			originPosition: this.props.originPosition,
+			blockingElements: this.props.blockingElements
 		};
 	}
 
@@ -62,53 +68,64 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		}
 
 		return (
-			<div ref={ (ref) => this.experienceRefContainer = ref } className={`experiences`}>
+			<div ref={ (ref) => this.ref = ref } className={`experiences`}>
 				{experiences}
 			</div>
 		);
 	}
 	
+	componentDidMount() {
+		this.packager = new RandomPackager(this.ref as HTMLElement);
+	}
+
 	componentDidUpdate() {
 		this.rearrangeExperiences();
 	}
 
 	rearrangeExperiences() {
-		let blockingElements = [];
+		let container = this.ref as HTMLElement;
+		if (this.packager == null) {
+			return;
+		}
 
-		let container = this.experienceRefContainer as HTMLElement;
-		let timeline = document.querySelector('.timeline') as HTMLElement; 
-		let header = document.querySelector('.history-header') as HTMLElement;
-		let experiences = container.querySelectorAll('.experiences .experience');
+		let blocker = [];
+		for (let element of this.props.blockingElements) {
+			let item = new PackageItem(element);
+			item.margin = {x: 0, y: 0 };
+			item.top = element.offsetTop;
+			item.left = element.offsetLeft;
 
-		let center = {
-			x: header.offsetLeft + (header.clientWidth / 2),
-			y: header.offsetTop + (header.clientHeight / 2),
-		};
+			blocker.push(item);
+		}
+		this.packager.blockingItems = blocker;
 
-		blockingElements.push(timeline)
-		blockingElements.push(header)
+		let originPosition = {
+			x: (this.state.originPosition) ? this.state.originPosition.x : 0,
+			y: (this.state.originPosition)  ? this.state.originPosition.y : 0
+		}
 
-		let packager = new RandomPackager(container as HTMLElement, {
-			blockingElements: blockingElements
-		});
-
-		for (let element of experiences) {
-			let item = packager.addItem(element as HTMLElement);			
-
-			if (item.left + (item.originElement.clientWidth / 2) < center.x) {
+		if (this.packager.items.length <= 0) {
+			let experiences = container.querySelectorAll('.experiences .experience');
+			for (let element of experiences) {
+				let item = this.packager.addItem(element as HTMLElement);	
+			}
+		}
+		
+		for (let item of this.packager.items) {
+			if (item.left + (item.originElement.clientWidth / 2) < originPosition.x) {
 				item.originElement.classList.add('experience__align-left');
 			} else {
 				item.originElement.classList.add('experience__align-right');
 			}
 
-			if (item.top + (item.originElement.clientHeight / 2) < center.y) {
+			if (item.top + (item.originElement.clientHeight / 2) < originPosition.y) {
 				item.originElement.classList.add('experience__align-top');
 			} else {
 				item.originElement.classList.add('experience__align-bottom');
 			}
 		}
 
-		packager.layout()
+		this.packager.layout(true)
 	}
 
 }

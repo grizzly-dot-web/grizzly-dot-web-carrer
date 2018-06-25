@@ -7,11 +7,9 @@ export class PackageItem {
 
     margin : { x : number, y : number}
 
-    shouldRearrange : boolean
-    
     originElement : HTMLElement
 
-	constructor(element: HTMLElement, shouldRearrange: boolean = true) {
+	constructor(element: HTMLElement) {
         this._top = 0;
         this._left = 0;
 
@@ -21,7 +19,6 @@ export class PackageItem {
         };
 
 		this.originElement = element; 
-		this.shouldRearrange = shouldRearrange;
 	}
 	
 	set top(value: number) {
@@ -70,6 +67,22 @@ export class PackageItem {
             return horizontalInBetweenItem(x) && verticalInBetweenItem(y); 
         };
 
+        let horizontalLineCollides = (left : number, right : number) => {
+            let currentLeft = this.left - this.margin.x;
+            let currentRight = this.right + this.margin.x;
+
+            
+            return currentLeft < left && currentRight > right;
+        }
+
+        let verticalLineCollides = (top : number, bottom : number) => {
+            let currentTop = this.top - this.margin.y;
+            let currentBottom = this.bottom + this.margin.y;
+
+            
+            return currentTop < top && currentBottom > bottom;
+        }
+
         if (checkOpposite) {
             if (item.collides(this, false)) {
                 return true;
@@ -81,13 +94,20 @@ export class PackageItem {
         let bottomLeftCorner = coordinatesAreInItem(item.left, item.bottom);
         let bottomRightCorner = coordinatesAreInItem(item.right, item.bottom);
 
+        if (verticalInBetweenItem(item.top) && horizontalLineCollides(item.left, item.right)) {
+            return true;
+        }
+
+        if (horizontalInBetweenItem(item.left) && verticalLineCollides(item.top, item.bottom)) {
+            return true;
+        }
+
         return topLeftCorner || topRightCorner || bottomLeftCorner || bottomRightCorner;
     }
 }
 
 export interface PackagerOptions {
     maxTriesPerItem? : number
-    blockingElements? : HTMLElement[]
     debug? : boolean
 }
 
@@ -99,27 +119,25 @@ export default abstract class Packager {
 
     options : PackagerOptions
 
+    blockingItems: PackageItem[]
+
     private _lastAddedItem : PackageItem|null
     
-	constructor(container : HTMLElement, options: PackagerOptions) {
+	constructor(container : HTMLElement, options: PackagerOptions = {}) {
 		this.items = [];
         this.container = container;
+        this.blockingItems = [];
         this._lastAddedItem = null;
 
         this.options = Object.assign({
             maxTriesPerItem: 1000,
-            blockingElements: [],
             debug: false
         }, options);
-		
-		for (let element of this.options.blockingElements as HTMLElement[]) {
-			let item = new PackageItem(element, false);
-			item.top = element.offsetTop;
-            item.left = element.offsetLeft;
-            item.margin = { x: 0, y: 0 }
-			this.items.push(item);
-		}
 	}
+    
+    addBlockingItem(item : PackageItem) {
+        this.blockingItems.push(item);
+    }
 	
 	abstract getPosition(maxHeight: number, maxWidth: number) : { top: number, left: number}
 	
@@ -129,7 +147,7 @@ export default abstract class Packager {
         }
         
         return this.items;
-	}
+    }
 	
 	addItem(element: HTMLElement) : PackageItem {
 		let item = new PackageItem(element);
@@ -144,7 +162,7 @@ export default abstract class Packager {
         return item;
     }
     
-    private _assignCollisionFreePosition(item: PackageItem, otherItems: PackageItem[]) {
+    protected _assignCollisionFreePosition(item: PackageItem, otherItems: PackageItem[]) {
         let attempCounter = 0;
         let hasCollision = true;
 		do {
@@ -155,7 +173,7 @@ export default abstract class Packager {
                 item
             );
             
-            hasCollision = this._collides(item, otherItems);
+            hasCollision = this._collides(item, otherItems.concat(this.blockingItems));
 
             let maxTries = this.options.maxTriesPerItem as number;
             if (attempCounter >= maxTries) {
@@ -193,20 +211,16 @@ export default abstract class Packager {
     
     reset() {
 		for (let item of this.items) {
-			if (!item.shouldRearrange || !item.originElement) {
-                    continue;
-            }
-
             item.originElement.classList.remove('packageItem__is-positioned')
 		}
     }
     
-	layout() {
+	layout(shouldRearrange: boolean = false) {
+        if (shouldRearrange) {
+            this.rearrange();
+        }
+
 		for (let item of this.items) {
-			if (!item.shouldRearrange || !item.originElement) {
-					continue;
-            }
-			
             item.originElement.classList.add('packageItem__is-positioned')
 
 			item.originElement.style.top = item.top +'px';
@@ -218,14 +232,27 @@ export default abstract class Packager {
         }
     }
 
+    rearrange() {
+        for (let item of this.items) {
+            item.top = 0;
+            item.left = 0;
+        }
+
+        for (let item of this.items) {
+            this._assignCollisionFreePosition(item, this.items);
+        }
+    }
+
     debugItemPositions() {
         for (let element of this.container.querySelectorAll('.packager-DEBUG')) {
             element.remove();
         }
 
-        for (let item of this.items) {
+        let debugging = this.items;
+        for (let item of debugging.concat(this.blockingItems)) {
             let debugElement = document.createElement('div');
             debugElement.className = 'packager-DEBUG';
+            debugElement.style.setProperty('z-index', `5`)
             debugElement.style.setProperty('opacity', `0.5`)
             debugElement.style.setProperty('position', `absolute`)
             debugElement.style.setProperty('box-sizing', `content-box`)
@@ -251,7 +278,7 @@ export class RandomPackager extends Packager {
 
     positionRanges : { minWidth: number, maxWidth: number, minHeight: number, maxHeight: number }[]
 
-    constructor(container : HTMLElement, options: PackagerOptions) {
+    constructor(container : HTMLElement, options: PackagerOptions = {}) {
         super(container, options);
 
         let endWidth = this.container.clientWidth;
@@ -288,6 +315,11 @@ export class RandomPackager extends Packager {
         ];
     }
 
+    rearrange() {
+        super.rearrange();
+        this.positionIndex = 0;
+    }
+
     getPosition(maxHeight: number, maxWidth: number) : { top: number; left: number; } {
         let range = this.positionRanges[this.positionIndex];
 
@@ -296,15 +328,14 @@ export class RandomPackager extends Packager {
             left: Math.round(range.minWidth + ((range.maxWidth - range.minWidth)*(Math.random() % 1))),
         }
     }
-    
-    addItem(element: HTMLElement) {
-        let item = super.addItem(element);
+
+    _assignCollisionFreePosition(item: PackageItem, items: PackageItem[]) {
         
         this.positionIndex++;
         if (this.positionIndex >= this.positionRanges.length) {
             this.positionIndex = 0;
         }
 
-        return item;
+        super._assignCollisionFreePosition(item, items);
     }
 }

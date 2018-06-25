@@ -5,6 +5,7 @@ import * as check from 'check-types';
 
 import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
+import AbstractRoutingComponent, { ScrollRoutingComponent } from '../AbstractRoutingComponent';
 
 
 export interface HistoryProps {
@@ -19,7 +20,15 @@ export interface HistoryState {
 	timescaleStart: moment.Moment
 }
 
-class History extends React.Component<HistoryProps, HistoryState> {
+class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
+
+	url: string;
+
+	ref: HTMLElement | null;
+
+	acitveStateCondition(): boolean {
+		return false;
+	}
 
 	lastScrollTop : number = 0;
 	scrollWaitTimeout : number|null = null;
@@ -32,6 +41,8 @@ class History extends React.Component<HistoryProps, HistoryState> {
 		this.scrollWaitTimeout = null;
 		this.historyElementRefs = [];
 
+		this.ref = null;
+		this.url = '/carrer';
 		let entries = this.props.data.sort((a: any, b: any) => {
 			let aDate = moment(a.begin_date);
 			let bDate = moment(b.begin_date);
@@ -76,17 +87,9 @@ class History extends React.Component<HistoryProps, HistoryState> {
 				first = false;
 			}
 
-			let assignHistoryElementsReference = (ref : HTMLElement) => {
-				if (ref == null) {
-					return;
-				}
-			};
-			
-			history.push(( 
+				history.push(( 
 				<HistoryEntry 
-					entryRef = { assignHistoryElementsReference }
 					key = { i }
-					config = {{}}
 					data = { item }
 					prevEntries = { prevEntries }
 					nextEntries = { nextEntries }

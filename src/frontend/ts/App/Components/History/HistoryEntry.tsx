@@ -1,41 +1,47 @@
 import * as React from 'react';
 import * as check from 'check-types';
-import moment from 'moment';
+import slugify from 'slugify'
 
-import {FrontendComponent, FrontendComponentProps} from '../_FrontendComponent';
+import moment from 'moment';
 
 import Article from '../Content/Article';
 import Experiences from './Experiences';
+import AbstractRoutingComponent, { ScrollRoutingComponent } from '../../../AbstractRoutingComponent';
 
-export interface HistoryEntryProps extends FrontendComponentProps {
+export interface HistoryEntryProps {
 	data : any
 	prevEntries: any
 	nextEntries: any
-	entryRef : Function
 	additionalClasses: Array<string>
 }
-class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
+
+export interface HistoryEntryState {
+	lastPosition: number
+	detailsVisible: boolean
+	showExperiences: boolean
+	experienceBlockingElements: HTMLElement[]
+	experiencesOriginPosition: { x : number, y : number }|null
+}
+
+class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntryState> {
 	
+	url: string;
+
+	ref: HTMLElement | null;
+
 	constructor(props : any) {
 		super(props);
 
-		this.state = Object.assign(this.state, {
+		this.state = {
 			lastPosition: 0,
+			showExperiences: false,
 			detailsVisible:  false,
-		});
-	}
-
-	allowedComponents() {
-		return {
-			'Article': {
-				class: Article,
-				props: { allowedTags: ['h3', 'h4', 'h5', 'h6'] }
-			}
+			experienceBlockingElements: [],
+			experiencesOriginPosition: null,
 		};
-	}
 
-	handleLastExperiencePositionChange(self : HistoryEntry, position: number) {
-		self.setState({ lastPosition: position });
+		this.ref = null;
+		this.url = slugify(this.props.data.institution.title);
 	}
 
 	render() {
@@ -51,12 +57,12 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 		let details = null;
 		let detailComponents = this.props.data.ChildComponents;
 		if (check.assigned(detailComponents)) {
-			details = (<div className="content">{this.renderComponents(detailComponents)}</div>);
+			details = null; // (<div className="content">{this.renderComponents(detailComponents)}</div>);
 		}
 
 		// render the prepared section
 		return (
-			<article ref={ () => this.props.entryRef} id={this.props.data.begin_date} data-gzly-routing-module={this.props.data.slug} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
+			<article ref={ (ref) => this.ref = ref} id={this.props.data.begin_date} data-gzly-routing-module={this.props.data.slug} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
 				{this.props.children}
 				<div className={'history-main'}>
 					<header className="history-header">
@@ -66,7 +72,7 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 							<h2><pre>{this.props.data.institution.job_title}</pre></h2>
 						</div>
 					</header>
-					<Experiences data={ this.props.data.experiences } originCenter={null}  blockedPositions={[]} />
+					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
 				<div className={`history-content ${check.assigned(details) ? 'details-exists' : ''} ${this.state.detailsVisible ? 'details-visible' : ''}`} >
 					{details}
@@ -76,8 +82,33 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 	}
 
 	componentDidMount() {
-		this.setState(Object.assign(this.state, {
+		super.componentDidMount();
+		let ref = this.ref as HTMLElement;
+		let timeline = document.querySelector('.timeline') as HTMLElement; 
+		let historyHeader = ref.querySelector('.history-header') as HTMLElement;
+		let header = document.querySelector('#page-header') as HTMLElement;
 
+		this.setState(Object.assign(this.state, {
+			experiencesOriginPosition: { x: header.offsetTop / 2, y: header.offsetTop / 2 },
+			experienceBlockingElements: [timeline, historyHeader, header]
+		}));
+	}
+
+	enter(): void {
+		super.enter();
+
+		this.setState(Object.assign(this.state, {
+			showExperiences: true
+		}));
+	}
+	
+	leave(): void {
+		super.enter();
+
+		let experienceOverviewLink = document.querySelector('header#page-header .experience-link .circle') as HTMLElement;
+		this.setState(Object.assign(this.state, {
+			showExperiences: false,
+			experiencesOriginPosition: { x: experienceOverviewLink.offsetTop / 2, y: experienceOverviewLink.offsetTop / 2 }
 		}));
 	}
 
@@ -134,26 +165,6 @@ class HistoryEntry extends FrontendComponent<HistoryEntryProps> {
 		}
 
 		return formattedYear + formattedMonth + formattedDay;
-	}
-
-	// Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-	shuffle(array: Array<any>) {
-		let currentIndex = array.length, temporaryValue, randomIndex;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
-
-		return array;
 	}
 }
 
