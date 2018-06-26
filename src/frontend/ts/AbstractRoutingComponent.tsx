@@ -30,7 +30,7 @@ export class Router {
         this._components.push(comp);
     }
 
-    protected _detectActiveComponent(condition : Function) {
+    protected _detectActiveComponent(condition : Function, duration : null|number = null) {
         if (this._detectionTimeout !== null) {
             return;
         }
@@ -56,7 +56,7 @@ export class Router {
             this._lastActiveComponents = activeComps;
             clearTimeout(this._detectionTimeout);
             this._detectionTimeout = null;
-        }, 200);
+        }, duration);
     }
 
     public detectActiveComponentByUrl() {
@@ -66,13 +66,13 @@ export class Router {
             }
 
             return false;
-         });
+         }, 0);
     }
 
     detectActiveComponentByItsCondition() {
         return this._detectActiveComponent((component: AbstractRoutingComponent) => { 
             return component.acitveStateCondition() 
-        });
+        }, 100);
     }
 
 }
