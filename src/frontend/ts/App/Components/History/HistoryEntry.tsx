@@ -41,7 +41,7 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 		};
 
 		this.ref = null;
-		this.url = '/career/'+ slugify(this.props.data.institution.title).toLowerCase();
+		this.url = '/career/'+ slugify(this.props.data.institution.title).toLowerCase() +'-'+ slugify(this.props.data.begin_date).toLowerCase();
 	}
 
 	render() {
@@ -102,7 +102,7 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 	}
 	
 	leave(): void {
-		super.enter();
+		super.leave();
 
 		let experienceOverviewLink = document.querySelector('header#page-header .experience-link .circle') as HTMLElement;
 		this.setState(Object.assign(this.state, {

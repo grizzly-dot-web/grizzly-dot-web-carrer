@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+import scroll from 'scroll';
+import page from 'scroll-doc';
+import ease from 'ease-component';
+
 export class Router {
 
     static _instance : Router;
@@ -20,7 +24,10 @@ export class Router {
         this._detectionTimeout = null;
         this._components = [];
         this._lastActiveComponents = [];
+        this.disableActiveDetection = false;
     }
+
+    public disableActiveDetection : boolean;
 
     public get currentUrl() {
         return window.location.pathname;
@@ -31,7 +38,7 @@ export class Router {
     }
 
     protected _detectActiveComponent(condition : Function, duration : null|number = null) {
-        if (this._detectionTimeout !== null) {
+        if (this._detectionTimeout !== null || this.disableActiveDetection) {
             return;
         }
 
@@ -42,14 +49,14 @@ export class Router {
                     activeComps.push(comp);
     
                     if (this._lastActiveComponents.findIndex((c) => c.url === comp.url) === -1) {
-                        comp.dispatch();
+                        comp.dispatchEnter();
                     }
                 }
             }
     
             for (let comp of this._lastActiveComponents) {
                 if (!comp.acitveStateCondition()) {
-                    comp.leave();
+                    comp.dispatchLeave();
                 }
             }
     
@@ -89,8 +96,12 @@ export default abstract class AbstractRoutingComponent<Props = {}, State = {}> e
         this._router.addComponent(this);
     }
 
-    dispatch() {        
+    dispatchEnter() {       
         this.enter();
+    }
+
+    dispatchLeave() {       
+        this.leave();
     }
 
     abstract enter() : void;
@@ -104,7 +115,34 @@ export default abstract class AbstractRoutingComponent<Props = {}, State = {}> e
 export abstract class ScrollRoutingComponent<Props = {}, State = {}> extends AbstractRoutingComponent<Props, State> {
     
 
-	abstract get ref() : HTMLElement|null
+    abstract get ref() : HTMLElement|null
+    
+    hasScrolledOnce = false
+
+    dispatchEnter() {
+        if (this.hasScrolledOnce || this.ref == null)  {
+            return;
+        }
+        
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let scrollBottom = scrollTop + window.innerHeight;
+
+        this._router.disableActiveDetection = true;
+        console.log('scroll-start');
+        let callback = () => {
+            this._router.disableActiveDetection = false;
+            this.hasScrolledOnce = true;
+            console.log('scroll-end');        
+        }
+        scroll.top(page(), this.ref.offsetTop, callback)
+           
+        this.enter();
+    }
+
+    dispatchLeave() {
+        this.hasScrolledOnce = false;
+        this.leave();
+    }
 
 	enter(): void {
         console.log('enter: ', this.url);
@@ -115,20 +153,14 @@ export abstract class ScrollRoutingComponent<Props = {}, State = {}> extends Abs
 	}
 
 	acitveStateCondition(): boolean {
-		var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-	    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        //scrollLeft += window.innerWidth / 2;
-        //scrollTop += window.innerHeight / 2;
-
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let scrollBottom = scrollTop + window.innerHeight;
 		if (this.ref == null) {
 			return false;
 		}
 
 		if (
-			scrollLeft >= this.ref.offsetLeft &&
-			scrollLeft <= this.ref.offsetLeft + this.ref.clientWidth &&
-			scrollTop >= this.ref.offsetTop &&
+			scrollBottom >= this.ref.offsetTop &&
 			scrollTop <= this.ref.offsetTop + this.ref.clientHeight
 		) {
 			return true;
