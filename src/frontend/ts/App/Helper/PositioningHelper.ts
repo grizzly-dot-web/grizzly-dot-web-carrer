@@ -1,24 +1,23 @@
+export interface PackageAble {
+    top: number
+    left: number
+    right: number
+    bottom: number
+    width: number
+    height: number
+}
 
-export class PackageItem {
-
+export abstract class Package implements PackageAble {
     private _top : number
 
     private _left : number
 
     margin : { x : number, y : number}
 
-    originElement : HTMLElement
-
-	constructor(element: HTMLElement) {
+	constructor() {
         this._top = 0;
         this._left = 0;
-
-        this.margin = {
-            x: element.clientWidth / 2,
-            y: element.clientHeight / 2
-        };
-
-		this.originElement = element; 
+        this.margin = { x: 0, y: 0 };
 	}
 	
 	set top(value: number) {
@@ -42,14 +41,10 @@ export class PackageItem {
 		return this.top + this.height;
 	}
 	
-	get width() {
-		return this.originElement.clientWidth;
-	}
-	get height() {
-		return this.originElement.clientHeight;
-	}
+	abstract get width() : number
+	abstract get height() : number
     
-    collides(item: PackageItem, checkOpposite : boolean = true) : boolean {
+    collides(item: Package, checkOpposite : boolean = true) : boolean {
         let horizontalInBetweenItem = (x: number) => {
             let left = this.left - this.margin.x;
             let right = this.right + this.margin.x;
@@ -106,6 +101,42 @@ export class PackageItem {
     }
 }
 
+export class PackageBlocker extends Package {
+    width: number;
+    height: number;
+
+    constructor(width : number, height : number) {
+        super();
+
+        this.width = width;
+        this.height = height;
+    }
+}
+
+export class PackageItem extends Package {
+
+    originElement : HTMLElement
+
+    constructor(element: HTMLElement) {
+        super();
+
+        this.margin = {
+            x: element.clientWidth / 2,
+            y: element.clientHeight / 2
+        };
+
+		this.originElement = element;
+    }
+	
+	get width() {
+		return this.originElement.clientWidth;
+	}
+	get height() {
+		return this.originElement.clientHeight;
+	}
+    
+}
+
 export interface PackagerOptions {
     maxTriesPerItem? : number
     debug? : boolean
@@ -119,7 +150,7 @@ export default abstract class Packager {
 
     options : PackagerOptions
 
-    blockingItems: PackageItem[]
+    blockingItems: PackageBlocker[]
 
     private _lastAddedItem : PackageItem|null
     
@@ -162,7 +193,7 @@ export default abstract class Packager {
         return item;
     }
     
-    protected _assignCollisionFreePosition(item: PackageItem, otherItems: PackageItem[]) {
+    protected _assignCollisionFreePosition(item: Package, otherItems: Package[]) {
         let attempCounter = 0;
         let hasCollision = true;
 		do {
@@ -170,10 +201,10 @@ export default abstract class Packager {
 
             this._setValidItemPosition(
                 this.getPosition(this.container.clientHeight, this.container.clientWidth),
-                item
+                item as PackageItem
             );
             
-            hasCollision = this._collides(item, otherItems.concat(this.blockingItems));
+            hasCollision = this._collides(item as PackageItem, otherItems.concat(this.blockingItems));
 
             let maxTries = this.options.maxTriesPerItem as number;
             if (attempCounter >= maxTries) {
@@ -195,7 +226,7 @@ export default abstract class Packager {
         item.left = position.left > item.width + item.margin.x ? position.left - item.width : position.left;
     }
 
-	private _collides(item : PackageItem, blockingItems : PackageItem[]) {
+	private _collides(item : PackageItem, blockingItems : Package[]) {
 		for (let blocker of blockingItems) {
             if (item === blocker) {
                 continue;
@@ -263,7 +294,7 @@ export default abstract class Packager {
             element.remove();
         }
 
-        let debugging = this.items;
+        let debugging : Package[] = this.items;
         for (let item of debugging.concat(this.blockingItems)) {
             let debugElement = document.createElement('div');
             debugElement.className = 'packager-DEBUG';
@@ -345,7 +376,6 @@ export class RandomPackager extends Packager {
     }
 
     _assignCollisionFreePosition(item: PackageItem, items: PackageItem[]) {
-        
         this.positionIndex++;
         if (this.positionIndex >= this.positionRanges.length) {
             this.positionIndex = 0;

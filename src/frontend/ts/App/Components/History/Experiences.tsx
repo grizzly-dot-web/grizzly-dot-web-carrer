@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as check from 'check-types';
 
 import { calcAngle } from '../../Helper/AngleCalculation';
-import { RandomPackager, PackageItem } from '../../Helper/PositioningHelper';
+import { RandomPackager, PackageItem, PackageBlocker } from '../../Helper/PositioningHelper';
 
 export interface ExperienceProps {
 	data : any
@@ -109,6 +109,14 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 
 			blocker.push(item);
 		}
+
+		let headerElement = document.getElementById('page-header') as HTMLElement;
+		console.log(headerElement.clientWidth, headerElement.clientHeight)
+		let headerBlocker = new PackageBlocker(headerElement.clientWidth, headerElement.clientHeight);
+		headerBlocker.top = 0;
+		headerBlocker.left = 0;
+		blocker.push(headerBlocker);
+
 		this.packager.blockingItems = blocker;
 
 		let originPosition = {
