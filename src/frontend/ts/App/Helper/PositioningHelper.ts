@@ -209,9 +209,24 @@ export default abstract class Packager {
 		return false;
     }
     
+    show(item: PackageItem|null = null) {
+        if (item != null) {
+            item.originElement.classList.remove('packageItem__is-visible')
+            return;
+        }
+
+		for (let item of this.items) {
+            item.originElement.classList.add('packageItem__is-visible')
+		}
+        
+    }
+
     reset() {
 		for (let item of this.items) {
+			item.originElement.style.top = null;
+			item.originElement.style.left = null;
             item.originElement.classList.remove('packageItem__is-positioned')
+            item.originElement.classList.remove('packageItem__is-visible')
 		}
     }
     

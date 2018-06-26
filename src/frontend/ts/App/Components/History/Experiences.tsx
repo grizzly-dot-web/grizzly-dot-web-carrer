@@ -75,11 +75,23 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 	}
 	
 	componentDidMount() {
-		this.packager = new RandomPackager(this.ref as HTMLElement);
+		this.packager = new RandomPackager(this.ref as HTMLElement, {
+		});
 	}
 
 	componentDidUpdate() {
+		if (this.props.show) {
+			this.show();
+		}
+	}
+
+	show() {
+		if (this.packager == null) {
+			return;
+		}
+
 		this.rearrangeExperiences();
+		this.packager.show();
 	}
 
 	rearrangeExperiences() {
@@ -100,8 +112,8 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		this.packager.blockingItems = blocker;
 
 		let originPosition = {
-			x: (this.state.originPosition) ? this.state.originPosition.x : 0,
-			y: (this.state.originPosition)  ? this.state.originPosition.y : 0
+			x: (this.props.originPosition) ? this.props.originPosition.x : 0,
+			y: (this.props.originPosition)  ? this.props.originPosition.y : 0
 		}
 
 		if (this.packager.items.length <= 0) {
@@ -112,6 +124,11 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 		}
 		
 		for (let item of this.packager.items) {
+			item.originElement.classList.remove('experience__align-left');
+			item.originElement.classList.remove('experience__align-right');
+			item.originElement.classList.remove('experience__align-top');
+			item.originElement.classList.remove('experience__align-bottom');
+			
 			if (item.left + (item.originElement.clientWidth / 2) < originPosition.x) {
 				item.originElement.classList.add('experience__align-left');
 			} else {
@@ -125,7 +142,7 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 			}
 		}
 
-		this.packager.layout(true)
+		this.packager.layout()
 	}
 
 }

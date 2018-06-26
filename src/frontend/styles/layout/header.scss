@@ -14,10 +14,10 @@ header#page-header {
 		z-index: 2;
 		display: flex;
 		flex-wrap: nowrap;
+		position: relative;
 		align-items: center;
 		flex-direction: row;
 		justify-content: space-between;
-		position: relative;
 
 		.logo {	
 			float: left;

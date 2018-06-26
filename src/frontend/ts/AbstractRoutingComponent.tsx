@@ -60,7 +60,7 @@ export class Router {
     }
 
     public detectActiveComponentByUrl() {
-        return this._detectActiveComponent((component: AbstractRoutingComponent) => { 
+        return this._detectActiveComponent((component: AbstractRoutingComponent) => {
             if (component.url === this.currentUrl) {
                 return true;
             }
@@ -118,8 +118,8 @@ export abstract class ScrollRoutingComponent<Props = {}, State = {}> extends Abs
 		var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
 	    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        scrollLeft += window.innerWidth / 2;
-        scrollTop += window.innerHeight / 2;
+        //scrollLeft += window.innerWidth / 2;
+        //scrollTop += window.innerHeight / 2;
 
 		if (this.ref == null) {
 			return false;

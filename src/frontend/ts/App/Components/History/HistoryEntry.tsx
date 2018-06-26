@@ -41,7 +41,7 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 		};
 
 		this.ref = null;
-		this.url = slugify(this.props.data.institution.title);
+		this.url = '/career/'+ slugify(this.props.data.institution.title).toLowerCase();
 	}
 
 	render() {
@@ -86,11 +86,10 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 		let ref = this.ref as HTMLElement;
 		let timeline = document.querySelector('.timeline') as HTMLElement; 
 		let historyHeader = ref.querySelector('.history-header') as HTMLElement;
-		let header = document.querySelector('#page-header') as HTMLElement;
 
 		this.setState(Object.assign(this.state, {
-			experiencesOriginPosition: { x: header.offsetTop / 2, y: header.offsetTop / 2 },
-			experienceBlockingElements: [timeline, historyHeader, header]
+			experiencesOriginPosition: { x: historyHeader.offsetLeft / 2, y: historyHeader.offsetTop / 2 },
+			experienceBlockingElements: [timeline, historyHeader]
 		}));
 	}
 
