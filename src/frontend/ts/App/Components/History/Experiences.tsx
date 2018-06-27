@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as check from 'check-types';
 
 import { calcAngle } from '../../Helper/AngleCalculation';
-import { RandomPackager, PackageItem, PackageBlocker } from '../../Helper/PositioningHelper';
+import { RandomPackager, PackageItem, PackageBlocker } from '../../Helper/Packager';
 
 export interface ExperienceProps {
 	data : any
@@ -76,12 +76,19 @@ class Experiences extends React.Component<ExperienceProps, ExperienceState> {
 	
 	componentDidMount() {
 		this.packager = new RandomPackager(this.ref as HTMLElement, {
+			
 		});
 	}
 
 	componentDidUpdate() {
+		if (this.packager == null) {
+			return;
+		}
+
 		if (this.props.show) {
 			this.show();
+		} else {
+			this.packager.reset()
 		}
 	}
 
