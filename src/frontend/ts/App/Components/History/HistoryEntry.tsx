@@ -106,7 +106,6 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 	leave(): void {
 		super.leave();
 
-		this.appElement.classList.remove('history__is-active');
 		let experienceOverviewLink = document.querySelector('header#page-header .experience-link .circle') as HTMLElement;
 		this.setState(Object.assign(this.state, {
 			showExperiences: false,
