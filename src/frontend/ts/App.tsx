@@ -8,24 +8,18 @@ import Histroy from './App/History';
 
 export interface AppProps {
 	data : any
-	element : HTMLElement
 }
 
 class App extends React.Component<AppProps> {
 
-	wrapperRef : HTMLDivElement|null
-
 	constructor(props : any) {
 		super(props);
-
-		this.wrapperRef = null;
-		this.props.element.classList.add('history__is-active')
 	}
 
 	// TODO rewrite jobRequest and Accordeon	<JobRequest data={ this.props.carrer.jobRequest } />
 	render() {
 		return (
-			<div ref={ (ref) => this.wrapperRef = ref}>
+			<div>
 				<Header data={this.props.data.header} />
 				<main>
 					<Histroy data={this.props.data.history} />
@@ -39,12 +33,6 @@ class App extends React.Component<AppProps> {
 	//	new ScrollRouter({});
 	}
 
-	componentWillUnmount() {}
-
-	handleInternalLinkClick(e : Event) {
-		e.preventDefault();
-		return false;
-	}
 }
 
 export default App;

@@ -25,8 +25,10 @@ export class Router {
         this._components = [];
         this._lastActiveComponents = [];
         this.disableActiveDetection = false;
+        this.appElement = null;
     }
 
+    public appElement : HTMLElement|null;
     public disableActiveDetection : boolean;
 
     public get currentUrl() {
@@ -47,16 +49,18 @@ export class Router {
             for (let comp of this._components) {
                 if (condition(comp)) {
                     activeComps.push(comp);
-    
-                    if (this._lastActiveComponents.findIndex((c) => c.url === comp.url) === -1) {
-                        comp.dispatchEnter();
-                    }
                 }
             }
     
             for (let comp of this._lastActiveComponents) {
                 if (!comp.acitveStateCondition()) {
                     comp.dispatchLeave();
+                }
+            }
+
+            for (let comp of activeComps) {
+                if (this._lastActiveComponents.findIndex((c) => c.url === comp.url) === -1) {
+                    comp.dispatchEnter();
                 }
             }
     
@@ -91,6 +95,10 @@ export default abstract class AbstractRoutingComponent<Props = {}, State = {}> e
     }
     
     abstract get url() : string;
+
+    get appElement() {
+        return this._router.appElement as HTMLElement;
+    }
 
     componentDidMount() {
         this._router.addComponent(this);

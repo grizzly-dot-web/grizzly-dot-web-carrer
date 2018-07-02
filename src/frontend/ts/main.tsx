@@ -64,15 +64,16 @@ import * as ReactDOM from 'react-dom';
 import App from './App';
 import { Router } from './AbstractRoutingComponent';
 
-let appElement = document.getElementById('app');
+let appElement = document.getElementById('app') as HTMLElement;
 
 let router = Router.Instance;
+router.appElement = appElement;
 
 fetch('/data/career.json').then((response) => {
 	if (response.ok) {
 		response.json().then((data) => {
 			ReactDOM.render(
-				<App element={appElement} data={data} />,
+				<App data={data} />,
 				appElement
 			);
 
