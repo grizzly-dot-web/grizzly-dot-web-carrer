@@ -90,7 +90,6 @@ header#page-header {
 				font-size: 0.9em;
 				margin-left: getGridSize(1, horizontal);
 				transition: $HeaderColorTansition;
-				background-color: $ColorBackgroundLight;
 
 				&:hover {
 					color: $ColorPrimary;
@@ -102,35 +101,9 @@ header#page-header {
 			}
 		}
 	}
-
-	&.header__bg-active {
-		background-color: $ColorBackgroundDark;
-
-		&:after {
-			display: block;
-		}
-		
-		.main-nav a {
-			background-color: transparent;
-		}
-	}
-
-	&.header__left-dark {
-		.logo, .experience-link, .experience-link .circle {
-			color: $ColorThird;
-			background-color: $ColorBackgroundLight;
-		}
-	}
-
-	&.header__right-dark {
-		.main-nav a {
-			color: $ColorThird;
-			background-color: transparent;
-		}
-	}
 }
 
-#app.history__is-active #page-header {
+#app.history__is-active:not(.experience-overview__active) #page-header {
 	&:after {
 		content: '';
 		z-index: 1;
@@ -144,9 +117,25 @@ header#page-header {
 	}
 }
 
-.justify-chars {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: space-between;
+#app {
+	&.header__bg-active header#page-header {
+		background-color: $ColorBackgroundDark;
+
+		&:after {
+			display: block;
+		}
+	}
+
+	&.header__left-dark header#page-header {
+		.logo, .experience-link, .experience-link .circle {
+			color: $ColorThird;
+			background-color: $ColorBackgroundLight;
+		}
+	}
+
+	&.header__right-dark header#page-header {
+		.main-nav a:not(.active):not(:hover) {
+			color: $ColorThird;
+		}
+	}	
 }

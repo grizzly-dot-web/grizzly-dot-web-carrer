@@ -95,6 +95,7 @@ export default abstract class AbstractRoutingComponent<Props = {}, State = {}> e
     }
     
     abstract get url() : string;
+    abstract get ref() : HTMLElement|null
 
     get appElement() {
         return this._router.appElement as HTMLElement;
@@ -123,8 +124,6 @@ export default abstract class AbstractRoutingComponent<Props = {}, State = {}> e
 export abstract class ScrollRoutingComponent<Props = {}, State = {}> extends AbstractRoutingComponent<Props, State> {
     
 
-    abstract get ref() : HTMLElement|null
-    
     hasScrolledOnce = false
 
     dispatchEnter() {

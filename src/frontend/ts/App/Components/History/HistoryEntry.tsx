@@ -97,6 +97,7 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 		super.enter();
 
 		this.appElement.classList.add('history__is-active');
+        this.appElement.classList.add(`header__right-dark`);
 		
 		this.setState(Object.assign(this.state, {
 			showExperiences: true

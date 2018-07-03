@@ -128,62 +128,23 @@
 		{
 			"begin_date": "2018-01",
 			"end_date": null,
-			"slug": "now",
+			"url": "/carrer/grizzly.web",
 			"institution": {
 				"type": "company",
-				"title": "Auf der Suche",
-				"url": "http://kodehaus.de",
+				"title": "grizzly.web",
 				"job_title": "Web Developer",
 				"industry": "Internet und Onlinemedien",
-				"company_size": "1-10",
-				"form_of_employment": "FULL_TIME_EMPLOYEE"
+				"company_size": "1",
+				"form_of_employment": "self_employee"
 			},
 			"experiences": [
-				{
-					"icon": null,
-					"url": "https://reactjs.org/",
-					"title": "React",
-					"color": "#61dafb",
-					"scaleFactor": 1,
-					"type": "skill"
-				},
-				{
-					"icon": null,
-					"url": "https://www.w3.org/TR/2009/WD-websockets-20091222/",
-					"title": "WebSockets",
-					"color": "#61dafb",
-					"scaleFactor": 1.2,
-					"type": "skill"
-				},
-				{
-					"icon": null,
-					"url": "https://www.w3.org/TR/2009/WD-websockets-20091222/",
-					"title": "Webpack",
-					"color": "#61dafb",
-					"scaleFactor": 0.8,
-					"type": "skill"
-				},
-				{
-					"icon": null,
-					"url": "https://www.w3.org/TR/2009/WD-websockets-20091222/",
-					"title": "Babel, ES6",
-					"color": "#61dafb",
-					"scaleFactor": 0.6,
-					"type": "skill"
-				},
-				{
-					"icon": null,
-					"url": null,
-					"title": "Aktuelle Seite",
-					"color": "#ff9c00",
-					"type": "reference"
-				}
+				
 			]
 		},
 		{
 			"begin_date": "2016-09",
 			"end_date": "2018-01",
-			"slug": "kodehaus",
+			"url": "/carrer/kodehaus",
 			"institution": {
 				"type": "company",
 				"title": "Kodehaus UG",
@@ -194,13 +155,6 @@
 				"form_of_employment": "FULL_TIME_EMPLOYEE"
 			},
 			"experiences": [
-				{
-					"icon": null,
-					"url": "https://reactjs.org/",
-					"title": "React",
-					"color": "#61dafb",
-					"type": "experience"
-				}
 			],
 			"ChildComponents": [
 				{
@@ -260,7 +214,7 @@
 		{
 			"begin_date": "2014-10",
 			"end_date": "2016-08",
-			"slug": "anymotion-webdeveloper",
+			"url": "/carrer/anymotion-webdeveloper",
 			"institution": {
 				"type": "company",
 				"url": "http://anymotion.de",
@@ -272,18 +226,57 @@
 			},
 			"experiences": [
 				{
-					"icon": null,
-					"url": "https://reactjs.org/",
-					"title": "React",
-					"color": "#61dafb",
-					"type": "experience"
+					"url": "https://framework.zend.com/manual/1.11/de/manual.html",
+					"title": "Zend Framework 1.2",
+					"level": 100,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"url": "https://pimcore.com/de",
+					"title": "Pimcore",
+					"level": 400,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"icon": "/img/svg/reference-rcibanque.svg",
+					"url": "https://www.rcibanque.de/",
+					"title": "rcibanque",
+					"type": "reference"
+				},
+				{
+					"icon": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIwLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiIFsKCTwhRU5USVRZIG5zX2V4dGVuZCAiaHR0cDovL25zLmFkb2JlLmNvbS9FeHRlbnNpYmlsaXR5LzEuMC8iPgoJPCFFTlRJVFkgbnNfYWkgImh0dHA6Ly9ucy5hZG9iZS5jb20vQWRvYmVJbGx1c3RyYXRvci8xMC4wLyI+Cgk8IUVOVElUWSBuc19ncmFwaHMgImh0dHA6Ly9ucy5hZG9iZS5jb20vR3JhcGhzLzEuMC8iPgoJPCFFTlRJVFkgbnNfdmFycyAiaHR0cDovL25zLmFkb2JlLmNvbS9WYXJpYWJsZXMvMS4wLyI+Cgk8IUVOVElUWSBuc19pbXJlcCAiaHR0cDovL25zLmFkb2JlLmNvbS9JbWFnZVJlcGxhY2VtZW50LzEuMC8iPgoJPCFFTlRJVFkgbnNfc2Z3ICJodHRwOi8vbnMuYWRvYmUuY29tL1NhdmVGb3JXZWIvMS4wLyI+Cgk8IUVOVElUWSBuc19jdXN0b20gImh0dHA6Ly9ucy5hZG9iZS5jb20vR2VuZXJpY0N1c3RvbU5hbWVzcGFjZS8xLjAvIj4KCTwhRU5USVRZIG5zX2Fkb2JlX3hwYXRoICJodHRwOi8vbnMuYWRvYmUuY29tL1hQYXRoLzEuMC8iPgpdPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHhtbG5zOng9IiZuc19leHRlbmQ7IiB4bWxuczppPSImbnNfYWk7IiB4bWxuczpncmFwaD0iJm5zX2dyYXBoczsiCgkgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxOTIuNiAyMiIKCSBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTIuNiAyMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtjbGlwLXBhdGg6dXJsKCNTVkdJRF8yXyk7ZmlsbDojOUM5RTlGO30KCS5zdDF7Y2xpcC1wYXRoOnVybCgjU1ZHSURfMl8pO2ZpbGw6I0MzMDAyRjt9Cjwvc3R5bGU+Cjxzd2l0Y2g+Cgk8Zm9yZWlnbk9iamVjdCByZXF1aXJlZEV4dGVuc2lvbnM9IiZuc19haTsiIHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPgoJCTxpOnBnZlJlZiAgeGxpbms6aHJlZj0iI2Fkb2JlX2lsbHVzdHJhdG9yX3BnZiI+CgkJPC9pOnBnZlJlZj4KCTwvZm9yZWlnbk9iamVjdD4KCTxnIGk6ZXh0cmFuZW91cz0ic2VsZiI+CgkJPGc+CgkJCTxkZWZzPgoJCQkJPHJlY3QgaWQ9IlNWR0lEXzFfIiB4PSIxIiB5PSIxIiB3aWR0aD0iMTkwLjYiIGhlaWdodD0iMjAiLz4KCQkJPC9kZWZzPgoJCQk8Y2xpcFBhdGggaWQ9IlNWR0lEXzJfIj4KCQkJCTx1c2UgeGxpbms6aHJlZj0iI1NWR0lEXzFfIiAgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7Ii8+CgkJCTwvY2xpcFBhdGg+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xODguNCwxLjRjLTMuOCwzLjMtNi45LDYuNi05LjcsOS44YzMuNywzLjEsNyw2LjMsMTAuMSw5LjVoMi44Yy0zLjEtMy4zLTYuNi02LjUtMTAuNC05LjcKCQkJCWMyLjgtMy4yLDYuMS02LjQsMTAtOS42SDE4OC40eiBNMTc3LjksMS40SDE3NnYxOS4zaDEuOVYxLjR6IE0xNzEsMjAuNlYxLjRoLTEuOHYxNi4xTDE1NywxLjRoLTIuNXYxOS4zaDEuOFYzLjNsMTMuMSwxNy4zSDE3MXoKCQkJCSBNMTM3LjUsMTMuM2MxLjgtNC41LDMuNC04LDQuOS0xMC40YzAuNywxLjIsMi43LDUuMiw0LjgsMTAuNEgxMzcuNXogTTE1MS45LDIwLjZjLTMuNS0xMC43LTcuNi0xOC04LjQtMTkuM2gtMi4yCgkJCQljLTAuOSwxLjMtNSw4LjYtOC41LDE5LjNoMS45YzAuNy0yLDEuNC0zLjksMi4xLTUuNmgxMWMwLjcsMS44LDEuNCwzLjcsMi4xLDUuNkgxNTEuOXogTTExNy41LDExLjZoNS42YzMuNiwwLDUuOCwxLjMsNS44LDMuNwoJCQkJYzAsMy4yLTIuMywzLjctNi44LDMuN2gtNC43VjExLjZ6IE0xMTcuNSwzLjFoNC4zYzQuMSwwLDYuNCwwLjEsNi40LDMuMWMwLDIuMy0yLjIsMy43LTQuOSwzLjdoLTUuOFYzLjF6IE0xMTUuNiwxLjR2MTkuM2g3LjIKCQkJCWM0LjksMCw4LTEsOC01LjNjMC0yLjYtMi4yLTQuMy00LjMtNC43djBjMS45LTAuNiwzLjYtMi4yLDMuNi00LjRjMC0zLjgtMy4xLTQuOC03LjctNC44SDExNS42eiIvPgoJCQk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTA4LjUsMjAuNlYxLjRIMTA0djEyLjFMOTUuNywxLjRoLTUuM3YxOS4zaDQuNXYtMTNsOSwxM0gxMDguNXogTTc0LjcsMTMuM2MxLTIuOSwyLTUuOCwzLjItOC41CgkJCQljMS4zLDMuMSwyLjMsNS44LDMuMyw4LjVINzQuN3ogTTgzLjcsMjAuNmg1LjFjLTEuOS02LjItNC43LTEzLjQtNy40LTE5LjNoLTYuNGMtMi41LDUuMy01LjIsMTIuNS03LjMsMTkuM2g0LjgKCQkJCWMwLjQtMS4yLDAuNy0yLjMsMS4xLTMuNWg5LjFMODMuNywyMC42eiBNNTguOCwxYy01LjksMC04LjcsMS45LTguNyw1LjhjMCwyLjYsMS42LDQuNSw0LjUsNS4zbDQuOSwxLjJjMS44LDAuNCwyLjYsMS4yLDIuNiwyCgkJCQljMCwxLjItMS4zLDEuNy00LjQsMS43Yy0yLDAtNS4zLTAuNy03LjMtMS4ydjQuMmMyLjEsMC42LDQuMywxLjEsNy45LDEuMWM1LjcsMCw4LjUtMi4zLDguNS02LjFjMC0yLjUtMS40LTQuMy00LjktNS4ybC01LjEtMS4zCgkJCQljLTEuNi0wLjQtMi0xLTItMS42YzAtMSwwLjktMS43LDMuNi0xLjdjMi44LDAsNC41LDAuNCw3LDFWMkM2My44LDEuNiw2MS41LDEsNTguOCwxIE0zOS44LDFjLTUuOSwwLTguNywxLjktOC43LDUuOAoJCQkJYzAsMi42LDEuNiw0LjUsNC41LDUuM2w0LjksMS4yYzEuOCwwLjQsMi42LDEuMiwyLjYsMmMwLDEuMi0xLjMsMS43LTQuNCwxLjdjLTIsMC01LjMtMC43LTcuMy0xLjJ2NC4yYzIuMSwwLjYsNC4zLDEuMSw3LjksMS4xCgkJCQljNS43LDAsOC41LTIuMyw4LjUtNi4xYzAtMi41LTEuNC00LjMtNC45LTUuMmwtNS4xLTEuM2MtMS42LTAuNC0yLTEtMi0xLjZjMC0xLDAuOS0xLjcsMy42LTEuN2MyLjgsMCw0LjUsMC40LDcsMVYyCgkJCQlDNDQuNywxLjYsNDIuNSwxLDM5LjgsMSBNMjcuOCwxLjRoLTQuNnYxOS4zaDQuNlYxLjR6IE0xOS4xLDIwLjZWMS40aC00LjV2MTIuMUw2LjMsMS40SDF2MTkuM2g0LjV2LTEzbDksMTNIMTkuMXoiLz4KCQk8L2c+Cgk8L2c+Cjwvc3dpdGNoPgoKCQo8L3N2Zz4K",
+					"url": "https://www.nissan-bank.de/",
+					"title": "nissan-bank",
+					"type": "reference"
+				},
+				{
+					"url": "https://www.ubuntu.com/server",
+					"title": "Ubuntu Server",
+					"level": 400,
+					"category": "Betriebssystem / Server",
+					"type": "skill"
+				},
+				{
+					"url": "https://jquery.com/",
+					"title": "jQuery",
+					"level": 100,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"icon": "/img/svg/reference-upd.svg",
+					"url": "https://www.patientenberatung.de/",
+					"title": "UPD | Unabhängige Patientenberatung Deutschland",
+					"type": "reference"
 				}
 			]
 		},
 		{
 			"begin_date": "2011-10",
 			"end_date": "2014-07",
-			"slug": "anymotion-ausbildung",
+			"url": "/carrer/anymotion-ausbildung",
 			"institution": {
 				"type": "company",
 				"title": "anyMOTION GRAPHICS GmbH",
@@ -295,10 +288,73 @@
 			},
 			"experiences": [
 				{
-					"icon": null,
-					"url": "https://reactjs.org/",
-					"title": "React",
-					"color": "#61dafb",
+					"url": "https://cakephp.org/",
+					"title": "CakePHP",
+					"level": 100,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"url": "https://developer.mozilla.org/de/Learn/Getting_started_with_the_web/CSS_basics",
+					"title": "CSS",
+					"level": 500,
+					"category": "Sprache",
+					"type": "skill"
+				},
+				{
+					"url": "http://compass-style.org/",
+					"title": "Compass",
+					"level": 500,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"url": "https://developer.mozilla.org/de/Learn/HTML",
+					"title": "HTML",
+					"level": 500,
+					"category": "Sprache",
+					"type": "skill"
+				},
+				{
+					"url": "http://prototypejs.org/",
+					"title": "prototype",
+					"level": 100,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"url": "http://script.aculo.us/",
+					"title": "script.aculo.us",
+					"level": 100,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"url": "https://wordpress.org/",
+					"title": "Wordpress",
+					"level": 400,
+					"category": "Framework / CMS",
+					"type": "skill"
+				},
+				{
+					"url": "https://php.net/",
+					"title": "PHP",
+					"level": 400,
+					"category": "Sprache",
+					"type": "skill"
+				},
+				{
+					"url": "https://www.ubuntu.com/desktop",
+					"title": "Linux",
+					"level": 400,
+					"category": "Betriebssystem / Server",
+					"type": "skill"
+				},
+				{
+					"url": "https://www.microsoft.com/de-de/windows",
+					"title": "Windows",
+					"level": 500,
+					"category": "Betriebssystem / Server",
 					"type": "skill"
 				}
 			]
@@ -306,7 +362,7 @@
 		{
 			"begin_date": "2007-08",
 			"end_date": "2009-07",
-			"slug": "berufskolleg-kempen",
+			"url": "/carrer/berufskolleg-kempen",
 			"institution": {
 				"type": "education",
 				"title": "Berufskolleg Kempen",
@@ -318,16 +374,49 @@
 			},
 			"experiences": [
 				{
-					"icon": null,
-					"url": "https://reactjs.org/",
-					"title": "React",
+					"url": "https://www.apple.com/de/mac/compare/",
+					"title": "Mac OS",
+					"level": 500,
+					"category": "Betriebssystem / Server",
+					"type": "skill"
+				},
+				{
+					"url": "",
+					"title": "Java",
+					"level": 100,
+					"category": "Sprache",
+					"type": "skill"
+				},
+				{
+					"url": "",
+					"title": "Flash",
+					"level": 100,
+					"category": "Software",
 					"type": "skill"
 				},
 				{
 					"icon": null,
 					"url": "",
-					"title": "Keine",
-					"type": "reference"
+					"title": "Cinema 4D",
+					"level": 200,
+					"category": "Software",
+					"type": "skill"
+				},
+				{
+					"icon": null,
+					"url": "",
+					"title": "Actionsscript 2.0/3.0",
+					"level": 100,
+					"category": "Sprache",
+					"type": "skill"
+				},
+				{
+					"icon": null,
+					"url": "https://de.wikipedia.org/wiki/FreeHand",
+					"title": "Macromedia Freehand",
+					"level": 100,
+					"category": "Sprache",
+					"type": "skill"
 				}
 			]
 		}

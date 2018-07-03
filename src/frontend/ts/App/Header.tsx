@@ -28,7 +28,7 @@ class Header extends React.Component<AppProps> {
 		}
 
 		return (
-			<header id="page-header" className={"header__right-dark"}>
+			<header id="page-header">
 				<div className="container">
 					<a className="logo" href="/">
 						<h1>
@@ -39,7 +39,7 @@ class Header extends React.Component<AppProps> {
 							{spanPerCharacter('grizzly.web')}
 						</h2>
 					</a>
-					<a href="/carrer/experiece-overview" className="experience-link">
+					<a href="/carrer/experiences" className="experience-link">
 						<span className="skills">Skills</span> <span className="circle">&</span> <span className="references">Referenzen</span>
 					</a>
 					<nav className="main-nav">
