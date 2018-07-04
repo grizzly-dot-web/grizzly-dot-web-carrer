@@ -1,0 +1,146 @@
+.experience-level {
+	font-weight: 700;
+	line-height: 1em;
+	border-radius: 50%;
+	margin-left: 0.25em;
+	padding: 0.3em 0.6em 0.2em;
+	display: inline-block;
+	text-decoration: none;
+	text-transform: uppercase;
+
+	&.level_discarded {
+		background-color: $ColorDiscarded;
+	}
+
+	&.level_untrained {
+		background-color: $ColorUntrained;
+	}
+
+	&.level_interested {
+		background-color: $ColorInterested;
+	}
+
+	&.level_assess {
+		background-color: $ColorAssess;
+	}
+
+	&.level_mastered {
+		background-color: $ColorMastered;
+	}
+}
+
+.experience-level-legend {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	margin-bottom: 2em;
+    position: relative;
+    font-size: 0.7em;
+	
+	width: 100vw;
+	position: relative;
+	left: calc((100vw - 100%) / 2 * -1);
+    
+    @media (max-width: 900px) {
+        overflow-x: hidden;
+    }
+
+	&:before {
+		content: '';
+		display: block;
+		top: 0;
+		right: 0;
+		height: 0.4em;
+		width: 100%;
+		position: absolute;
+		background-color: $ColorBackgroundContent;
+    }
+
+	.experience-level-toggle {
+		cursor: pointer;
+		font-weight: 700;
+		line-height: 1.7em;
+		font-style: italic;
+        padding: 1em;
+        min-width: 200px;
+		position: relative;
+		margin-bottom: 0.4em;
+		transition: 0.35s ease-in-out;
+        transition-property: color, opacity;
+        
+        &:first-child {
+            padding-left: calc(1em + 20px)
+        }
+        
+        &:last-child {
+            padding-right: calc(1em + 20px)
+        }
+
+		&:after, &:before {
+			content: '';
+			z-index: 2;
+			display: block;
+			bottom: 0;
+			right: 0;
+			height: 0.4em;
+			width: 100%;
+			position: absolute;
+			background-color: $ColorBackgroundContent;
+		}
+
+		&:after {
+			width: 0;
+			transition: width 0.1s ease;
+		}
+
+		&.level_discarded:after {
+			background-color: $ColorDiscarded;
+		}
+	
+		&.level_untrained:after {
+			background-color: $ColorUntrained;
+		}
+	
+		&.level_interested:after {
+			background-color: $ColorInterested;
+		}
+	
+		&.level_assess:after {
+			background-color: $ColorAssess;
+		}
+	
+		&.level_mastered:after {
+			background-color: $ColorMastered;
+		}
+
+		&:not(.active) {
+            text-decoration: line-through;
+            color: rgba($color:$ColorBackgroundContent, $alpha: 0.3);
+            
+			.experience-level {
+				background-color: $ColorBackgroundDark;
+            }
+		}
+
+		&.active {
+            text-decoration: underline;
+            .experience-level {
+                text-decoration: none;
+            }
+
+			&:after {
+				width: 100%;
+            }
+		}
+
+		.experience-level {
+			margin-left: 0;
+			margin-right: 0.25em;
+			border-radius: 1.2em;
+		}
+    }
+    
+    .experience-level-toggle.active ~ .experience-level-toggle.active {
+        text-decoration: none;
+    }
+}

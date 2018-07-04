@@ -4,9 +4,9 @@ $Default_Height: 768px;
 
 @function getPercatageOfDefaultSize($px, $orientation, $floor: false) {
 	$size: $Default_Width;
-	$percent: 100vw;
+	$percent: 100vh;
 	@if ($orientation == horizontal) {
-		$percent: 100vh;
+		$percent: 100vw;
 		$size: $Default_Height;
 	}
 

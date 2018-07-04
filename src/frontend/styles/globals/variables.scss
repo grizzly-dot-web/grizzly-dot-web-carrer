@@ -34,27 +34,27 @@ $HistoryMainWidth: 70%;
 
 $Timeline_Width: 10%;
 $Timeline-Line_Width: 6px;
-$Timeline_PositionLeft: getGridSize(20, vertical);
+$Timeline_PositionLeft: getGridSize(13, horizontal);
 
 
-$EndMarker_PositionTop: getGridSize(3, horizontal);
-$BeginMarker_PositionBottom: getGridSize(3, horizontal);
+$EndMarker_PositionTop: getGridSize(3, vertical);
+$BeginMarker_PositionBottom: getGridSize(3, vertical);
 
 $Timespan_Height: (
-	Previous: getGridSize(18, horizontal),
-	Next: getGridSize(10, horizontal),
+	Previous: getGridSize(18, vertical),
+	Next: getGridSize(10, vertical),
 );
 
 $CurrentTimeSpan_Height: 100 - (map-get($Timespan_Height, Previous) + map-get($Timespan_Height, Next));
 
 //#subregion after Animation
 $Timespan-NavigationPrevActive_Height: (
-	Previous: getGridSize(19, horizontal),
-	Next: getGridSize(8, horizontal),
+	Previous: getGridSize(19, vertical),
+	Next: getGridSize(8, vertical),
 );
 $Timespan_NavigationNextActive_Height: (
-	Previous: getGridSize(8, horizontal),
-	Next: getGridSize(19, horizontal),
+	Previous: getGridSize(8, vertical),
+	Next: getGridSize(19, vertical),
 );
 //#endsubregion
 

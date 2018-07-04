@@ -8,25 +8,13 @@ html, body {
 
 body {
 	color: $ColorBackgroundLight;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	background-color: $ColorBackgroundLight;
 
     font-size: 14px;
 
     @media screen and (min-width: 800px) and (min-height: 520px) {
         font-size: 18px;
-    }
-
-    @media screen and (min-width: 1050px) and (min-height: 575px) {
-        font-size: 24px;
-    }
-
-    @media screen and (min-width: 1450px) and (min-height: 750px) {
-        font-size: 30px;
-    }
-    
-    @media screen and (min-width: 1900px) and (min-height: 1024px) {
-        font-size: 36px;
     }
 }
 

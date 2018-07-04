@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
 
 @import '../../../node_modules/normalize-scss/sass/normalize';
 
@@ -44,21 +44,6 @@ pre {
 
 a {
 	&[target=_blank] {
-		padding-right: 1.4em;
-		position: relative;
-
-		&:after {
-			content: '';
-			top: 50%;
-			right: 0.4em;
-			width: 1em;
-			height: 1em;
-			color: inherit;
-			display: block;
-			position: absolute;
-			transform: translateY(-50%);
-			background: transparent url('/img/svg/external_link.svg') no-repeat;
-		}
 	}
 }
 
