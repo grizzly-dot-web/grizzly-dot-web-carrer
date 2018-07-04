@@ -11,7 +11,6 @@ export interface ExperienceOverviewProps {
 	data : any
 }
 export interface ExperienceOverviewState {
-	isActive : boolean
 	visibleExperienceLevel : number
 }
 
@@ -30,7 +29,6 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         this.legendIsStateChanging = false;
         
         this.state = {
-            isActive: false,
             visibleExperienceLevel: parseInt(Object.keys(ExperienceOverview.Tags)[1])
         };
 
@@ -285,25 +283,10 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         this.assignActiveLegendLevels(levelCode);
     }
 
-    handleActiveState() {
-        let ref = this.ref as HTMLElement;
-
-        if (!this.state.isActive) {
-            ref.style.marginTop = `${ref.clientHeight * -1}px`;
-        } else {
-            ref.style.marginTop = null;
-        }
-    }
-
     enter(): void {       
         this._router.disableActiveDetection = true;
 
-        this.setState(Object.assign(this.state, {
-            isActive: true
-        }));
-
         this.assignActiveLegendLevels();
-        this.appElement.classList.add(`header__bg-active`);
         this.appElement.classList.add(`${this.appClassSlug}__active`);
         this.appElement.classList.add(`${this.appClassSlug}__entered`);
     }
@@ -311,10 +294,6 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
     leave(): void {
         this._router.disableActiveDetection = false;
 
-        this.setState(Object.assign(this.state, {
-            isActive: false
-        }));
-        
         this.appElement.classList.remove(`${this.appClassSlug}__active`);
         this.appElement.classList.remove(`${this.appClassSlug}__entered`);
     }
