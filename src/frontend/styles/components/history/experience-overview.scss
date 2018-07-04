@@ -43,6 +43,11 @@
 	.inner {	
 		padding:  0 getGridSize(2, horizontal);
 		padding-top: 6em;
+		min-height: 100%;
+		
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	.experience-overview--title {
@@ -56,7 +61,7 @@
 	}
 
 	.skills {
-		margin-bottom: 10vmin;
+		flex-grow: 2;
 
 		> .experience-item-wrapper {
 			display: flex;
