@@ -1,2 +1,54 @@
 @import './layout/header';
 @import './layout/footer';
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	color: $ColorBackgroundLight;
+	font-family: 'Montserrat', sans-serif;
+	background-color: $ColorBackgroundLight;
+
+    font-size: 14px;
+
+    @media screen and (min-width: 800px) and (min-height: 520px) {
+        font-size: 18px;
+    }
+
+    @media screen and (min-width: 1050px) and (min-height: 575px) {
+        font-size: 24px;
+    }
+
+    @media screen and (min-width: 1450px) and (min-height: 750px) {
+        font-size: 30px;
+    }
+    
+    @media screen and (min-width: 1900px) and (min-height: 1024px) {
+        font-size: 36px;
+    }
+}
+
+img {
+	max-width: 100%;
+}
+
+#app > div {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+	
+	> * {
+        flex-grow: 1;
+	}
+
+    main {
+        flex-grow: 2;
+
+        > * {
+            transition: 0.5s ease-in-out;
+            transition-property: margin-top;
+        }
+    }
+}

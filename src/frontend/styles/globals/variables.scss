@@ -1,7 +1,7 @@
 //#region Colors
 $ColorPrimary: #ff9c00;
 $ColorSecondary: #9c9b9b;
-$ColorThird: #07034a;
+$ColorThird: #475157;
 
 $ColorSecondaryDark: darken($ColorSecondary, 5%);
 $ColorSecondaryDarker: darken($ColorSecondary, 25%);
@@ -22,10 +22,10 @@ $Color2: #005aff;
 $Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.5);
 $Timeline-Active_BackgroundColor: $ColorBackgroundContent;
 
-$ColorDiscarded: #f00;
-$ColorUntrained: #F1235A;
-$ColorInterested: #5CB449;
-$ColorAssess: #40A7D1;
+$ColorDiscarded: #F1235A;
+$ColorUntrained: #40A7D1;
+$ColorInterested: lighten($ColorUntrained, 20%);
+$ColorAssess: #5CB449;
 $ColorMastered: $ColorPrimary;
 //#endregion
 

@@ -4,60 +4,21 @@
 
 @include normalize();
 
+* {
+	box-sizing: border-box;
+}
+
+
 @import './globals/mixins';
 @import './globals/variables';
 @import './globals/extends';
 @import './globals/typo';
 @import './globals/keyframes';
 
-* {
-	box-sizing: border-box;
-}
-
 pre {
 	margin: 0;
 	font-size: inherit;
 	font-family: inherit;
-}
-
-html, body {
-	width: 100%;
-	height: 100%;
-}
-
-body {
-	color: $ColorBackgroundLight;
-	font-family: 'Montserrat', sans-serif;
-	background-color: $ColorBackgroundLight;
-
-  font-size: 14px;
-
-  @media screen and (min-width: 800px) and (min-height: 520px) {
-    font-size: 18px;
-  }
-
-/*
-  @media screen and (min-width: 1050px) and (min-height: 575px) {
-    font-size: 24px;
-  }
-
-  @media screen and (min-width: 1450px) and (min-height: 750px) {
-    font-size: 30px;
-  }
-  @media screen and (min-width: 1900px) and (min-height: 1024px) {
-    font-size: 36px;
-	}
-*/
-}
-
-.wrapper {
-	width: 80%;
-	max-width: 1000px;
-	margin: 0 auto;
-}
-
-img {
-	max-width: 100%;
 }
 
 .flex-container {

@@ -1,107 +1,98 @@
-#app.experience-overview__active .experience-overview {
-	opacity: 1;
-	height: 100vh;	
-	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
-	padding-top: 6em;
+#app.experience-overview__active {
+	> div, main {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+	}
+
+	.experience-overview {
+		margin-top: 0;
+	}
+
+	footer {
+		display: none;
+	}
 }
 
-.experience-overview {	
-	z-index: 2;
-	top: 0;
-	left: 0;
+.experience-overview {
+	background-color: $ColorThird;
+
 	width: 100vw;
-	position: fixed;
-	background-color: #475157;
+	height: 100vh;
+	overflow: scroll;
+	margin-top: -100vh;
 
-	height: 0;
-	opacity: 0;
-	padding:  0 getGridSize(2, horizontal);
-	transition: height 0.35s ease-in-out, padding 0.35s ease-in-out, opacity 0.35s ease-in-out;
-
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	justify-content: space-between;
-
-	.experience-item-wrapper {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+	.inner {	
+		padding:  0 getGridSize(2, horizontal);
+		padding-top: 6em;
 	}
 
-	& > .experience-item-wrapper {
-		flex-grow: 1;
-
-		.experience-level-legend {
-			order: 2;
-			align-self: flex-end;
-		}	
-	}
-
-	.experience-type {
-		order: 2;
+	.experience-overview--title {
 		width: 100%;
-		
-		h3 {
-			margin-bottom: 0.5em;
-			text-transform: uppercase;
+		color: $ColorBackgroundContent;
+		text-transform: uppercase;
+		margin-bottom: 0.5em;
+	}
+	.experience-overview--type-title {
+		margin-bottom: 1em;
+	}
 
+	.skills {
+		> .experience-item-wrapper {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: space-between;
+
+			.experience-type {
+				max-width: 90%;
+				margin: 0 auto;
+
+				.experience-overview--type-title {
+
+				}
+
+				.experience-item-wrapper {
+					columns: 3 250px;
+					column-gap: 2em;
+					
+					.experience-item, .category-headline {
+						display: block;
+						width: auto;
+						font-size: 0.75em;
+						margin-bottom: 0.2em;
+					}
+				}
+			}
+		}
+	}
+
+	.references {
+		width: 100vw;
+		position: relative;
+		left: calc((100vw - 100%) / 2 * -1);
+		padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
+		background-color: $ColorBackgroundContent;
+
+		.experience-overview--title {
+			color: $DarkCopy_Color;
 			&:after {
 				content: '';
 				width: 100%;
 				height: 0.3rem;
 				display: block;
 				margin-top: 0.5em;
-				background-color: $ColorBackgroundContent;
+				background-color: $DarkCopy_Color;
 			}
 		}
 
 		.experience-item-wrapper {
-			flex-direction: row;
-			.experience-category {
-				width: 100%;
-				margin-bottom: 0.5em;
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
 
-				@media (min-width: 600px) {
-					width: calc(50% - 1em);
-				}
-
-				.experience-item {
-					width: 100%;
-					display: flex;
-					flex-wrap: wrap;
-					font-size: 0.75em;
-					margin-bottom: 0.2em;
-					
-					@media (min-width: 1000px) {
-						width: calc(50% - 1em);
-					}
-				}
-			}
-		}
-
-		&.reference {
-			width: 100vw;
-			position: relative;
-			left: calc((100vw - 100%) / 2 * -1);
-			padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
-			background-color: $ColorBackgroundContent;
-
-			h3 {
-				color: $DarkCopy_Color;
-
-				&:after {
-					background-color: $DarkCopy_Color;
-				}
-			}
-
-			.experience-item-wrapper {
-				align-items: center;
-				justify-content: space-evenly;
-
-				.experience-item {
-					width: 10em;			
-				}
+			.experience-item {
+				width: 10em;			
 			}
 		}
 	}
@@ -109,22 +100,40 @@
 
 .experience-level-legend {
 	display: flex;
+	align-items: stretch;
 	justify-content: space-between;
+	margin-bottom: 1em;
+	position: relative;
 
-	button {
+	&:before {
+		content: '';
+		display: block;
+		top: -0.3em;
+		right: 0;
+		height: 0.3em;
+		width: 100%;
+		position: absolute;
+		background-color: $ColorBackgroundContent;
+	}
+
+	.experience-level-toggle {
 		cursor: pointer;
-		font-size: 0.65em;
+		font-weight: 700;
+		font-size: 0.7em;
 		line-height: 1.7em;
 		font-style: italic;
-		padding: 1.5em 0.5em;
+		padding: 1em 0.5em;
 		position: relative;
+		margin-bottom: 0.4em;
+		transition: 0.35s ease-in-out;
+		transition-property: color, opacity;
 
 		&:after, &:before {
 			content: '';
 			display: block;
-			top: 0;
+			bottom: -0.4em;
 			right: 0;
-			height: 0.4rem;
+			height: 0.4em;
 			width: 100%;
 			position: absolute;
 			background-color: $ColorBackgroundContent;
@@ -155,9 +164,14 @@
 			background-color: $ColorMastered;
 		}
 
-		&.active {
-			text-decoration: underline;
+		&:not(.active) {
+			opacity: 0.3;
+			.experience-level {
+				background-color: $ColorBackgroundDark;
+			}
+		}
 
+		&.active {
 			&:after {
 				width: 100%;
 			}
@@ -172,6 +186,7 @@
 }
 .experience-level {
 	font-size: 1em;
+	font-weight: 700;
 	line-height: 1em;
 	border-radius: 50%;
 	margin-left: 0.25em;

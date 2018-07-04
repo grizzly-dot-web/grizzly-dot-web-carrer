@@ -11,6 +11,7 @@ export interface ExperienceOverviewProps {
 	data : any
 }
 export interface ExperienceOverviewState {
+	isActive : boolean
 	visibleExperienceLevel : number
 }
 
@@ -29,6 +30,7 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         this.legendIsStateChanging = false;
         
         this.state = {
+            isActive: false,
             visibleExperienceLevel: parseInt(Object.keys(ExperienceOverview.Tags)[1])
         };
 
@@ -44,17 +46,17 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         200:  { 
             className : "level_untrained", 
             name: "untrained", 
-            description: "Hiermit habe ich mich länger nicht beschäftigt, bzw. bin ich in meiner Karriere nicht oft dazu gekommen"
+            description: "Hiermit habe ich mich länger nicht beschäftigt, bzw. bin ich in meiner Karriere nicht oft dazu gekommen."
         },
         300:  { 
             className : "level_interested", 
             name: "interested", 
-            description: "Ich bin an diesem Skill interessiert, habe allerdings noch keine Übung darin"
+            description: "Ich bin an diesem Skill interessiert, habe allerdings noch keine bis wenig Übung darin."
         },
         400:  { 
             className : "level_assess", 
             name: "assess", 
-            description: "Ich habe bereits einige Erfahrung mit diesem Skill, bin allerdings nicht sicher ob ich ihn in meinen Alltag aufnehme"
+            description: "Ich habe bereits einige Erfahrung mit diesem Skill, bin allerdings nicht sicher ob ich ihn in meinen Alltag aufnehme."
         },
         500:  { 
             className : "level_mastered", 
@@ -92,18 +94,23 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         delete otherExperiences.reference;
         
         return (
-            <section ref={ref => this.ref = ref} className={`experience-overview`}>
-                <div className="experience-item-wrapper">
-                    {this._renderTypeRows(otherExperiences)}
-                    {this._renderLegend()}
+            <div ref={ref => this.ref = ref} className={`experience-overview`}>
+                <div className="inner">
+                    <section className={`skills`}>
+                    <h3 className="experience-overview--title">Skills</h3>
+                        {this._renderLegend()}
+                        <section className="experience-item-wrapper">
+                            {this._renderTypeRows(otherExperiences)}
+                        </section>
+                    </section>
+                    <section className={`references`}>
+                        <h3 className="experience-overview--title">Referenzen</h3>
+                        <div className="experience-item-wrapper">
+                            { this._renderExperiences(referenceExperiences)}
+                        </div>
+                    </section>
                 </div>
-               <div className={`experience-type reference`}>
-                    <h3>Referenzen</h3>
-                    <div className="experience-item-wrapper">
-                        { this._renderExperiences(referenceExperiences)}
-                    </div>
-                </div>
-            </section>
+            </div>
         );
     }
     
@@ -114,9 +121,13 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
             counter++;
             let renderedExperiences = this._renderCategories(type, experiences[type]);
 
+            if (renderedExperiences.length <= 0) {
+                continue;
+            }
+
             types.push(
                 <div key={counter} className={`experience-type ${type}`}>
-                     <h3>{type}</h3>
+                     <h4 className="experience-overview--type-title">{type}</h4>
                      <div className="experience-item-wrapper">
                          {renderedExperiences}
                      </div>
@@ -128,37 +139,24 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
     }
 
     _renderCategories(type : string, experiences : any[]): any {
-        let categorizedExp : any[] = [];
-        let categoryIndex : {[cat:string] : number} = {};
-        for (let exp of experiences) {
-            if (!categoryIndex.hasOwnProperty(exp.category)) {
-                categoryIndex[exp.category] = categorizedExp.length;
-                categorizedExp[categoryIndex[exp.category]] = [];
-            }
-
-            categorizedExp[categoryIndex[exp.category]].push(exp);
-        }
-
         let counter = 0;
         let rendered = [];
-        for (let experiences of categorizedExp.sort( (a, b) => a.length < b.length ? 1 : -1 )) {
+        let lastCategory = '';
+        for (let experience of experiences.sort( (a, b) => a.category > b.category ? -1 : 1)) {
             counter++;
 
-            let renderedExperiences = this._renderExperiences(experiences);
-
-            if (renderedExperiences.length <= 0) {
+            if (this.state.visibleExperienceLevel > experience.level) {
                 continue;
             }
 
+            if (lastCategory !== experience.category) {
+                rendered.push(<h5 key={`headline-${counter}`} className={`category-headline`}>{experience.category}</h5>);
+                lastCategory = experience.category;
+            }
+
             rendered.push(
-                <div key={counter} className="experience-category">
-                    <h4>{experiences[0].category}</h4>
-                    <div className="experience-item-wrapper">
-                        {renderedExperiences}
-                    </div>
-                </div>
+                this._renderSingleExp(experience, counter.toString())
             );
-            
         }
 
         return rendered;
@@ -200,10 +198,12 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         }
 
         return (
-            <a href={url} target={target} key={key} className="experience-item">
-                {inner}
-                {renderedLevel}
-            </a>
+            <div key={key} className="experience-item">
+                <a href={url} target={target}>
+                    {inner}
+                    {renderedLevel}
+                </a>
+            </div>
         );
     }
 
@@ -230,10 +230,6 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         }
 
         return ExperienceOverview.Tags[level];
-    }
-
-    componentDidUpdate() {
-        this.assignActiveLegendLevels();
     }
 
     assignActiveLegendLevels(currentLevelCode : number|null = null) {
@@ -289,15 +285,36 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         this.assignActiveLegendLevels(levelCode);
     }
 
-    enter(): void {
+    handleActiveState() {
         let ref = this.ref as HTMLElement;
-        
+
+        if (!this.state.isActive) {
+            ref.style.marginTop = `${ref.clientHeight * -1}px`;
+        } else {
+            ref.style.marginTop = null;
+        }
+    }
+
+    enter(): void {       
+        this._router.disableActiveDetection = true;
+
+        this.setState(Object.assign(this.state, {
+            isActive: true
+        }));
+
         this.assignActiveLegendLevels();
+        this.appElement.classList.add(`header__bg-active`);
         this.appElement.classList.add(`${this.appClassSlug}__active`);
         this.appElement.classList.add(`${this.appClassSlug}__entered`);
     }
     
     leave(): void {
+        this._router.disableActiveDetection = false;
+
+        this.setState(Object.assign(this.state, {
+            isActive: false
+        }));
+        
         this.appElement.classList.remove(`${this.appClassSlug}__active`);
         this.appElement.classList.remove(`${this.appClassSlug}__entered`);
     }
