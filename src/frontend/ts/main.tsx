@@ -14,8 +14,6 @@ let bootstrap = new Bootstrap(appElement);
 
 bootstrap.registerNavigations([
 	new Navigation('main'),
-	new Navigation('meta'),
-	new Navigation('social'),
 ]);
 
 bootstrap.init()

@@ -30,7 +30,6 @@ class Footer extends CmsControlledComponent<AppProps> {
 						<a href="/feedback">Feedback / Bug report</a>
 						<a href="https://github.com/sebgrizzly/LifeCareer" target="_blank">Opensource (github.com)</a>
 					</nav>
-					{this.handler.renderNavigation('main')}
 				</div>
 			</footer>
 		);
