@@ -62,7 +62,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './App';
-import { Router } from './AbstractRoutingComponent';
+import Router from './Core/Router';
 
 let appElement = document.getElementById('app') as HTMLElement;
 

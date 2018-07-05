@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import Article from '../Content/Article';
 import Experiences from './Experiences';
-import AbstractRoutingComponent, { ScrollRoutingComponent } from '../../../AbstractRoutingComponent';
+import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
 
 export interface HistoryEntryProps {
 	data : any

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as check from 'check-types';
 
-import { calcAngle } from '../../Helper/AngleCalculation'; 
-import { RandomPackager, PackageItem, PackageBlocker } from '../../Helper/PositioningHelper';
+import { RandomPackager, PackageItem, PackageBlocker } from '../../../Helper/PositioningHelper';
 
 export interface ExperienceProps {
 	data : any

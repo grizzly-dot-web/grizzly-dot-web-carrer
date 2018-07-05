@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import Header from './App/Header';
-import Footer from './App/Footer';
+import Header from './App/_Header';
+import Footer from './App/_Footer';
 import Histroy from './App/History';
-import ExperienceOverview from './App/Components/History/ExperienceOverview';
+import ExperienceOverview from './App/ExperienceOverview';
 
 //import ScrollRouter from './Lib/ScrollRouter';
 

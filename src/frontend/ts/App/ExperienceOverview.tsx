@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AbstractRoutingComponent from "../../../AbstractRoutingComponent";
+import AbstractRoutingComponent from '../Core/Router/AbstractRoutingComponent';
 
 export interface ExperienceLevel {
     name : string

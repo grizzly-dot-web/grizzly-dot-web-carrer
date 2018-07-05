@@ -5,7 +5,7 @@ import * as check from 'check-types';
 
 import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
-import AbstractRoutingComponent, { ScrollRoutingComponent } from '../AbstractRoutingComponent';
+import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
 
 
 export interface HistoryProps {
