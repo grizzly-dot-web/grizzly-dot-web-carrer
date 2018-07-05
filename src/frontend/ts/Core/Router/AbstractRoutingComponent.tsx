@@ -5,7 +5,7 @@ import Router from '../Router';
 export default abstract class AbstractRoutingComponent<Props = {}, State = {}> extends React.Component<Props, State> {
 
     protected get _router() : Router {
-        return Router.Instance;
+        return Router.getInstance();
     }
     
     abstract get url() : string;

@@ -1,10 +1,11 @@
 import AbstractRoutingComponent from "./Router/AbstractRoutingComponent";
+import { StepTimingFunction } from "csstype";
 
 export default class Router {
 
     static _instance : Router;
 
-    static get Instance() {
+    static getInstance() {
         if (!Router._instance) {
             Router._instance = new this();
         }
@@ -17,11 +18,12 @@ export default class Router {
     private _lastActiveComponents : AbstractRoutingComponent[]
 
     private constructor() {
+        this.appElement = null;
+        this.disableActiveDetection = false;
+
         this._detectionTimeout = null;
         this._components = [];
         this._lastActiveComponents = [];
-        this.disableActiveDetection = false;
-        this.appElement = null;
     }
 
     public appElement : HTMLElement|null;
@@ -36,7 +38,7 @@ export default class Router {
     }
 
     protected _detectActiveComponent(condition : Function, duration : null|number = null) {
-        if (this._detectionTimeout !== null || this.disableActiveDetection) {
+        if (this._detectionTimeout !== null) {
             return;
         }
 
@@ -77,9 +79,30 @@ export default class Router {
     }
 
     detectActiveComponentByItsCondition() {
+        if (this.disableActiveDetection) {
+            return;
+        }
+        
         return this._detectActiveComponent((component: AbstractRoutingComponent) => { 
             return component.acitveStateCondition() 
         }, 100);
+    }
+
+    setupAnchorTagClickHandling(anchorSelector : string) {
+        if (!this.appElement) {
+            return;
+        }
+        
+        let anchorTags = this.appElement.querySelectorAll(anchorSelector);
+        anchorTags.forEach((a) => {
+            a.addEventListener('click', (e) => {
+                window.history.pushState({}, '', a.getAttribute('href'));
+                this.detectActiveComponentByUrl();
+
+                e.preventDefault();
+                return false;
+            });
+        });
     }
 
 }
