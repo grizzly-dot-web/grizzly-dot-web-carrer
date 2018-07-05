@@ -7,12 +7,18 @@ import 'moment/locale/de';
 moment.locale('de');
 
 import Bootstrap from './Core/Bootstrap';
+import { Navigation } from './Core/Router/Navigation';
 
 let appElement = document.getElementById('app') as HTMLElement;
 let bootstrap = new Bootstrap(appElement);
 
-bootstrap.render();
+bootstrap.registerNavigations([
+	new Navigation('main'),
+	new Navigation('meta'),
+	new Navigation('social'),
+]);
 
+bootstrap.init()
 window.addEventListener('scroll', () => {
-	bootstrap.router.detectActiveComponentByItsCondition();
+	//bootstrap.componentHandler.activateComponentByItsCondition();
 });

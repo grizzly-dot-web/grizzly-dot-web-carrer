@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AbstractRoutingComponent from '../Core/Router/AbstractRoutingComponent';
+import CmsRoutingComponent from '../Core/Router/AbstractRoutingComponent';
 
 export interface ExperienceLevel {
     name : string
@@ -14,10 +14,21 @@ export interface ExperienceOverviewState {
 	visibleExperienceLevel : number
 }
 
-export default class ExperienceOverview extends AbstractRoutingComponent<ExperienceOverviewProps, ExperienceOverviewState> {
+export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOverviewProps, ExperienceOverviewState> {
+
+    navigationId() {
+        return 'main';
+    }
+    link() {
+        return {
+            url: '/experiences',
+            title: 'Skills und Referenzen',
+            text: (<span><span className="skills">Skills</span> <span className="circle">&</span> <span className="references">Referenzen</span></span>),
+            classes: ['experience-link']
+        }
+    }
 
     ref: HTMLElement | null;
-    url = '/carrer/experiences';
 
     appClassSlug = 'experience-overview';
     legendIsStateChanging : boolean;
@@ -285,7 +296,7 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
     }
 
     enter(): void {       
-        this._router.disableActiveDetection = true;
+        this.handler.disableComponentConditionRouting();
 
         this.assignActiveLegendLevels();
         this.appElement.classList.add(`${this.appClassSlug}__active`);
@@ -293,16 +304,9 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
     }
     
     leave(): void {
-        this._router.disableActiveDetection = false;
+        this.handler.enableComponentConditionRouting();
 
         this.appElement.classList.remove(`${this.appClassSlug}__active`);
         this.appElement.classList.remove(`${this.appClassSlug}__entered`);
-    }
-    
-    acitveStateCondition(): boolean {
-        let active = this.appElement.classList.contains(`${this.appClassSlug}__entered`);
-        this.appElement.classList.remove(`${this.appClassSlug}__entered`);
-
-        return active;
     }
 } 

@@ -1,43 +1,34 @@
-import AbstractRoutingComponent from "./Router/AbstractRoutingComponent";
-import { StepTimingFunction } from "csstype";
+import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
+import { NavigationLink, NavigationRegistry } from './Router/Navigation';
+import CmsControlledComponent from "./CmsControlledComponent";
 
 export default class Router {
 
-    static _instance : Router;
-
-    static getInstance() {
-        if (!Router._instance) {
-            Router._instance = new this();
-        }
-
-        return Router._instance;
-    }
-
+    private _appElement : HTMLElement|null;
+    private _components : CmsRoutingComponent[]
     private _detectionTimeout : any;
-    private _components : AbstractRoutingComponent<{}, {}>[]
-    private _lastActiveComponents : AbstractRoutingComponent[]
-
-    private constructor() {
-        this.appElement = null;
-        this.disableActiveDetection = false;
-
-        this._detectionTimeout = null;
-        this._components = [];
-        this._lastActiveComponents = [];
-    }
-
-    public appElement : HTMLElement|null;
-    public disableActiveDetection : boolean;
+    private _lastActiveComponents : CmsRoutingComponent[]
 
     public get currentUrl() {
         return window.location.pathname;
     }
 
-    public addComponent(comp: any) {
-        this._components.push(comp);
+    public addComponent(component : CmsRoutingComponent) {
+        this._components.push(component);
     }
 
-    protected _detectActiveComponent(condition : Function, duration : null|number = null) {
+    constructor(app : HTMLElement) {
+        this.componentCoditionRoutingIsEnabled = true;
+
+        this._appElement = app;
+        this._components = [];
+        this._detectionTimeout = null;
+        this._lastActiveComponents = [];
+    }
+
+    public componentCoditionRoutingIsEnabled : boolean;
+
+    private _detectActiveComponent(condition : Function, duration : null|number = null) {
         if (this._detectionTimeout !== null) {
             return;
         }
@@ -57,7 +48,7 @@ export default class Router {
             }
 
             for (let comp of activeComps) {
-                if (this._lastActiveComponents.findIndex((c) => c.url === comp.url) === -1) {
+                if (this._lastActiveComponents.findIndex((c) => c.link().url === comp.link().url) === -1) {
                     comp.dispatchEnter();
                 }
             }
@@ -69,8 +60,8 @@ export default class Router {
     }
 
     public detectActiveComponentByUrl() {
-        return this._detectActiveComponent((component: AbstractRoutingComponent) => {
-            if (component.url === this.currentUrl) {
+        return this._detectActiveComponent((component: CmsRoutingComponent) => {
+            if (component.link().url === this.currentUrl) {
                 return true;
             }
 
@@ -79,30 +70,41 @@ export default class Router {
     }
 
     detectActiveComponentByItsCondition() {
-        if (this.disableActiveDetection) {
+        if (!this.componentCoditionRoutingIsEnabled) {
             return;
         }
         
-        return this._detectActiveComponent((component: AbstractRoutingComponent) => { 
+        return this._detectActiveComponent((component: CmsRoutingComponent) => { 
             return component.acitveStateCondition() 
         }, 100);
     }
 
-    setupAnchorTagClickHandling(anchorSelector : string) {
-        if (!this.appElement) {
+    setupAnchorTagClickHandling() {
+        if (!this._appElement) {
             return;
         }
         
-        let anchorTags = this.appElement.querySelectorAll(anchorSelector);
+        let anchorTags = this._appElement.querySelectorAll('a:not(.reload):not([tarrget=_blank])');
         anchorTags.forEach((a) => {
             a.addEventListener('click', (e) => {
-                window.history.pushState({}, '', a.getAttribute('href'));
-                this.detectActiveComponentByUrl();
+                let title = a.getAttribute('title');
+                if (!title) {
+                    title = '';
+                }
+
+                if (window.location.pathname !== a.getAttribute('href')) {
+                    window.history.pushState({}, title, a.getAttribute('href'));
+                    this.detectActiveComponentByUrl();
+                }
 
                 e.preventDefault();
                 return false;
             });
         });
+
+        window.onpopstate = () => {
+            this.detectActiveComponentByUrl();
+        }
     }
 
 }

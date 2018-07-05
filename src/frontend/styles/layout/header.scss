@@ -1,6 +1,6 @@
 header#page-header {
 	z-index: 3;
-	width: 100%;
+	width: 100vw;
 	position: fixed;
 	transition: $HeaderColorTansition;
 	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
@@ -83,7 +83,7 @@ header#page-header {
 			}
 		}
 
-		.main-nav {
+		nav.main {
 			a {
 				color: $ColorBackgroundContent;
 				font-size: 0.9em;
@@ -133,7 +133,7 @@ header#page-header {
 	}
 
 	&.header__right-dark header#page-header {
-		.main-nav a:not(.active):not(:hover) {
+		nav.main a:not(.active):not(:hover) {
 			color: $ColorThird;
 		}
 	}	

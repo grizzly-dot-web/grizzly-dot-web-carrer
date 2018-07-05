@@ -22,13 +22,18 @@ export interface HistoryState {
 
 class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 
-	url: string;
+    navigationId() {
+		return 'main';
+	}
+    link() {
+        return {
+			url: '/career',
+			title: 'Karriere',
+			text: 'Karriere'
+		};
+	}
 
 	ref: HTMLElement | null;
-
-	acitveStateCondition(): boolean {
-		return false;
-	}
 
 	lastScrollTop : number = 0;
 	scrollWaitTimeout : number|null = null;
@@ -42,7 +47,6 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 		this.historyElementRefs = [];
 
 		this.ref = null;
-		this.url = '/carrer';
 		let entries = this.props.data.sort((a: any, b: any) => {
 			let aDate = moment(a.begin_date);
 			let bDate = moment(b.begin_date);
@@ -145,6 +149,11 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 				{ this.renderHistoryEntries() } 
 			</section>
 		);
+	}
+
+	enter(): void {
+	}
+	leave(): void {
 	}
 }
 

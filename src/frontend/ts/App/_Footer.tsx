@@ -1,9 +1,10 @@
 import * as React from 'react';
+import CmsControlledComponent from '../Core/CmsControlledComponent';
 
 export interface AppProps {
 	data : any
 }
-class Header extends React.Component<AppProps> {
+class Footer extends CmsControlledComponent<AppProps> {
 
 	constructor(props : any) {
 		super(props);
@@ -29,10 +30,11 @@ class Header extends React.Component<AppProps> {
 						<a href="/feedback">Feedback / Bug report</a>
 						<a href="https://github.com/sebgrizzly/LifeCareer" target="_blank">Opensource (github.com)</a>
 					</nav>
+					{this.handler.renderNavigation('main')}
 				</div>
 			</footer>
 		);
 	}
 }
 
-export default Header;
+export default Footer;

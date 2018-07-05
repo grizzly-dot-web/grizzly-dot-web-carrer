@@ -1,9 +1,10 @@
 import * as React from 'react';
+import CmsControlledComponent from '../Core/CmsControlledComponent';
 
 export interface AppProps {
 	data : any
 }
-class Header extends React.Component<AppProps> {
+class Header extends CmsControlledComponent<AppProps> {
 
 	constructor(props : any) {
 		super(props);
@@ -39,14 +40,7 @@ class Header extends React.Component<AppProps> {
 							{spanPerCharacter('grizzly.web')}
 						</h2>
 					</a>
-					<a href="/carrer/experiences" className="experience-link">
-						<span className="skills">Skills</span> <span className="circle">&</span> <span className="references">Referenzen</span>
-					</a>
-					<nav className="main-nav">
-						<a className="active" href="/">Start</a>
-						<a href="/career">Karriere</a>
-						<a href="/booking">Beauftragen</a>
-					</nav>
+					{this.handler.renderNavigation('main')}
 				</div>
 			</header>
 		);

@@ -7,6 +7,7 @@ import moment from 'moment';
 import Article from '../Content/Article';
 import Experiences from './Experiences';
 import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
+import CmsControlledComponent from '../../../Core/CmsControlledComponent';
 
 export interface HistoryEntryProps {
 	data : any
@@ -23,7 +24,7 @@ export interface HistoryEntryState {
 	experiencesOriginPosition: { x : number, y : number }|null
 }
 
-class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntryState> {
+class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntryState> {
 	
 	url: string;
 
@@ -82,7 +83,6 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 	}
 
 	componentDidMount() {
-		super.componentDidMount();
 		let ref = this.ref as HTMLElement;
 		let timeline = document.querySelector('.timeline') as HTMLElement; 
 		let historyHeader = ref.querySelector('.history-header') as HTMLElement;
@@ -94,7 +94,6 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 	}
 
 	enter(): void {
-		super.enter();
 
 		this.appElement.classList.add('history__is-active');
         this.appElement.classList.add(`header__right-dark`);
@@ -105,7 +104,6 @@ class HistoryEntry extends ScrollRoutingComponent<HistoryEntryProps, HistoryEntr
 	}
 	
 	leave(): void {
-		super.leave();
 
 		let experienceOverviewLink = document.querySelector('header#page-header .experience-link .circle') as HTMLElement;
 		this.setState(Object.assign(this.state, {

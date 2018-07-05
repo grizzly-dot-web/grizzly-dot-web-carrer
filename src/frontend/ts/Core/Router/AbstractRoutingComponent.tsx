@@ -1,36 +1,50 @@
 import * as React from 'react';
 
 import Router from '../Router';
+import CmsComponentHandler from '../CmsComponentHandler';
+import CmsControlledComponent from '../CmsControlledComponent';
+import { NavigationLink } from './Navigation';
 
-export default abstract class AbstractRoutingComponent<Props = {}, State = {}> extends React.Component<Props, State> {
-
-    protected get _router() : Router {
-        return Router.getInstance();
-    }
+export default abstract class CmsRoutingComponent<Props = {}, State = {}> extends CmsControlledComponent<Props, State> {
     
-    abstract get url() : string;
+    abstract link() : NavigationLink
+    abstract navigationId() : string|false
     abstract get ref() : HTMLElement|null
 
-    get appElement() {
-        return this._router.appElement as HTMLElement;
+    constructor(props: Props, context?: any) {
+        super(props, context);
+        this.addNavigationLink();    
     }
 
-    componentDidMount() {
-        this._router.addComponent(this);
+    _register() {
+        this.handler.addComponent(this, true);
+    }
+
+    addNavigationLink() {
+        let id = this.navigationId();
+        if (!id) {
+            return;
+        }
+
+        this.handler.addLinkToNavigation(id, this.link());
     }
 
     dispatchEnter() {       
+        console.log('enter: ', this.link().url);
         this.enter();
     }
 
     dispatchLeave() {       
+        console.log('leave: ', this.link().url);
         this.leave();
     }
 
     abstract enter() : void;
 
     abstract leave() : void;
-
-    abstract acitveStateCondition() : boolean
+    
+    acitveStateCondition(): boolean {
+        return this.link().url === window.location.pathname;
+    }
 
 }
