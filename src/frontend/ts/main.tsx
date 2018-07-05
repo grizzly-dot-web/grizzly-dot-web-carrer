@@ -20,5 +20,5 @@ bootstrap.registerNavigations([
 
 bootstrap.init()
 window.addEventListener('scroll', () => {
-	//bootstrap.componentHandler.activateComponentByItsCondition();
+	bootstrap.componentHandler.activateComponentByItsCondition();
 });
