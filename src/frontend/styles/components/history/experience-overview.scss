@@ -92,7 +92,7 @@
 				width: 100%;
 				margin-bottom: 10vmin;
 
-				&.frontend, &.backend {
+				&.Frontend, &.Backend {
 					order: 1;
 				}
 
@@ -114,6 +114,13 @@
 				}
 
 				.experience-item-wrapper {
+					columns: 2 200px;
+
+					.category-wrap {
+						margin-bottom: 0.8em;
+						page-break-inside: avoid;
+						break-inside: avoid;
+					}
 
 					.experience-item, .category-headline {
 						padding: 0 0.5em;
@@ -144,7 +151,6 @@
 					}
 					
 					.category-headline {
-						margin-top: 0.8em;
 						color: $ColorPrimary;
 					}
 				}

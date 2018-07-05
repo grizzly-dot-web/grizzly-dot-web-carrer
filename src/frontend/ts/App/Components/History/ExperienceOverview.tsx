@@ -63,32 +63,34 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
         }
     }
 
-    _reorderExperienceData() : { [type : string] : any[] } {
-        let experiences : any = {};
-        for (let entry of this.props.data) {
-            for (let exp of entry.experiences) {
-                if (!experiences.hasOwnProperty(exp.type)) {
-                    experiences[exp.type] = [];
-                }
+    _groupExperienceDataByProperty(data : any[], property : string) {
+        let experiences : { [type : string] : any[] } = {};
 
-                if (experiences[exp.type].find( (e:any) => e.title == exp.title)) {
-                    continue;
-                }
-
-                if (!exp.url) {
-                    exp.url = `/carrer/${entry.url}#${exp.title}`
-                }
-                experiences[exp.type].push(exp);
+        for (let exp of data) {
+            if (!experiences.hasOwnProperty(exp[property])) {
+                experiences[exp[property]] = [];
             }
+
+            if (experiences[exp[property]].find( (e:any) => e.title == exp.title)) {
+                continue;
+            }
+
+            experiences[exp[property]].push(exp);
         }
 
         return experiences;
     }
 
     render() {
-        let referenceExperiences = this._reorderExperienceData()['reference'];
+        let experiences : any[] = [];
+        for (let historyEntry of this.props.data) {
+            experiences = experiences.concat(historyEntry.experiences);
+        }
 
-        let otherExperiences = this._reorderExperienceData();
+        let orderedExp = this._groupExperienceDataByProperty(experiences, 'type');
+
+        let referenceExperiences = orderedExp['reference'];
+        let otherExperiences = orderedExp;
         delete otherExperiences.reference;
         
         return (
@@ -104,7 +106,7 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
                     <section className={`references`}>
                         <h3 className="experience-overview--title">Referenzen</h3>
                         <div className="experience-item-wrapper">
-                            { this._renderExperiences(referenceExperiences)}
+                           { this._renderExperiences(referenceExperiences)}
                         </div>
                     </section>
                 </div>
@@ -139,22 +141,21 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
     _renderCategories(type : string, experiences : any[]): any {
         let counter = 0;
         let rendered = [];
-        let lastCategory = '';
-        for (let experience of experiences.sort( (a, b) => a.category > b.category ? -1 : 1)) {
-            counter++;
+        let renderedExperiences = [];
+        let groupedExperiences = this._groupExperienceDataByProperty(experiences, 'category');
 
-            if (this.state.visibleExperienceLevel > experience.level) {
+        for (let category in groupedExperiences) {
+            let renderedExperiences = this._renderExperiences(groupedExperiences[category]);
+
+            if (renderedExperiences.length <= 0) {
                 continue;
             }
 
-            if (lastCategory !== experience.category) {
-                rendered.push(<h5 key={`headline-${counter}`} className={`category-headline`}>{experience.category}</h5>);
-                lastCategory = experience.category;
-            }
+            rendered.push(<div className="category-wrap" key={category}>
+                <h5 key={`headline-${counter}`} className={`category-headline`}>{category}</h5>
+                {renderedExperiences}
+            </div>);
 
-            rendered.push(
-                this._renderSingleExp(experience, counter.toString())
-            );
         }
 
         return rendered;
