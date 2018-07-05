@@ -30,31 +30,23 @@
 }
 
 .experience-level-legend {
-	display: flex;
-	align-items: stretch;
-	justify-content: space-between;
 	margin-bottom: 2em;
     position: relative;
     font-size: 0.7em;
 	
 	width: 100vw;
 	position: relative;
-	left: calc((100vw - 100%) / 2 * -1);
+	margin-left: calc(((100vw - 100%) / 2) * -1);
     
     @media (max-width: 900px) {
-        overflow-x: hidden;
+		overflow-x: scroll;
     }
 
-	&:before {
-		content: '';
-		display: block;
-		top: 0;
-		right: 0;
-		height: 0.4em;
-		width: 100%;
-		position: absolute;
-		background-color: $ColorBackgroundContent;
-    }
+	.legend-frame {
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
+	}
 
 	.experience-level-toggle {
 		cursor: pointer;
@@ -64,7 +56,6 @@
         padding: 1em;
         min-width: 200px;
 		position: relative;
-		margin-bottom: 0.4em;
 		transition: 0.35s ease-in-out;
         transition-property: color, opacity;
         

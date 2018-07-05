@@ -219,7 +219,7 @@ export default class ExperienceOverview extends AbstractRoutingComponent<Experie
             );
         }
 
-        return <nav className="experience-level-legend">{legendItems}</nav>;
+        return <nav className="experience-level-legend"><div className="legend-frame">{legendItems}</div></nav>;
     }
 
     _mapExperienceLevel(level : string) {

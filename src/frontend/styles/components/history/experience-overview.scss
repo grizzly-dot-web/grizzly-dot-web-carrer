@@ -24,6 +24,7 @@
 	width: 100vw;
 	height: 100vh;
 	overflow-y: scroll;
+	overflow-x: hidden;
 	margin-top: -100vh;
 	
 	&:after {
@@ -62,6 +63,24 @@
 
 	.skills {
 		flex-grow: 2;
+
+		.experience-overview--title {
+			position: relative;
+			margin-bottom: 0;
+			padding-bottom: 0.65em;
+
+			&:after {
+				content: '';
+				display: block;
+				bottom: 0;
+				left: 0;
+				height: 0.25em;
+				width: 100vw;
+				margin-left: calc((100vw - 100%) / 2 * -1);
+				position: absolute;
+				background-color: $ColorBackgroundContent;
+			}
+		}
 
 		> .experience-item-wrapper {
 			display: flex;
