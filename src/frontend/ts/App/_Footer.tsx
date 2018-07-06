@@ -1,10 +1,14 @@
 import * as React from 'react';
-import CmsControlledComponent from '../Core/CmsControlledComponent';
+import CmsControlledComponent, { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 
-export interface AppProps {
-	data : any
+export interface FooterProps extends CmsProps<any> {
 }
-class Footer extends CmsControlledComponent<AppProps> {
+
+export interface FooterState extends CmsState {
+
+}
+
+class Footer extends CmsControlledComponent<FooterProps, FooterState> {
 
 	constructor(props : any) {
 		super(props);

@@ -1,17 +1,17 @@
 import * as React from 'react';
-import CmsControlledComponent from '../Core/CmsControlledComponent';
+import CmsControlledComponent, { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 
-export interface AppProps {
+export interface HeaderProps extends CmsProps<any> {
+}
+
+export interface HeaderState extends CmsState {
 	data : any
 }
-class Header extends CmsControlledComponent<AppProps> {
+
+class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
 
 	constructor(props : any) {
 		super(props);
-
-		this.state = {
-			data: this.props.data
-		};
 	}
 
 	render() {

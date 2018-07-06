@@ -6,12 +6,12 @@ import * as check from 'check-types';
 import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
 import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
+import { CmsState, CmsProps } from '../Core/CmsControlledComponent';
 
 
-export interface HistoryProps {
-	data : any
+export interface HistoryProps extends CmsProps<any> {
 }
-export interface HistoryState {
+export interface HistoryState extends CmsState {
 	routeName: string
 	historyEntries: any
 	disableScroll: boolean
@@ -70,6 +70,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			routeName: 'karriere',
 			disableScroll: false,
 			historyEntries: entries,
+			navigationRegistry: null,
 			timescaleEnd: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
 			timescaleStart: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
 		};

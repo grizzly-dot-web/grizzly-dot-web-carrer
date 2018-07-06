@@ -1,5 +1,6 @@
 import * as React from 'react';
 import CmsRoutingComponent from '../Core/Router/AbstractRoutingComponent';
+import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 
 export interface ExperienceLevel {
     name : string
@@ -7,10 +8,9 @@ export interface ExperienceLevel {
     description: string
 }
 
-export interface ExperienceOverviewProps {
-	data : any
+export interface ExperienceOverviewProps extends CmsProps<any> {
 }
-export interface ExperienceOverviewState {
+export interface ExperienceOverviewState extends CmsState {
 	visibleExperienceLevel : number
 }
 
@@ -40,6 +40,7 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
         this.legendIsStateChanging = false;
         
         this.state = {
+			navigationRegistry: null,
             visibleExperienceLevel: parseInt(Object.keys(ExperienceOverview.Tags)[1])
         };
 

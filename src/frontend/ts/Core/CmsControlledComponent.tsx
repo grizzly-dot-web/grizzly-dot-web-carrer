@@ -2,15 +2,15 @@ import * as React from 'react';
 import CmsComponentHandler from './CmsComponentHandler';
 import { NavigationRegistry } from './Router/Navigation';
 
-export interface CmsState {
-    navigationRegistry : NavigationRegistry
-}
-
 export interface CmsProps<Data> {
     class : string
     key? : string
     data? : Data
     childrenInfo? : {[className:string] : CmsProps<Data>} 
+}
+
+export interface CmsState {
+    navigationRegistry : NavigationRegistry|null
 }
 
 export interface ChildComponents {
@@ -56,7 +56,6 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
             let comp = new ChildComps(info[compClassName]) as CmsControlledComponent<Props, State>;
             children.push(comp.render()); 
         }
-        console.log(children);
 
         return children;
     } 
