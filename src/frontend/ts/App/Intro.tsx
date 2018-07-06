@@ -2,9 +2,17 @@ import * as React from 'react';
 import ScrollRoutingComponent from "../Core/Router/ScrollRoutingComponent";
 import { NavigationLink } from '../Core/Router/Navigation';
 import Article from '../Core/Components/Article';
+import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 
 
-export default class Intro extends ScrollRoutingComponent<any, {}> {
+
+export interface IntroProps extends CmsProps<undefined> {
+}
+export interface IntroState extends CmsState {
+	visibleExperienceLevel : number
+}
+
+export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState> {
     link(): NavigationLink {
         return {
             url: '/',
@@ -30,16 +38,16 @@ export default class Intro extends ScrollRoutingComponent<any, {}> {
         });
 
         return (
-            <section ref={ref => this.ref}>
+            <section ref={ref => this.ref} className={`intro`}>
                 {children}
             </section>
         );
     }
 
     enter(): void {
-        throw new Error("Method not implemented.");
+        this.appElement.classList.add('header__bg-active');
     }
     leave(): void {
-        throw new Error("Method not implemented.");
+        this.appElement.classList.remove('header__bg-active');
     }
 }

@@ -42,7 +42,11 @@ export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, S
     abstract leave() : void;
     
     acitveStateCondition(): boolean {
-        return this.link().url === window.location.pathname;
+        let currentUrl = window.location.pathname;
+        if (currentUrl === '') {
+            currentUrl = '/';
+        }
+        return this.link().url === currentUrl;
     }
 
 }

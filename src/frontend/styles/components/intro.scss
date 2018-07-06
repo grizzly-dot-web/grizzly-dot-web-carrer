@@ -1,0 +1,17 @@
+.intro {
+	min-height: 70vh;
+
+	padding:  0 getGridSize(2, horizontal);
+	padding-top: 6em;
+	margin-bottom: 0.5em;	
+
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	color: $ColorThird;
+	
+	.intro-title {
+		margin-bottom: 0.5em;	
+	}
+}

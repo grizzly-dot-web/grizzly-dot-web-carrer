@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import CmsControlledComponent, { CmsProps, CmsState } from '../CmsControlledComponent';
 
-export interface HeadlineData {tag:string, text:string};
+export interface HeadlineData {
+	tag:string, 
+	text:string,
+	classes?: string[]
+};
 
 export interface HeadlineProps extends CmsProps<HeadlineData> {
 
@@ -20,8 +24,13 @@ export default class Headline extends CmsControlledComponent<HeadlineProps, Head
 			return;
 		}
 
+		let classes : string[] = [];
+		if (data.classes) {
+			classes = data.classes;
+		}
+
 		let Tag = data.tag;
-		return (<Tag key={this.props.key}>{data.text}</Tag>);
+		return (<Tag key={this.props.key} className={classes.join(' ')}>{data.text}</Tag>);
 	}
 	
 }
