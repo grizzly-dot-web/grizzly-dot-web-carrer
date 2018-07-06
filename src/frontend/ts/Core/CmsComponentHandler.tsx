@@ -41,8 +41,8 @@ export default class CmsComponentHandler {
             throw new Error('Router is not assigned')
         }
 
-        this._router.detectActiveComponentByUrl();
         this._router.setupAnchorTagClickHandling();
+        this._router.activateComponentByUrl();
     }
 
 	public activateComponentByItsCondition(): any {
@@ -50,7 +50,7 @@ export default class CmsComponentHandler {
             throw new Error('Router is not assigned')
         }
 
-        this._router.detectActiveComponentByItsCondition();
+        this._router.activateComponentByItsCondition();
 	}
 
     public disableComponentConditionRouting() {

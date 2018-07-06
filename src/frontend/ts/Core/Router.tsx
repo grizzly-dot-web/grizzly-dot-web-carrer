@@ -48,7 +48,7 @@ export default class Router {
             }
 
             for (let comp of activeComps) {
-                if (this._lastActiveComponents.findIndex((c) => c.link().url === comp.link().url) === -1) {
+                if (this._lastActiveComponents.length > 0 || this._lastActiveComponents.findIndex((c) => c.link().url === comp.link().url) === -1) {
                     comp.dispatchEnter();
                 }
             }
@@ -59,9 +59,9 @@ export default class Router {
         }, duration);
     }
 
-    public detectActiveComponentByUrl() {
+    public activateComponentByUrl() {
         return this._detectActiveComponent((component: CmsRoutingComponent) => {
-            if (component.link().url === this.currentUrl) {
+            if (component.link().url == this.currentUrl) {
                 return true;
             }
 
@@ -69,7 +69,7 @@ export default class Router {
          }, 0);
     }
 
-    detectActiveComponentByItsCondition() {
+    activateComponentByItsCondition() {
         if (!this.componentCoditionRoutingIsEnabled) {
             return;
         }
@@ -94,7 +94,7 @@ export default class Router {
 
                 if (window.location.pathname !== a.getAttribute('href')) {
                     window.history.pushState({}, title, a.getAttribute('href'));
-                    this.detectActiveComponentByUrl();
+                    this.activateComponentByUrl();
                 }
 
                 e.preventDefault();
@@ -103,7 +103,7 @@ export default class Router {
         });
 
         window.onpopstate = () => {
-            this.detectActiveComponentByUrl();
+            this.activateComponentByUrl();
         }
     }
 

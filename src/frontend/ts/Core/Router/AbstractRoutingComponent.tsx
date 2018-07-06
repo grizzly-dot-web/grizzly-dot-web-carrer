@@ -30,12 +30,10 @@ export default abstract class CmsRoutingComponent<Props = {}, State = {}> extend
     }
 
     dispatchEnter() {       
-        console.log('enter: ', this.link().url);
         this.enter();
     }
 
-    dispatchLeave() {       
-        console.log('leave: ', this.link().url);
+    dispatchLeave() {       ;
         this.leave();
     }
 

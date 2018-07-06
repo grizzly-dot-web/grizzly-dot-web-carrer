@@ -145,15 +145,20 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 		}
 
 		return ( 
-			<section data-gzly-routing-module={this.state.routeName} className={ `history ${additionalClasses.join(' ')}` }> 
+			<section ref={ref => this.ref = ref} data-gzly-routing-module={this.state.routeName} className={ `history ${additionalClasses.join(' ')}` }> 
 				{ this.renderHistoryEntries() } 
 			</section>
 		);
 	}
 
 	enter(): void {
+		console.log('enter');
+		this.appElement.classList.add('header__right-dark');
 	}
+
 	leave(): void {
+		console.log('leave');
+		this.appElement.classList.remove('header__right-dark');
 	}
 }
 
