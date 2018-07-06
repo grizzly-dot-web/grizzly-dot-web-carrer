@@ -39,11 +39,15 @@
 			transform: translate(-50%, -50%);
 		}
 
+		h1, time {
+			color: $LightCopy_Color;
+		}
+
 		time {
 			display: block;
-			min-width: getGridSize(22.5, vertical);
-			padding-bottom: getGridSize(1, horizontal) / 1.8;
-			margin-bottom: getGridSize(1, horizontal) / 3;
+			min-width: getGridSize(22.5, horizontal);
+			padding-bottom: getGridSize(1, vertical) / 1.8;
+			margin-bottom: getGridSize(1, vertical) / 3;
 			border-bottom: 1px solid $ColorSecondary;
 		}
 	}
