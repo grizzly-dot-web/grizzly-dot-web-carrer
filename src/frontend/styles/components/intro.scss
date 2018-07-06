@@ -11,7 +11,11 @@
 
 	color: $ColorThird;
 	
-	.intro-title {
-		margin-bottom: 0.5em;	
+	article {
+		max-width: 800px;
+
+		.intro-title {
+			margin-bottom: 0.5em;	
+		}
 	}
 }
