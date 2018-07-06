@@ -36,89 +36,47 @@
 			}
 		]
 	},
-	"jobRequest": {
-		"articles": [
+	"intro": {
+		"childrenInfo": [
 			{
-				"headings": {
-					"h1": "Stellengesuch"
-				},
-				"accordeons": [
+				"class": "Article",
+				"childrenInfo": [
 					{
-						"visibleContent": false,
-						"headings": {
-							"h2": "Lebenslauf",
-							"h3": "Ausbildung zum Mediengestalter"
-						},
-						"content": [
-							{
-								"type": "markdown",
-								"access_rights": "any",
-								"content": "Seit 2011 bin ich in der Medien/Marketingbranche als Web Entwickler beschäftigt. Hier habe ich in mit meiner Ausbildung zum &quot;Medientyp der von allem ein bisschen kann&quot; (Mediengestalter in Digital und Druck) begonnen.\n Die Werbeagentur in der ich gelernt habe, hat schnell meine Fähigkeiten entdeckt und gefördert. So bin ich bei den Entwicklern gelandet.\n\n Hier habe ich noch für den IE 7 meist Corperate Sites und Ladingpages umgesetzt und gewartet. Es gab aber auch zahlreiche Newsletter und viel Content Integration in meiner Ausbildung.\n Das waren nicht unbedingt meine Lieblingsaufgaben. Bei jedem neuen Projekt suche ich neue Herausforderungen und so stieg mein Können und meine Aufgaben von Projekt zu Projekt."
-							},
-							{
-								"type": "markdown",
-								"access_rights": "honest",
-								"content": "Bis meine Verantwortung meine Aufgaben mein können überholt haben. Hier habe ich zum ersten Mal meine Grenzen kennengelernt. Das warf mich um einiges zurück und erforderte eine Pause.\n Mir wurde bewusst gemacht, dass man nicht nur 110% geben kann, sondern auf sich selbst achtgeben muss."
-							}
-						]
-					},
-					{
-						"visibleContent": true,
-						"headings": {
-							"h3": "Ausbildung geschafft"
-						},
-						"content": [
-							{
-								"type": "markdown",
-								"access_rights": "any",
-								"content": "Nach der Ausbildung konnte ich ohne weiteres selbständig arbeiten und war einer der fähigsten im Unternehmen. Im speziellen habe ich mich mit der Umsetzung von Corperate Sites, Landingpages und Wissensportalen mit dem CMS Pimcore beschäftigt."
-							}
-						]
-					},
-					{
-						"visibleContent": false,
-						"headings": {
-							"h2": "Neuer Job, neue Erfahrungen"
-						},
-						"content": [
-							{
-								"type": "markdown",
-								"access_rights": "any",
-								"content": "Meine mir vertraut und bekannt gewordene Umgebungen bei anyMOTION GRAPHICS, dem Unternehmen in dem ich gewachsen bin und gelernt habe, von dem ich auch heute noch sehr viel halte und gerne zurückdenke, bei dem ich viele Freunde und tolle Menschen kennenlernen durfte, sorgte aber auch mehr und mehr nach dem Wunsch nach was Neuem.\n\n So schaute ich mich auch Links und Rechts in der Medienwelt um. Letztendlich entschied ich mich für ein kleineres Unternehmen statt des knapp 60 Mann starken Unternehmens zu dem es geworden war. Ich fing in einer wesentlich kleineren Werbeagentur an.\n Ich erhoffte mir hier mehr Mitbestimmungsrecht, mehr Freiheit und mehr Kontrolle. Leider konnte mein Arbeitgeber seine anfänglichen Versicherungen nie Erfüllen.\n Neben einem sehr anspruchsvollen und umfangreichen Projekt, an dem ich mit Unterstützung eines Frontend Entwicklers in Shopware mit Symfony gearbeitet habe, welches aber aufgrund von fehlendem Konzept und Planung eingestellt wurde. Habe ich an zahlreichen Wordpress Anwendungen gearbeitet, die meines Erachtens oft viel zu komplex für das darunterliegende System waren.\n\n Man kann sagen hier habe ich gelernt wie man es nicht macht. Die Projekte waren grundsätzlich fehlkalkuliert und liefen aus dem Budget. Die Stimmung im Betrieb war nicht auszuhalten. Jeder Mitarbeiter versuchte was er konnte, um das Unternehmen am Leben zu erhalten."
-							},
-							{
-								"type": "markdown",
-								"access_rights": "honest",
-								"content": "Auch hier habe ich wieder Mals meine Grenzen aufgezeigt bekommen. Nach Abschluss eines sehr stressigen Projektes war es wieder soweit ich hatte nicht rechtzeitig die Bremse gezogen und konnte nicht mehr. Nach meiner Auszeit war es mir dann schon klar, dass ich nicht länger Teil des Unternehmens sein kann."
-							},
-							{
-								"type": "markdown",
-								"access_rights": "any",
-								"content": "Unser Arbeitgeber entschied letztendlich dafür Arbeitsstellen abzubauen um im Kleinen zu überleben."
-							}
-						]
-					},
-					{
-						"visibleContent": true,
-						"headings": {
-							"h2": "Was ich suche"
-						},
-						"content": {
-							"type": "markdown",
-							"access_rights": "any",
-							"content": "Nach den letzten Erfahrungen war mir aber eins klar. Ich sollte mir Gedanken machen, was ich eigentlich will und wo ich das finden kann. Keinesfalls einfach unüberlegt zum nächsten Job. Was ist mir wichtig und was ist notwendig, um weiter zu wachsen und gute Arbeit zu leisten.\n\n Meine, schon kurz nach abschließen der Ausbildung, erworbene Selbständige Tätigkeit als Freiberuflicher Web Entwickler weiterführen und ausweiten, bei der ich sobald ich es vollberuflich betreiben würde, mich von Auftrag zu Auftrag hetzen müsste.\n Oder mich einer neuen Werbeagentur verschreiben, die meiner Erfahrung nach nicht die Möglichkeit bietet die Qualität die ich mir wünsche zu erzielen."
+						"class": "Headline",
+						"data": {
+							"tag": "h1",
+							"text": "Überschrift"
 						}
 					},
 					{
-						"visibleContent": false,
-						"headings": {
-							"h2": "Was ich mitbringe"
-						},
-						"content": {
-							"type": "markdown",
-							"access_rights": "any",
-							"content": "- Ich arbeite gerne mit APIs bzw. stelle ich gerne APIs bereit.\n- Über einen längeren Zeitraum an einer Anwendung test getrieben Entwickeln würde mich auch interessieren. So gut wie meine Erfahrung dabei bisher war, so kurz war sie auch.\n- Auch wenn ich mich ganz gut im Frontend auskenne, habe ich bisher noch keine komplexe Frontend Anwendung gebaut, was ich auch sehr spannend finde.\n- Eine komplexe bestehende Anwendung warten und weiterentwickeln macht mich auch neugierig.\n- ...\n\n Solange ich mit an der Anwendung entwickeln und programmieren kann bin ich gerne dabei."
+						"class": "Textarea",
+						"data": [
+							"Lorem Ipsum",
+							"Lorem Ipsum",
+							"Lorem Ipsum",
+							"Lorem Ipsum"
+						]
+					}
+				]
+			}, 
+			{
+				"class": "Article",
+				"childrenInfo": [
+					{
+						"class": "Headline",
+						"data": {
+							"tag": "h1",
+							"text": "Überschrift"
 						}
+					},
+					{
+						"class": "Textarea",
+						"data": [
+							"Lorem Ipsum",
+							"Lorem Ipsum",
+							"Lorem Ipsum",
+							"Lorem Ipsum"
+						]
 					}
 				]
 			}

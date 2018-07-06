@@ -4,6 +4,7 @@ import Header from './App/_Header';
 import Footer from './App/_Footer';
 import Histroy from './App/History';
 import ExperienceOverview from './App/ExperienceOverview';
+import Intro from './App/Intro';
 
 //import ScrollRouter from './Lib/ScrollRouter';
 
@@ -24,6 +25,7 @@ class App extends React.Component<AppProps> {
 				<Header data={this.props.data.header} />
 				<main>
 					<ExperienceOverview data={this.props.data.history} />
+					<Intro childrenInfo={this.props.data.intro.childrenInfo} />
 					<Histroy data={this.props.data.history} />
 				</main>
 				<Footer data={this.props.data.footer} />	

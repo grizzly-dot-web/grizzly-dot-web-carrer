@@ -3,10 +3,15 @@ import page from 'scroll-doc';
 import ease from 'ease-component';
 
 import CmsRoutingComponent from "./AbstractRoutingComponent";
+import { CmsState, CmsProps } from '../CmsControlledComponent';
 
-export default abstract class ScrollRoutingComponent<Props = {}, State = {}> extends CmsRoutingComponent<Props, State> {
+export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsRoutingComponent<Props, State> {
 
     hasScrolledOnce = false
+
+    constructor(props: any, context?: any) {
+        super(props, context);
+    }
 
     dispatchEnter() {
         if (this.hasScrolledOnce || this.ref == null)  {

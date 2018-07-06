@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import Router from '../Router';
 import CmsComponentHandler from '../CmsComponentHandler';
-import CmsControlledComponent from '../CmsControlledComponent';
+import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComponent';
 import { NavigationLink } from './Navigation';
 
-export default abstract class CmsRoutingComponent<Props = {}, State = {}> extends CmsControlledComponent<Props, State> {
+export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsControlledComponent<Props, State> {
     
     abstract link() : NavigationLink
     abstract navigationId() : string|false
