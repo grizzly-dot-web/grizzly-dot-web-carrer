@@ -1,6 +1,6 @@
 import Router from "./Router";
 import { NavigationRegistry, NavigationLink } from "./Router/Navigation";
-import CmsControlledComponent from "./CmsControlledComponent";
+import CmsControlledComponent, { CmsState, CmsProps } from "./CmsControlledComponent";
 import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
 
 export default class CmsComponentHandler {
@@ -17,7 +17,7 @@ export default class CmsComponentHandler {
     public appElement : HTMLElement|null;
 
     private _router : Router|null
-    private _components : CmsControlledComponent[]
+    private _components : CmsControlledComponent<CmsProps<any>, CmsState>[]
     private _navigationRegistry : NavigationRegistry;
 
     private constructor() {
@@ -76,7 +76,7 @@ export default class CmsComponentHandler {
         this._components.push(comp);
 
         if (this._router && isRoutingComponent) {
-            this._router.addComponent(comp as CmsRoutingComponent);
+            this._router.addComponent(comp as CmsRoutingComponent<CmsProps<any>, CmsState>);
         }
     }
 

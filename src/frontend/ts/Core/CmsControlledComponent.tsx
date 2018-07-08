@@ -6,7 +6,7 @@ export interface CmsProps<Data> {
     class : string
     key? : string
     data? : Data
-    childrenInfo? : {[className:string] : CmsProps<Data>} 
+    childrenInfo? : {[className:string] : CmsProps<Data>}
 }
 
 export interface CmsState {
@@ -23,7 +23,7 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
         super(props, context);
         this._register();
     }
-    
+
     _register() {
         this.handler.addComponent(this);
     }
