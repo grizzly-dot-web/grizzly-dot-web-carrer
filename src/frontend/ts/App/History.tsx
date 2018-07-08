@@ -7,11 +7,13 @@ import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
 import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
 import { CmsState, CmsProps } from '../Core/CmsControlledComponent';
+import { CmsRoutingState } from '../Core/Router/AbstractRoutingComponent';
 
 
 export interface HistoryProps extends CmsProps<any> {
 }
-export interface HistoryState extends CmsState {
+export interface HistoryState extends CmsRoutingState {
+	isActive: boolean
 	routeName: string
 	historyEntries: any
 	disableScroll: boolean
@@ -63,6 +65,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 		});
 
 		this.state = {
+			isActive: false,
 			navigationActive: {
 				previous: false,
 				next: false,

@@ -2,11 +2,10 @@ import scroll from 'scroll';
 import page from 'scroll-doc';
 import ease from 'ease-component';
 
-import CmsRoutingComponent from "./AbstractRoutingComponent";
-import { CmsState, CmsProps } from '../CmsControlledComponent';
-import { ENGINE_METHOD_DIGESTS } from 'constants';
+import CmsRoutingComponent, { CmsRoutingState } from "./AbstractRoutingComponent";
+import { CmsProps } from '../CmsControlledComponent';
 
-export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsRoutingComponent<Props, State> {
+export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsRoutingState> extends CmsRoutingComponent<Props, State> {
 
     lastScrollTop : null|number = null
     hasScrolledOnce = false
@@ -42,11 +41,6 @@ export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>
 
         let compTop = this.ref.offsetTop;
         let compBottom = this.ref.offsetTop + this.ref.offsetHeight;
-
-        console.log(`COMPONENT: ${this.link().url}`)
-        console.log(`Comp Top: ${compTop}`)
-        console.log(`View TOP: ${scrollTop}`)
-        console.log(`Comp Bot: ${compBottom}`)
 
         //scroll down - is active when not upper viewport position is not in between component 
         return scrollTop <= compBottom && scrollTop >= compTop

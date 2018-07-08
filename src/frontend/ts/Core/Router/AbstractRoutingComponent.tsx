@@ -5,7 +5,11 @@ import CmsComponentHandler from '../CmsComponentHandler';
 import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComponent';
 import { NavigationLink } from './Navigation';
 
-export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsControlledComponent<Props, State> {
+export interface CmsRoutingState extends CmsState {
+    isActive: boolean
+} 
+
+export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, State extends CmsRoutingState> extends CmsControlledComponent<Props, State> {
     
     abstract link() : NavigationLink
     abstract navigationId() : string|false
@@ -13,6 +17,9 @@ export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, S
 
     constructor(props: Props, context?: any) {
         super(props, context);
+        this.state = Object.assign(this.state, {
+            isActive: false
+        });
         this.addNavigationLink();    
     }
 
@@ -30,13 +37,23 @@ export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, S
     }
 
     dispatchEnter() {       
-        this.enter();
         console.log('entered: ', this.link().url);        
+        this.enter();
+        this.setState(Object.assign(
+            this.state, {
+                isActive: true
+            }
+        ));
     }
 
-    dispatchLeave() {       ;
-        this.leave();
+    dispatchLeave() {
         console.log('leave: ', this.link().url);        
+        this.leave();
+        this.setState(Object.assign(
+            this.state, {
+                isActive: false
+            }
+        ));
     }
 
     abstract enter() : void;

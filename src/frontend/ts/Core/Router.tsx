@@ -1,19 +1,19 @@
-import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
+import CmsRoutingComponent, { CmsRoutingState } from "./Router/AbstractRoutingComponent";
 import { NavigationLink, NavigationRegistry } from './Router/Navigation';
 import CmsControlledComponent, { CmsState, CmsProps } from "./CmsControlledComponent";
 
 export default class Router {
 
     private _appElement : HTMLElement|null;
-    private _components : CmsRoutingComponent<CmsProps<any>, CmsState>[]
+    private _components : CmsRoutingComponent<CmsProps<any>, CmsRoutingState>[]
     private _detectionTimeout : any;
-    private _lastActiveComponents : CmsRoutingComponent<CmsProps<any>, CmsState>[]
+    private _lastActiveComponents : CmsRoutingComponent<CmsProps<any>, CmsRoutingState>[]
 
     public get currentUrl() {
         return window.location.pathname;
     }
 
-    public addComponent(component : CmsRoutingComponent<CmsProps<any>, CmsState>) {
+    public addComponent(component : CmsRoutingComponent<CmsProps<any>, CmsRoutingState>) {
         this._components.push(component);
     }
 
@@ -60,7 +60,7 @@ export default class Router {
     }
 
     public activateComponentByUrl() {
-        return this._detectActiveComponent((component: CmsRoutingComponent<CmsProps<any>, CmsState>) => {
+        return this._detectActiveComponent((component: CmsRoutingComponent<CmsProps<any>, CmsRoutingState>) => {
             if (component.link().url == this.currentUrl) {
                 return true;
             }
@@ -74,7 +74,7 @@ export default class Router {
             return;
         }
         
-        return this._detectActiveComponent((component: CmsRoutingComponent<CmsProps<any>, CmsState>) => { 
+        return this._detectActiveComponent((component: CmsRoutingComponent<CmsProps<any>, CmsRoutingState>) => { 
             return component.acitveStateCondition() 
         }, 100);
     }

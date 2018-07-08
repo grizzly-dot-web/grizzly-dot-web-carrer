@@ -19,8 +19,13 @@ export interface ChildComponents {
 
 export default class CmsControlledComponent<Props extends CmsProps<any>, State extends CmsState> extends React.Component<Props, State> {
 
+
     constructor(props: Props, context?: any) {
         super(props, context);
+        this.state = {
+            navigationRegistry: null
+        } as Readonly<State>;
+        
         this._register();
     }
 
