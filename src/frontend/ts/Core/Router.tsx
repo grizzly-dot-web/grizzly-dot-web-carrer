@@ -94,8 +94,9 @@ export default class Router {
 
                 if (window.location.pathname !== a.getAttribute('href')) {
                     window.history.pushState({}, title, a.getAttribute('href'));
-                    this.activateComponentByUrl();
                 }
+
+                this.activateComponentByUrl();
 
                 e.preventDefault();
                 return false;

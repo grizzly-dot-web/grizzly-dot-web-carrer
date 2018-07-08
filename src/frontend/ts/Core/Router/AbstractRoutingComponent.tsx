@@ -31,10 +31,12 @@ export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, S
 
     dispatchEnter() {       
         this.enter();
+        console.log('entered: ', this.link().url);        
     }
 
     dispatchLeave() {       ;
         this.leave();
+        console.log('leave: ', this.link().url);        
     }
 
     abstract enter() : void;

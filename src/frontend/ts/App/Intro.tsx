@@ -38,7 +38,7 @@ export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState
         });
 
         return (
-            <section ref={ref => this.ref} className={`intro`}>
+            <section ref={ref => this.ref = ref} className={`intro`}>
                 {children}
             </section>
         );

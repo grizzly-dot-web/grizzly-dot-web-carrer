@@ -4,9 +4,11 @@ import ease from 'ease-component';
 
 import CmsRoutingComponent from "./AbstractRoutingComponent";
 import { CmsState, CmsProps } from '../CmsControlledComponent';
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsRoutingComponent<Props, State> {
 
+    lastScrollTop : null|number = null
     hasScrolledOnce = false
 
     constructor(props: any, context?: any) {
@@ -14,44 +16,39 @@ export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>
     }
 
     dispatchEnter() {
-        if (this.hasScrolledOnce || this.ref == null)  {
-            return;
+        if (this.ref == null) {
+            throw new Error('ref is not defined');
+        }
+
+        if (this.acitveStateCondition())  {
+            return super.dispatchEnter();
         }
         
         this.handler.disableComponentConditionRouting();
-        console.log('scroll-start');
-        let callback = () => {
+        
+        scroll.top(page(), this.ref.offsetTop, () => {
             this.handler.enableComponentConditionRouting();
             this.hasScrolledOnce = true;
-            console.log('scroll-end');        
-            this.enter();            
-        }
-        scroll.top(page(), this.ref.offsetTop, callback);
-    }
-
-    dispatchLeave() {
-        this.hasScrolledOnce = false;
-        this.leave();
+            return super.dispatchEnter();
+        });
     }
 
 	acitveStateCondition(): boolean {
         let scrollTop = window.scrollY;
         let scrollBottom = scrollTop + window.innerHeight;
 		if (this.ref == null) {
-			return false;
+            throw new Error('ref is not defined');
 		}
 
         let compTop = this.ref.offsetTop;
         let compBottom = this.ref.offsetTop + this.ref.offsetHeight;
 
-		if (
-			scrollBottom >= compTop &&
-            scrollTop <=  compBottom &&
-            super.acitveStateCondition()
-		) {
-			return true;
-        }
-		
-		return false;
+        console.log(`COMPONENT: ${this.link().url}`)
+        console.log(`Comp Top: ${compTop}`)
+        console.log(`View TOP: ${scrollTop}`)
+        console.log(`Comp Bot: ${compBottom}`)
+
+        //scroll down - is active when not upper viewport position is not in between component 
+        return scrollTop <= compBottom && scrollTop >= compTop
 	}
 }
