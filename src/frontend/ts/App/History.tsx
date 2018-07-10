@@ -192,45 +192,13 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 	}
 
 	enter(): void {
-		this.disableScrollObserving = false;
-
-		this.handler.disableComponentConditionRouting();
-		this.changeActiveHistoryIndex(0).then(() => {
-			let scrollTimeout : number|null = null;
-			
-			let direction = null;
-
-			this.scrollWatcher = new ScrollWatcher(null, {
-			});
-			let extraRange = 20;
-			this.handler.disableComponentConditionRouting();
-			this.scrollWatcher.watch((e, type, direction, key) => {
-				if (this.disableScrollObserving) {
-					return false;
-				}
-
-				let ref = this.ref as HTMLElement;
-				let target = this.scrollWatcher.element||window;
-				let lastHistroyItemIsInViewport = (range = 0) => PositionChecker.elementIsInsideTarget(ref.querySelector('.history-entry:last-of-type') as HTMLElement, target, range);
-				let firstHistroyItemIsInViewport = (range = 0) => PositionChecker.elementIsInsideTarget(ref.querySelector('.history-entry:first-of-type') as HTMLElement, target, range);
-
-				if (firstHistroyItemIsInViewport() || lastHistroyItemIsInViewport()) {
-					return true;
-				}
-
-				this.changeActiveHistoryIndexByScrollDirection(direction);
-				return false;
-			});
-			
-			this.appElement.classList.add('history__is-active');
-			this.appElement.classList.add('header__right-dark');
-		});
-		
+		this.changeActiveHistoryIndex(0);
+		this.appElement.classList.add('history__is-active');
+		this.appElement.classList.add('header__right-dark');
 	}
 
 	leave(): void {
-		this.scrollWatcher.destroy();
-		this.handler.enableComponentConditionRouting();
+		this.changeActiveHistoryIndex(false);
 		this.appElement.classList.remove('history__is-active');
 		this.appElement.classList.remove('header__right-dark');
 	}
