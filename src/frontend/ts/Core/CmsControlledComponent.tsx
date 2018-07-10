@@ -41,10 +41,10 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
         return this.handler.appElement as HTMLElement;
     }
 
-    protected renderChildren(possibleChildComps : ChildComponents) {
+    protected renderChildren(possibleChildComps : {[className:string] : any}) {
         let info = this.props.childrenInfo;
         if (!info) {
-            throw new Error('Component have no children / you have to specify it in the json')
+            throw new Error('Component have no children / you have to specify it in the json: childrenInfo')
         }
 
         let children = [];

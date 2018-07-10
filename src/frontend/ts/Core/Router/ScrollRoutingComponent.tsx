@@ -7,7 +7,7 @@ import { CmsProps } from '../CmsControlledComponent';
 
 export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsRoutingState> extends CmsRoutingComponent<Props, State> {
 
-    lastScrollTop : null|number = null
+    lastScrollY : null|number = null
     hasScrolledOnce = false
 
     constructor(props: any, context?: any) {
@@ -24,7 +24,6 @@ export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>
         }
         
         this.handler.disableComponentConditionRouting();
-        
         scroll.top(page(), this.ref.offsetTop, () => {
             this.handler.enableComponentConditionRouting();
             this.hasScrolledOnce = true;

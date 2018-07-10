@@ -1,3 +1,45 @@
+export class PositionChecker {
+
+    public static getBoundary(element : Element|Window) {
+        let boundary = {} as ClientRect;
+
+        if (element instanceof Window) {
+            return {
+                top: element.scrollY,
+                left: element.scrollX,
+                right: element.scrollX + element.innerWidth,
+                bottom: element.scrollY + element.innerHeight,
+                width: element.innerWidth,
+                height: element.innerHeight
+            };
+        } 
+
+        return element.getBoundingClientRect();
+    }
+
+    public static elementIsInsideTarget(element: Element, target : Element|Window, range = 0) {
+        let targetBoundary = PositionChecker.getBoundary(target) as any;
+        let elementBoundary = PositionChecker.getBoundary(target) as any;
+
+        let isInside = true;
+        for (let key of Object.keys(targetBoundary)) {
+            if (key === 'width' || key === 'height') {
+                continue;
+            }
+
+            for (let elementKey of Object.keys(elementBoundary)) {
+                if (elementKey === 'width' || elementKey === 'height') {
+                    continue;
+                }
+
+                isInside = targetBoundary[key] + range > elementBoundary[elementKey]
+            }
+        }
+        
+        return isInside;
+    }
+}
+
 export interface PackageAble {
     top: number
     left: number

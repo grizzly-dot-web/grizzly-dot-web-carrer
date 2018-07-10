@@ -1,51 +1,179 @@
+#app:not(.history__is-active) {
+	.history-entry {
+		.timespan {
+			&:before, .date {
+				left: $Timeline-Line_Width * -1 - 3px;
+			}
+	
+			justify-content: flex-start;
+		}
+	}
+}
+
 .history-entry {
 	width: 100%;
-	height: 100vh;
 	position: relative;
-	color: $ColorSecondaryDarker;
 
-	//Fix Browser (Chrome) calculation Error
-	&:not(:first-child) {
-		height: calc(100vh + 1px + #{$Viewport_Padding_Horizontal});
-		margin-top: -1px;
+
+	&:not(.is-active) {
+		cursor: pointer;
+		
+		.history-main {
+			min-height: 0;
+			background-image: none;
+			
+			&:hover {
+				.history-title  {
+					color: $ColorPrimary;
+				}
+			}
+		}
+
+		.history-institutions {
+			flex-grow: 1;
+
+			.institution {
+				display: none;
+			}
+		}
+
+		.timespan {
+			flex-grow: 1;
+		}
+	}
+
+	&.is-active {
+		.history-main {
+			min-height: 90vh;
+
+			.institution {
+				opacity: 1;
+				height: auto;
+			}
+		}
 	}
 
 	.history-main {
 		width: $HistoryMainWidth;
-		height: 100%;
 		position: relative;
+
+		display: flex;
+		align-items: stretch;
+		flex-direction: column;
+		justify-content: space-between;
+		transition: min-height 0.5s ease-in-out;
+
+		background-color: $Color1;
 		background-image: radial-gradient(
 			circle at 65% 50%,
 			$Color2 1%,
 			$Color1 75%
-    );
+		);
 	}
 
-	.history-header {
+	.timespan {
 		order: 1;
-		bottom: map-get($Timespan_Height, Next);
-		height: $CurrentTimeSpan_Height;
-		position: absolute;
-		left: 0;
-		width: 100%;
-		transition: bottom 0.55s linear;
+		flex-grow: 2;
+		overflow: hidden;
+		position: relative;
 
-		.inner {
-			top: 50%;
-			left: 50%;
-			min-width: 50vw;
-			position: relative;
-			display: inline-block;
-			transform: translate(-50%, -50%);
+		&:before, .date {
+			transition: left 0.3s ease-in-out;
 		}
 
-		h1, time {
-			color: $LightCopy_Color;
-		}
-
-		time {
+		&:before {
+			content: '';
+			left: $Timeline_PositionLeft;
+			width: $Timeline-Line_Width;
+			height: 100vh;
 			display: block;
-			min-width: getGridSize(22.5, horizontal);
+			position: absolute;
+			transform: translateX(50%);
+			background-color: $Timeline_BackgroundColor;
+		}
+
+		&.start {
+			order: 1;
+			height: 2em;
+
+			.date {
+				bottom: 0;				
+			}
+		}
+
+		&.end {
+			order: 3;
+
+			.date {
+				top: 0;				
+			}
+		}
+
+		.date {
+			color: $Timeline_BackgroundColor;
+			
+			padding: 0.8em 0;
+			padding-left: $Timeline_Marker_Width;
+			
+			left: calc(#{$Timeline_PositionLeft});
+			position: absolute;
+
+			&:before, &:after {
+				content: '';
+				top: 50%;
+				left: $Timeline-Line_Width / 2;
+				height: $Timeline-Line_Width;
+				width: $Timeline_Marker_Width / 2;
+				display: block;
+				position: absolute;
+				background-color: $Timeline_BackgroundColor;
+				transform: translate(-100%, -50%);
+			}
+
+			&:after {
+				left: $Timeline-Line_Width / 2 + $Timeline-Line_Width;
+				transform: translateY(-50%);
+			}
+		}
+	}
+	
+	.history-institutions {
+		order: 2;
+
+		display: flex;
+		padding: 1em getGridSize(2, horizontal);
+		flex-direction: column;
+		justify-content: center;
+
+		transition: flex-grow 0.5s ease-in-out;
+
+		.institution {
+			margin-bottom: 1em;
+			opacity: 0;
+			height: 0;
+			overflow: hidden;
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		.history-title, .duration, .timespan {
+			color: $LightCopy_Color;
+			transition: color 0.3s ease-in-out;
+		}
+
+		.history-title {
+			margin-bottom: 1em;
+		}
+
+		.institution-title {
+			@extend h4;
+		}
+
+		.institution-subtitle {
+			
+		}
+
+		.duration {
+			display: block;
 			padding-bottom: getGridSize(1, vertical) / 1.8;
 			margin-bottom: getGridSize(1, vertical) / 3;
 			border-bottom: 1px solid $ColorSecondary;

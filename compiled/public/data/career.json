@@ -63,17 +63,20 @@
 	},
 	"history": [
 		{
-			"begin_date": "2018-01",
-			"end_date": null,
 			"url": "/carrer/grizzly.web",
-			"institution": {
-				"type": "company",
-				"title": "grizzly.web",
-				"job_title": "Web Developer",
-				"industry": "Internet und Onlinemedien",
-				"company_size": "1",
-				"form_of_employment": "self_employee"
-			},
+			"title": "Jobsuche",
+			"institutions": [
+				{
+					"begin_date": "2018-01",
+					"end_date": null,
+					"type": "company",
+					"title": "grizzly.web",
+					"job_title": "Web Developer",
+					"industry": "Internet und Onlinemedien",
+					"company_size": "1",
+					"form_of_employment": "self_employee"
+				}
+			],
 			"experiences": [
 				{
 					"url": "https://jestjs.io/",
@@ -120,18 +123,21 @@
 			]
 		},
 		{
-			"begin_date": "2016-09",
-			"end_date": "2018-01",
 			"url": "/carrer/kodehaus",
-			"institution": {
-				"type": "company",
-				"title": "Kodehaus UG",
-				"url": "http://kodehaus.de",
-				"job_title": "Web Developer",
-				"industry": "Internet und Onlinemedien",
-				"company_size": "1-10",
-				"form_of_employment": "FULL_TIME_EMPLOYEE"
-			},
+			"title": "Kodehaus UG",
+			"institutions": [
+				{
+					"begin_date": "2016-09",
+					"end_date": "2018-01",
+					"type": "company",
+					"title": null,
+					"url": "http://kodehaus.de",
+					"job_title": "Web Developer",
+					"industry": "Internet und Onlinemedien",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				}
+			],
 			"experiences": [
 				{
 					"url": "http://getbem.com/introduction/",
@@ -206,18 +212,32 @@
 			]
 		},
 		{
-			"begin_date": "2014-10",
-			"end_date": "2016-08",
-			"url": "/carrer/anymotion-webdeveloper",
-			"institution": {
-				"type": "company",
-				"url": "http://anymotion.de",
-				"title": "anyMOTION GRAPHICS GmbH",
-				"job_title": "Web Developer",
-				"industry": "Internet und Onlinemedien",
-				"company_size": "1-10",
-				"form_of_employment": "FULL_TIME_EMPLOYEE"
-			},
+			"url": "/carrer/anymotion",
+			"title": "anyMOTION GRAPHICS GmbH",
+			"institutions": [
+				{
+					"begin_date": "2011-10",
+					"end_date": "2014-07",
+					"type": "company",
+					"title": "Ausbildug zum Mediengestalter Digital und Print",
+					"job_title": "",
+					"url": "http://anymotion.de",
+					"industry": "Internet und Onlinemedien",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				},
+				{
+					"begin_date": "2014-10",
+					"end_date": "2016-08",
+					"type": "company",
+					"url": "http://anymotion.de",
+					"job_title": "Angestellter",
+					"title": "anyMOTION GRAPHICS GmbH",
+					"industry": "Internet und Onlinemedien",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				}
+			],
 			"experiences": [
 				{
 					"url": "https://framework.zend.com/manual/1.11/de/manual.html",
@@ -348,23 +368,7 @@
 					"level": 500,
 					"category": "Pattern",
 					"type": "Design Pattern / Methode"
-				}
-			]
-		},
-		{
-			"begin_date": "2011-10",
-			"end_date": "2014-07",
-			"url": "/carrer/anymotion-ausbildung",
-			"institution": {
-				"type": "company",
-				"title": "anyMOTION GRAPHICS GmbH",
-				"url": "http://anymotion.de",
-				"job_title": "Ausbildung zum Mediengestalter Digital und Print",
-				"industry": "Internet und Onlinemedien",
-				"company_size": "1-10",
-				"form_of_employment": "FULL_TIME_EMPLOYEE"
-			},
-			"experiences": [
+				},
 				{
 					"url": "https://cakephp.org/",
 					"title": "CakePHP",
@@ -451,18 +455,32 @@
 			]
 		},
 		{
-			"begin_date": "2007-08",
-			"end_date": "2009-07",
 			"url": "/carrer/berufskolleg-kempen",
-			"institution": {
-				"type": "education",
-				"title": "Berufskolleg Kempen",
-				"url": "",
-				"job_title": "nicht abgeschlossene Fachhochschulreife Informationstechnik",
-				"industry": "Informationstechnik",
-				"company_size": "1-10",
-				"form_of_employment": "FULL_TIME_EMPLOYEE"
-			},
+			"title": "Schulbildung",
+			"institutions": [
+				{
+					"begin_date": "2000-08",
+					"end_date": "2006-07",
+					"type": "education",
+					"title": "Johannes Keppler Realschule",
+					"url": "",
+					"job_title": "Fachoberschulreife",
+					"industry": "Informationstechnik",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				},
+				{
+					"begin_date": "2007-08",
+					"end_date": "2009-07",
+					"type": "education",
+					"title": "Berufskolleg Kempen",
+					"url": "",
+					"job_title": "nicht abgeschlossene Fachhochschulreife Informationstechnik",
+					"industry": "Informationstechnik",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				}
+			],
 			"experiences": [
 				{
 					"url": "https://www.apple.com/de/mac/compare/",
