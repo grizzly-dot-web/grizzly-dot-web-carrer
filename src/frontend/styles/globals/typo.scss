@@ -7,7 +7,7 @@ time {
 h1, .h1 {
 	margin: 0;
 	font-size: 2em;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 h2, .h2 {
@@ -18,7 +18,7 @@ h2, .h2 {
 
 h3, .h3 {
 	margin: 0;
-	font-weight: 400;
+	font-weight: 700;
 	text-transform: uppercase;
 }
 
@@ -36,4 +36,21 @@ a {
 	color: inherit;
 	font-weight: 400;
 	text-decoration: underline;
+}
+
+dl {
+	break-inside: avoid;
+	page-break-inside: avoid;
+
+	dt {
+		font-weight: 700;
+	}
+
+	dd {
+		display: block;
+		margin-left: 0.5em;
+		padding-left: 0.5em;
+		border-left: 0.1em solid $ColorBackgroundDark;
+		margin-bottom: 1em;
+	}
 }

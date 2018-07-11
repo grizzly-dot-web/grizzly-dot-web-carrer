@@ -1,11 +1,9 @@
-#app:not(.history__is-active) {
-	.history-entry {
-		.timespan {
-			&:before, .date {
-				left: $Timeline-Line_Width * -1 - 3px;
+#app {
+	&.history__is-active {
+		.history-entry:first-child:not(.is-active) {
+			.history-main {
+				padding-top: 6em;
 			}
-	
-			justify-content: flex-start;
 		}
 	}
 }
@@ -52,6 +50,10 @@
 		.history-main {
 			min-height: 90vh;
 
+			.timespan.start {
+				min-height: 7em;
+			}
+
 			.institution {
 				opacity: 1;
 				height: auto;
@@ -67,7 +69,7 @@
 		align-items: stretch;
 		flex-direction: column;
 		justify-content: space-between;
-		transition: min-height 0.5s ease-in-out;
+		transition: min-height 0.5s ease-in-out, padding 0.2s 0.2s ease-in-out;
 
 		background-color: $Color1;
 		background-image: radial-gradient(
@@ -172,7 +174,7 @@
 		transition: flex-grow 0.5s ease-in-out;
 
 		.institution {
-			margin-bottom: 1em;
+			margin-bottom: 4em;
 			opacity: 0;
 			height: 0;
 			overflow: hidden;
@@ -210,12 +212,15 @@
 		top: 0;
 		height: 80vh;
 		min-width: 10vw; 
-		padding-top: 6em;
-		position: absolute;
+		
 		transition: opacity 0.5s 0.5s ease-in-out;
+
+		position: absolute;
 		left: $HistoryMainWidth - $HistoryDetailsOverlap;
 		width: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
+
 		padding: getGridSize(2, vertical) getGridSize(1, horizontal);
+		padding-top: 6em;
 
 		article {
 			height: 100%;

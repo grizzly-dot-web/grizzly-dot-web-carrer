@@ -8,6 +8,7 @@ import Experiences from './Entry/Experiences';
 import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
 import CmsControlledComponent, { CmsState, CmsProps } from '../../../Core/CmsControlledComponent';
 import Article from '../../../Core/Components/Article';
+import Textarea from '../../../Core/Components/Textarea';
 
 export interface Institution {
 	begin_date: string,
@@ -106,9 +107,8 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 				</div>
 				<div className={`history-details`}>
 					{
-
 						this.renderChildren({ 
-							'Article': Article 
+							'Textarea': { class: Textarea } 
 						})
 					}
 				</div>

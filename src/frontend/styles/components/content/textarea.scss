@@ -1,0 +1,21 @@
+.textarea {
+	margin-bottom: 2em;
+
+	&.textarea_columns {
+		columns: 2 200px;
+		column-gap: getGridSize(2, horizontal);
+	}
+
+	h2 {
+		@extend .h2;
+		font-size: 1.5em;
+		column-span: all;
+		margin-bottom: 1em; 
+		text-transform: uppercase;
+	}
+
+	h4 {
+		@extend .h3;
+		color: inherit;
+	}
+}

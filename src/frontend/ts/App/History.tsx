@@ -3,7 +3,7 @@ import * as React from 'react';
 import moment from 'moment';
 import * as check from 'check-types';
 
-import HistoryEntry, { HistoryEntryData } from './Components/History/HistoryEntry';
+import HistoryEntry, { HistoryEntryData, Institution } from './Components/History/HistoryEntry';
 import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
 import { CmsState, CmsProps } from '../Core/CmsControlledComponent';
 import { CmsRoutingState } from '../Core/Router/AbstractRoutingComponent';
@@ -23,6 +23,22 @@ export interface HistoryState extends CmsRoutingState {
 
 class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 
+	orderAscending<OrderableObject>(data : OrderableObject[], date : ((object : OrderableObject) => string)): OrderableObject[] {
+		return data.sort((a, b) => {
+			let aDate = date(a);
+			let bDate = date(b);
+
+			if (aDate < bDate) {
+				return -1;
+			}
+
+			if (aDate > bDate) {
+				return 1;
+			}
+
+			return 0;
+		})
+	}
     navigationId() {
 		return 'main';
 	}
@@ -43,7 +59,6 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 	disableScrollObserving : boolean = false;
 	scrollWaitTimeout : number|null = null;
 	historyElementRefs : HTMLElement[] = [];
-	scrollWatcher : ScrollWatcher
 
 	constructor(props : any) {
 		super(props);
@@ -54,24 +69,14 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 
 		this.ref = null;
 
-		let data : HistoryEntryData[] = [];
+		let entries : HistoryEntryData[] = [];
 		if (this.props.data) {
-			data = this.props.data;
+			entries = this.props.data;
 		}
-		let entries = data.sort((a, b) => {
-			let aDate = moment(a.institutions[0].begin_date);
-			let bDate = moment(b.institutions[b.institutions.length -1].begin_date);
-
-			if (aDate < bDate) {
-				return -1;
-			}
-
-			if (aDate > bDate) {
-				return 1;
-			}
-
-			return 0;
+		entries.map((e) => {
+			e.institutions = this.orderAscending<Institution>(e.institutions, (a) => a.begin_date);
 		});
+		entries = this.orderAscending<HistoryEntryData>(entries, (a) => a.institutions[0].begin_date);
 
 		this.state = {
 			isActive: false,
@@ -98,7 +103,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			}
 
 			history.push(
-				<HistoryEntry key={ i } data={ item } childrenInfo={item.childrenInfo} enabled={active} onClick={() => this.changeActiveHistoryIndex(i)}/>
+				<HistoryEntry key={ i } data={ item } childrenInfo={item.childrenInfo} enabled={active} onClick={() => { this.changeActiveHistoryIndex(i) }}/>
 			);
 		}
 
@@ -127,6 +132,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			}
 
 			let ref = this.ref as HTMLElement;
+			this.handler.disableComponentConditionRouting();
 			let activeElement = ref.querySelectorAll('.history-entry')[i as number] as HTMLElement|null;
 			this.setState(
 				Object.assign(
@@ -145,6 +151,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 						scroll.top(page(), activeElement.offsetTop, { duration: this.scrollDuration }, () => {
 							this.disableScrollObserving = false;
 							this.lastScrollY = window.scrollY;
+							this.handler.enableComponentConditionRouting();
 							return resolve()
 						});
 					}, this.animationDuration);
@@ -179,6 +186,8 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			}
 
 			this.changeActiveHistoryIndex(index).then(() => {
+				this.handler.enableComponentConditionRouting();
+
 				this.appElement.classList.add('history__is-active');
 				this.appElement.classList.add('header__right-dark');
 			
@@ -192,13 +201,12 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 	}
 
 	enter(): void {
-		this.changeActiveHistoryIndex(0);
 		this.appElement.classList.add('history__is-active');
 		this.appElement.classList.add('header__right-dark');
+        this.appElement.classList.remove('header__bg-active');
 	}
 
 	leave(): void {
-		this.changeActiveHistoryIndex(false);
 		this.appElement.classList.remove('history__is-active');
 		this.appElement.classList.remove('header__right-dark');
 	}
