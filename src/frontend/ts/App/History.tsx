@@ -37,7 +37,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 	ref: HTMLElement | null;
 
 	lastScrollY : number = 0;
-	scrollDuration : number = 500
+	scrollDuration : number = 300
 	animationDuration : number = 500
 	scrollTimeout : number|undefined
 	disableScrollObserving : boolean = false;
@@ -98,7 +98,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			}
 
 			history.push(
-				<HistoryEntry key={ i } data={ item } enabled={active} onClick={() => this.changeActiveHistoryIndex(i)}/>
+				<HistoryEntry key={ i } data={ item } childrenInfo={item.childrenInfo} enabled={active} onClick={() => this.changeActiveHistoryIndex(i)}/>
 			);
 		}
 
@@ -147,7 +147,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 							this.lastScrollY = window.scrollY;
 							return resolve()
 						});
-					}, this.animationDuration/2);
+					}, this.animationDuration);
 				}
 			);
 		});

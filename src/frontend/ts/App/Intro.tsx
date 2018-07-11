@@ -33,13 +33,13 @@ export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState
     }
     
     render() {
-        let children = this.renderChildren({
-            'Article' : Article
-        });
-
         return (
             <section ref={ref => this.ref = ref} className={`intro`}>
-                {children}
+                {
+                    this.renderChildren({
+                        'Article' : Article
+                    })
+                }
             </section>
         );
     }

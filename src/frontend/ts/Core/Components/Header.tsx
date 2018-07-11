@@ -3,16 +3,15 @@ import * as React from 'react';
 import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComponent';
 import Textarea from './Textarea';
 import Headline from './Headline';
-import Header from './Header';
 
-export interface ArticleProps extends CmsProps<null> {
-
-}
-export interface ArticleState extends CmsState { 
+export interface HeaderProps extends CmsProps<null> {
 
 }
+export interface HeaderState extends CmsState { 
 
-class Article extends CmsControlledComponent<ArticleProps, ArticleState> {
+}
+
+export default class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
 
 	constructor(props : any) {
 		super(props);
@@ -20,16 +19,12 @@ class Article extends CmsControlledComponent<ArticleProps, ArticleState> {
 
 	render() {
 		return (
-			<article key={this.props.key}>
+			<header key={this.props.key}>
 				{this.renderChildren({
-					'Header' : Header,
-					'Textarea' : Textarea,
 					'Headline' : Headline,
 				})}
-			</article>
+			</header>
 		);
 	}
 
 }
-
-export default Article;

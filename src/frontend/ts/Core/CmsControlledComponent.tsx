@@ -6,7 +6,7 @@ export interface CmsProps<Data> {
     class : string
     key? : string
     data? : Data
-    childrenInfo? : {[className:string] : CmsProps<Data>}
+    childrenInfo? : {[region:string] : {[className:string] : CmsProps<Data>}}
 }
 
 export interface CmsState {
@@ -41,10 +41,13 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
         return this.handler.appElement as HTMLElement;
     }
 
-    protected renderChildren(possibleChildComps : {[className:string] : any}) {
-        let info = this.props.childrenInfo;
+    protected renderChildren(possibleChildComps : {[className:string] : any}, region : string = 'default') {
+        let info : any = null;
+        if (this.props.childrenInfo && this.props.childrenInfo.hasOwnProperty(region)) {
+            info = this.props.childrenInfo[region];
+        }
         if (!info) {
-            throw new Error('Component have no children / you have to specify it in the json: childrenInfo')
+            return null;
         }
 
         let children = [];
@@ -54,7 +57,7 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
             
             let ChildComps = possibleChildComps[info[compClassName].class];
             if (!ChildComps) {
-                throw new Error(`Unsupported Component`);
+                throw new Error(`Unsupported Component "${info[compClassName].class}" in "${region}" region`);
             }
 
             info[compClassName].key = counter.toString(); 

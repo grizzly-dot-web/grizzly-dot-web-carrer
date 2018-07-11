@@ -37,29 +37,32 @@
 		]
 	},
 	"intro": {
-		"childrenInfo": [
-			{
-				"class": "Article",
-				"childrenInfo": [
-					{
-						"class": "Headline",
-						"data": {
-							"tag": "h3",
-							"text": "Überschrift",
-							"classes": ["h1", "intro-title"]
-						}
-					},
-					{
-						"class": "Textarea",
-						"data": [
-							"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-							"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-							"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+		"childrenInfo": {
+			"default": [
+				{
+					"class": "Article",
+					"childrenInfo": {
+						"default": [
+							{
+								"class": "Headline",
+								"data": {
+									"tag": "h1",
+									"text": "Überschrift"
+								}
+							},
+							{
+								"class": "Textarea",
+								"data": [
+									"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+									"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+									"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+								]
+							}
 						]
 					}
-				]
-			}
-		]
+				}
+			]
+		}
 	},
 	"history": [
 		{
@@ -120,7 +123,47 @@
 					"category": "Pattern",
 					"type": "Design Pattern / Methode"
 				}
-			]
+			],
+			"childrenInfo": {
+				"default": [
+					{
+						"class": "Article",
+						"childrenInfo": {
+							"default": [
+								{
+									"class": "Header",
+									"childrenInfo": {
+										"default": [
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h3",
+													"text": "Überschrift"
+												}
+											},
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h4",
+													"text": "Überschrift"
+												}
+											}
+										]
+									}
+								},
+								{
+									"class": "Textarea",
+									"data": [
+										"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+									]
+								}
+							]
+						}
+					}
+				]
+			}
 		},
 		{
 			"url": "/carrer/kodehaus",
@@ -209,7 +252,47 @@
 					"category": "Package Manager",
 					"type": "Tool"
 				}
-			]
+			],
+			"childrenInfo": {
+				"default": [
+					{
+						"class": "Article",
+						"childrenInfo": {
+							"default": [
+								{
+									"class": "Header",
+									"childrenInfo": {
+										"default": [
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h3",
+													"text": "Überschrift"
+												}
+											},
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h4",
+													"text": "Überschrift"
+												}
+											}
+										]
+									}
+								},
+								{
+									"class": "Textarea",
+									"data": [
+										"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+									]
+								}
+							]
+						}
+					}
+				]
+			}
 		},
 		{
 			"url": "/carrer/anymotion",
@@ -452,7 +535,47 @@
 					"title": "Rosacea Blog",
 					"type": "reference"
 				}
-			]
+			],
+			"childrenInfo": {
+				"default": [
+					{
+						"class": "Article",
+						"childrenInfo": {
+							"default": [
+								{
+									"class": "Header",
+									"childrenInfo": {
+										"default": [
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h3",
+													"text": "Überschrift"
+												}
+											},
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h4",
+													"text": "Überschrift"
+												}
+											}
+										]
+									}
+								},
+								{
+									"class": "Textarea",
+									"data": [
+										"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+									]
+								}
+							]
+						}
+					}
+				]
+			}
 		},
 		{
 			"url": "/carrer/berufskolleg-kempen",
@@ -498,60 +621,46 @@
 					"type": "Frontend"
 				}
 			],
-			"ChildComponents": [
-				{
-					"type": "Article",
-					"config": {},
-					"data": {
-						"ChildComponents": [
-							 {
-								"type": "Headings",
-								"config": {
-									"isHeader": true
+			"childrenInfo": {
+				"default": [
+					{
+						"class": "Article",
+						"childrenInfo": {
+							"default": [
+								{
+									"class": "Header",
+									"childrenInfo": {
+										"default": [
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h3",
+													"text": "Überschrift"
+												}
+											},
+											{
+												"class": "Headline",
+												"data": {
+													"tag": "h4",
+													"text": "Überschrift"
+												}
+											}
+										]
+									}
 								},
-								"data": [
-									"Ausbildung",
-									"Mediengestalter"
-								]
-							},
-							{
-								"type": "Content",
-								"config": {},
-								"data": {
-									"type": "markdown",
-									"access_rights": "any",
-									"content": "Ich bin flexibel im Einsatz des Betriebssystems, ich habe bereits unter Linux, Mac OSX und Windows gearbeitet. Im .NET Universum würde ich einen Windows mit Visual Studio bevorzugen, ansonsten arbeite ich gerne mit IntelliJ und an einem Mac.\nIch möchte einen entsprechenden Laptop gestellt bekommen. Ich habe bisher noch nicht in einem Großraumbüro gearbeitet, kann es mir aber durch aus vorstellen."
+								{
+									"class": "Textarea",
+									"data": [
+										"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+										"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+									]
 								}
-							}
-						]
-					}
-				},
-				{
-					"type": "Article",
-					"config": {},
-					"data": {
-						"ChildComponents": {
-							"Headings": {
-								"config": {
-									"isHeader": true
-								},
-								"data": [
-									"Ausbildung",
-									"Wissenstand"
-								]
-							},
-							"Content": {
-								"config": {},
-								"data": {
-									"type": "markdown",
-									"access_rights": "any",
-									"content": "Ich bin flexibel im Einsatz des Betriebssystems, ich habe bereits unter Linux, Mac OSX und Windows gearbeitet. Im .NET Universum würde ich einen Windows mit Visual Studio bevorzugen, ansonsten arbeite ich gerne mit IntelliJ und an einem Mac.\nIch möchte einen entsprechenden Laptop gestellt bekommen. Ich habe bisher noch nicht in einem Großraumbüro gearbeitet, kann es mir aber durch aus vorstellen."
-								}
-							}
+							]
 						}
 					}
-				}
-			]
+				]
+			}
 		}
 	]
 }

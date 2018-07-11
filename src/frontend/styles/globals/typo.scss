@@ -1,31 +1,35 @@
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 time {
-	margin: 0;
 	font-weight: 300;
 }
 
 h1, .h1 {
+	margin: 0;
 	font-size: 2em;
 	font-weight: 600;
 }
 
 h2, .h2 {
+	margin: 0;
 	font-size: 1em;
 	color: $ColorPrimary;
 }
 
-time {
-  font-size: 0.7em;
-}
-
-h3 {
+h3, .h3 {
+	margin: 0;
 	font-weight: 400;
 	text-transform: uppercase;
 }
 
-h4 {
+h4, .h4 {
+	margin: 0;
 	font-weight: 400;
+}
+
+time {
+	margin: 0;
+ 	font-size: 0.7em;
 }
 
 a {

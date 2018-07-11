@@ -4,10 +4,10 @@ import slugify from 'slugify'
 
 import moment from 'moment';
 
-import HistoryDetails from './Entry/HistoryDetails';
 import Experiences from './Entry/Experiences';
 import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
 import CmsControlledComponent, { CmsState, CmsProps } from '../../../Core/CmsControlledComponent';
+import Article from '../../../Core/Components/Article';
 
 export interface Institution {
 	begin_date: string,
@@ -88,7 +88,6 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 			handleClick = undefined;
 			classes.push('is-active');
 		}
-
 		// render the prepared section
 		return (
 			<article ref={ (ref) => this.ref = ref} className={`history-entry ${classes.join(' ')}`} onClick={handleClick} >
@@ -107,7 +106,10 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 				</div>
 				<div className={`history-details`}>
 					{
-						//this.renderChildren({ 'HistoryDetails': HistoryDetails })
+
+						this.renderChildren({ 
+							'Article': Article 
+						})
 					}
 				</div>
 			</article>

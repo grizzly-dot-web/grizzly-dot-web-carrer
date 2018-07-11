@@ -21,6 +21,7 @@
 		.history-main {
 			min-height: 0;
 			background-image: none;
+			transition-delay: 0;
 			
 			&:hover {
 				.history-title  {
@@ -39,6 +40,11 @@
 
 		.timespan {
 			flex-grow: 1;
+		}
+
+		.history-details {
+			opacity: 0;
+			visibility: hidden;
 		}
 	}
 
@@ -69,9 +75,27 @@
 			$Color2 1%,
 			$Color1 75%
 		);
+
+		&:after, &:before {
+			content: '';
+			z-index: 1;
+			height: 7vh;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			position: absolute;
+			background-image: linear-gradient(to top, rgba($Color1,1) 30% ,rgba($Color1,0) 100%);
+		}
+
+		&:before {
+			top: 0;
+			bottom: auto;
+			transform: rotate(180deg)
+		}
 	}
 
 	.timespan {
+		z-index: 2;
 		order: 1;
 		flex-grow: 2;
 		overflow: hidden;
@@ -180,22 +204,27 @@
 		}
 	}
 
-	.history-content {
-		order: 3;
-
-		&.details-exists {
-			left: getGridSize(45, vertical);
-			top: getGridSize(2, horizontal);
-			width: getGridSize(23, vertical) * 2;
-			height:  getGridSize(34, horizontal) ;
-			position: absolute;
-
-			.content {
-				height: 100%;
-			}
-		}
+	.history-details {
+		z-index: 5;
+		opacity: 1;
+		top: 0;
+		height: 80vh;
+		min-width: 10vw; 
+		padding-top: 6em;
+		position: absolute;
+		transition: opacity 0.5s 0.5s ease-in-out;
+		left: $HistoryMainWidth - $HistoryDetailsOverlap;
+		width: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
+		padding: getGridSize(2, vertical) getGridSize(1, horizontal);
 
 		article {
+			height: 100%;
+			color: $ColorBackgroundDark;
+			background-color: $ColorBackgroundContent;
+			padding: getGridSize(2, vertical) getGridSize(1, horizontal);
+
+			columns: 300px;
+
 			header {
 				h3,
 				h4 {
@@ -203,6 +232,8 @@
 				}
 
 				h4 {
+					color: $ColorPrimary;
+
 					&:before {
 						content: ' | ';
 						white-space: pre;
