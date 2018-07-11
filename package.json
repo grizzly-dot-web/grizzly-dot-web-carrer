@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "test": "",
-    "start": "node compiled/server/index.js",
-    "bundle": "webpack",
+    "start": "npm run build | npm run start:server",
+    "start:server": "node compiled/server/index.js",
     "build": "webpack -p --verbose --progress",
     "watch": "webpack --watch --progress",
     "watch:server": "nodemon compiled/server/index.js"
