@@ -14,7 +14,9 @@ export interface NavigationLink {
 
     target?: string
 
-    classes?: string[]
+    classes?: string[],
+
+    links?: NavigationLink[]
     
 }
 
@@ -26,10 +28,11 @@ export class Navigation {
      * @param links rendered in anchor tags for the navigation
      * @param activeLinkClass would be added to an link if it is active
      */
-    constructor(id : string, classes : string[] = [], links : NavigationLink[] = [], activeLinkClass = 'is-active') {
+    constructor(id : string, classes : string[] = [], links : NavigationLink[] = [], burgerMenu : boolean = true, activeLinkClass = 'is-active') {
         this.identifier = id;
         this.links = links;
         this.classes = classes;
+        this.hasBurgerMenu = burgerMenu;
     }
 
     links : NavigationLink[]
@@ -38,21 +41,51 @@ export class Navigation {
 
     identifier : string
 
+    hasBurgerMenu : boolean
+
     render() {
         let renderedLinks = [];
-        for (let link of this.links) {
+
+        let burgerMenu = null;
+        if (this.hasBurgerMenu) {
+            burgerMenu = (
+                <div className="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            );
+        }
+
+        return (
+            <nav className={`${this.identifier} ${this.classes.join(' ')}`}>
+                {burgerMenu}
+                {this.renderLinks(this.links)}
+            </nav>
+        );
+    }
+
+    renderLinks(links : NavigationLink[]) {
+        let renderedLinks = [];
+        for (let link of links) {
             let classNames : string[] = [];
             if (link.classes) {
                 classNames = link.classes;
             }
 
-            renderedLinks.push(<a key={link.url} className={classNames.join(' ')} title={link.title} href={link.url} target={link.target}>{link.text}</a>);
+            let children = null;
+            if (link.links) {
+                children = this.renderLinks(link.links)
+            }
+
+            renderedLinks.push(
+                <li key={link.url} className={classNames.join(' ')}>
+                    <a title={link.title} href={link.url} target={link.target}>{link.text}</a>
+                </li>
+            );
         }
 
-        return (
-            <nav className={`${this.identifier} ${this.classes.join(' ')}`}>
-                {renderedLinks}
-            </nav>
-        );
+        return <ul>{renderedLinks}</ul>;
     }
 }
