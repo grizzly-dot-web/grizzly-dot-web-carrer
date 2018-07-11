@@ -1,0 +1,24 @@
+{
+	"class": "App",
+	"data": {
+
+	},
+	"config": {
+		"slug": "",
+		"title": "Start"
+	},
+	"children": [
+		{
+			"class": "App",
+			"data": {
+
+			},
+			"config": {
+
+			},
+			"children": {
+				
+			}		
+		}
+	]
+}
