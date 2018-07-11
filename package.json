@@ -6,7 +6,7 @@
     "test": "",
     "start": "npm run build | npm run start:server",
     "start:server": "node compiled/server/index.js",
-    "build": "webpack -p --verbose --progress",
+    "build": "webpack -p --verbose",
     "watch": "webpack --watch --progress",
     "watch:server": "nodemon compiled/server/index.js"
   },
