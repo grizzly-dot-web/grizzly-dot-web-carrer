@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import compression from 'compression';
 
 import * as WebSocket from 'ws';
 import * as path from 'path';
@@ -13,6 +14,7 @@ const wss = new WebSocket.Server({ server });
 
 server.listen(PORT);
 app.use(
+	compression(),
 	morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms')
 );
 // Serve static assets
