@@ -4,20 +4,43 @@ import slugify from 'slugify'
 
 import moment from 'moment';
 
-import Article from '../Content/Article';
-import Experiences from './Experiences';
+import Experiences from './Entry/Experiences';
 import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
-import CmsControlledComponent from '../../../Core/CmsControlledComponent';
+import CmsControlledComponent, { CmsState, CmsProps } from '../../../Core/CmsControlledComponent';
+import Textarea from '../../../Core/Components/Textarea';
 
-export interface HistoryEntryProps {
-	data : any
-	prevEntries: any
-	nextEntries: any
-	additionalClasses: Array<string>
+export interface Institution {
+	begin_date: string,
+	end_date?: string,
+	type: string
+	title: string,
+	url: string,
+	job_title: string,
+	industry: string,
+	company_size: string,
 }
 
-export interface HistoryEntryState {
-	lastPosition: number
+export interface Experience {
+	url: string,
+	title: string,
+	level: string
+	category: string,
+	type: string,
+}
+
+export interface HistoryEntryData {
+	url: string,
+	title: string
+	institutions: Institution[],
+	experiences: Experience[]
+}
+
+export interface HistoryEntryProps extends CmsProps<HistoryEntryData> {
+	enabled : boolean
+	onClick : (() => void)|undefined
+}
+
+export interface HistoryEntryState extends CmsState {
 	detailsVisible: boolean
 	showExperiences: boolean
 	experienceBlockingElements: HTMLElement[]
@@ -34,88 +57,107 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 		super(props);
 
 		this.state = {
-			lastPosition: 0,
 			showExperiences: false,
 			detailsVisible:  false,
+			navigationRegistry: null,
 			experienceBlockingElements: [],
 			experiencesOriginPosition: null,
 		};
 
 		this.ref = null;
-		this.url = '/career/'+ slugify(this.props.data.institution.title).toLowerCase() +'-'+ slugify(this.props.data.begin_date).toLowerCase();
+		if (this.props.data) {
+			this.url = this.props.data.url;
+		} else {
+			this.url = 'history-entry';
+		}
 	}
 
 	render() {
+		if (!this.props.data) {
+			return;
+		}
+
 		//prepare working duration
-		let startDate = moment(this.props.data.begin_date, 'YYYY-MM');
-		let endDate = moment(this.props.data.end_date, 'YYYY-MM');
+		let startDate = this.stringToDate(this.props.data.institutions[0].begin_date);
+		let endDate = this.stringToDate(this.props.data.institutions[this.props.data.institutions.length -1].end_date);
 
-		if (this.props.data.end_date === null) {
-			endDate = moment();
+
+		let classes = [];
+		let handleClick : (() => void)|undefined = this.props.onClick;
+		if (this.props.enabled) {
+			handleClick = undefined;
+			classes.push('is-active');
 		}
-
-		// prepare child rendering
-		let details = null;
-		let detailComponents = this.props.data.ChildComponents;
-		if (check.assigned(detailComponents)) {
-			details = null; // (<div className="content">{this.renderComponents(detailComponents)}</div>);
-		}
-
 		// render the prepared section
 		return (
-			<article ref={ (ref) => this.ref = ref} id={this.props.data.begin_date} data-gzly-routing-module={this.props.data.slug} className={'history-entry '+ this.props.additionalClasses.join(' ')}>
-				{this.props.children}
+			<article ref={ (ref) => this.ref = ref} className={`history-entry ${classes.join(' ')}`} onClick={handleClick} >
 				<div className={'history-main'}>
-					<header className="history-header">
-						<div className={'inner'}>
-							<time className="title">{ this.getFormattedTime(startDate, endDate) }</time>
-							<h1><pre>{this.props.data.institution.title}</pre></h1>
-							<h2><pre>{this.props.data.institution.job_title}</pre></h2>
+					<span className="timespan start">
+						<time className="date">{startDate.format('MMMM YYYY')}</time>
+					</span>
+					<span className="timespan end"></span>
+					<header className="history-institutions">
+						<div className={'history-header'}>
+							<h1 className="history-title">{this.props.data.title}</h1>
 						</div>
+						{this.renderInstitutions()}
 					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
-				<div className={`history-content ${check.assigned(details) ? 'details-exists' : ''} ${this.state.detailsVisible ? 'details-visible' : ''}`} >
-					{details}
+				<div className={`history-details`}>
+					{
+						this.renderChildren({ 
+							'Textarea': { class: Textarea } 
+						})
+					}
 				</div>
 			</article>
 		);
 	}
 
+	renderInstitutions() {
+		if (!this.props.data) {
+			return;
+		}
+
+		let counter = 0;
+		let rendered = [];
+		for (let institution of this.props.data.institutions) {
+			counter++;
+			//prepare working duration
+			let startDate = this.stringToDate(institution.begin_date);
+			let endDate = this.stringToDate(institution.end_date);
+			
+			rendered.push(
+				<div key={counter} className={'institution'}>
+					<time className="duration">{ this.getFormattedTime(startDate, endDate) }</time>
+					<h2 className="institution-title">{institution.title}</h2>
+					<span className="institution-subtitle">{institution.job_title}</span>
+				</div>
+			)
+		}
+		
+		return rendered;
+	}
+
 	componentDidMount() {
 		let ref = this.ref as HTMLElement;
-		let timeline = document.querySelector('.timeline') as HTMLElement; 
 		let historyHeader = ref.querySelector('.history-header') as HTMLElement;
 
 		this.setState(Object.assign(this.state, {
 			experiencesOriginPosition: { x: historyHeader.offsetLeft / 2, y: historyHeader.offsetTop / 2 },
-			experienceBlockingElements: [timeline, historyHeader]
+			experienceBlockingElements: [historyHeader]
 		}));
 	}
 
-	enter(): void {
+	stringToDate(dateString : string|undefined) {
+		let date = moment(dateString, 'YYYY-MM');
 
-		this.appElement.classList.add('history__is-active');
-        this.appElement.classList.add(`header__right-dark`);
-		
-		this.setState(Object.assign(this.state, {
-			showExperiences: true
-		}));
-	}
-	
-	leave(): void {
+		if (!dateString) {
+			date = moment();
+		}
 
-		let experienceOverviewLink = document.querySelector('header#page-header .experience-link .circle') as HTMLElement;
-		this.setState(Object.assign(this.state, {
-			showExperiences: false,
-			experiencesOriginPosition: { x: experienceOverviewLink.offsetTop / 2, y: experienceOverviewLink.offsetTop / 2 }
-		}));
-	}
-
-	onDetailsToggleClick(e : Event) {
-		this.setState(Object.assign(this.state, {
-			detailsVisible: !this.state.detailsVisible
-		}));
+		return date;
 	}
 
 	getFormattedTime(startDate: moment.Moment, endDate : moment.Moment) {

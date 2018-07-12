@@ -19,7 +19,7 @@ $LightCopy_Color: $ColorBackgroundContent;
 $Color1: #7f18ff;
 $Color2: #005aff;
 
-$Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.5);
+$Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.7);
 $Timeline-Active_BackgroundColor: $ColorBackgroundContent;
 
 $ColorDiscarded: #F1235A;
@@ -31,11 +31,12 @@ $ColorMastered: $ColorPrimary;
 
 //#region Sizes and Positions
 $HistoryMainWidth: 70%;
+$HistoryDetailsOverlap: 10%;
 
 $Timeline_Width: 10%;
 $Timeline-Line_Width: 6px;
 $Timeline_PositionLeft: getGridSize(13, horizontal);
-
+$Timeline_Marker_Width: getGridSize(2, horizontal);
 
 $EndMarker_PositionTop: getGridSize(3, vertical);
 $BeginMarker_PositionBottom: getGridSize(3, vertical);

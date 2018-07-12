@@ -1,73 +1,235 @@
+#app {
+	&.history__is-active {
+		.history-entry:first-child:not(.is-active) {
+			.history-main {
+				padding-top: 6em;
+			}
+		}
+	}
+}
+
 .history-entry {
 	width: 100%;
-	height: 100vh;
 	position: relative;
-	color: $ColorSecondaryDarker;
 
-	//Fix Browser (Chrome) calculation Error
-	&:not(:first-child) {
-		height: calc(100vh + 1px + #{$Viewport_Padding_Horizontal});
-		margin-top: -1px;
+
+	&:not(.is-active) {
+		cursor: pointer;
+		
+		.history-main {
+			min-height: 0;
+			background-image: none;
+			transition-delay: 0;
+			
+			&:hover {
+				.history-title  {
+					color: $ColorPrimary;
+				}
+			}
+		}
+
+		.history-institutions {
+			flex-grow: 1;
+
+			.institution {
+				display: none;
+			}
+		}
+
+		.timespan {
+			flex-grow: 1;
+		}
+
+		.history-details {
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+
+	&.is-active {
+		.history-main {
+			min-height: 90vh;
+
+			.timespan.start {
+				min-height: 7em;
+			}
+
+			.institution {
+				opacity: 1;
+				height: auto;
+			}
+		}
 	}
 
 	.history-main {
 		width: $HistoryMainWidth;
-		height: 100%;
 		position: relative;
+
+		display: flex;
+		align-items: stretch;
+		flex-direction: column;
+		justify-content: space-between;
+		transition: min-height 0.5s ease-in-out, padding 0.2s 0.2s ease-in-out;
+
+		background-color: $Color1;
 		background-image: radial-gradient(
 			circle at 65% 50%,
 			$Color2 1%,
 			$Color1 75%
-    );
+		);
+
+		&:after, &:before {
+			content: '';
+			z-index: 1;
+			height: 7vh;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			position: absolute;
+			background-image: linear-gradient(to top, rgba($Color1,1) 30% ,rgba($Color1,0) 100%);
+		}
+
+		&:before {
+			top: 0;
+			bottom: auto;
+			transform: rotate(180deg)
+		}
 	}
 
-	.history-header {
+	.timespan {
+		z-index: 2;
 		order: 1;
-		bottom: map-get($Timespan_Height, Next);
-		height: $CurrentTimeSpan_Height;
-		position: absolute;
-		left: 0;
-		width: 100%;
-		transition: bottom 0.55s linear;
+		flex-grow: 2;
+		overflow: hidden;
+		position: relative;
 
-		.inner {
-			top: 50%;
-			left: 50%;
-			min-width: 50vw;
-			position: relative;
-			display: inline-block;
-			transform: translate(-50%, -50%);
+		&:before, .date {
+			transition: left 0.3s ease-in-out;
 		}
 
-		h1, time {
-			color: $LightCopy_Color;
-		}
-
-		time {
+		&:before {
+			content: '';
+			left: $Timeline_PositionLeft;
+			width: $Timeline-Line_Width;
+			height: 100vh;
 			display: block;
-			min-width: getGridSize(22.5, horizontal);
+			position: absolute;
+			transform: translateX(50%);
+			background-color: $Timeline_BackgroundColor;
+		}
+
+		&.start {
+			order: 1;
+			height: 2em;
+
+			.date {
+				bottom: 0;				
+			}
+		}
+
+		&.end {
+			order: 3;
+
+			.date {
+				top: 0;				
+			}
+		}
+
+		.date {
+			color: $Timeline_BackgroundColor;
+			
+			padding: 0.8em 0;
+			padding-left: $Timeline_Marker_Width;
+			
+			left: calc(#{$Timeline_PositionLeft});
+			position: absolute;
+
+			&:before, &:after {
+				content: '';
+				top: 50%;
+				left: $Timeline-Line_Width / 2;
+				height: $Timeline-Line_Width;
+				width: $Timeline_Marker_Width / 2;
+				display: block;
+				position: absolute;
+				background-color: $Timeline_BackgroundColor;
+				transform: translate(-100%, -50%);
+			}
+
+			&:after {
+				left: $Timeline-Line_Width / 2 + $Timeline-Line_Width;
+				transform: translateY(-50%);
+			}
+		}
+	}
+	
+	.history-institutions {
+		order: 2;
+
+		display: flex;
+		padding: 1em getGridSize(2, horizontal);
+		flex-direction: column;
+		justify-content: center;
+
+		transition: flex-grow 0.5s ease-in-out;
+
+		.institution {
+			margin-bottom: 4em;
+			opacity: 0;
+			height: 0;
+			overflow: hidden;
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		.history-title, .duration, .timespan {
+			color: $LightCopy_Color;
+			transition: color 0.3s ease-in-out;
+		}
+
+		.history-title {
+			margin-bottom: 1em;
+		}
+
+		.institution-title {
+			@extend h4;
+		}
+
+		.institution-subtitle {
+			
+		}
+
+		.duration {
+			display: block;
 			padding-bottom: getGridSize(1, vertical) / 1.8;
 			margin-bottom: getGridSize(1, vertical) / 3;
 			border-bottom: 1px solid $ColorSecondary;
 		}
 	}
 
-	.history-content {
-		order: 3;
+	.history-details {
+		z-index: 5;
+		opacity: 1;
+		top: 0;
+		height: 80vh;
+		min-width: 10vw; 
+		
+		transition: opacity 0.5s 0.5s ease-in-out;
 
-		&.details-exists {
-			left: getGridSize(45, vertical);
-			top: getGridSize(2, horizontal);
-			width: getGridSize(23, vertical) * 2;
-			height:  getGridSize(34, horizontal) ;
-			position: absolute;
+		position: absolute;
+		left: $HistoryMainWidth - $HistoryDetailsOverlap;
+		width: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
 
-			.content {
-				height: 100%;
-			}
-		}
+		padding: getGridSize(2, vertical) getGridSize(1, horizontal);
+		padding-top: 6em;
 
 		article {
+			height: 100%;
+			color: $ColorBackgroundDark;
+			background-color: $ColorBackgroundContent;
+			padding: getGridSize(2, vertical) getGridSize(1, horizontal);
+
+			columns: 300px;
+
 			header {
 				h3,
 				h4 {
@@ -75,6 +237,8 @@
 				}
 
 				h4 {
+					color: $ColorPrimary;
+
 					&:before {
 						content: ' | ';
 						white-space: pre;

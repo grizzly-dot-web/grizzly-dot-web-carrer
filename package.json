@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "test": "",
-    "start": "node compiled/server/index.js",
-    "bundle": "webpack",
-    "build": "webpack -p --verbose --progress",
+    "start": "npm run build | npm run start:server",
+    "start:server": "node compiled/server/index.js",
+    "build": "webpack -p --verbose",
     "watch": "webpack --watch --progress",
     "watch:server": "nodemon compiled/server/index.js"
   },
@@ -45,7 +45,7 @@
     "ease-component": "^1.0.0",
     "express": "^4.16.3",
     "http": "0.0.0",
-    "marked": "^0.3.17",
+    "markdown-to-jsx": "^6.6.9",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
     "normalize-scss": "^7.0.1",

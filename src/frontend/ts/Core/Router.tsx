@@ -41,13 +41,14 @@ export default class Router {
             }
     
             for (let comp of this._lastActiveComponents) {
-                if (!comp.acitveStateCondition()) {
+                if (!condition(comp)) {
                     comp.dispatchLeave();
                 }
             }
 
             for (let comp of activeComps) {
-                if (this._lastActiveComponents.length > 0 || this._lastActiveComponents.findIndex((c) => c.link.url === comp.link.url) === -1) {
+                // If it is first active Component or it is newly added
+                if (this._lastActiveComponents.length <= 0 || this._lastActiveComponents.indexOf(comp) === -1) {
                     comp.dispatchEnter();
                 }
             }
@@ -59,11 +60,13 @@ export default class Router {
     }
 
     public activateComponentByUrl() {
+        this.componentCoditionRoutingIsEnabled = false;
         return this._detectActiveComponent((component: CmsRoutingComponent<CmsProps<any>, CmsState>) => {
-            if (component.link.url == this.currentUrl) {
+            if (component.link().url == this.currentUrl) {
                 return true;
             }
 
+            this.componentCoditionRoutingIsEnabled = true;
             return false;
          }, 0);
     }

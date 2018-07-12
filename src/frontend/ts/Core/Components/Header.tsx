@@ -4,14 +4,14 @@ import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComp
 import Textarea from './Textarea';
 import Headline from './Headline';
 
-export interface ArticleProps extends CmsProps<null> {
+export interface HeaderProps extends CmsProps<null> {
 
 }
-export interface ArticleState extends CmsState { 
+export interface HeaderState extends CmsState { 
 
 }
 
-class Article extends CmsControlledComponent<ArticleProps, ArticleState> {
+export default class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
 
 	constructor(props : any) {
 		super(props);
@@ -19,15 +19,12 @@ class Article extends CmsControlledComponent<ArticleProps, ArticleState> {
 
 	render() {
 		return (
-			<article key={this.props.key}>
+			<header key={this.props.key}>
 				{this.renderChildren({
-					'Textarea' : Textarea,
 					'Headline' : Headline,
 				})}
-			</article>
+			</header>
 		);
 	}
 
 }
-
-export default Article;

@@ -6,6 +6,7 @@
 	.experience {
 		opacity: 0;
 		z-index: 2;
+		visibility: hidden;
 		position: absolute;
 		border-radius: 20px;
 		padding: 10px 15px;
@@ -90,6 +91,7 @@
 	
 		&.packageItem__is-visible {
 			opacity: 1;
+			visibility: visible;
 		}
 	
 		.title {

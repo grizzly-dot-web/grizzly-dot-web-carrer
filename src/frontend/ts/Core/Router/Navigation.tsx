@@ -118,7 +118,6 @@ export class Navigation extends React.Component<NavProps, NavState> {
         }
 
         let app = document.querySelector('#app') as HTMLElement;
-        
         app.classList.toggle(`navigation-${this.props.identifier}__is-active`)
     }
 

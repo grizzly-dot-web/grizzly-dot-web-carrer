@@ -13,6 +13,7 @@ import Footer from '../App/_Footer';
 import Histroy from '../App/History';
 import ExperienceOverview from '../App/ExperienceOverview';
 import NavigationRegistry from './Router/NavigationRegistry';
+import Outro from '../App/Outro';
 
 export default class Bootstrap extends React.Component {
    
@@ -54,15 +55,16 @@ export default class Bootstrap extends React.Component {
     
     render() {
         return (
-            <div>
-                <Header data={this.data.header} />
-                <main>
-                    <ExperienceOverview data={this.data.history} />
-                    <Intro childrenInfo={this.data.intro.childrenInfo} />
-                    <Histroy data={this.data.history} />
-                </main>
-                <Footer data={this.data.footer} />
-            </div>
+			<div>
+				<Header data={this.data.header} />
+				<main>
+					<ExperienceOverview data={this.data.history} />
+					<Intro data={this.data.intro} />
+					<Histroy data={this.data.history} />
+					<Outro data={this.data.outro} />
+				</main>
+				<Footer data={this.data.footer} />	
+			</div>
         )
     }
 

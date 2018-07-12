@@ -1,3 +1,5 @@
+$MobileNavBreak: 700px;
+
 header#page-header {
 	z-index: 3;
 	width: 100vw;
@@ -37,68 +39,257 @@ header#page-header {
 				font-size: 0.5em;
 			}
 		}
+	}
+}
 
-		nav.main {
-			a {
-				color: $ColorBackgroundContent;
-				font-size: 0.9em;
-				margin-left: getGridSize(1, horizontal);
-				transition: $HeaderColorTansition;
+/***
 
-				&:hover {
-					color: $ColorPrimary;
-				}
-				&.active {
-					color: $ColorPrimary;
-					font-weight: bold;
-				}
+Navigation
 
-				&.experience-link {
-					left: calc(#{$Timeline_PositionLeft} - #{getGridSize(2, horizontal)});
-					margin-left: -3.9em;
-					transition: $HeaderColorTansition;
+***/
+nav.main {
+	> ul {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+
+		li {
+			order: 1;
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			list-style: none;
+		}
+	}
+
+	a {
+		color: $ColorBackgroundContent;
+		font-size: 0.9em;
+		margin-left: getGridSize(1, horizontal);
+		transition: $HeaderColorTansition;
+
+		&:hover {
+			color: $ColorPrimary;
+		}
+
+		&.active {
+			color: $ColorPrimary;
+			font-weight: bold;
+		}
+	}
+
+	.print {
+		order: 3;
+	}
+
+	.experience-link {
+		order: 1;
+	
+		a {
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+	
+			.skills, .references {
+				display: inline-block;
+			}
+			.skills {
+				transform: translateY(-20%);
+			}
+			.references {
+				transform: translateY(20%);
+			}
+	
+			.circle {
+				color: $ColorBackgroundDark;
+				position: relative;
+				display: inline-block;
+				padding: 0 1.1em;
+	
+				&:after {
+					content: '';
+					z-index: -1;
+					top: 50%;
+					left: 50%;
+					display: block;
+					border-radius: 50%;
 					position: absolute;
-		
-					display: flex;
-					flex-wrap: nowrap;
-					align-items: center;
-					flex-direction: row;
-					justify-content: space-between;
-		
-					.skills, .references {
-						display: inline-block;
-					}
-					.skills {
-						transform: translateY(-20%);
-					}
-					.references {
-						transform: translateY(20%);
-					}
-		
-					.circle {
-						color: $ColorThird;
-						position: relative;
-						display: inline-block;
-						padding: 0 1.1em;
-		
-						&:after {
-							content: '';
-							z-index: -1;
-							top: 50%;
-							left: 50%;
-							display: block;
-							border-radius: 50%;
-							position: absolute;
-							background-color: $ColorBackgroundLight;
-							width: 2em;
-							height: 2em;
-							background-color: $ColorBackgroundContent;
-							transform: translate(-50%, -50%);
-						}
-					}
+					background-color: $ColorBackgroundLight;
+					width: 2em;
+					height: 2em;
+					background-color: $ColorBackgroundContent;
+					transform: translate(-50%, -50%);
+				}
+			}
+			
+
+			&:hover .circle:after {
+				background-color: $ColorPrimary;
+			}
+		}
+	}
+
+	.burger-icon {
+		z-index: 2;
+	}
+
+	/***
+	
+	Desktop Nav
+	
+	***/
+	@media (min-width: $MobileNavBreak) {
+		.burger-icon {
+			display: none;
+		}
+
+		.experience-link a {
+			top: 50%;
+			transform: translateY(-50%);
+			left: calc(#{$Timeline_PositionLeft} - #{getGridSize(2, horizontal)});
+			margin-left: -3.9em;
+			transition: $HeaderColorTansition;
+			position: absolute;
+		}
+	}
+
+	/***
+	
+	Mobile Nav
+	
+	***/
+	@media (max-width: $MobileNavBreak) {
+		> ul {
+			height: 100vh;
+			top: 0;
+			right: 0;
+			position: fixed;
+			padding-top: 7em;
+			background-color: $ColorBackgroundDark;
+			flex-direction: column;
+			align-items: stretch;
+			justify-content: flex-start;
+			transform: translateX(100%);
+	
+			li {
+				display: block;
+
+				a {
+					padding: 0.5em;
+					display: block;
+					text-align: right;
+				}
+			}
+
+			.experience-link {
+				align-self: center;
+				margin-bottom: 2em;
+
+				a {
+					text-align: center;
 				}
 			}
 		}
+	
+		.burger-icon {
+			display: block;
+		}
+	}
+}
+
+/***
+
+Burgericon
+
+***/
+$burgerLineHeight: 3px;
+$burgerLineGap: 9px;
+$burgerLineWidth: 32px;
+$burgerColor: $ColorBackgroundContent;
+$burgerColorHover: $ColorPrimary;
+
+$burgerHeight: ($burgerLineHeight * 3) + ($burgerLineGap * 2);
+
+.burger-icon {
+  cursor: pointer;
+  width: $burgerLineWidth;
+  height: $burgerHeight;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+
+  &:hover span {
+    background-color: $burgerColorHover;
+  }
+
+  span {
+    display: block;
+    position: absolute;
+    height: $burgerLineHeight;
+    width: 100%;
+    background-color: $burgerColor;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+
+    &:nth-child(1) {
+      top: 0;
+    }
+    &:nth-child(2), &:nth-child(3)  {
+      top: ($burgerHeight / 2) - ($burgerLineHeight / 2);
+    }
+    &:nth-child(4) {
+      top: $burgerHeight - $burgerLineHeight;
+    }
+  }
+}
+
+/***
+
+Header States
+
+***/
+#app.navigation-main__is-active {
+	@media (max-width: $MobileNavBreak) {
+		nav.main {
+			> ul {
+				transform: translateX(0);
+			}
+		}
+	}
+
+	.burger-icon {
+		span {
+			&:nth-child(1) {
+			  top: $burgerLineGap + $burgerLineHeight;
+			  width: 0;
+			  left: 50%;
+			}
+	  
+			&:nth-child(2) {
+			  transform: rotate(45deg);
+			}
+	  
+			&:nth-child(3) {
+			  top: ceil(($burgerHeight / 2) - $burgerLineHeight);
+			  transform: rotate(-45deg);
+			}
+	  
+			&:nth-child(4) {
+			  top: 18px;
+			  width: 0;
+			  left: 50%;
+			}
+		  }
 	}
 }
 
@@ -127,18 +318,27 @@ header#page-header {
 
 	&.header__left-dark header#page-header {
 		.logo, .experience-link, .experience-link .circle {
-			color: $ColorThird;
+			color: $ColorBackgroundDark;
 			background-color: $ColorBackgroundLight;
 		}
 	}
 
 	&.header__right-dark header#page-header {
-		nav.main a:not(.active):not(:hover) {
-			color: $ColorThird;
-
-			&.experience-link {
-				color: $ColorBackgroundLight;
+		nav.main .burger-icon:not(:hover) {
+			span {
+				background-color: $ColorBackgroundDark;
 			}
+		}
+		@media (min-width: $MobileNavBreak) {
+			nav.main a:not(.active):not(:hover) {
+				font-weight: 400;
+				color: $ColorBackgroundDark;
+	
+				&.experience-link {
+					color: $ColorBackgroundLight;
+				}
+			}
+
 		}
 	}	
 }

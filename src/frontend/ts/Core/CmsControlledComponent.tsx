@@ -5,23 +5,29 @@ import CmsComponentHandler from './CmsComponentHandler';
 import NavigationRegistry from './Router/NavigationRegistry';
 import { NavState } from './Router/Navigation';
 
+
+export interface ChildComponentConfig {
+    [className:string] : { class: any, props? : any }//new (props : CmsComponentProps) => CmsControlledComponent<CmsComponentProps, CmsState>
+}
+
+export interface ChildComponentData {
+    [className:string] : CmsProps<any>//new (props : CmsComponentProps) => CmsControlledComponent<CmsComponentProps, CmsState>
+}
+
 export interface CmsProps<Data> {
-    class : string
+    className : string
     key? : string
     data? : Data
-    childrenInfo? : {[className:string] : CmsProps<Data>}
+    childrenInfo? : {[region:string] : ChildComponentData}
 }
 
 export interface CmsState {
     navigations?: {[className:string] : React.ReactElement<NavState>[]}
 }
 
-export interface ChildComponents {
-    [className:string] : any//new (props : CmsComponentProps) => CmsControlledComponent<CmsComponentProps, CmsState>
-}
+export default class CmsControlledComponent<Props extends CmsProps<any>, State extends CmsState> extends React.Component<Props, State> {
 
-export default abstract class CmsControlledComponent<Props extends CmsProps<any>, State extends CmsState> extends React.Component<Props, State> {
-    
+
     constructor(props: Props, context?: any) {
         super(props, context);
         this.state = {} as Readonly<State>;
@@ -41,21 +47,19 @@ export default abstract class CmsControlledComponent<Props extends CmsProps<any>
         return this.handler.appElement as HTMLElement;
     }
 
-    protected renderNavigation(id : string) {
-        if (!this.state.navigations) {
-            throw new Error(`navigation property must exist in state`)
-        }
-        if (!this.state.navigations.hasOwnProperty(id)) {
-            throw new Error(`navigation with key: ${id} did not exists`)
+    protected renderChildren(possibleChildComps : ChildComponentConfig, region : string = 'default') {
+        let info = null;
+        
+        if (this.props.data && this.props.data.childrenInfo && this.props.data.childrenInfo.hasOwnProperty(region)) {
+            info = this.props.data.childrenInfo[region] as ChildComponentData;
         }
 
-        return this.state.navigations[id];
-    }
+        if (this.props.childrenInfo && this.props.childrenInfo.hasOwnProperty(region)) {
+            info = this.props.childrenInfo[region] as ChildComponentData;
+        }
 
-    protected renderChildren(possibleChildComps : ChildComponents) {
-        let info = this.props.childrenInfo;
         if (!info) {
-            throw new Error('Component have no children / you have to specify it in the json')
+            return null;
         }
 
         let counter = 0;
@@ -63,13 +67,16 @@ export default abstract class CmsControlledComponent<Props extends CmsProps<any>
         for (let compClassName in info) {
             counter++;
             
-            let ChildComps = possibleChildComps[info[compClassName].class];
-            if (!ChildComps) {
-                throw new Error(`Unsupported Component`);
+            let props = info[compClassName];
+            let config =  possibleChildComps[props.className]
+
+            if (!config) {
+                throw new Error(`Unsupported Component "${info[compClassName].className}" in "${region}" region`);
             }
 
-            info[compClassName].key = counter.toString();
-            let comp = new ChildComps(info[compClassName]) as CmsControlledComponent<Props, State>;
+            let ChildComps = config.class;
+            info[compClassName].key = counter.toString(); 
+            let comp = new ChildComps(Object.assign(props, config.props)) as CmsControlledComponent<Props, State>;
             children.push(comp.render()); 
         }
 
