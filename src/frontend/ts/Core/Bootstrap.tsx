@@ -1,53 +1,69 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import App from '../App';
 import Router from '../Core/Router';
-import { Navigation, NavigationRegistry } from './Router/Navigation';
+
+import { Navigation, NavProps } from './Router/Navigation';
+
 import CmsComponentHandler from './CmsComponentHandler';
 
-export default class Bootstrap {
-    disabledAnchorTagsSelector = 'a:not(.reload)'
-    
+import Intro from '../App/Intro';
+import Header from '../App/_Header';
+import Footer from '../App/_Footer';
+import Histroy from '../App/History';
+import ExperienceOverview from '../App/ExperienceOverview';
+import NavigationRegistry from './Router/NavigationRegistry';
+
+export default class Bootstrap extends React.Component {
+   
     appElement : HTMLElement;
+
+    disabledAnchorTagsSelector = 'a:not(.reload)'
+
+    data : any
 
     get componentHandler() {
         return CmsComponentHandler.getInstance();
     }
 
     constructor(app : HTMLElement) {
+        super({});
+
         this.appElement = app;
         this.componentHandler.appElement = this.appElement;
     }
 
-    public registerNavigations(navigations : Navigation[]) {
-        let registry : NavigationRegistry = {};
-        for (let nav of navigations) {
-            registry[nav.identifier] = nav;
-        }
-
-        this.componentHandler.setNavigationRegistry(registry);
-    }
-    
-	init(): any {
+	init(navigations : NavProps[] = []): any {
         this.componentHandler.init();
-        this.render().then(() => {
-            this.componentHandler.startRouter();
-        });
-	}
+        
+        NavigationRegistry.init(navigations);
 
-	render(): any {
-        return fetch('/data/career.json').then((response) => {
+        fetch('/data/career.json').then((response) => {
             if (response.ok) {
                 return response.json().then((data) => {
-                    ReactDOM.render(
-                        <App data={data} />,
-                        this.appElement
-                    );
+                    this.data = data;
+                    ReactDOM.render(this.render(), this.appElement, () => {
+                        this.componentHandler.startRouter();
+                    });
+
+                    NavigationRegistry.updateNavigations()
                 })
             }
         });
     }
+    
+    render() {
+        return (
+            <div>
+                <Header data={this.data.header} />
+                <main>
+                    <ExperienceOverview data={this.data.history} />
+                    <Intro childrenInfo={this.data.intro.childrenInfo} />
+                    <Histroy data={this.data.history} />
+                </main>
+                <Footer data={this.data.footer} />
+            </div>
+        )
+    }
 
-
-}
+} 

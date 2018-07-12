@@ -7,13 +7,12 @@ import Timeline from './Components/History/Timeline';
 import HistoryEntry from './Components/History/HistoryEntry';
 import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
 import { CmsState, CmsProps } from '../Core/CmsControlledComponent';
-import { CmsRoutingState } from '../Core/Router/AbstractRoutingComponent';
+import { NavigationLink } from '../Core/Router/Navigation';
 
 
 export interface HistoryProps extends CmsProps<any> {
 }
-export interface HistoryState extends CmsRoutingState {
-	isActive: boolean
+export interface HistoryState extends CmsState {
 	routeName: string
 	historyEntries: any
 	disableScroll: boolean
@@ -24,17 +23,15 @@ export interface HistoryState extends CmsRoutingState {
 
 class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 
-    navigationId() {
-		return 'main';
-	}
-    link() {
-        return {
+	link() {
+		return {
 			url: '/career',
 			title: 'Karriere',
 			text: 'Karriere'
-		};
-	}
+		}
+	};
 
+    navigationId() { return 'main' };
 	ref: HTMLElement | null;
 
 	lastScrollTop : number = 0;
@@ -64,8 +61,8 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			return 0;
 		});
 
+		
 		this.state = {
-			isActive: false,
 			navigationActive: {
 				previous: false,
 				next: false,
@@ -73,7 +70,6 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			routeName: 'karriere',
 			disableScroll: false,
 			historyEntries: entries,
-			navigationRegistry: null,
 			timescaleEnd: check.assigned(entries[0].end_date) ? moment(entries[0].end_date, 'YYYY-MM') : moment(),
 			timescaleStart: moment(entries[entries.length - 1].begin_date, 'YYYY-MM'),
 		};

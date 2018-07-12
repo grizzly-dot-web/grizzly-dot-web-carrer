@@ -4,29 +4,24 @@ import { NavigationLink } from '../Core/Router/Navigation';
 import Article from '../Core/Components/Article';
 import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 
-
-
 export interface IntroProps extends CmsProps<undefined> {
 }
 export interface IntroState extends CmsState {
-	visibleExperienceLevel : number
 }
 
 export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState> {
-    link(): NavigationLink {
+    
+    link() { 
         return {
             url: '/',
             title: '',
             text: 'Start',
-        };
+        }
     }
-    navigationId(): string | false {
-       return 'main';
-    }
-
+    navigationId() { return 'main' };
     ref: HTMLElement | null;
 
-	constructor(props : any) {
+    constructor(props : any) {
         super(props);
         
         this.ref = null;

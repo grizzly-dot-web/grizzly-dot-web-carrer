@@ -16,17 +16,15 @@ export interface ExperienceOverviewState extends CmsState {
 
 export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOverviewProps, ExperienceOverviewState> {
 
-    navigationId() {
-        return 'main';
-    }
     link() {
         return {
             url: '/experiences',
             title: 'Skills und Referenzen',
             text: (<span><span className="skills">Skills</span> <span className="circle">&</span> <span className="references">Referenzen</span></span>),
             classes: ['experience-link']
-        }
+        };
     }
+    navigationId() { return 'main' };
 
     ref: HTMLElement | null;
 
@@ -40,7 +38,6 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
         this.legendIsStateChanging = false;
         
         this.state = {
-			navigationRegistry: null,
             visibleExperienceLevel: parseInt(Object.keys(ExperienceOverview.Tags)[1])
         };
 

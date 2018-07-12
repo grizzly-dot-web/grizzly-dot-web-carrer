@@ -1,8 +1,5 @@
 import * as React from 'react';
-
-export interface NavigationRegistry {
-    [identifier:string] : Navigation
-}
+import NavigationRegistry from './NavigationRegistry';
 
 export interface NavigationLink {
     
@@ -12,47 +9,117 @@ export interface NavigationLink {
 
     text: string|JSX.Element
 
+    links?: NavigationLink[] 
+
     target?: string
 
     classes?: string[]
     
+    isActive?: Function
+    
 }
 
-export class Navigation {
-
-    /**
-     * @param id identifies this navigation to get the navigation from the router in an component also as className setted 
-     * @param classes additional class names for the rendered navigation
-     * @param links rendered in anchor tags for the navigation
-     * @param activeLinkClass would be added to an link if it is active
-     */
-    constructor(id : string, classes : string[] = [], links : NavigationLink[] = [], activeLinkClass = 'is-active') {
-        this.identifier = id;
-        this.links = links;
-        this.classes = classes;
-    }
-
-    links : NavigationLink[]
-    
-    classes: string[]
-
+export interface NavProps {
     identifier : string
+    links? : NavigationLink[]
+    classes? : string[]
+    hasBurgerMenu? : boolean
+    activeLinkClass? : string
+}
+
+export interface NavState {
+    links : NavigationLink[]
+    classes : string[]
+    hasBurgerMenu : boolean,
+    activeLinkClass : string
+}
+
+export class Navigation extends React.Component<NavProps, NavState> {
+
+    ref : HTMLElement|null
+    burgerMenuRef : HTMLElement|null
+
+    constructor(props : NavProps) {
+        super(props);
+
+
+        this.ref = null;
+        this.burgerMenuRef = null;
+
+        this.state = {
+            classes: this.props.classes || [],
+            links: this.props.links || [],
+            hasBurgerMenu: this.props.hasBurgerMenu || true,
+            activeLinkClass: this.props.activeLinkClass || 'is-active',
+        }
+    }
 
     render() {
         let renderedLinks = [];
-        for (let link of this.links) {
+
+        let burgerMenu = null;
+        if (this.state.hasBurgerMenu) {
+            burgerMenu = (
+                <div ref={(ref) => this.burgerMenuRef = ref} onClick={() => this.handleBurgerClick} className="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            );
+        }
+
+        return (
+            <nav  ref={(ref) => this.ref = ref} className={`${this.props.identifier} ${this.state.classes.join(' ')}`}>
+                {burgerMenu}
+                {this.renderLinks(this.state.links)}
+            </nav>
+        );
+    }
+
+    renderLinks(links : NavigationLink[]) {
+        let renderedLinks = [];
+        for (let link of links) {
             let classNames : string[] = [];
             if (link.classes) {
                 classNames = link.classes;
             }
 
-            renderedLinks.push(<a key={link.url} className={classNames.join(' ')} title={link.title} href={link.url} target={link.target}>{link.text}</a>);
+            let children = null;
+            if (link.links) {
+                children = this.renderLinks(link.links)
+            }
+
+            renderedLinks.push(
+                <li key={link.url} className={classNames.join(' ')}>
+                    <a onClick={() => this.handleLinkClick()} title={link.title} href={link.url} target={link.target}>{link.text}</a>
+                </li>
+            );
         }
 
-        return (
-            <nav className={`${this.identifier} ${this.classes.join(' ')}`}>
-                {renderedLinks}
-            </nav>
-        );
+        return <ul>{renderedLinks}</ul>;
     }
+
+    componentDidMount() {
+        NavigationRegistry.addInstance(this.props.identifier, this);
+    }
+
+    componentDidUpdate() {
+        let navProps = NavigationRegistry.get(this.props.identifier);
+    }
+
+    handleLinkClick() {
+        
+    }
+
+    handleBurgerClick() {
+        if (!this.burgerMenuRef) {
+            throw new Error('burgerMenuRef is not assigned')
+        }
+
+        let app = document.querySelector('#app') as HTMLElement;
+        
+        app.classList.toggle(`navigation-${this.props.identifier}__is-active`)
+    }
+
 }

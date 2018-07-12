@@ -2,10 +2,10 @@ import scroll from 'scroll';
 import page from 'scroll-doc';
 import ease from 'ease-component';
 
-import CmsRoutingComponent, { CmsRoutingState } from "./AbstractRoutingComponent";
-import { CmsProps } from '../CmsControlledComponent';
+import CmsRoutingComponent from "./AbstractRoutingComponent";
+import { CmsProps, CmsState } from '../CmsControlledComponent';
 
-export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsRoutingState> extends CmsRoutingComponent<Props, State> {
+export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsRoutingComponent<Props, State> {
 
     lastScrollTop : null|number = null
     hasScrolledOnce = false

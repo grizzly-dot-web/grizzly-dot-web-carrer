@@ -1,17 +1,22 @@
 import * as React from 'react';
 import CmsControlledComponent, { CmsProps, CmsState } from '../Core/CmsControlledComponent';
+import { Navigation } from '../Core/Router/Navigation';
 
 export interface HeaderProps extends CmsProps<any> {
 }
 
 export interface HeaderState extends CmsState {
-	data : any
+	navigations : any 
 }
 
-class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
+export default class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
 
 	constructor(props : any) {
 		super(props);
+
+		this.state = {
+			navigations: { main: null }
+		};
 	}
 
 	render() {
@@ -40,11 +45,13 @@ class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
 							{spanPerCharacter('grizzly.web')}
 						</h2>
 					</a>
-					{this.handler.renderNavigation('main')}
+					<Navigation identifier={'main'} />
 				</div>
 			</header>
 		);
 	}
-}
 
-export default Header;
+	componentDidMount() {
+		//this.updateNavigationState('main')
+	}
+}
