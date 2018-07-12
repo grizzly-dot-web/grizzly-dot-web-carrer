@@ -23,7 +23,7 @@ export default class Bootstrap {
     public registerNavigations(navigations : Navigation[]) {
         let registry : NavigationRegistry = {};
         for (let nav of navigations) {
-            registry[nav.identifier] = nav;
+            registry[nav.props.id] = nav;
         }
 
         this.componentHandler.setNavigationRegistry(registry);

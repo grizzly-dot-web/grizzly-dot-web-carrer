@@ -13,14 +13,17 @@ let appElement = document.getElementById('app') as HTMLElement;
 let bootstrap = new Bootstrap(appElement);
 
 bootstrap.registerNavigations([
-	new Navigation('main', [], [
-		{
-			url: '/print-version',
-			title: 'Druckvariante',
-			text: 'Druckenversion',
-			classes: ['print']
-		}
-	]),
+	new Navigation({
+		id: 'main',
+		links: [
+			{
+				url: '/print-version',
+				title: 'Druckvariante',
+				text: 'Druckenversion',
+				classes: ['print']
+			}
+		]
+	}),
 ]);
 
 bootstrap.init()

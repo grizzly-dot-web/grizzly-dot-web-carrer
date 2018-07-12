@@ -90,13 +90,13 @@ export default class CmsComponentHandler {
             throw new Error('Navigation did not exists');
         }
 
-        let links = this._navigationRegistry[identifier].links;
+        let links = this._navigationRegistry[identifier].state.links;
         if (!links) {
             links = [];
         }
 
         links.push(link);
-        this._navigationRegistry[identifier].links = links;
+        this._navigationRegistry[identifier].state.links = links;
 
         this.updateNavigationRegistryState(this._navigationRegistry);
     }

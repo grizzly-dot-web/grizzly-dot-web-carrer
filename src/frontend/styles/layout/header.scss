@@ -258,7 +258,7 @@ $burgerHeight: ($burgerLineHeight * 3) + ($burgerLineGap * 2);
 Header States
 
 ***/
-#app.navigation_is-active {
+#app.navigation-main__is-active {
 	@media (max-width: $MobileNavBreak) {
 		nav.main {
 			> ul {
@@ -324,6 +324,11 @@ Header States
 	}
 
 	&.header__right-dark header#page-header {
+		nav.main .burger-icon:not(:hover) {
+			span {
+				background-color: $ColorBackgroundDark;
+			}
+		}
 		@media (min-width: $MobileNavBreak) {
 			nav.main a:not(.active):not(:hover) {
 				font-weight: 400;
