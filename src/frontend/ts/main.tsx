@@ -19,6 +19,7 @@ bootstrap.init([
 				title: `Druckversion`,
 				text: 'Drucken',
 				url: '',
+				classes: ['print'],
 				callback: (e) => {
 					window.print();
 					e.preventDefault();
