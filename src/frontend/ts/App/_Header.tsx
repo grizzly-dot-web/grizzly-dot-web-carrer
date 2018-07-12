@@ -38,11 +38,14 @@ export default class Header extends CmsControlledComponent<HeaderProps, HeaderSt
 				<div className="container">
 					<a className="logo" href="/">
 						<h1>
-							Sebastian<br />
-							Müller
+							<div className="name">
+								Sebastian<br /> 
+								Müller
+							</div>
+							<div className="company">{spanPerCharacter('grizzly.web')}</div>
 						</h1>
 						<h2>
-							{spanPerCharacter('grizzly.web')}
+							
 						</h2>
 					</a>
 					<Navigation identifier={'main'} />

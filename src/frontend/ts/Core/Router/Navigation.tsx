@@ -15,7 +15,9 @@ export interface NavigationLink {
 
     classes?: string[]
     
-    isActive?: Function
+    isActive?: (() => boolean)
+
+    callback?: ((e : React.MouseEvent<HTMLAnchorElement>) => void)
     
 }
 
@@ -60,7 +62,7 @@ export class Navigation extends React.Component<NavProps, NavState> {
         let burgerMenu = null;
         if (this.state.hasBurgerMenu) {
             burgerMenu = (
-                <div ref={(ref) => this.burgerMenuRef = ref} onClick={() => this.handleBurgerClick} className="burger-icon">
+                <div ref={(ref) => this.burgerMenuRef = ref} onClick={() => this.handleBurgerClick()} className="burger-icon">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -70,7 +72,7 @@ export class Navigation extends React.Component<NavProps, NavState> {
         }
 
         return (
-            <nav  ref={(ref) => this.ref = ref} className={`${this.props.identifier} ${this.state.classes.join(' ')}`}>
+            <nav ref={(ref) => this.ref = ref} className={`${this.props.identifier} ${this.state.classes.join(' ')}`}>
                 {burgerMenu}
                 {this.renderLinks(this.state.links)}
             </nav>
@@ -85,6 +87,10 @@ export class Navigation extends React.Component<NavProps, NavState> {
                 classNames = link.classes;
             }
 
+            if (link.isActive && link.isActive() == true) {
+                classNames.push(this.state.activeLinkClass);
+            }
+
             let children = null;
             if (link.links) {
                 children = this.renderLinks(link.links)
@@ -92,7 +98,7 @@ export class Navigation extends React.Component<NavProps, NavState> {
 
             renderedLinks.push(
                 <li key={link.url} className={classNames.join(' ')}>
-                    <a onClick={() => this.handleLinkClick()} title={link.title} href={link.url} target={link.target}>{link.text}</a>
+                    <a onClick={link.callback} title={link.title} href={link.url} target={link.target}>{link.text}</a>
                 </li>
             );
         }
@@ -104,17 +110,12 @@ export class Navigation extends React.Component<NavProps, NavState> {
         NavigationRegistry.addInstance(this.props.identifier, this);
     }
 
-    componentDidUpdate() {
-        let navProps = NavigationRegistry.get(this.props.identifier);
-    }
-
-    handleLinkClick() {
-        
+    handleLinkClick(e : React.MouseEvent<HTMLAnchorElement>, link : NavigationLink) {
     }
 
     handleBurgerClick() {
-        if (!this.burgerMenuRef) {
-            throw new Error('burgerMenuRef is not assigned')
+        if (!this.burgerMenuRef || !this.ref) {
+            throw new Error('burgerMenuRef or ref is not assigned')
         }
 
         let app = document.querySelector('#app') as HTMLElement;

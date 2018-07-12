@@ -31,10 +31,14 @@ export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, S
             return;
         }
 
-        NavigationRegistry.addLink(id, this.link());
+        NavigationRegistry.addLink(id, {
+            ...this.link(),
+            ...{isActive: this.acitveStateCondition.bind(this)}
+        });
     }
 
-    dispatchEnter() {               
+    dispatchEnter() {
+        NavigationRegistry.updateNavigations();
         console.log('entered: ', this.link().url);        
         this.enter();
     }

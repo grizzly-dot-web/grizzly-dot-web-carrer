@@ -30,13 +30,17 @@ header#page-header {
 
 			h1 {
 				font-size: 1em;
-				text-transform: uppercase;
-				margin-bottom: 5px;
-				padding-bottom: 5px;
-				border-bottom: 3px $ColorPrimary solid;
-			}
-			h2 {
-				font-size: 0.5em;
+				
+				.name {
+					text-transform: uppercase;
+					margin-bottom: 5px;
+					padding-bottom: 5px;
+					border-bottom: 3px $ColorPrimary solid;
+				}
+
+				.company {
+					font-size: 0.5em;
+				}
 			}
 		}
 	}
@@ -77,8 +81,10 @@ nav.main {
 		&:hover {
 			color: $ColorPrimary;
 		}
+	}
 
-		&.active {
+	&.active {
+		a {
 			color: $ColorPrimary;
 			font-weight: bold;
 		}
@@ -170,14 +176,14 @@ nav.main {
 		> ul {
 			height: 100vh;
 			top: 0;
-			right: 0;
+			right: -100%;
 			position: fixed;
 			padding-top: 7em;
 			background-color: $ColorBackgroundDark;
 			flex-direction: column;
 			align-items: stretch;
 			justify-content: flex-start;
-			transform: translateX(100%);
+			transition: right 0.5s ease-in-out;
 	
 			li {
 				display: block;
@@ -262,7 +268,7 @@ Header States
 	@media (max-width: $MobileNavBreak) {
 		nav.main {
 			> ul {
-				transform: translateX(0);
+				right: 0;
 			}
 		}
 	}

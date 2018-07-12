@@ -13,7 +13,18 @@ let bootstrap = new Bootstrap(appElement);
 
 bootstrap.init([
 	{
-		identifier: 'main'
+		identifier: 'main',
+		links: [
+			{
+				title: `Druckversion`,
+				text: 'Drucken',
+				url: '',
+				callback: (e) => {
+					window.print();
+					e.preventDefault();
+				}
+			}
+		]
 	}
 ]);
 
