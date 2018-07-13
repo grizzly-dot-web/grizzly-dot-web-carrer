@@ -6,7 +6,7 @@
     "postinstall": "npm run build",
     "test": "",
     "start": "node compiled/server/index.js",
-    "build": "webpack -p --verbose",
+    "build": "node .\\node_modules\\webpack-cli\\bin\\webpack.js -p --verbose",
     "watch": "webpack --watch --progress",
     "watch:server": "nodemon compiled/server/index.js"
   },
