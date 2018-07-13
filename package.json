@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "postinstall": "npm run build",
     "test": "",
-    "start": "npm run build | node compiled/server/index.js",
+    "start": "node compiled/server/index.js",
     "build": "webpack -p --verbose",
     "watch": "webpack --watch --progress",
     "watch:server": "nodemon compiled/server/index.js"
