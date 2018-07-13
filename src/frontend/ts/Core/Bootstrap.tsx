@@ -44,10 +44,11 @@ export default class Bootstrap extends React.Component {
                 return response.json().then((data) => {
                     this.data = data;
                     ReactDOM.render(this.render(), this.appElement, () => {
-                        this.componentHandler.startRouter();
+                        NavigationRegistry.updateNavigations().then(() => {
+                            this.componentHandler.startRouter();
+                        })
                     });
 
-                    NavigationRegistry.updateNavigations()
                 })
             }
         });

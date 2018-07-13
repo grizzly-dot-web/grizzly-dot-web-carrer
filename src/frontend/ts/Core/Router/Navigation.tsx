@@ -96,9 +96,14 @@ export class Navigation extends React.Component<NavProps, NavState> {
                 children = this.renderLinks(link.links)
             }
 
+            let click = {};
+            if (link.callback) {
+                click = { onClick: link.callback}
+            }
+
             renderedLinks.push(
                 <li key={link.url} className={classNames.join(' ')}>
-                    <a onClick={link.callback} title={link.title} href={link.url} target={link.target}>{link.text}</a>
+                    <a {...click} title={link.title} href={link.url} target={link.target}>{link.text}</a>
                 </li>
             );
         }

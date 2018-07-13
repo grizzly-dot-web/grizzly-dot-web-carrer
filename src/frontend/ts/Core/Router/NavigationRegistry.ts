@@ -68,16 +68,25 @@ export default class NavigationRegistry {
     }
 
     static updateNavigations() {
-        for (let id in NavigationRegistry._navigationRegistry) {
-            let regItem = NavigationRegistry.get(id);
+        return new Promise((resolve) => {
+            let changedStateCount = 0; 
+            for (let id in NavigationRegistry._navigationRegistry) {
+                let regItem = NavigationRegistry.get(id);
 
-            if (regItem.instance) {
-                regItem.instance.setState(Object.assign(
-                    regItem.instance.state,
-                    regItem.props,
-                ));
+                if (regItem.instance) {
+                    regItem.instance.setState(Object.assign(
+                        regItem.instance.state,
+                        regItem.props,
+                    ), () => {
+                        changedStateCount++;
+
+                        if (changedStateCount == Object.keys(NavigationRegistry._navigationRegistry).length) {
+                            resolve();
+                        }
+                    });
+                }
             }
-        }
+        })
     }
 
 }
