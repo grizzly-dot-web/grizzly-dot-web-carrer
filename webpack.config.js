@@ -15,7 +15,7 @@ var frontendConfig = {
         extensions: ['.ts', '.tsx', '.js', '.json']
     },
 	output: {
-			path: path.resolve(__dirname, 'compiled/public/compiled'),
+			path: path.resolve(__dirname, 'compiled/public/'),
 			filename: 'main.js',
 			publicPath: './'
 	},
@@ -52,7 +52,7 @@ var backendConfig = {
 		main: ['./src/backend/index.ts'],
 	},
 	output: {
-			path: path.resolve(__dirname, 'compiled/backend'),
+			path: path.resolve(__dirname, 'compiled/server'),
 			filename: 'index.js',
 			publicPath: './'
 	},
