@@ -6,7 +6,7 @@ import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComp
 import { NavigationLink, NavState } from './Navigation';
 import NavigationRegistry from './NavigationRegistry';
 
-export default abstract class CmsRoutingComponent<Props extends CmsProps<any>, State extends CmsState> extends CmsControlledComponent<Props, State> {
+export default abstract class CmsRoutingComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends CmsControlledComponent<Props, State> {
     
     abstract get ref() : HTMLElement|null
     abstract navigationId() : string|false

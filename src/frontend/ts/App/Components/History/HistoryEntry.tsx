@@ -36,8 +36,6 @@ export interface HistoryEntryData {
 }
 
 export interface HistoryEntryProps extends CmsProps<HistoryEntryData> {
-	enabled : boolean
-	onClick : (() => void)|undefined
 }
 
 export interface HistoryEntryState extends CmsState {
@@ -81,15 +79,10 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 		let endDate = this.stringToDate(this.props.data.institutions[this.props.data.institutions.length -1].end_date);
 
 
-		let classes = [];
-		let handleClick : (() => void)|undefined = this.props.onClick;
-		if (this.props.enabled) {
-			handleClick = undefined;
-			classes.push('is-active');
-		}
+		let classes : string[] = [];
 		// render the prepared section
 		return (
-			<article ref={ (ref) => this.ref = ref} className={`history-entry ${classes.join(' ')}`} onClick={handleClick} >
+			<article ref={ (ref) => this.ref = ref} className={`history-entry ${classes.join(' ')}`} >
 				<div className={'history-main'}>
 					<span className="timespan start">
 						<time className="date">{startDate.format('MMMM YYYY')}</time>

@@ -18,7 +18,6 @@ export interface HistoryProps extends CmsProps<HistoryEntryData[]> {
 }
 export interface HistoryState extends CmsState {
 	historyEntries : HistoryEntryData[]
-	activeHistoryIndex : number|false
 }
 
 class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
@@ -80,10 +79,7 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 		
 		this.state = {
 			historyEntries: entries,
-			activeHistoryIndex: false,
 		};
-
-		this.changeActiveHistoryIndex = this.changeActiveHistoryIndex.bind(this);
 	}
 
 	renderHistoryEntries() {
@@ -101,61 +97,11 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			}
 
 			history.push(
-				<HistoryEntry key={ i } data={ item } childrenInfo={item.childrenInfo} enabled={active} onClick={() => { this.changeActiveHistoryIndex(i) }}/>
+				<HistoryEntry key={ i } data={ item }/>
 			);
 		}
 
 		return history;
-	}
-	
-	changeActiveHistoryIndex(i : number|false) {
-		return new Promise((resolve, reject) => {
-			let index = i;
-			if (i >= this.state.historyEntries.length) {
-				index = false;
-			}
-
-			if (index === false || index <= -1) {
-				this.setState(
-					Object.assign(
-						this.state,
-						{
-							activeHistoryIndex: index
-						}
-					), 
-					() => {
-						return resolve();	
-					}
-				);	
-			}
-
-			let ref = this.ref as HTMLElement;
-			this.handler.disableComponentConditionRouting();
-			let activeElement = ref.querySelectorAll('.history-entry')[i as number] as HTMLElement|null;
-			this.setState(
-				Object.assign(
-					this.state,
-					{
-						activeHistoryIndex: index
-					}
-				), 
-				() => {
-					setTimeout(() => {
-						if (!activeElement) {
-							return reject();
-						}
-	
-						this.disableScrollObserving = true;
-						scroll.top(page(), activeElement.offsetTop, { duration: this.scrollDuration }, () => {
-							this.disableScrollObserving = false;
-							this.lastScrollY = window.scrollY;
-							this.handler.enableComponentConditionRouting();
-							return resolve()
-						});
-					}, this.animationDuration);
-				}
-			);
-		});
 	}
 
 	render() {
@@ -166,36 +112,6 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 				{ this.renderHistoryEntries() } 
 			</section>
 		);
-	}
-
-	changeActiveHistoryIndexByScrollDirection(direction : {down : boolean, right : boolean}) {
-		if (this.scrollTimeout !== undefined) {
-			return false;
-		}
-
-		this.scrollTimeout = window.setTimeout(() => {
-			if (this.state.activeHistoryIndex === false) {
-				return false;
-			}
-
-			let index = this.state.activeHistoryIndex - 1;
-			if (direction.down) {
-				index = this.state.activeHistoryIndex + 1;
-			}
-
-			this.changeActiveHistoryIndex(index).then(() => {
-				this.handler.enableComponentConditionRouting();
-
-				this.appElement.classList.add('history__is-active');
-				this.appElement.classList.add('header__right-dark');
-			
-				this.lastScrollY = window.scrollY;
-
-				return false;
-			});
-
-			return false;
-		}, this.scrollDuration);
 	}
 
 	enter(): void {
