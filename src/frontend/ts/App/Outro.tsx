@@ -12,7 +12,7 @@ export default class Outro extends Intro {
             text: 'Meine Suche',
         };
     }
-    navigationId(): string | false {
+    navigationId() {
        return 'main';
     }
 

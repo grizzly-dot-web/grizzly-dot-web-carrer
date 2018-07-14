@@ -91,11 +91,6 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			let classes = [];
 			let item = this.state.historyEntries[i];
 
-			let active = false;
-			if (this.state.activeHistoryIndex !== false && i === this.state.activeHistoryIndex) {
-				active = true;
-			}
-
 			history.push(
 				<HistoryEntry key={ i } data={ item }/>
 			);

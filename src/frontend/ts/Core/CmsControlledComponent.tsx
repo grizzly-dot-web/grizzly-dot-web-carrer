@@ -11,12 +11,14 @@ export interface ChildComponentConfig {
 }
 
 export interface ChildComponentData {
-    [className:string] : CmsProps<any>//new (props : CmsComponentProps) => CmsControlledComponent<CmsComponentProps, CmsState>
+    [className:string] : {
+        className : string 
+        props : CmsProps<any>        
+    }
 }
 
 export interface CmsProps<Data> {
-    className : string
-    key? : string
+    key? : string|number
     data? : Data
     childrenInfo? : {[region:string] : ChildComponentData}
 }
@@ -25,7 +27,7 @@ export interface CmsState {
     navigations?: {[className:string] : React.ReactElement<NavState>[]}
 }
 
-export default class CmsControlledComponent<Props extends CmsProps<any>, State extends CmsState> extends React.Component<Props, State> {
+export default class CmsControlledComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends React.Component<Props, State> {
 
 
     constructor(props: Props, context?: any) {
@@ -51,11 +53,11 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
         let info = null;
         
         if (this.props.data && this.props.data.childrenInfo && this.props.data.childrenInfo.hasOwnProperty(region)) {
-            info = this.props.data.childrenInfo[region] as ChildComponentData;
+            info = this.props.data.childrenInfo[region] as ChildComponentData[];
         }
 
         if (this.props.childrenInfo && this.props.childrenInfo.hasOwnProperty(region)) {
-            info = this.props.childrenInfo[region] as ChildComponentData;
+            info = this.props.childrenInfo[region] as ChildComponentData[];
         }
 
         if (!info) {
@@ -64,22 +66,38 @@ export default class CmsControlledComponent<Props extends CmsProps<any>, State e
 
         let counter = 0;
         let children = [];
-        for (let compClassName in info) {
+        for (let compData of info) {
             counter++;
             
-            let props = info[compClassName];
-            let config =  possibleChildComps[props.className]
+            let config =  possibleChildComps[compData.className as any]
 
             if (!config) {
-                throw new Error(`Unsupported Component "${info[compClassName].className}" in "${region}" region`);
+                throw new Error(`Unsupported Component "${compData.className}" in "${region}" region`);
+            }
+
+
+            let props = {
+                key: counter.toString(),
+                ...compData.props,
+                ...config.props
             }
 
             let ChildComps = config.class;
-            info[compClassName].key = counter.toString(); 
-            let comp = new ChildComps(Object.assign(props, config.props)) as CmsControlledComponent<Props, State>;
+            props.key = counter.toString(); 
+            let comp = new ChildComps(props, config.class) as ChildComponent;
             children.push(comp.render()); 
         }
 
         return children;
     } 
+}
+
+export class ChildComponent extends CmsControlledComponent {
+    className : string
+
+    constructor(props: CmsProps<any>, className : string, context?: any) {
+        super(props, context);
+
+        this.className = className;
+    }
 }
