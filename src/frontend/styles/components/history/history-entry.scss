@@ -1,69 +1,11 @@
-#app {
-	&.history__is-active {
-		.history-entry:first-child:not(.is-active) {
-			.history-main {
-				padding-top: 6em;
-			}
-		}
-	}
-}
-
 .history-entry {
 	width: 100%;
 	position: relative;
 
-
-	&:not(.is-active) {
-		cursor: pointer;
-		
-		.history-main {
-			min-height: 0;
-			background-image: none;
-			transition-delay: 0;
-			
-			&:hover {
-				.history-title  {
-					color: $ColorPrimary;
-				}
-			}
-		}
-
-		.history-institutions {
-			flex-grow: 1;
-
-			.institution {
-				display: none;
-			}
-		}
-
-		.timespan {
-			flex-grow: 1;
-		}
-
-		.history-details {
-			opacity: 0;
-			visibility: hidden;
-		}
-	}
-
-	&.is-active {
-		.history-main {
-			min-height: 90vh;
-
-			.timespan.start {
-				min-height: 7em;
-			}
-
-			.institution {
-				opacity: 1;
-				height: auto;
-			}
-		}
-	}
-
 	.history-main {
-		width: $HistoryMainWidth;
+		min-height: 60vh;
 		position: relative;
+		width: $HistoryMainWidth;
 
 		display: flex;
 		align-items: stretch;
@@ -81,12 +23,12 @@
 		&:after, &:before {
 			content: '';
 			z-index: 1;
-			height: 7vh;
+			height: 20vh;
 			width: 100%;
 			left: 0;
 			bottom: 0;
 			position: absolute;
-			background-image: linear-gradient(to top, rgba($Color1,1) 30% ,rgba($Color1,0) 100%);
+			background-image: linear-gradient(to top, rgba($Color1,1) 0% ,rgba($Color1,0) 100%);
 		}
 
 		&:before {
@@ -100,6 +42,7 @@
 		z-index: 2;
 		order: 1;
 		flex-grow: 2;
+		height: 7em;
 		overflow: hidden;
 		position: relative;
 
@@ -119,8 +62,8 @@
 		}
 
 		&.start {
+			min-height: 10em;
 			order: 1;
-			height: 2em;
 
 			.date {
 				bottom: 0;				
@@ -165,6 +108,9 @@
 	
 	.history-institutions {
 		order: 2;
+		width: 50%;
+		transform: translateX(-50%);
+		margin-left: $Timeline_PositionLeft;
 
 		display: flex;
 		padding: 1em getGridSize(2, horizontal);
@@ -175,9 +121,6 @@
 
 		.institution {
 			margin-bottom: 4em;
-			opacity: 0;
-			height: 0;
-			overflow: hidden;
 			transition: opacity 0.5s ease-in-out;
 		}
 

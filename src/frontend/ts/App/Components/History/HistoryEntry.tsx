@@ -59,7 +59,6 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 		this.state = {
 			showExperiences: false,
 			detailsVisible:  false,
-			navigationRegistry: null,
 			experienceBlockingElements: [],
 			experiencesOriginPosition: null,
 		};
@@ -95,7 +94,9 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 					<span className="timespan start">
 						<time className="date">{startDate.format('MMMM YYYY')}</time>
 					</span>
-					<span className="timespan end"></span>
+					<span className="timespan end">
+						<time className="date">{endDate.format('MMMM YYYY')}</time>
+					</span>
 					<header className="history-institutions">
 						<div className={'history-header'}>
 							<h1 className="history-title">{this.props.data.title}</h1>
