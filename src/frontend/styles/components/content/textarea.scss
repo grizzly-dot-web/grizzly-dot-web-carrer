@@ -1,7 +1,7 @@
-.AtomicsCCM_markdown {
+.intro, .outro {
 	margin-bottom: 2em;
 
-	&.textarea_columns {
+	.textarea_columns {
 		columns: 2 200px;
 		column-gap: getGridSize(2, horizontal);
 	}

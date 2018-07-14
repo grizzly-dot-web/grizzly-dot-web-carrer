@@ -84,7 +84,7 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
             children.push(comp.render()); 
         }
 
-        return children;
+        return children as React.ReactElement<ChildComponent>[];
     } 
 }
 

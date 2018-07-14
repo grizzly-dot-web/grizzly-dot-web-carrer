@@ -6,8 +6,8 @@ import moment from 'moment';
 
 import Experiences from './Entry/Experiences';
 import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
-import CmsControlledComponent, { CmsState, CmsProps } from '../../../Core/CmsControlledComponent';
-import CmsMarkdown from '../../../Core/Components/CmsMarkdown';
+import CmsControlledComponent, { CmsState, CmsProps, ChildComponentConfig } from '../../../Core/CmsControlledComponent';
+import Details from './Entry/Details';
 
 export interface Institution {
 	begin_date: string,
@@ -31,6 +31,7 @@ export interface Experience {
 export interface HistoryEntryData {
 	url: string,
 	title: string
+	childrenInfo: ChildComponentConfig
 	institutions: Institution[],
 	experiences: Experience[]
 }
@@ -46,7 +47,6 @@ export interface HistoryEntryState extends CmsState {
 }
 
 class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntryState> {
-	
 	url: string;
 
 	ref: HTMLElement | null;
@@ -98,13 +98,7 @@ class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntr
 					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
-				<div className={`history-details`}>
-					{
-						this.renderChildren({ 
-							'CmsMarkdown': { class: CmsMarkdown, props: { allowedHeadlineLevel: 3 } } 
-						})
-					}
-				</div>
+				<Details childrenInfo={this.props.data.childrenInfo} />
 			</article>
 		);
 	}

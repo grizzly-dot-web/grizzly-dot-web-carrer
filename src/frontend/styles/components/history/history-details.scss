@@ -1,0 +1,101 @@
+$DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
+
+
+
+
+.history-details {
+    opacity: 1;
+
+    width: 100%;
+    height: calc(100% - 14em);
+    min-height: calc(#{$HistoryMain_MinHeight} - 14em);
+    
+    transition: opacity 0.5s 0.5s ease-in-out;
+
+    top: 7em;
+    left: 0;
+    position: absolute;
+
+
+    $LeftPosition_From: $HistoryMainWidth - $HistoryDetailsOverlap;
+    $LeftPosition_To: getGridSize(2, horizontal);
+
+    &:not(.is-active) .history-details-content {
+        left: $LeftPosition_From;
+    }
+    &.is-active .history-details-content {
+        left: $LeftPosition_To;
+    }
+
+    .history-details-content {
+        z-index: 4;
+        height: 100%;
+        max-height: #{$HistoryMain_MinHeight};
+        color: $ColorBackgroundDark;
+        background-color: $ColorBackgroundContent;
+        
+        padding: getGridSize(2, vertical) getGridSize(1, horizontal);
+        
+        top: 50%;
+        width: 200vw;
+        overflow-y: scroll;
+        position: absolute;
+        transform: translate3d(0, -50%, 0);
+
+        &.animated {
+            animation-name: bounceInRightDetails;
+            animation-duration: 0.5s;
+        }
+
+        columns: 300px;
+        .AtomicsCCM_markdown {
+            display: inline-block;
+
+            header {
+                h3,
+                h4 {
+                    display: inline-block;
+                }
+
+                h4 {
+                    color: $ColorPrimary;
+
+                    &:before {
+                        content: ' | ';
+                        white-space: pre;
+                    }
+                }
+            }
+        }
+    }
+
+    @keyframes bounceInRightDetails {
+        from,
+        60%,
+        75%,
+        90%,
+        to {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        from {
+            left: $LeftPosition_From;
+        }
+        
+        60% {
+            left: $LeftPosition_From / 4 * -1;
+        }
+        
+        75% {
+            left: $LeftPosition_From / 8;
+        }
+        
+        90% {
+            left:  $LeftPosition_From / 7 * -1;
+        }
+        
+        to {
+            left: $LeftPosition_To;
+        }
+    }
+}
