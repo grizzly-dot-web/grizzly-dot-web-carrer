@@ -1,4 +1,4 @@
-export default function animateCss(element : HTMLElement) {
+export default function animateCss(element : HTMLElement, reverse : boolean = false) {
     return new Promise((resolve) => {
         var eventName = (function(el) {
             var animations = {
@@ -14,11 +14,15 @@ export default function animateCss(element : HTMLElement) {
               }
             }
           })(document.createElement('div'));
-
-
+          
         element.classList.add('animated');
+        if (reverse) {
+            element.classList.add('reversed');
+        }
+
         let afterAnimation = () => {
             element.classList.remove('animated');
+            element.classList.remove('reversed');
             element.removeEventListener(eventName, afterAnimation);
 
             return resolve();

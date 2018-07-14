@@ -28,15 +28,17 @@ class Details extends CmsControlledComponent<{}, DetailsState> {
 		}
 
 		return (
-			<div ref={ref => this.ref = ref} onClick={this.activate.bind(this)} className={`history-details`}>
-				<article className="history-details-content">
+			<div ref={ref => this.ref = ref} className={`history-details`}>
+				<article className="history-details-content" onClick={this.activate.bind(this)} >
+					<button onClick={this.deactivate.bind(this)} className="close">Schließen</button>
 					{content}
 				</article>
 			</div>
 		);
 	}
 
-	activate() {
+	activate(e : MouseEvent) {
+		console.log('activate');
 		if (!this.ref || this.state.isActive) {
 			return;
 		}
@@ -47,23 +49,26 @@ class Details extends CmsControlledComponent<{}, DetailsState> {
 
 		animateCss(this.ref.querySelector('.history-details-content') as HTMLElement).then(() => {
 			let ref = this.ref as HTMLElement;
-			ref.classList.toggle('is-active');
+			ref.classList.add('is-active');
 		});
 	}
 
-	deactivate() {
+	deactivate(e : MouseEvent) {
+		console.log('deactivate');
 		if (!this.ref || !this.state.isActive) {
 			return;
 		}
 
+		animateCss(this.ref.querySelector('.history-details-content') as HTMLElement, true).then(() => {
+			let ref = this.ref as HTMLElement;
+			ref.classList.remove('is-active');
+		});
+
 		this.setState(Object.assign(this.state, {
-			isActive: true,
+			isActive: false,
 		}));
 
-		animateCss(this.ref.querySelector('.history-details-content') as HTMLElement).then(() => {
-			let ref = this.ref as HTMLElement;
-			ref.classList.toggle('is-active');
-		});
+		e.stopPropagation();
 	}
 }
 

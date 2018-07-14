@@ -25,6 +25,10 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
     }
     &.is-active .history-details-content {
         left: $LeftPosition_To;
+
+        .close {
+            opacity: 1;
+        }
     }
 
     .history-details-content {
@@ -34,7 +38,7 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
         color: $ColorBackgroundDark;
         background-color: $ColorBackgroundContent;
         
-        padding: getGridSize(2, vertical) getGridSize(1, horizontal);
+        padding: 3em 4em;
         
         top: 50%;
         width: 200vw;
@@ -45,6 +49,35 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
         &.animated {
             animation-name: bounceInRightDetails;
             animation-duration: 0.5s;
+            
+            &.reversed {
+                animation-direction: normal;
+                animation-name: bounceOutRightDetails;
+            }
+        }
+
+        .close {
+            top: 1em;
+            left: 1em;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 0.3s ease-in-out;
+
+            &:before {
+                content: '✕';
+                width: 2em;
+                height: 2em;
+                font-size: 1em;
+                line-height: 2em;
+                font-weight: 300;
+                text-align: center;
+                position: relative;
+                border-radius: 50%;
+                display: inline-block;
+                margin-right: 0.4em; 
+                color: $ColorBackgroundContent;
+                background-color: $ColorBackgroundDark;
+            }
         }
 
         columns: 300px;
@@ -83,19 +116,49 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
         }
         
         60% {
-            left: $LeftPosition_From / 4 * -1;
+            left:  $LeftPosition_From / 7 * -1;
         }
         
         75% {
-            left: $LeftPosition_From / 8;
+            left: $LeftPosition_From / 4 * -1;
         }
         
         90% {
-            left:  $LeftPosition_From / 7 * -1;
+            left: $LeftPosition_From / 8;
         }
         
         to {
             left: $LeftPosition_To;
+        }
+    }
+
+    @keyframes bounceOutRightDetails {
+        from,
+        60%,
+        75%,
+        90%,
+        to {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        from {
+            left: $LeftPosition_To;
+        }
+        
+        60% {
+            left: $LeftPosition_To / 4 * -1;
+        }
+        
+        75% {
+            left: $LeftPosition_To / 8;
+        }
+        
+        90% {
+            left:  $LeftPosition_To / 7 * -1;
+        }
+        
+        to {
+            left: $LeftPosition_From;
         }
     }
 }
