@@ -3,7 +3,7 @@ import ScrollRoutingComponent from "../Core/Router/ScrollRoutingComponent";
 import { NavigationLink } from '../Core/Router/Navigation';
 import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 import TimeQualityCostSwitch from './Components/TimeQualityCostSwitch';
-import Textarea from '../Core/Components/Textarea';
+import CmsMarkdown from '../Core/Components/CmsMarkdown';
 
 export interface IntroProps extends CmsProps<undefined> {
 }
@@ -33,8 +33,8 @@ export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState
             <div ref={ref => this.ref = ref} className={`intro`}>
                 {
                    this.renderChildren({
-                        'Textarea' : {
-                            class: Textarea,
+                        'CmsMarkdown' : {
+                            class: CmsMarkdown,
                             props: { classes: ['textarea_columns'] }
                         },
                     })

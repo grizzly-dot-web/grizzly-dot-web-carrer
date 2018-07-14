@@ -40,7 +40,7 @@
 		"childrenInfo": {
 			"default": [
 				{
-					"className": "Textarea",
+					"className": "CmsMarkdown",
 					"props": {
 						"data": "## Fullstack Webdeveloper\r\nIch sehe mich selbst als Full Stack Web Entwickler. Wobei mein Interessenschwerpunkt eher im Frontend liegt.\r\nIch habe bereits mit unterschiedlichen Programmiersprachen und Frameworks gearbeitet. Schau dir dazu doch einfach mal meine [Skills und Referenzen](\/experiences) an.\r\nOder auch wie ich diese in meiner bisherigen [Karriere](\/career) erlernt habe. \r\n\r\n### Junior oder Senior?\r\nMeiner Definition nach bin ich weder das eine noch das andere. \r\n\r\nIch habe in unterschiedlichen Projekten schon breit gef\u00E4cherte Erfahrungen sammeln k\u00F6nnen. Bei meinen unterschiedlichen Arbeitgebern habe ich auch schon Erfahrung mit dem unterst\u00FCtzen von Auszubildenden zu tun gehabt. Auch die Erstellung von technischen Konzepten ist mir nicht v\u00F6llig fremd.\r\nAber von einem Senior bin ich noch entfernt, dazu fehlt mir schlichtweg noch einiges an Erfahrung.\r\nWenn ich keine explizite Aufgabenstellung habe, lasse ich mich oft schnell von meiner eigentlichen Aufgabe ablenken oder verstricke mich in Kleinigkeiten bestes beispiel ist dieses Projekt <a href=\"https:\/\/github.com\/sebgrizzly\/LifeCareer\">(siehe GitHub)<\/a>. \r\nOhne die Milestones, und das aufteilen der Seite in Tickets w\u00FCrde ich vermutlich immer noch willk\u00FCrlich von Aufgabe zu Aufgabe springen.\r\n\r\n<dl>\r\n  <dt>Junior Developer<\/dt>\r\n  <dd>\r\n    Sie brauchen noch oft Hilfe und sollten nur unter Leitung arbeiten. Sie kennen sich nicht mit dem Gesch\u00E4ftsbereich aus. Au\u00DFerdem haben sie die Grundlagen der Sprache bzw. den Tools noch nicht in g\u00E4nze verstanden. sie wissen nicht, was nicht wissen. Ohne einen Mentor der sie beobachtet und f\u00FChrt werden sie viele Fehler machen.\r\n  <\/dd>\r\n  <dt>Webdeveloper<\/dt>\r\n  <dd>\r\n    Haben bereits einige Erfahrungen gesammelt. Sie arbeiten eigenverantwortlich zielf\u00FChrend und erledigen die meisten Aufgaben selbst\u00E4ndig. Sie wissen, bei welchen Aufgaben sie nach Hilfe fragen m\u00FCssen.\r\n  <\/dd>\r\n  <dt>Senior Developer<\/dt>\r\n  <dd>\r\n    Haben noch mehr Erfahrung und sind sowohl in der Lage L\u00F6sungen zu konzeptionieren als auch diese umzusetzen. M\u00F6glicherweise m\u00FCssen ihre Konzepte nochmal gegen gepr\u00FCft werden bevor mit der Implementierung begonnen werden kann. Sie haben nicht unbedingt ein allumfassendes Wissen der gesamten Architektur sind aber in ihren Bereichen Experten. sie sind in der Lage die Junior Mitglieder ihres Teams anzuleiten und zu beraten.\r\n  <\/dd>\r\n<\/dl>"
 					}
@@ -53,7 +53,7 @@
 			"default": [
 				{
 					
-					"className": "Textarea",
+					"className": "CmsMarkdown",
 					"props": {
 						"data": "##Was ich suche\r\nIch suche eine Stelle, in der neue Herausforderungen auf mich warten. \r\nIch m\u00F6chte neue Arbeitsweisen und Methoden kennenlernen, die in meiner bisherigen Karriere noch nicht vorkamen.\r\n\r\nMir ist die Qualit\u00E4t des Produktes das wichtigste. Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzl\u00E4ufige Projekte mit einer Dauer von 1 - 2 Monaten umgesetzt habe. Hier standen eher Zeit und Kosten vorrang.\r\n\r\nIch suche ein Unternehmen, welches Projekte mit l\u00E4ngeren Laufzeiten betreut. Gerne auch \u00FCber mehrere Jahre.\r\nEine Entwicklungsabteilung die dazu auffordert getestete Qualitativ hochwertige Software zu schreiben.\r\n\r\nIch suche einen Arbeitgeber, dem seine Angestellten wichtig sind. \r\nDer an sie nicht nur Erwartungen stellt, sondern sich auch ehrlich um ihr Wohl sorgt.\r\n\r\n### Welche Anstellung ich m\u00F6chte.\r\nDa ich meine, schon kurz nach abschlie\u00DFen der Ausbildung, erworbene Selbst\u00E4ndige T\u00E4tigkeit als Freiberuflicher Web Entwickler weiterf\u00FChren und ausweiten m\u00F6chte. \r\nM\u00F6chte ich eine Teilzeit Besch\u00E4ftigung haben, mit maximal 30h die Woche.\r\n"
 					}
@@ -124,7 +124,7 @@
 			"childrenInfo": {
 				"default": [
 					{
-						"className": "Textarea",
+						"className": "CmsMarkdown",
 						"props": {
 							"data": "##Was ich suche\r\nIch suche eine Stelle, in der neue Herausforderungen auf mich warten. \r\nIch m\u00F6chte neue Arbeitsweisen und Methoden kennenlernen, die in meiner bisherigen Karriere noch nicht vorkamen.\r\n\r\nMir ist die Qualit\u00E4t des Produktes das wichtigste. Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzl\u00E4ufige Projekte mit einer Dauer von 1 - 2 Monaten umgesetzt habe. Hier standen eher Zeit und Kosten vorrang.\r\n\r\nIch suche ein Unternehmen, welches Projekte mit l\u00E4ngeren Laufzeiten betreut. Gerne auch \u00FCber mehrere Jahre.\r\nEine Entwicklungsabteilung die dazu auffordert getestete Qualitativ hochwertige Software zu schreiben.\r\n\r\nIch suche einen Arbeitgeber, dem seine Angestellten wichtig sind. \r\nDer an sie nicht nur Erwartungen stellt, sondern sich auch ehrlich um ihr Wohl sorgt.\r\n\r\n### Welche Anstellung ich m\u00F6chte.\r\nDa ich meine, schon kurz nach abschlie\u00DFen der Ausbildung, erworbene Selbst\u00E4ndige T\u00E4tigkeit als Freiberuflicher Web Entwickler weiterf\u00FChren und ausweiten m\u00F6chte. \r\nM\u00F6chte ich eine Teilzeit Besch\u00E4ftigung haben, mit maximal 30h die Woche.\r\n"
 						}
@@ -223,7 +223,7 @@
 			"childrenInfo": {
 				"default": [
 					{
-						"className": "Textarea",
+						"className": "CmsMarkdown",
 						"props": {
 							"data": "##Was ich suche\r\nIch suche eine Stelle, in der neue Herausforderungen auf mich warten. \r\nIch m\u00F6chte neue Arbeitsweisen und Methoden kennenlernen, die in meiner bisherigen Karriere noch nicht vorkamen.\r\n\r\nMir ist die Qualit\u00E4t des Produktes das wichtigste. Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzl\u00E4ufige Projekte mit einer Dauer von 1 - 2 Monaten umgesetzt habe. Hier standen eher Zeit und Kosten vorrang.\r\n\r\nIch suche ein Unternehmen, welches Projekte mit l\u00E4ngeren Laufzeiten betreut. Gerne auch \u00FCber mehrere Jahre.\r\nEine Entwicklungsabteilung die dazu auffordert getestete Qualitativ hochwertige Software zu schreiben.\r\n\r\nIch suche einen Arbeitgeber, dem seine Angestellten wichtig sind. \r\nDer an sie nicht nur Erwartungen stellt, sondern sich auch ehrlich um ihr Wohl sorgt.\r\n\r\n### Welche Anstellung ich m\u00F6chte.\r\nDa ich meine, schon kurz nach abschlie\u00DFen der Ausbildung, erworbene Selbst\u00E4ndige T\u00E4tigkeit als Freiberuflicher Web Entwickler weiterf\u00FChren und ausweiten m\u00F6chte. \r\nM\u00F6chte ich eine Teilzeit Besch\u00E4ftigung haben, mit maximal 30h die Woche.\r\n"
 						}
@@ -476,9 +476,9 @@
 			"childrenInfo": {
 				"default": [
 					{
-						"className": "Textarea",
+						"className": "CmsMarkdown",
 						"props": {
-							"data": "##Was ich suche\r\nIch suche eine Stelle, in der neue Herausforderungen auf mich warten. \r\nIch m\u00F6chte neue Arbeitsweisen und Methoden kennenlernen, die in meiner bisherigen Karriere noch nicht vorkamen.\r\n\r\nMir ist die Qualit\u00E4t des Produktes das wichtigste. Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzl\u00E4ufige Projekte mit einer Dauer von 1 - 2 Monaten umgesetzt habe. Hier standen eher Zeit und Kosten vorrang.\r\n\r\nIch suche ein Unternehmen, welches Projekte mit l\u00E4ngeren Laufzeiten betreut. Gerne auch \u00FCber mehrere Jahre.\r\nEine Entwicklungsabteilung die dazu auffordert getestete Qualitativ hochwertige Software zu schreiben.\r\n\r\nIch suche einen Arbeitgeber, dem seine Angestellten wichtig sind. \r\nDer an sie nicht nur Erwartungen stellt, sondern sich auch ehrlich um ihr Wohl sorgt.\r\n\r\n### Welche Anstellung ich m\u00F6chte.\r\nDa ich meine, schon kurz nach abschlie\u00DFen der Ausbildung, erworbene Selbst\u00E4ndige T\u00E4tigkeit als Freiberuflicher Web Entwickler weiterf\u00FChren und ausweiten m\u00F6chte. \r\nM\u00F6chte ich eine Teilzeit Besch\u00E4ftigung haben, mit maximal 30h die Woche.\r\n"
+							"data": "#Meine Ausbildung\r\nSeit 2011 bin ich in der Medien\/Marketingbranche als Web Entwickler besch\u00E4ftigt. Begonnen hat es mit der Ausbildung zum Mediengestalter in Digital und Druck begonnen.\r\nDie Werbeagentur in der ich gelernt habe, hat schnell meine F\u00E4higkeiten entdeckt und gef\u00F6rdert. \r\nVon Anfang an war der Schwerpunkt klar, ich wollte Webentwickler werden. So kam ich in die Entwicklungsabteilung.\r\nHier habe ich noch f\u00FCr den IE 7 meist Corperate Sites und Ladingpages umgesetzt und gewartet. Es gab aber auch zahlreiche Newsletter und viel Content Integration in meiner Ausbildung.\r\nDas waren nicht unbedingt meine Lieblingsaufgaben, aber auch diese habe ich mit viel Verantwortungsgef\u00FChl umgesetzt. \r\nBei jedem neuen Projekt suchte ich neue Herausforderungen und so stiegen mein K\u00F6nnen und meine Aufgaben von Projekt zu Projekt.\r\n"
 						}
 					}
 				]
@@ -548,7 +548,7 @@
 			"childrenInfo": {
 				"default": [
 					{
-						"className": "Textarea",
+						"className": "CmsMarkdown",
 						"props": {
 							"data": "##Was ich suche\r\nIch suche eine Stelle, in der neue Herausforderungen auf mich warten. \r\nIch m\u00F6chte neue Arbeitsweisen und Methoden kennenlernen, die in meiner bisherigen Karriere noch nicht vorkamen.\r\n\r\nMir ist die Qualit\u00E4t des Produktes das wichtigste. Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzl\u00E4ufige Projekte mit einer Dauer von 1 - 2 Monaten umgesetzt habe. Hier standen eher Zeit und Kosten vorrang.\r\n\r\nIch suche ein Unternehmen, welches Projekte mit l\u00E4ngeren Laufzeiten betreut. Gerne auch \u00FCber mehrere Jahre.\r\nEine Entwicklungsabteilung die dazu auffordert getestete Qualitativ hochwertige Software zu schreiben.\r\n\r\nIch suche einen Arbeitgeber, dem seine Angestellten wichtig sind. \r\nDer an sie nicht nur Erwartungen stellt, sondern sich auch ehrlich um ihr Wohl sorgt.\r\n\r\n### Welche Anstellung ich m\u00F6chte.\r\nDa ich meine, schon kurz nach abschlie\u00DFen der Ausbildung, erworbene Selbst\u00E4ndige T\u00E4tigkeit als Freiberuflicher Web Entwickler weiterf\u00FChren und ausweiten m\u00F6chte. \r\nM\u00F6chte ich eine Teilzeit Besch\u00E4ftigung haben, mit maximal 30h die Woche.\r\n"
 						}
