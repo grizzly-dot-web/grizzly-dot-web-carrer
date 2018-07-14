@@ -20,7 +20,7 @@ export interface ChildComponentData {
 export interface CmsProps<Data> {
     key? : string|number
     data? : Data
-    childrenInfo? : {[region:string] : ChildComponentData}
+    childrenInfo? : {[region:string] : ChildComponentData[]}
 }
 
 export interface CmsState {
@@ -50,7 +50,7 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
     }
 
     protected renderChildren(possibleChildComps : ChildComponentConfig, region : string = 'default') {
-        let info = null;
+        let info : ChildComponentData[] = [];
         
         if (this.props.data && this.props.data.childrenInfo && this.props.data.childrenInfo.hasOwnProperty(region)) {
             info = this.props.data.childrenInfo[region] as ChildComponentData[];
@@ -58,10 +58,6 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
 
         if (this.props.childrenInfo && this.props.childrenInfo.hasOwnProperty(region)) {
             info = this.props.childrenInfo[region] as ChildComponentData[];
-        }
-
-        if (!info) {
-            return null;
         }
 
         let counter = 0;
