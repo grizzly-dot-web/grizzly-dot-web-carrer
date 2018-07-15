@@ -1,18 +1,13 @@
 $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
 
-
-
-
 .history-details {
     opacity: 1;
 
     width: 100%;
-    height: calc(100% - 14em);
-    min-height: calc(#{$HistoryMain_MinHeight} - 14em);
-    
+    height: 100%;
     transition: opacity 0.5s 0.5s ease-in-out;
 
-    top: 7em;
+    top: 0;
     left: 0;
     position: absolute;
 
@@ -33,16 +28,15 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
 
     .history-details-content {
         z-index: 4;
-        height: 100%;
-        max-height: #{$HistoryMain_MinHeight};
         color: $ColorBackgroundDark;
         background-color: $ColorBackgroundContent;
         
         padding: 3em 4em;
         
         top: 50%;
-        width: 200vw;
-        overflow-y: scroll;
+        width: 300vw;
+        overflow-x: scroll;
+        overflow-y: hidden;
         position: absolute;
         transform: translate3d(0, -50%, 0);
 
@@ -80,9 +74,17 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
             }
         }
 
-        columns: 300px;
+        columns: 30vw;
         .AtomicsCCM_markdown {
+            width: auto; 
+            height: calc(#{$HistoryMain_MinHeight} - 20vh);
+            max-width: none;
             display: inline-block;
+    
+            column-width: 30vw;
+            -o-column-width: 30vw;
+            -moz-column-width: 30vw;
+            -webkit-column-width: 30vw;
 
             header {
                 h3,

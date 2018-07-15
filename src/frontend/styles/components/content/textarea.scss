@@ -2,8 +2,20 @@
 	margin-bottom: 2em;
 
 	.textarea_columns {
-		columns: 2 200px;
-		column-gap: getGridSize(2, horizontal);
+
+		@media (min-width: $MobileNavBreak) {
+			column-gap: getGridSize(2, horizontal);
+		
+			column-width: auto;
+			-o-column-width: auto;
+			-moz-column-width: auto;
+			-webkit-column-width: auto;
+		
+			column-count: 2;
+			-o-column-count: 2;
+			-moz-column-count: 2;
+			-webkit-column-count: 2;
+		}
 	}
 
 	h2 {
