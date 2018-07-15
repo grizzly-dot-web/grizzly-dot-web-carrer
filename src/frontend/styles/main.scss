@@ -3,10 +3,12 @@
 @import '../../../node_modules/normalize-scss/sass/normalize';
 @include normalize();
 
-@import './globals';
+@media screen {
+    @import './globals';
 
-@import './components';
+    @import './components';
 
-@import './layout';
+    @import './layout';
+}
 
 @import './print';
