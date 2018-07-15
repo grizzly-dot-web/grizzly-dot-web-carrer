@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import TimeQualityCostSwitch from './Components/TimeQualityCostSwitch';
-import CmsMarkdown from '../Core/Components/CmsMarkdown';
+import Content from '../Core/Components/Content';
 import Intro from './Intro';
 
 export default class Outro extends Intro {
@@ -29,8 +28,8 @@ export default class Outro extends Intro {
             <div ref={ref => this.ref = ref} className={`outro`}>
                 {
                    this.renderChildren({
-                        'CmsMarkdown' : {
-                            class: CmsMarkdown,
+                        'Content' : {
+                            class: Content,
                             props: { classes: ['textarea_columns'] }
                         },
                     })

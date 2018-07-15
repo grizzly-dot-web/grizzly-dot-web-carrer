@@ -12,7 +12,39 @@ export interface TextState extends CmsState {
 
 }
 
-export default class CmsMarkdown extends CmsControlledComponent<TextProps, TextState> {
+export default class Content extends CmsControlledComponent<TextProps, TextState> {
+
+	render() {
+		if (typeof this.props.data !== 'string') {
+			throw new Error('Empty Textarea')
+		}
+
+		console.log(this.props.data);
+		console.log('------');
+		if (this.props.data.replace(/^\s*\n/gm, '').trim() == '') {
+			return null;
+		}
+
+		let classes : string[] = [];
+		if (this.props.classes) {
+			classes = this.props.classes;
+		}
+
+		let options = {
+			overrides: {
+			},
+		}
+
+		if (this.props.allowedHeadlineLevel) {
+			options.overrides = Object.assign(options.overrides, this.getOverriddenHeadlines());
+		}
+
+		return (
+			<Markdown className={`AtomicsCCM_markdown ${classes.join(' ')}`} options={options} key={this.props.key}>
+				{this.props.data}
+			</Markdown>
+		);
+	}
 
 
 	getOverriddenHeadlines(): any {
@@ -47,31 +79,6 @@ export default class CmsMarkdown extends CmsControlledComponent<TextProps, TextS
 		}
 
 		return overrides;	
-	}
-	render() {
-		if (typeof this.props.data !== 'string') {
-			throw new Error('Empty Textarea')
-		}
-
-		let classes : string[] = [];
-		if (this.props.classes) {
-			classes = this.props.classes;
-		}
-
-		let options = {
-			overrides: {
-			},
-		}
-
-		if (this.props.allowedHeadlineLevel) {
-			options.overrides = Object.assign(options.overrides, this.getOverriddenHeadlines());
-		}
-
-		return (
-			<Markdown className={`AtomicsCCM_markdown ${classes.join(' ')}`} options={options} key={this.props.key}>
-				{this.props.data}
-			</Markdown>
-		);
 	}
 	
 }

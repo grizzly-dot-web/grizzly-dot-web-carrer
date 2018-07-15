@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CmsControlledComponent, { CmsState } from "../../../../Core/CmsControlledComponent";
-import CmsMarkdown from '../../../../Core/Components/CmsMarkdown';
+import Content from '../../../../Core/Components/Content';
 
 import animateCss from '../../../../Helper/animate';
 
@@ -20,7 +20,7 @@ class Details extends CmsControlledComponent<{}, DetailsState> {
 	
 	render(): any {
 		let content = this.renderChildren({ 
-			'CmsMarkdown': { class: CmsMarkdown, props: { allowedHeadlineLevel: 3 } } 
+			'Content': { class: Content, props: { allowedHeadlineLevel: 3 } } 
 		});
 
 		if (content.length <= 0) {

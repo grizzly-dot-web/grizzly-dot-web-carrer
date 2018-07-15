@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Router from '../Core/Router';
-
-import { Navigation, NavProps } from './Router/Navigation';
+import { NavProps } from './Router/Navigation';
 
 import CmsComponentHandler from './CmsComponentHandler';
 
@@ -39,7 +37,7 @@ export default class Bootstrap extends React.Component {
         
         NavigationRegistry.init(navigations);
 
-        fetch('/data/career.json').then((response) => {
+        fetch('/compiled/data.json').then((response) => {
             if (response.ok) {
                 return response.json().then((data) => {
                     this.data = data;

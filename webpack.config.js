@@ -65,9 +65,11 @@ var backendConfig = {
 				test: /((?!frontend).).*\.(js|tsx?)$/,
 				query: {
 					presets: [
-						["@babel/env", { "modules": false }]
-					],
-					babelrc: false,
+						[
+							"@babel/env", { "modules": false },
+							"@babel/typescript"
+						]
+					]
 				},
 				exclude: /node_modules/,
 				loader: 'babel-loader',
