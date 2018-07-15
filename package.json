@@ -11,7 +11,7 @@
     "watch:server": "nodemon compiled/server/index.js"
   },
   "engines": {
-    "node": "8.11.0"
+    "node": "8.11.1"
   },
   "author": "Sebastian Müller",
   "license": "ISC",
