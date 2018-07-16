@@ -30,7 +30,10 @@ export default class Outro extends Intro {
                    this.renderChildren({
                         'Content' : {
                             class: Content,
-                            props: { classes: ['textarea_columns'] }
+                            props: { 
+                                classes: ['textarea_columns'],
+                                allowedHeadlineLevel: 2
+                            }
                         },
                     })
                 }

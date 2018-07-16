@@ -35,7 +35,10 @@ export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState
                    this.renderChildren({
                         'Content' : {
                             class: Content,
-                            props: { classes: ['textarea_columns'] }
+                            props: { 
+                                classes: ['textarea_columns'],
+                                allowedHeadlineLevel: 2
+                            }
                         },
                     })
                 }

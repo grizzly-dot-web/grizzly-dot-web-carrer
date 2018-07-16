@@ -7,7 +7,10 @@ import HtmlTag from './HtmlTag';
 export interface TextProps extends CmsProps<string> {
 	classes: string[]
 	allowedHeadlineLevel? : 1|2|3|4|5|6;
+	requiredUser? : string
+	requiredRight? : string
 }
+
 export interface TextState extends CmsState {
 
 }
@@ -17,12 +20,6 @@ export default class Content extends CmsControlledComponent<TextProps, TextState
 	render() {
 		if (typeof this.props.data !== 'string') {
 			throw new Error('Empty Textarea')
-		}
-
-		console.log(this.props.data);
-		console.log('------');
-		if (this.props.data.replace(/^\s*\n/gm, '').trim() == '') {
-			return null;
 		}
 
 		let classes : string[] = [];
@@ -73,9 +70,7 @@ export default class Content extends CmsControlledComponent<TextProps, TextState
 				},
 			};
 			
-			if (hLevel >= allowedHLevel) {
-				allowedHLevel++;
-			}
+			allowedHLevel++;
 		}
 
 		return overrides;	
