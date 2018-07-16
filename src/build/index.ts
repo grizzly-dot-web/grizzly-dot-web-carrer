@@ -2,7 +2,7 @@ import fs from 'fs';
 import * as path from 'path';
 
 //TODO refactor and abstract as service for client Service Worker
-export class ContentUpdater {
+class ContentUpdater {
     
     static contents : { name : string, content : string }[] = [];
     
@@ -32,8 +32,6 @@ export class ContentUpdater {
             ContentUpdater.counter = 0;
             ContentUpdater.changeJson((key, json) => {
                 if (key == contentInfoObj.name) {
-                    console.log(key, json);
-    
                     if (
                         json[key].childrenInfo &&
                         json[key].childrenInfo.default &&
@@ -97,3 +95,5 @@ export class ContentUpdater {
         fs.writeFileSync(path.resolve('.', 'compiled', 'public', 'data.json'), JSON.stringify(ContentUpdater.json));
     }
 }
+
+ContentUpdater.update();

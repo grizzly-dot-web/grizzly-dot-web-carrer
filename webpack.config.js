@@ -78,4 +78,38 @@ var backendConfig = {
 	}
 };
 
-module.exports = [ frontendConfig, backendConfig];
+var afterBuildConfig = {
+	name: 'Backend side Changes',
+	mode: debug ? 'development' : 'production',
+	target: 'node',
+	entry: {
+		main: ['./src/build/index.ts'],
+	},
+	output: {
+			path: path.resolve(__dirname, 'compiled/build'),
+			filename: 'index.js',
+			publicPath: './'
+	},
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.json']
+    },
+	module: {
+		rules: [
+			{
+				test: /((?!frontend).).*\.(js|tsx?)$/,
+				query: {
+					presets: [
+						[
+							"@babel/env", { "modules": false },
+							"@babel/typescript"
+						]
+					]
+				},
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+			}
+		]
+	}
+};
+
+module.exports = [ frontendConfig, backendConfig, afterBuildConfig];
