@@ -2,7 +2,7 @@
 Kontaktiere mich einfach. Und wir können gucken ob es passt. 
 Auch wenn wir nicht zusammen kommen, würde ich mich über Feedback freuen. 
 
-<ManagedContent requiredRole=’bewerbung’>
+<ManagedContent requiredRole=’Arbeitgeber’>
     ## Selbständigkeit - grizzly.web
     Wenn ihr nur für begrenzte Zeit unterstützung benötigt, können wir auch gerne über ein gemeinsames Projekt sprechen.
 </ManagedContent>

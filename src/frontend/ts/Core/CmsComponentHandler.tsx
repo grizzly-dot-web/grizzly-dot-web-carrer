@@ -1,11 +1,32 @@
 import Router from "./Router";
 import CmsControlledComponent, { CmsState, CmsProps } from "./CmsControlledComponent";
 import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
-import NavigationRegistry from "./Router/NavigationRegistry";
-import { NavigationLink } from "./Router/Navigation";
+import User from "./Models/User";
+import { resolve } from "dns";
 
 export default class CmsComponentHandler {
     static _instance : CmsComponentHandler;
+    
+    private _user : Promise<User>|undefined
+
+    get currentUser() {
+        if (this._user) {
+            return this._user; 
+        }
+
+        this._user = new Promise((resolve, reject) => {
+            fetch('/users/current', {
+                method: 'GET',
+                credentials: 'same-origin',
+              }).then((response : Response) => {
+                return response.json().then((data) => {
+                    resolve(data as User);
+                });
+            });
+        });
+
+        return this._user; 
+    };
 
     static getInstance() {
         if (!CmsComponentHandler._instance) {
@@ -41,6 +62,9 @@ export default class CmsComponentHandler {
             throw new Error('Router is not assigned')
         }
 
+        console.log(this.currentUser.then((user) => {
+            console.log(user);
+        }));
         this._router.setupAnchorTagClickHandling();
         this._router.activateComponentByUrl();
     }

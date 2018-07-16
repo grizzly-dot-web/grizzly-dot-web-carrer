@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import CmsComponentHandler from './CmsComponentHandler';
 import NavigationRegistry from './Router/NavigationRegistry';
 import { NavState } from './Router/Navigation';
+import User from './Models/User';
 
 
 export interface ChildComponentConfig {
@@ -28,7 +29,11 @@ export interface CmsState {
 }
 
 export default class CmsControlledComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends React.Component<Props, State> {
+    
 
+    protected get currentUser() {
+        return this.handler.currentUser;
+    }
 
     constructor(props: Props, context?: any) {
         super(props, context);

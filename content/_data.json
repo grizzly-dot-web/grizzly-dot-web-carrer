@@ -36,6 +36,18 @@
 			}
 		]
 	},
+	"introUserSpecific": {
+		"childrenInfo": {
+			"default": [
+				{
+					"className": "Content",
+					"props": {
+						"data": ""
+					}
+				}
+			]
+		}
+	},
 	"intro": {
 		"childrenInfo": {
 			"default": [

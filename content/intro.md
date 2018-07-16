@@ -1,4 +1,3 @@
-# Stellengesuch
 ## Fullstack Webdeveloper
 Ich sehe mich selbst als Full Stack Web Entwickler. 
 Wobei mein Interessenschwerpunkt eher im Frontend liegt.
