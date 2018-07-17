@@ -15,7 +15,7 @@ const wss = new WebSocket.Server({ server });
 const FileStore = FileStoreF(session);
 
 server.listen(PORT);
-//app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 app.use('/compiled', express.static(path.resolve('.', 'compiled/public')));
 app.use(express.static(path.resolve('.', 'public')));
 app.use(compression());
