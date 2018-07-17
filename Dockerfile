@@ -1,20 +1,16 @@
-# Dockerfile extending the generic Node image with application files for a
-# single application.
-FROM gcr.io/google_appengine/nodejs
-# Check to see if the the version included in the base runtime satisfies
-# 9.3.0, if not then do an npm install of the latest available
-# version that satisfies it.
-RUN /usr/local/bin/install_node 9.3.0
-COPY . /app/
-# You have to specify "--unsafe-perm" with npm install
-# when running as root.  Failing to do this can cause
-# install to appear to succeed even if a preinstall
-# script fails, and may have other adverse consequences
-# as well.
-# This command will also cat the npm-debug.log file after the
-# build, if it exists.
-RUN npm install || \
-  ((if [ -f npm-debug.log ]; then \
-      cat npm-debug.log; \
-    fi) && false)
-CMD npm start
+FROM node:8
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+
+RUN npm run-script build
+RUN npm run-script build:content
+
+CMD [ "npm", "start" ]
