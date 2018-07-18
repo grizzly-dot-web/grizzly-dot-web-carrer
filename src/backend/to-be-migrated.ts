@@ -1,7 +1,8 @@
 import crypto from "crypto";
 import { Guid } from "guid-typescript";
-import UserRole from "../frontend/ts/Core/Models/UserRole";
-import User from "../frontend/ts/Core/Models/User";
+
+import UserRole from "./Core/Component/User/Shared/Models/UserRole";
+import User from "./Core/Component/User/Shared/Models/User";
 
 let sha512 = function(password : string, salt : string) {
     var hash = crypto.createHmac('sha512', salt);

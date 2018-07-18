@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import CmsComponentHandler from './CmsComponentHandler';
 import NavigationRegistry from './Router/NavigationRegistry';
 import { NavState } from './Router/Navigation';
-import User from './Models/User';
+import User from '../../../backend/Core/Component/User/Models/User';
 
 
 export interface ChildComponentConfig {

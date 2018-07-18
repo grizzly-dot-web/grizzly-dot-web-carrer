@@ -1,7 +1,7 @@
-import AbstractModel from "./AbstractModel";
 import UserRole from "./UserRole";
+import AbstractModel from "../../../../AbstractModel";
 
-export default interface UserObj extends AbstractModel {
+export default interface User extends AbstractModel {
     
     username : string
 

@@ -1,8 +1,7 @@
 import Router from "./Router";
 import CmsControlledComponent, { CmsState, CmsProps } from "./CmsControlledComponent";
 import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
-import User from "./Models/User";
-import { resolve } from "dns";
+import User from "../../../backend/Core/Component/User/Shared/Models/User";
 
 export default class CmsComponentHandler {
     static _instance : CmsComponentHandler;
