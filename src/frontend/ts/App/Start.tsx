@@ -32,7 +32,7 @@ export default class Start extends Introduction {
                         'Content' : {
                             class: Content,
                             props: { 
-                                classes: ['textarea', 'textarea_columns'],
+                                classes: ['textarea'],
                                 allowedHeadlineLevel: 2
                             }
                         },
