@@ -1,7 +1,8 @@
-.intro, .outro {
+.textarea {
 	margin-bottom: 2em;
+	padding:  0 getGridSize(2, horizontal);
 
-	.textarea_columns {
+	&.textarea_columns {
 
 		@media (min-width: $MobileNavBreak) {
 			column-gap: getGridSize(2, horizontal);

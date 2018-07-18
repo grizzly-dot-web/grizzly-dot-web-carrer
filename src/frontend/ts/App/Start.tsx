@@ -1,15 +1,16 @@
 import * as React from 'react';
 
 import Content from '../Core/Components/Content';
-import Intro from './Intro';
+import Introduction from './Introduction';
 
-export default class Outro extends Intro {
-    link() {
+export default class Start extends Introduction {
+    
+    link() { 
         return {
-            url: '/serching',
+            url: '/',
             title: '',
-            text: 'Meine Suche',
-        };
+            text: 'Start',
+        }
     }
     navigationId() {
        return 'main';
@@ -25,13 +26,13 @@ export default class Outro extends Intro {
     
     render() {
         return (
-            <div ref={ref => this.ref = ref} className={`outro`}>
+            <div ref={ref => this.ref = ref} className={`start`}>
                 {
                    this.renderChildren({
                         'Content' : {
                             class: Content,
                             props: { 
-                                classes: ['textarea_columns'],
+                                classes: ['textarea', 'textarea_columns'],
                                 allowedHeadlineLevel: 2
                             }
                         },

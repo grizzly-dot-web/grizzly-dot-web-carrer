@@ -36,7 +36,7 @@
 			}
 		]
 	},
-	"introUserSpecific": {
+	"start": {
 		"childrenInfo": {
 			"default": [
 				{
@@ -48,23 +48,10 @@
 			]
 		}
 	},
-	"intro": {
+	"introduction": {
 		"childrenInfo": {
 			"default": [
 				{
-					"className": "Content",
-					"props": {
-						"data": ""
-					}
-				}
-			]
-		}
-	},
-	"outro": {
-		"childrenInfo": {
-			"default": [
-				{
-					
 					"className": "Content",
 					"props": {
 						"data": ""

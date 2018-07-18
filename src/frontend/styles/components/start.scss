@@ -1,0 +1,22 @@
+.start, .introduction {
+	color: $ColorThird;
+}
+
+.start {
+	padding-top: 8em;
+	min-height: 80vh;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	.textarea {
+		margin-bottom: 7em;
+	}
+}
+
+.introduction {
+	.textarea {
+		margin-bottom: 7em;
+	}
+}

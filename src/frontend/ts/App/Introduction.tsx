@@ -1,25 +1,26 @@
 import * as React from 'react';
-import ScrollRoutingComponent from "../Core/Router/ScrollRoutingComponent";
 import { NavigationLink } from '../Core/Router/Navigation';
 import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
 import TimeQualityCostSwitch from './Components/TimeQualityCostSwitch';
 import Content from '../Core/Components/Content';
+import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
 
 export interface IntroProps extends CmsProps<undefined> {
 }
 export interface IntroState extends CmsState {
 }
 
-export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState> {
-    
+export default class Introduction extends ScrollRoutingComponent<IntroProps, IntroState> {
+
+    navigationId() { return '' };
+
     link() { 
         return {
-            url: '/',
+            url: '/introduction',
             title: '',
-            text: 'Start',
+            text: 'Vorstellung',
         }
     }
-    navigationId() { return 'main' };
     ref: HTMLElement | null;
 
     constructor(props : any) {
@@ -30,13 +31,13 @@ export default class Intro extends ScrollRoutingComponent<IntroProps, IntroState
     
     render() {
         return (
-            <div ref={ref => this.ref = ref} className={`intro`}>
+            <div ref={ref => this.ref = ref} className={`introduction`}>
                 {
                    this.renderChildren({
                         'Content' : {
                             class: Content,
                             props: { 
-                                classes: ['textarea_columns'],
+                                classes: ['textarea', 'textarea_columns'],
                                 allowedHeadlineLevel: 2
                             }
                         },
