@@ -14,4 +14,4 @@ At the moment my backend code can be found under `src/backend`, the frontend par
 As soon as possible they will be merged to one source.
 Only the build job will split them into two seperate files, one for the client and one for the server.
 
-And it will be shipped under **[atimoicCCMS](https://github.com/grizzlydotweb/atomicCCMS)**
+And it will be shipped under **[atomicCCMS](https://github.com/grizzlydotweb/atomicCCMS)**
