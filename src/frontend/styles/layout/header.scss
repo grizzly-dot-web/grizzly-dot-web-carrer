@@ -2,6 +2,7 @@ header#page-header {
 	z-index: 3;
 	width: 100vw;
 	position: fixed;
+	overflow: hidden;
 	transition: $HeaderColorTansition;
 	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
 

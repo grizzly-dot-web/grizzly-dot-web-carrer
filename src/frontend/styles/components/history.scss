@@ -1,72 +1,10 @@
-//#region mixins calculation variables
-@mixin NavigationState($type, $timespan_height) {
-
-	.timeline {
-		&:not(.has-#{$type}-entries) {
-
-			.timespan-#{$type}:hover:after {
-				height: 0;
-			}
-
-			@if ($type == 'previous') {
-				.current-date-marker.begin-marker:before {
-					display: none;
-				}
-			}
-			@if ($type == 'next') {
-				.current-date-marker.end-marker:after {
-					display: none;
-				}
-			}
-		}
-	}
-	&.navigation-#{$type}-active {
-		.timeline {
-
-			.timespan {
-				&.timespan-previous {
-					height: map-get($timespan_height, Previous);
-
-					@if ($type == 'previous') {
-						&:after {
-							height: 100%;
-						}
-					}
-				}
-				&.timespan-next {
-						height: map-get($timespan_height, Next);
-
-						@if ($type == 'next') {
-							&:after {
-								height: 100%;
-							}
-						}
-				}
-			}
-
-			.navigation-#{$type} li {
-				top: 0 !important;
-			}
-		}
-
-		.history-entry .history-header {
-			height: 100 - (map-get($timespan_height, Previous) + map-get($timespan_height, Next));
-			bottom: map-get($timespan_height, Next);
-		}
-	}
-}
-//#endregion
-
 @import './history/experience-level';
 @import './history/history-entry';
 @import './history/history-details';
 @import './history/experience';
 
 .history {
-	@include NavigationState('previous', $Timespan-NavigationPrevActive_Height);
-	@include NavigationState('next', $Timespan_NavigationNextActive_Height);
-
-	width: 100vw;
+	width: 100%;
 	overflow: hidden;
 	margin-bottom: 2em;
 }
