@@ -5,13 +5,14 @@ import { NavProps } from './Router/Navigation';
 
 import CmsComponentHandler from './CmsComponentHandler';
 
-import Header from '../App/_Header';
-import Footer from '../App/_Footer';
+import Header from '../App/_partials/Header';
+import Footer from '../App/_partials/Footer';
 import Histroy from '../App/History';
 import ExperienceOverview from '../App/ExperienceOverview';
 import NavigationRegistry from './Router/NavigationRegistry';
 import Introduction from '../App/Introduction';
 import Start from '../App/Start';
+import InfoCenter from '../App/_partials/InfoCenter';
 
 export default class Bootstrap extends React.Component {
    
@@ -62,6 +63,7 @@ export default class Bootstrap extends React.Component {
 					<Introduction data={this.data.introduction} />
 					<Histroy data={this.data.history} />
 				</main>
+				<InfoCenter data={this.data.infoCenter} />	
 				<Footer data={this.data.footer} />	
 			</div>
         )

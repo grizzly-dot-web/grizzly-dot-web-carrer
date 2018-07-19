@@ -1,9 +1,16 @@
 footer {
-	z-index: 3;
+	z-index: 5;
+	
 	width: 100%;
+	height: 10vh;
+	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
+
+	position: fixed;
+	left: 0;
+	bottom: 0;
+
 	background-color: $ColorBackgroundDark;
 	transition: $HeaderColorTansition;
-	padding:  getGridSize(3, vertical) getGridSize(2, horizontal) getGridSize(1, vertical);
 
 	.container {
 		z-index: 2;

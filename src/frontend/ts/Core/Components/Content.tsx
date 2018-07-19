@@ -5,18 +5,23 @@ import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComp
 import HtmlTag from './HtmlTag';
 
 export interface TextProps extends CmsProps<string> {
-	classes: string[]
+	classes?: string[]
 	allowedHeadlineLevel? : 1|2|3|4|5|6;
 	requiredUser? : string
-	requiredRight? : string
+	requiredRight? : string,
+	forceBlock? : boolean
 }
 
 export interface TextState extends CmsState {
-
+	forceBlock : boolean
 }
 
 export default class Content extends CmsControlledComponent<TextProps, TextState> {
-
+	getInitialState() {
+		return { 
+			forceBlock: this.props.forceBlock || false
+		};
+	}
 	render() {
 		if (typeof this.props.data !== 'string') {
 			throw new Error('Empty Textarea')
@@ -27,9 +32,13 @@ export default class Content extends CmsControlledComponent<TextProps, TextState
 			classes = this.props.classes;
 		}
 
-		let options = {
+		let options : any = {
 			overrides: {
 			},
+		}
+
+		if (this.state.forceBlock) {
+			options.forceBlock = this.state.forceBlock;
 		}
 
 		if (this.props.allowedHeadlineLevel) {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsProps, CmsState } from '../Core/CmsControlledComponent';
-import { Navigation } from '../Core/Router/Navigation';
+import CmsControlledComponent, { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
+import { Navigation } from '../../Core/Router/Navigation';
 
 export interface HeaderProps extends CmsProps<any> {
 }

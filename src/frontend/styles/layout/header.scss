@@ -1,6 +1,7 @@
 header#page-header {
-	z-index: 3;
+	z-index: 5;
 	width: 100%;
+	height: 10vh;
 	position: fixed;
 	transition: $HeaderColorTansition;
 	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);

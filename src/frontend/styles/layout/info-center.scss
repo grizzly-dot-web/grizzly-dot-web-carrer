@@ -1,0 +1,110 @@
+.info-center {
+    z-index: 4;
+    position: relative;
+
+    &:after, &:before {
+        @include Animated(1, 0.5s);
+        pointer-events: none;
+        content: '';
+        width: 100%;
+        height: 45vh;
+        display: block;
+        background-image: linear-gradient(
+            to top, 
+            rgba(#000, 0.8) 0,
+            rgba(#000, 0) 100%
+        );
+        left: 0;
+        position: fixed;
+    }
+
+    &:before {
+        animation-name: fadeInDown;
+        top: 0;
+        background-image: linear-gradient(
+            to bottom, 
+            rgba(#000, 0.8) 0,
+            rgba(#000, 0) 100%
+        );
+    }
+
+    &:after {
+        animation-name: fadeInUp;
+        bottom: 0;
+    }
+
+    .region-bottom {
+        z-index: 4;
+        width: 50vw;
+        animation-name: zoomInUp;
+        @include Animated(1, 2s);
+        
+        @media (max-width: $MobileNavBreak) {
+            right: 5%;
+            width: 90%;
+        }
+        
+        right: 10vw;
+        position: fixed;
+        bottom: calc(10vh - 1em);
+
+        color: $ColorBackgroundDark;
+        background-color: #fff;
+        border: 1px solid $ColorBackgroundDark;
+
+        padding: 1em;
+        border-radius: 1em;
+
+        .info {
+            font-size: 0.8em;
+            border-radius: 1em;
+            padding: 1em;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            position: relative;
+            &:not(:last-child):after {
+                content: '';
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                width: 100%;
+                background-image: radial-gradient(
+                    circle at center,
+                    rgba($ColorBackgroundDark, 0.5) 20%,
+                    rgba($ColorBackgroundDark, 0) 100%
+                );
+                position: absolute;
+            }
+
+            > * {
+                order: 2;
+            
+                &.info-button {
+                    &.info-close-button {
+                        @include CloseButton();
+                        order: 1;
+                        font-size: 0.9em;
+
+
+                        &:before {
+                            display: block;
+                            color: $ColorBackgroundDark;
+                            font-weight: 700;
+                            border: 1px solid $ColorBackgroundDark;
+                            background-color: transparent;
+                        }
+                    }
+
+                    &:not(.info-close-button) {
+                        @include Button();
+                        align-self: flex-end;
+                    }
+                }
+            }
+        }
+    }
+}

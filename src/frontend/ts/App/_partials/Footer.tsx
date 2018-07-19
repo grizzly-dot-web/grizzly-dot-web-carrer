@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsProps, CmsState } from '../Core/CmsControlledComponent';
+import CmsControlledComponent, { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
 
 export interface FooterProps extends CmsProps<any> {
 }
