@@ -21,6 +21,7 @@ $HeightSingleColumn: 100%;
     .scroller {
       overflow-y: hidden;
       overflow-x: auto;
+      scroll-behavior: smooth;
       height: 100%;
       position: relative;
       z-index: 1;

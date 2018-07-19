@@ -90,9 +90,9 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
 
         .columns {
             -webkit-column-width: 80vw;
-            -webkit-column-gap: 2vw;
+            -webkit-column-gap: 10vw;
             -moz-column-width: 80vw;
-            -moz-column-gap: 2vw;
+            -moz-column-gap: 10vw;
             
             &:after {
                 height: 100%;
@@ -101,9 +101,7 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
             @media (min-width: $MobileNavBreak) {
                 max-width: 600px;
                 -webkit-column-width: 50vw;
-                -webkit-column-gap: 2em;
                 -moz-column-width: 50vw;
-                -moz-column-gap: 2em;
             }
 
             header {
