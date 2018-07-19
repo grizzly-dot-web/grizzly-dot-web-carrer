@@ -1,4 +1,5 @@
 import '../styles/main.scss';
+import "@babel/polyfill";
 
 import 'whatwg-fetch';
 import moment from 'moment';

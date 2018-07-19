@@ -20,7 +20,12 @@ class Details extends CmsControlledComponent<{}, DetailsState> {
 	
 	render(): any {
 		let content = this.renderChildren({ 
-			'Content': { class: Content, props: { allowedHeadlineLevel: 3 } } 
+			'Content': { 
+				class: Content, props: { 
+					allowedHeadlineLevel: 3, 
+					classes: ['columns'],
+				} 
+			} 
 		});
 
 		if (content.length <= 0) {
@@ -29,9 +34,9 @@ class Details extends CmsControlledComponent<{}, DetailsState> {
 
 		return (
 			<div ref={ref => this.ref = ref} className={`history-details`}>
-			<article className="history-details-content" onClick={this.activate.bind(this)} >
+			<article className="history-details-content column-scroller" onClick={this.activate.bind(this)} >
 				<button onClick={this.deactivate.bind(this)} className="close">Schließen</button>
-				<div className="history-details-frame">
+				<div className="scroller">
 					{content}
 				</div>
 			</article>
