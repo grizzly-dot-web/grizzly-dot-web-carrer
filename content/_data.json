@@ -40,21 +40,19 @@
 		"childrenInfo": {
 			"bottom": [
 				{
-					"className": "DefaultInfo",
-					"props": {
-						"order": 2,
-						"visibleStateChangeDuration": 3000,
-						"cookieName": "supported_browser_info",
-						"data": "Diese Seite ist für folgende Browser in der neusten Version optimiert (Microsoft Edge, Google Chrome und Mozilla Firefox)"
-					}
-				},
-				{
 					"infoLevelClass": "attention",
 					"className": "DefaultInfo",
 					"props": {
-						"order": 1,
 						"button": "Annehmen",
 						"data": "Durch die Nutzung der Webseite stimmen Sie deren Verwendung zu. Für Details zu den verwendeten Cookies schauen sie [hier](/imprint#privacy)\n\nDer Grund warum ihr dies seht: [EU Cookie Richtline](http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm)"
+					}
+				},
+				{
+					"className": "DefaultInfo",
+					"props": {
+						"visibleStateChangeDuration": 3000,
+						"cookieName": "supported_browser_info",
+						"data": "Diese Seite ist für folgende Browser in der neusten Version optimiert (Microsoft Edge, Google Chrome und Mozilla Firefox)"
 					}
 				}
 			]

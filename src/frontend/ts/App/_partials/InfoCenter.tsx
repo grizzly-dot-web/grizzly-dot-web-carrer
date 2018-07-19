@@ -9,7 +9,7 @@ export interface InfoCenterState extends CmsState {
 
 }
 
-class Footer extends CmsControlledComponent<InfoCenterProps, InfoCenterState> {
+export default class InfoCenter extends CmsControlledComponent<InfoCenterProps, InfoCenterState> {
 
 	constructor(props : any) {
 		super(props);
@@ -19,14 +19,22 @@ class Footer extends CmsControlledComponent<InfoCenterProps, InfoCenterState> {
 		
 		let children = [];
 		for (let region of ['bottom', 'center']) {
-			children.push(this.renderChildrenByRegion(region))
+			let regionChild = this.renderChildrenByRegion(region);
+
+			if (regionChild === null) {
+				continue;
+			}
+
+			children.push(regionChild)
 		};
+
+		if (children.length <= 0) {
+			return null;
+		}
 
 		return (
 			<aside className="info-center">
-				{
-					children
-				}
+				{children}
 			</aside>
 		);
 	}
@@ -49,5 +57,3 @@ class Footer extends CmsControlledComponent<InfoCenterProps, InfoCenterState> {
 		);
 	}
 }
-
-export default Footer;
