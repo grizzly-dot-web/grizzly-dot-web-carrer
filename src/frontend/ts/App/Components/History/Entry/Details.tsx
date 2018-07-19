@@ -29,10 +29,12 @@ class Details extends CmsControlledComponent<{}, DetailsState> {
 
 		return (
 			<div ref={ref => this.ref = ref} className={`history-details`}>
-				<article className="history-details-content" onClick={this.activate.bind(this)} >
-					<button onClick={this.deactivate.bind(this)} className="close">Schließen</button>
+			<article className="history-details-content" onClick={this.activate.bind(this)} >
+				<button onClick={this.deactivate.bind(this)} className="close">Schließen</button>
+				<div className="history-details-frame">
 					{content}
-				</article>
+				</div>
+			</article>
 			</div>
 		);
 	}

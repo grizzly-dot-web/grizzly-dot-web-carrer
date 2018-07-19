@@ -1,5 +1,5 @@
 $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
-
+$DetailsHeight: $HistoryMain_MinHeight - 20vh;
 .history-details {
     opacity: 1;
 
@@ -31,12 +31,22 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
         color: $ColorBackgroundDark;
         background-color: $ColorBackgroundContent;
         
-        padding: 3em 4em;
+        height: $DetailsHeight;
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 100%; /* match columns */
+            z-index: 0;
+        }
         
         top: 50%;
-        width: 300vw;
-        overflow-x: scroll;
-        overflow-y: hidden;
         position: absolute;
         transform: translate3d(0, -50%, 0);
 
@@ -51,6 +61,7 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
         }
 
         .close {
+            z-index: 2;
             top: 1em;
             left: 1em;
             opacity: 0;
@@ -74,17 +85,31 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
             }
         }
 
-        columns: 30vw;
+        .history-details-frame {
+            overflow-y: hidden;
+            overflow-x: auto;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            padding: 3em 4em;
+        }
+
         .AtomicsCCM_markdown {
-            width: auto; 
-            height: calc(#{$HistoryMain_MinHeight} - 20vh);
-            max-width: none;
-            display: inline-block;
-    
-            column-width: 30vw;
-            -o-column-width: 30vw;
-            -moz-column-width: 30vw;
-            -webkit-column-width: 30vw;
+            -webkit-column-fill: auto;
+            -webkit-column-width: 20vw;
+            -webkit-column-gap: 2em;
+            -moz-column-fill: auto;
+            -moz-column-width: 20vw;
+            -moz-column-gap: 2em;
+            height: 100%;
+            width: auto;
+
+            @media (max-width: $MobileNavBreak) {
+                -webkit-column-width: 80vw;
+                -webkit-column-gap: 2vw;
+                -moz-column-width: 80vw;
+                -moz-column-gap: 2vw;
+            }
 
             header {
                 h3,
@@ -102,6 +127,7 @@ $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
                 }
             }
         }
+
     }
 
     @keyframes bounceInRightDetails {
