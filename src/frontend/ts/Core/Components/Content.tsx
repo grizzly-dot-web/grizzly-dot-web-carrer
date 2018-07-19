@@ -46,12 +46,11 @@ export default class Content extends CmsControlledComponent<TextProps, TextState
 		}
 
 		return (
-			<Markdown className={`AtomicsCCM_markdown ${classes.join(' ')}`} options={options} key={this.props.key}>
+			<Markdown className={`AtomicsCCM_markdown ${classes.join(' ')}`} options={options}>
 				{this.props.data}
 			</Markdown>
 		);
 	}
-
 
 	getOverriddenHeadlines(): any {
 		if (!this.props.allowedHeadlineLevel) {

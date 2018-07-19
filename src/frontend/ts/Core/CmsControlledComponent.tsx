@@ -17,7 +17,6 @@ export interface ChildComponentData {
 }
 
 export interface CmsProps<Data> {
-    key? : string|number
     data? : Data
     childrenInfo? : {[region:string] : ChildComponentData[]}
 }
@@ -82,9 +81,7 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
             }
 
             let ChildComps = config.class;
-            props.key = counter.toString(); 
-            let comp = new ChildComps(props, config.class) as ChildComponent;
-            children.push(comp.render()); 
+            children.push(<ChildComps key={'child'+ counter} {...props} />);
         }
 
         return children as React.ReactElement<ChildComponent>[];
