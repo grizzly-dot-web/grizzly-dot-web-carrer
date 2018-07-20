@@ -24,26 +24,26 @@ $HeightSingleColumn: 100%;
       scroll-behavior: smooth;
       height: 100%;
       position: relative;
-      z-index: 1;
-  
-      .columns {
-          -webkit-column-fill: auto;
-          -webkit-column-width: $WidthSingleColumn;
-          -webkit-column-gap: $WidthColumnGap;
-          -moz-column-fill: auto;
-          -moz-column-width: $WidthSingleColumn;
-          -moz-column-gap: $WidthColumnGap;
-          height: 100%;
-          text-align: justify;
-          width: auto;
-
-          &:after {
-            content: '';
-            display: block;
-            width: $WidthSingleColumn;
-            height: 1em;
-            float: right;
-          }
-      } 
+      z-index: 1;      
     }
+
+    .columns {
+      -webkit-column-fill: auto;
+      -webkit-column-width: $WidthSingleColumn;
+      -webkit-column-gap: $WidthColumnGap;
+      -moz-column-fill: auto;
+      -moz-column-width: $WidthSingleColumn;
+      -moz-column-gap: $WidthColumnGap;
+      height: 100%;
+      text-align: justify;
+      width: auto;
+
+      &:after {
+        content: '';
+        display: block;
+        width: $WidthSingleColumn;
+        height: 1em;
+        float: right;
+      }
+  } 
 }

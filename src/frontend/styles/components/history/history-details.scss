@@ -13,12 +13,11 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
 
     $LeftPosition_From: $HistoryMainWidth - $HistoryDetailsOverlap;
     $LeftPosition_To: getGridSize(2, horizontal);
-
-    &:not(.is-active) .history-details-content {
-        left: $LeftPosition_From;
+    &:not(.is-active) .history-details-content:not(.is-dragging) {
+        left: $LeftPosition_From !important;
     }
     &.is-active .history-details-content {
-        left: $LeftPosition_To;
+        left: $LeftPosition_To !important;
 
         .close {
             opacity: 1;
@@ -30,10 +29,17 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
         color: $ColorBackgroundDark;
         background-color: $ColorBackgroundContent;
         
+        cursor: move;
         height: $DetailsHeight;
-        overflow: hidden;
-        width: 100%;
+        width: 300vw;
         position: relative;
+        padding: 4em 4em 2em;
+        
+        top: 50%;
+        position: absolute;
+        transform: translate3d(0, -50%, 0);
+
+        transition: left 0.2s ease-out;
 
         &:after {
             content: '';
@@ -43,20 +49,6 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
             left: 0;
             height: 100%; /* match columns */
             z-index: 0;
-        }
-        
-        top: 50%;
-        position: absolute;
-        transform: translate3d(0, -50%, 0);
-
-        &.animated {
-            animation-name: bounceInRightDetails;
-            animation-duration: 0.5s;
-            
-            &.reversed {
-                animation-direction: normal;
-                animation-name: bounceOutRightDetails;
-            }
         }
 
         .close {
@@ -68,10 +60,6 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
             opacity: 0;
             position: absolute;
             transition: opacity 0.3s ease-in-out;
-        }
-
-        .scroller {
-            padding: 4em 4em 2em;
         }
 
         .columns {
@@ -107,65 +95,5 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
             }
         }
 
-    }
-
-    @keyframes bounceInRightDetails {
-        from,
-        60%,
-        75%,
-        90%,
-        to {
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        
-        from {
-            left: $LeftPosition_From;
-        }
-        
-        60% {
-            left:  $LeftPosition_From / 7 * -1;
-        }
-        
-        75% {
-            left: $LeftPosition_From / 4 * -1;
-        }
-        
-        90% {
-            left: $LeftPosition_From / 8;
-        }
-        
-        to {
-            left: $LeftPosition_To;
-        }
-    }
-
-    @keyframes bounceOutRightDetails {
-        from,
-        60%,
-        75%,
-        90%,
-        to {
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        
-        from {
-            left: $LeftPosition_To;
-        }
-        
-        60% {
-            left: $LeftPosition_To / 4 * -1;
-        }
-        
-        75% {
-            left: $LeftPosition_To / 8;
-        }
-        
-        90% {
-            left:  $LeftPosition_To / 7 * -1;
-        }
-        
-        to {
-            left: $LeftPosition_From;
-        }
     }
 }
