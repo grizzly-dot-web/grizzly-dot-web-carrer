@@ -110,7 +110,7 @@ export default class DefaultInfo extends CmsControlledComponent<DefaultInfoProps
 			this.setState(Object.assign(this.state, {
 				isVisible: false
 			}), () => {
-				this.props.onInfoHidden(this.props.cookieName)
+				this.props.onInfoHidden(this.props.cookieName as string)
 				resolve();
 			});
 		});
