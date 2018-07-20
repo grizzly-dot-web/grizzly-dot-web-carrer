@@ -19,12 +19,16 @@ export default class CmsComponentHandler {
                 credentials: 'same-origin',
               }).then((response : Response) => {
                 return response.json().then((data) => {
-                    resolve(data as User);
+                    if (Reflect.has(data, 'id')) {
+                        return resolve(data as User);
+                    }
+
+                    return reject(data);
                 });
             });
         });
 
-        return this._user; 
+        return this._user;
     };
 
     static getInstance() {
@@ -61,9 +65,6 @@ export default class CmsComponentHandler {
             throw new Error('Router is not assigned')
         }
 
-        console.log(this.currentUser.then((user) => {
-            console.log(user);
-        }));
         this._router.setupAnchorTagClickHandling();
         this._router.activateComponentByUrl();
     }

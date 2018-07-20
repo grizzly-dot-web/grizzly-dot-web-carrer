@@ -6,7 +6,11 @@ import { NavState } from './Router/Navigation';
 
 
 export interface ChildComponentConfig {
-    [className:string] : { class: any, props? : any }//new (props : CmsComponentProps) => CmsControlledComponent<CmsComponentProps, CmsState>
+    [className:string] : { 
+        class: any,
+        props? : any,
+        beforeRender? : (className: string, props : any) => void
+    }//new (props : CmsComponentProps) => CmsControlledComponent<CmsComponentProps, CmsState>
 }
 
 export interface ChildComponentData {
@@ -28,7 +32,7 @@ export interface CmsState {
 export default class CmsControlledComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends React.Component<Props, State> {
     
 
-    protected get currentUser() {
+    protected get workWithUser() {
         return this.handler.currentUser;
     }
 
@@ -75,12 +79,16 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
 
 
             let props = {
-                key: counter.toString(),
                 ...compData.props,
                 ...config.props
             }
 
             let ChildComps = config.class;
+
+            if  (config.beforeRender) {
+                config.beforeRender(config.class, props);
+            }
+
             children.push(<ChildComps key={'child'+ counter} {...props} />);
         }
 
