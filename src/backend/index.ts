@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import cookieParser from 'cookie-parser'
 import FileStoreF from 'session-file-store';
 import morgan from 'morgan';
 import compression from 'compression';
@@ -30,7 +31,7 @@ app.use(session({
   secret: 'grizzly-web-secret',
   resave: true,
   saveUninitialized: true,
-  cookie: { httpOnly: false, secure: false, maxAge: 3600000 },
+  cookie: { httpOnly: false, secure: true, maxAge: 3600000 },
   store: new FileStore(),
 }));
 
