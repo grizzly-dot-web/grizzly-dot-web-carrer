@@ -1,5 +1,5 @@
 import { Guid } from "guid-typescript";
 
 export default interface AbstractObject {
-    id : string|Guid,
+    id : string|Guid|null,
 }

@@ -46,7 +46,6 @@
   "dependencies": {
     "@types/express-session": "^1.15.10",
     "@types/session-file-store": "^1.2.0",
-    "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "express-session": "^1.15.6",
     "guid-typescript": "^1.0.7",

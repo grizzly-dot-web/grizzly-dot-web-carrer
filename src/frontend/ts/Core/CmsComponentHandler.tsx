@@ -6,7 +6,7 @@ import User from "../../../backend/Core/Component/User/Shared/Models/User";
 export default class CmsComponentHandler {
     static _instance : CmsComponentHandler;
     
-    private _user : Promise<User>|undefined
+    private _user : Promise<User|boolean>|undefined
 
     get currentUser() {
         if (this._user) {
@@ -19,11 +19,7 @@ export default class CmsComponentHandler {
                 credentials: 'same-origin',
               }).then((response : Response) => {
                 return response.json().then((data) => {
-                    if (Reflect.has(data, 'id')) {
-                        return resolve(data as User);
-                    }
-
-                    return reject(data);
+                    return resolve(data);
                 });
             });
         });

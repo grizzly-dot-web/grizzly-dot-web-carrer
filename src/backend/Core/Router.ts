@@ -9,71 +9,75 @@ export default class Router {
 	
 	private _app :  express.Router
 
-	private _routes : { [requestMethod:string] : {[route:string] : RequestHandler} }
+	private _routes : { [scope:string] : {[requestMethod:string] : {[route:string] : RequestHandler}} }
 
 	public routePrefix : string = '';
 
 	constructor(app : express.Router) {
 		this._app = app;
 		this._routes = {
-			get: {},
-			post: {},
-			delete: {},
-			update: {},
 		};
 	}
 
-	private _register(requestMethod : string, route : string, handlers : RequestHandler) {
+	private _register(requestMethod : string, route : string, handlers : RequestHandler, scope : string = 'default') {
 		route = this.routePrefix + route
 
-        if (this._routes[requestMethod] === undefined) {
-            throw new Error(`Invalid Request Method ${requestMethod}`);
+        if (this._routes[scope] === undefined) {
+			this._routes[scope] = {};
 		}
 		
-        if (this._routes[requestMethod][route] !== undefined) {
+        if (this._routes[scope][requestMethod] === undefined) {
+			if (['get', 'post', 'put', 'delete'].indexOf(requestMethod) === -1) {
+				throw new Error(`Invalid Request Method ${requestMethod}`);
+			}
+			this._routes[scope][requestMethod] = {};
+		}
+		
+        if (this._routes[scope][requestMethod][route] !== undefined) {
             throw new Error(`Route already Exists ${route} with ${requestMethod}`);
         }
 
-		this._routes[requestMethod][route] = handlers;
+		this._routes[scope][requestMethod][route] = handlers;
 		this.routePrefix = '';
 	}
 
-	get(route : string, handlers : RequestHandler) {
-		this._register('get', route, handlers);
+	get(route : string, handlers : RequestHandler, scope? : string) {
+		this._register('get', route, handlers, scope);
 	}
 
-	post(route : string, handlers : RequestHandler) {
-		this._register('post', route, handlers);
+	post(route : string, handlers : RequestHandler, scope? : string) {
+		this._register('post', route, handlers, scope);
 	}
 
-	update(route : string, handlers : RequestHandler) {
-		this._register('update', route, handlers);
+	update(route : string, handlers : RequestHandler, scope? : string) {
+		this._register('update', route, handlers, scope);
 	}
 
-	delete(route : string, handlers : RequestHandler) {
-		this._register('delete', route, handlers);
+	delete(route : string, handlers : RequestHandler, scope? : string) {
+		this._register('delete', route, handlers, scope);
 	}
 
 	listen() {
-		for (let method in this._routes) {
-			for (let route in this._routes[method]) {
-				switch(method) {
-					case 'get':
-						this._app.get(route, this._routes[method][route]);
-					break;
-
-					case 'post':
-						this._app.post(route, this._routes[method][route]);
-					break;
-
-					case 'put':
-						this._app.put(route, this._routes[method][route]);
-					break;
-
-					case 'delete':
-						this._app.delete(route, this._routes[method][route]);
-					break;
-
+		for (let scope in this._routes) {
+			for (let method in this._routes[scope]) {
+				for (let route in this._routes[scope][method]) {
+					switch(method) {
+						case 'get':
+							this._app.get(route, this._routes[scope][method][route]);
+						break;
+	
+						case 'post':
+							this._app.post(route, this._routes[scope][method][route]);
+						break;
+	
+						case 'put':
+							this._app.put(route, this._routes[scope][method][route]);
+						break;
+	
+						case 'delete':
+							this._app.delete(route, this._routes[scope][method][route]);
+						break;
+					}
 				}
 			}
 		}
