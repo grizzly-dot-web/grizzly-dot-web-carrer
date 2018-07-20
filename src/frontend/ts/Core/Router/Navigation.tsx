@@ -123,8 +123,19 @@ export class Navigation extends React.Component<NavProps, NavState> {
             throw new Error('burgerMenuRef or ref is not assigned')
         }
 
+        let activeClass = `navigation-${this.props.identifier}__is-active`;
         let app = document.querySelector('#app') as HTMLElement;
-        app.classList.toggle(`navigation-${this.props.identifier}__is-active`)
+        app.classList.toggle(activeClass)
+
+        if (app.classList.contains(activeClass)) {
+            let closeListener = (e : Event) => {
+                app.classList.remove(activeClass);
+                
+                document.removeEventListener('click', closeListener);
+            }
+
+            document.addEventListener('click', closeListener);
+        }
     }
 
 }
