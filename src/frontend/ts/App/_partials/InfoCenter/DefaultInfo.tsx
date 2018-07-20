@@ -2,12 +2,14 @@ import * as React from 'react';
 import CmsControlledComponent, { CmsProps, CmsState } from '../../../Core/CmsControlledComponent';
 import Content from '../../../Core/Components/Content';
 import { resolve } from 'dns';
+import User from '../../../../../backend/Core/Component/User/Shared/Models/User';
 
 export interface DefaultInfoProps extends CmsProps<string> {
 	order : number,
+	onInfoHidden : (name:string) => void
 	infoLevelClass? : string
 	initialVisible?: boolean
-	visibleStateChangeDuration?: number,
+	deleteCookieAfterSeconds?: number,
 	cookieName?: string,
 	cookieExpireInHours?: number,
 	cookieAutoRenew?: boolean
@@ -15,8 +17,6 @@ export interface DefaultInfoProps extends CmsProps<string> {
 }
 
 export interface DefaultInfoState extends CmsState {
-	order : number,
-	infoLevelClass : string,
 	isVisible : boolean;
 	cookieExpireInHours : number,
 	cookieAutoRenew: boolean
@@ -28,8 +28,6 @@ export default class DefaultInfo extends CmsControlledComponent<DefaultInfoProps
 		super(props);
 
 		this.state = {
-			order: this.props.order || 50,
-			infoLevelClass: this.props.infoLevelClass || 'info',
 			cookieExpireInHours: this.props.cookieExpireInHours || 1,
 			cookieAutoRenew: this.props.cookieAutoRenew || true,
 			isVisible: this.props.initialVisible || true
@@ -37,11 +35,13 @@ export default class DefaultInfo extends CmsControlledComponent<DefaultInfoProps
 	}
 
 	render() {
+		let classList = ['InfoCenter_Info'];
+		if (this.props.infoLevelClass) {
+			classList.push('InfoCenter_Info-level_'+ this.props.infoLevelClass)
+		}
 
-		let classList = ['info'];
-		classList.push('info-level-'+ this.state.infoLevelClass)
 		if (this.state.isVisible) {
-			classList.push('visible');
+			classList.push('InfoCenter_Info-isVisible');
 		}
 
 		let button = null;
@@ -52,7 +52,7 @@ export default class DefaultInfo extends CmsControlledComponent<DefaultInfoProps
 		}
 
 		return (
-			<div key={this.props.key} style={{order: this.state.order}} className={classList.join(' ')}>
+			<div className={classList.join(' ')}>
 				<Content classes={['text']} forceBlock={true} data={this.props.data} allowedHeadlineLevel={6} />
 				{button}
 			</div>
@@ -61,62 +61,58 @@ export default class DefaultInfo extends CmsControlledComponent<DefaultInfoProps
 	
 	
 	handleClick(e : Event) {
-		this.setCookieVisibleState(!this.state.isVisible);
+		this.hideInfo();		
+		this.updateCookie();
+
+		e.preventDefault();
 	}
 
 	componentDidMount() {
-		let isVisible = this.getVisibleStateFromCookie();
-		if (this.state.cookieAutoRenew) {
-			this.setCookieVisibleState(isVisible);
+		if (this.cookieExists()) {
+			this.hideInfo();			
+			if (this.state.cookieAutoRenew) {
+				this.updateCookie();
+			}
 		}
 		
-		if (!this.cookieExists() && this.props.visibleStateChangeDuration) {
-			this.setCookieVisibleState(isVisible).then(() => {
-				setTimeout(() => {
-					this.setCookieVisibleState(!this.state.isVisible);
-				}, this.props.visibleStateChangeDuration);
-			})
+		if (!this.cookieExists() && this.props.deleteCookieAfterSeconds) {
+			setTimeout(() => {
+				this.updateCookie();
+				this.hideInfo();
+			}, this.props.deleteCookieAfterSeconds * 1000);
 		}
-
-		
 	}
 
-	getVisibleStateFromCookie() {
-		if (!this.props.cookieName) {
-			return true;
-		}
-
-		// if cookie did not exists or auto renew is enabled
-		if (document.cookie.indexOf(this.props.cookieName) === -1) {
-		}
-
-		return !this.cookieExists();
-	}
-
-	setCookieVisibleState(visible : boolean) {
+	updateCookie(deleteCookie : boolean = false) {
 		let now = new Date();
-
-		if (this.props.cookieExpireInHours) {
-			let expire = new Date(now.getTime() + this.state.cookieExpireInHours * 60 * 60 * 1000);
-			let cookie = `${this.props.cookieName}=${visible}; expires=${expire}`
-
-			document.cookie = cookie;
+		
+		let expire = new Date(now.getTime() + this.state.cookieExpireInHours * 60 * 60 * 1000).getUTCDate();
+		if (deleteCookie) {
+			expire = 0;
 		}
 
-		return new Promise((resolve, reject) => {
-			this.setState(Object.assign(this.state, {
-				isVisible: this.getVisibleStateFromCookie()
-			}), () => {
-				resolve();
-			})
-		});
+		document.cookie = `${this.props.cookieName}=false; expires=${expire}`;
+	}
+
+	deleteCookie() {
+		this.updateCookie(true);
 	}
 
 	cookieExists() {
 		if (!this.props.cookieName) {
 			return true;
 		}
-
 		return document.cookie.indexOf(this.props.cookieName) !== -1;
+	}
+
+	hideInfo() {
+		return new Promise((resolve) => {
+			this.setState(Object.assign(this.state, {
+				isVisible: false
+			}), () => {
+				this.props.onInfoHidden(this.props.cookieName)
+				resolve();
+			});
+		});
 	}
 }

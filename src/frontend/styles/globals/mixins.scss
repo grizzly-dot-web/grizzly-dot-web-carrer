@@ -61,7 +61,7 @@ $Viewport_Padding_Horizontal: getPercatageOfDefaultSize(($Default_Width % $Defau
 	}
 }
 
-@mixin Animated($iterationCount, $duration, $delay: 0, $fillMode: 'booh') {
+@mixin Animated($iterationCount, $duration, $delay: 0, $fillMode: booh) {
 	animation-iteration-count: $iterationCount;
 	animation-duration: $duration;
 	animation-delay: $delay;
