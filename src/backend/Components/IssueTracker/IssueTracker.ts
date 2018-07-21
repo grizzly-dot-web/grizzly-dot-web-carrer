@@ -57,7 +57,7 @@ export default class IssueTracker extends ServerSideComponent {
     }
 
     getRepositoryInfos(req: express.Request, res: express.Response, next : express.NextFunction) {
-        return res.send({});
+        return res.send(this._repoInfo);
     }
     
     createRepositoryIssue(req: express.Request, res: express.Response, next : express.NextFunction) {

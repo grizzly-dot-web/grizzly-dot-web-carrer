@@ -99,6 +99,11 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
         this.fetch('/issue_tracker/info')
             .then((response) => response.json())
             .then((json) => {
+                console.log(json as GitHubInfoResponse)
+                if (!json.data) {
+                    return;
+                }
+
                 let info = {
                     ...this.state.info,
                     ...json
@@ -214,11 +219,20 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
     }
 
     enter(): void {
-        this.appElement.classList.add('header__bg-active');
+        if (!this.ref) {
+            return;
+        }
+
+        this.ref.classList.add('IssueTracker_isActive');
 		this.appElement.classList.remove('history__is-active');
 		this.appElement.classList.remove('header__right-dark');
     }
     leave(): void {
+        if (!this.ref) {
+            return;
+        }
+
+        this.ref.classList.remove('IssueTracker_isActive');
         this.appElement.classList.remove('header__bg-active');
     }
 }
