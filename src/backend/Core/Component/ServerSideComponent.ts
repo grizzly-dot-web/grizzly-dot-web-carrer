@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export default abstract class ServerSideComponent {
 
-    protected abstract name : string;
+    protected abstract get name() : string;
 
     private _di : DiContainer;
 

@@ -14,18 +14,24 @@ export default class CmsComponentHandler {
         }
 
         this._user = new Promise((resolve, reject) => {
-            fetch('/users/current', {
-                method: 'GET',
-                credentials: 'same-origin',
-              }).then((response : Response) => {
+            this.fetch('/users/current').then((response) => {
                 return response.json().then((data) => {
                     return resolve(data);
                 });
-            });
+            })
         });
 
         return this._user;
     };
+
+    fetch(route : string, req : RequestInit = {}) {
+        let requestInit = {
+            ...{ method: 'GET', credentials: 'same-origin' },
+            ...req
+        }
+
+        return fetch(route, requestInit as RequestInit);
+    }
 
     static getInstance() {
         if (!CmsComponentHandler._instance) {

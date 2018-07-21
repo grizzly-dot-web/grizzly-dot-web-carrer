@@ -7,32 +7,3 @@
 @import './globals/variables';
 @import './globals/typo';
 @import './globals/keyframes';
-
-.justify-chars {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-a {
-	&[target=_blank] {
-	}
-}
-
-button {
-	margin: 0;
-	display: inline;
-	padding: 0;
-	border: none;
-	color: inherit;
-	font-weight: inherit;
-	text-align: inherit;
-	cursor: pointer;
-	background-color: transparent;
-}
-
-p {
-	margin-top: 0;
-	margin-bottom: 1em;
-}

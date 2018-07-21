@@ -6,7 +6,9 @@ import { NextFunction } from "express";
 
 export default class Users extends ServerSideComponent {
     
-	protected name = 'users';
+    protected get name() {
+        return 'users';
+    };
 
 	get service() {
 		return this.getDependency('users_UserService') as UserService;
@@ -31,10 +33,8 @@ export default class Users extends ServerSideComponent {
 	}
 
 	loginByLink(req : Request, res : Response, next : NextFunction) {
-		console.log('loginByLink entered')
 		let user = this.service.getUserByNameAndHash(req.params.username, req.params.hash);
 	
-		console.log(user);
 		if (req.session) {
 			req.session.user = user;
 		}

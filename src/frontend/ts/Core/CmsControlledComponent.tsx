@@ -36,6 +36,10 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
         return this.handler.currentUser;
     }
 
+    protected fetch(route : string, req? : RequestInit) {
+        return this.handler.fetch(route, req)
+    }
+
     constructor(props: Props, context?: any) {
         super(props, context);
         this.state = {} as Readonly<State>;

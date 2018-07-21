@@ -1,0 +1,160 @@
+.IssueTracker {
+    z-index: 8;
+    padding-top: 7em;
+    width: 100%;
+    height: 100%;
+   
+    position: fixed;
+
+    .IssueTracker_Inner {
+        width: 80vw;
+        max-height: calc(100% - 7em);
+        overflow: auto;
+        padding: 2em;
+        margin: 0 auto;
+        color: $ColorBackgroundDark;
+        background-color: $ColorBackgroundContent;
+
+        animation-name: flipInX;
+        @include Animated(1, 1s);
+    }
+
+    .IssueTracker_Form_TextInput-Title {
+        padding: 0;
+        width: 100%;
+        font-size: 2em;
+        font-weight: 300;
+        padding-bottom: 0.1em;
+        margin-bottom: 0.2em;
+        border: none;
+        border-bottom: 2px solid $ColorBackgroundDark;
+
+        &:focus {
+            outline: none;
+            border-bottom: 2px solid $ColorPrimary;
+        }
+    }
+
+    &:before {
+        content: '';
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+
+        top: 50%;
+        left: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        
+        background-color: rgba($ColorBackgroundDark, 0.5);
+    }
+}
+
+.Form {
+    .Form_Fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        .Form_Fieldset_Legend {
+            margin-bottom: 1em;
+        }
+    }
+
+    .Form_Button {
+        margin-top: 1em; 
+        @include Button();
+    }
+
+    .From_CheckboxList {
+        display: block;
+    }
+
+    .Form_Textarea, .Form_Markdown_Preview {
+        padding: 0.5em 1em;
+        margin-bottom: 1em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    } 
+
+    .Form_Label_Inner, .Form_Label {
+        margin-bottom: 0.5em;
+    }
+
+    .Form_MarkdownEditor {
+        display: flex;
+        overflow: auto;
+        position: relative;
+        flex-direction: column;
+        border: 1px solid rgba($ColorBackgroundDark, 1);
+        
+        &:focus-within {
+          border: 1px solid rgba($ColorPrimary, 0.5);
+        }
+
+        .Form_Label_Inner, .Form_Markdown_Preview:before {
+            padding: 0.5em 0;
+            width: 100%;
+            display: block;
+
+            top: 0;
+            left: 0;
+            position: absolute;
+
+            color: $ColorBackgroundContent;
+            background-color: $ColorBackgroundDark;
+        }
+
+        .Form_Label_Inner {
+            padding-left: 0.5em;
+        }
+
+        .Form_Textarea, .Form_Markdown_Preview {
+            border: none;
+
+            width: 100%;
+            display: block;
+            min-height: 30vh;
+            padding-top: 3em;
+            margin-bottom: 0;
+        }
+
+        .Form_Textarea {
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .Form_Markdown_Preview {
+            position: relative;
+            
+            &:before {
+                content: 'Preview';
+                background-color: transparent;
+            }
+        }
+
+        @media (min-width: $MobileNavBreak) {
+            flex-direction: row;
+
+            .Form_Textarea, .Form_Markdown_Preview {
+                width: 50%;
+                display: block;
+            }
+
+            .Form_Textarea {
+                border-right: 1px dotted $ColorBackgroundDark;
+
+                &:before {
+                    content: ' ';
+                    display: block;
+                }
+            }
+        }
+    }
+}

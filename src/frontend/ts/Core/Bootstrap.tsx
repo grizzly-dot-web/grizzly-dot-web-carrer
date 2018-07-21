@@ -13,6 +13,7 @@ import NavigationRegistry from './Router/NavigationRegistry';
 import Introduction from '../App/Introduction';
 import Start from '../App/Start';
 import InfoCenter from '../App/_partials/InfoCenter';
+import IssueTracker from '../App/IssueTracker';
 
 export default class Bootstrap extends React.Component {
    
@@ -64,6 +65,7 @@ export default class Bootstrap extends React.Component {
 					<Histroy data={this.data.history} />
 				</main>
 				<InfoCenter data={this.data.infoCenter} />	
+				<IssueTracker data={this.data.gitHub} />	
 				<Footer data={this.data.footer} />	
 			</div>
         )

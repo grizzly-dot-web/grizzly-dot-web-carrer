@@ -4,6 +4,7 @@ import * as path from 'path';
 import Router from './Router';
 import DiContainer from "./DiContainer";
 import Users from './Component/User/User';
+import IssueTracker from '../Components/IssueTracker/IssueTracker';
 
 export default class Bootstrap {
     
@@ -22,6 +23,9 @@ export default class Bootstrap {
     init() {
         let user = new Users(this._di, this._router);
         user.init();
+
+        let issueTracker = new IssueTracker(this._di, this._router);
+        issueTracker.init();
     }
 
     listen() {

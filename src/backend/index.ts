@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import bodyParser from 'body-parser';
 import FileStoreF from 'session-file-store';
 import compression from 'compression';
 import * as path from 'path';
@@ -19,7 +20,6 @@ import morgan from 'morgan';
 app.use('/compiled', express.static(path.resolve('.', 'compiled/public')));
 app.use(express.static(path.resolve('.', 'public')));
 app.use(compression());
-
 app.set('trust proxy', 1) // trust first proxy
 
 app.use(session({
@@ -31,6 +31,11 @@ app.use(session({
   store: new FileStore(),
 }));
 
+
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(bodyParser.json());
 
 let diContainer = new DiContainer();
 let router = new Router(app);
