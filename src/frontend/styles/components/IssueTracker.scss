@@ -27,8 +27,17 @@
         overflow: auto;
         padding: 2em;
         margin: 0 auto;
+        position: relative;
         color: $ColorBackgroundDark;
         background-color: $ColorBackgroundContent;
+
+        .IssueTracker_CloseButton {
+            @include CloseButton();
+
+            top: 1em;
+            right: 1em;
+            position: absolute;
+        }
     }
 
     .IssueTracker_Form_TextInput-Title {
@@ -146,7 +155,7 @@
             position: relative;
             
             &:before {
-                content: 'Preview';
+                content: 'Preview (Markdown)';
                 background-color: transparent;
             }
         }

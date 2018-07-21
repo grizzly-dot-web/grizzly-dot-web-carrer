@@ -90,6 +90,7 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
                         </fieldset>
                         <button onClick={this.handleSubmit} className={`Form_Button`} type="submit">Absenden</button>
                     </form>
+                    <button className="IssueTracker_CloseButton" onClick={this.leave.bind(this)}>Schließen</button>
                 </div>
             </section>
         );
@@ -223,9 +224,35 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
             return;
         }
 
+        let clickOutsideHandler = (e : Event) => {
+            this.leave.bind(this);
+            document.removeEventListener('click', clickOutsideHandler);
+        };
+
+        document.addEventListener("click", (evt) => {  
+            if (!this.ref) {
+                return;
+            }
+            const flyoutElement = this.ref.querySelector('.IssueTracker_Inner') as HTMLElement;
+            let targetElement = evt.target as Node|null; 
+        
+            do {
+                if (targetElement == flyoutElement) {
+                    // This is a click inside. Do nothing, just return.
+                  
+                    return;
+                }
+                // Go up the DOM
+                targetElement = targetElement ? targetElement.parentNode : null;
+            } while (targetElement);
+        
+            // This is a click outside.
+            this.leave();
+        });
+
         this.ref.classList.add('IssueTracker_isActive');
 		this.appElement.classList.remove('history__is-active');
-		this.appElement.classList.remove('header__right-dark');
+		this.appElement.classList.add('header__right-dark');
     }
     leave(): void {
         if (!this.ref) {
