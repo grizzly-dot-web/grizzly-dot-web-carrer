@@ -17,9 +17,26 @@ const FileStore = FileStoreF(session);
 
 import morgan from 'morgan';
 //app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
-app.use('/compiled', express.static(path.resolve('.', 'compiled/public')));
-app.use(express.static(path.resolve('.', 'public')));
+
+
+/**
+ * @description define Static Files
+ */
+app.use('/compiled', express.static(path.resolve('compiled/public')));
+app.use(express.static(path.resolve('public')));
+
+
+
+/**
+ * @description exable compression for served Files
+ */
 app.use(compression());
+
+
+
+/**
+ * @description Express Server enable Sessions
+ */
 app.set('trust proxy', 1) // trust first proxy
 
 app.use(session({
@@ -31,12 +48,17 @@ app.use(session({
   store: new FileStore(),
 }));
 
-
+/**
+ * @description  enable access Post Request Body
+ */
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
 
+/**
+ * @description 
+ */
 let diContainer = new DiContainer();
 let router = new Router(app);
 let bootstrap = new Bootstrap(app, router, diContainer);
