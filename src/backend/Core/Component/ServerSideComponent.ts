@@ -35,8 +35,8 @@ export default abstract class ServerSideComponent {
         this._di.register(this.name + '_'+ identifier, classContruct, props);
     }
 
-    getDependency(identifier : string) {
-        return this._di.load(identifier);
+    getDependency<T>(identifier : string) : T {
+        return this._di.load<T>(identifier);
     }
 
     abstract init() : void

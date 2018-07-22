@@ -1,7 +1,8 @@
 @import './elements/textarea';
 @import './elements/columns-scroller';
+@import './elements/Form';
 
 @import './components/start';
 @import './components/history';
 @import './components/experience-overview';
-@import './components/IssueTracker';
+@import './components/IssueTracker/IssueTracker';

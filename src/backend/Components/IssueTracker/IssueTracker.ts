@@ -1,67 +1,56 @@
 import ServerSideComponent from "../../Core/Component/ServerSideComponent";
 import express from "express";
-import config from 'config-yml';
-import infoGraphQL from "./_shared/Models/GraphQlQueries";
-import GitHubInfoResponse from "./_shared/Models/GitHubInfoResponse";
-import fetch from 'node-fetch';
+import GithubService from "./GithubService";
+import { LabelResponse, ContributerResponse, IssueResponse } from "./_shared/Models/GitHubResponses";
 
-const infoGraphRequsetBody = `
-{
-    user(login:"sebgrizzly") {
-        name
-    }   
+export interface IssueTrackerRepoInfo {
+    issues: IssueResponse[]
+    labels: LabelResponse[]
+    contribs: ContributerResponse[]
 }
-  
-`
 
 export default class IssueTracker extends ServerSideComponent {
     
-    private _repoInfo? : GitHubInfoResponse 
-
     protected get name() {
         return 'issue_tracker';
     };
-    
-    protected mediaType = 'application/vnd.github.symmetra-preview+json'
 
-    init() {
-        this.routePrefixed().get('/info', this.getRepositoryInfos.bind(this));
-        this.routePrefixed().post('/create', this.createRepositoryIssue.bind(this));
-    
-        this.fetchRepoInfo();
-	}
-    
-    fetchRepoInfo() {
-        if (this._repoInfo) {
-            return this._repoInfo;
-        }
-
-        let modified = infoGraphRequsetBody.replace(/\s/g, '');
-        fetch('https://api.github.com/graphql', {
-                method: 'POST',
-                body: JSON.stringify({modified}),
-                headers: {
-                    'Authorization': `Bearer ${config.github.token}`,
-                    'Accept':  'application/vnd.github.v4.idl'
-                }
-            }
-        )
-        .then(res => res.json())
-        .then(json => this._repoInfo = json) 
-        .catch(error => this._repoInfo = error);
-
-        return this._repoInfo;
+    get service() {
+        return this.getDependency<GithubService>('issue_tracker_service')
     }
 
+    issues : IssueResponse[] = []
+    labels : LabelResponse[] = []
+    contribs : ContributerResponse[] = []
+    
+    init() {
+        this.registerPrefixedForDI('service', GithubService)
+
+        this.routePrefixed().get('/info', this.getInfo.bind(this));
+        this.routePrefixed().post('/issues/create', this.createRepositoryIssue.bind(this));
+    }
+    
 	index(req: express.Request, res: express.Response, next : express.NextFunction) {
     }
-
-    getRepositoryInfos(req: express.Request, res: express.Response, next : express.NextFunction) {
-        return res.send(this._repoInfo);
+    
+    getInfo(req: express.Request, res: express.Response, next : express.NextFunction) {
+        // TODO implement https://www.npmjs.com/package/express-async-errors?
+        this.getRepoInfo().then((info) => {
+            res.send(info);
+        });
     }
     
     createRepositoryIssue(req: express.Request, res: express.Response, next : express.NextFunction) {
-        console.log('req.body', req.body)
-        res.send(req.body);
+        this.service.createIssue(req.body).then(users => {
+            res.send(users);
+        });
+    }
+    
+    private async getRepoInfo() : Promise<IssueTrackerRepoInfo> {
+        return {
+            issues: await this.service.fetchIssues(),
+            contribs: await this.service.fetchContributers(),
+            labels: await this.service.fetchLabels()
+        }
     }
 }

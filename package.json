@@ -51,6 +51,7 @@
   "dependencies": {
     "@types/graphql": "^0.13.3",
     "@types/node-fetch": "^2.1.2",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
     "config-yml": "^0.10.2",
     "crypto": "^1.0.1",

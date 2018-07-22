@@ -13,7 +13,7 @@ import NavigationRegistry from './Router/NavigationRegistry';
 import Introduction from '../App/Introduction';
 import Start from '../App/Start';
 import InfoCenter from '../App/_partials/InfoCenter';
-import IssueTracker from '../App/IssueTracker';
+import IssueTracker from '../App/IssueTracker/index';
 
 export default class Bootstrap extends React.Component {
    
@@ -43,10 +43,11 @@ export default class Bootstrap extends React.Component {
             if (response.ok) {
                 return response.json().then((data) => {
                     this.data = data;
+                    
                     ReactDOM.render(this.render(), this.appElement, () => {
                         NavigationRegistry.updateNavigations().then(() => {
                             this.componentHandler.startRouter();
-                        })
+                        });
                     });
 
                 })

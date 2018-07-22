@@ -49,7 +49,7 @@ var backendConfig = {
 	mode: debug ? 'development' : 'production',
 	target: 'node',
 	entry: {
-		main: ['./src/backend/index.ts'],
+		main: ['babel-polyfill', './src/backend/index.ts'],
 	},
 	output: {
 			path: path.resolve(__dirname, 'compiled/server'),
