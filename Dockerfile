@@ -1,5 +1,6 @@
 FROM node:9.3.0
 WORKDIR /usr/src/app
+VOLUME /usr/src/app/www/persistant
 
 COPY package*.json ./
 
@@ -13,5 +14,4 @@ RUN npm run-script build:content
 
 EXPOSE 80 9000
 
-VOLUME /storage
 CMD [ "npm", "start" ]

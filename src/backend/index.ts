@@ -19,11 +19,12 @@ import morgan from 'morgan';
 //app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 
+
 /**
  * @description define Static Files
  */
-app.use('/compiled', express.static(path.resolve('compiled/public')));
-app.use(express.static(path.resolve('public')));
+app.use('/compiled', express.static(path.resolve('www', 'compiled', 'public')));
+app.use(express.static(path.resolve('www', 'public')));
 
 
 
@@ -47,6 +48,8 @@ app.use(session({
   cookie: { httpOnly: false, secure: false, maxAge: 3600000 },
   store: new FileStore(),
 }));
+
+
 
 /**
  * @description  enable access Post Request Body

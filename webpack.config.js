@@ -15,7 +15,7 @@ var frontendConfig = {
         extensions: ['.ts', '.tsx', '.js', '.json']
     },
 	output: {
-			path: path.resolve(__dirname, 'compiled/public/'),
+			path: path.resolve('www', 'compiled', 'public'),
 			filename: 'main.js',
 			publicPath: './'
 	},
@@ -52,7 +52,7 @@ var backendConfig = {
 		main: ['babel-polyfill', './src/backend/index.ts'],
 	},
 	output: {
-			path: path.resolve(__dirname, 'compiled/server'),
+			path: path.resolve('www', 'compiled', 'server'),
 			filename: 'index.js',
 			publicPath: './'
 	},
@@ -79,14 +79,14 @@ var backendConfig = {
 };
 
 var afterBuildConfig = {
-	name: 'Backend side Changes',
+	name: 'Build Changes',
 	mode: debug ? 'development' : 'production',
 	target: 'node',
 	entry: {
 		main: ['./src/build/index.ts'],
 	},
 	output: {
-			path: path.resolve(__dirname, 'compiled/build'),
+			path: path.resolve('www', 'compiled', 'build'),
 			filename: 'index.js',
 			publicPath: './'
 	},

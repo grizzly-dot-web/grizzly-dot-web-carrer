@@ -1,9 +1,12 @@
 
-compiled/*
-.vscode/*
-config/*
-/sessions/*
 
+
+www/compiled/*
+www/persistent/config/*
+www/persistent/sessions/*
+
+
+.vscode/*
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template

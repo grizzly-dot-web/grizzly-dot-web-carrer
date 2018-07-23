@@ -13,15 +13,15 @@ class ContentUpdater {
     private static json : any;
 
     static update() {
-        ContentUpdater.json = JSON.parse(fs.readFileSync(path.resolve('.', 'content', '_data.json')).toString());
+        ContentUpdater.json = JSON.parse(fs.readFileSync(path.resolve('www', 'content', '_data.json')).toString());
 
-        let files = fs.readdirSync(path.resolve('.', 'content'));
+        let files = fs.readdirSync(path.resolve('www', 'content'));
         for (let fileName of files) {
             if (fileName === '_data.json') {
                 continue;
             }
 
-            let content = fs.readFileSync(path.resolve('.', 'content', fileName)).toString();
+            let content = fs.readFileSync(path.resolve('www', 'content', fileName)).toString();
             ContentUpdater.contents.push({
                 name: fileName.slice(0, fileName.length - 3),
                 content: content,
@@ -92,7 +92,7 @@ class ContentUpdater {
     }
 
     private static updateJson() {
-        fs.writeFileSync(path.resolve('.', 'compiled', 'public', 'data.json'), JSON.stringify(ContentUpdater.json));
+        fs.writeFileSync(path.resolve('www', 'compiled', 'public', 'data.json'), JSON.stringify(ContentUpdater.json));
     }
 }
 

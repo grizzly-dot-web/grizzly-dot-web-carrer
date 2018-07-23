@@ -4,13 +4,14 @@
   "description": "",
   "scripts": {
     "test": "",
-    "start": "node compiled/server/index.js",
+    "start": "node www/compiled/server/index.js",
     "build": "webpack -p --verbose",
-    "build:content": "node compiled/build/index.js",
+    "build:content": "node www/compiled/build/index.js",
     "watch": "webpack --watch --progress",
-    "watch:server": "nodemon compiled/server/index.js",
+    "watch:server": "nodemon www/compiled/server/index.js",
     "docker:build": "docker build . -t grizzlydotweb/gizzlydotweb-career:latest",
-    "docker:push": "docker push grizzlydotweb/gizzlydotweb-career:latest"
+    "docker:push": "docker push grizzlydotweb/gizzlydotweb-career:latest",
+    "docker:local": "docker run -it -p 80:9000 -m 256m --memory-swap=256m  grizzlydotweb/gizzlydotweb-career:latest"
   },
   "engines": {
     "node": "9.3.0"
@@ -50,11 +51,12 @@
   },
   "dependencies": {
     "@types/graphql": "^0.13.3",
+    "@types/js-yaml": "^3.11.2",
+    "@types/lodash": "^4.14.112",
     "@types/node-fetch": "^2.1.2",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
     "browser-detect": "^0.2.28",
-    "config-yml": "^0.10.2",
     "crypto": "^1.0.1",
     "detector": "^2.5.0",
     "express-session": "^1.15.6",
@@ -62,6 +64,8 @@
     "guid-typescript": "^1.0.7",
     "hammerjs": "^2.0.8",
     "http": "0.0.0",
+    "js-yaml": "^3.12.0",
+    "lodash": "^4.17.10",
     "markdown-to-jsx": "^6.6.9",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",

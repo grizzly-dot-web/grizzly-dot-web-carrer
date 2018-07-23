@@ -1,7 +1,8 @@
 import nodeFetch from "node-fetch";
-import config from "config-yml";
 import { GitHubIssueBody } from "./_shared/Models/GitHubIssueBody";
 import { LabelResponse, IssueResponse, ContributerResponse } from "./_shared/Models/GitHubResponses";
+
+import config from "../../Core/ConfigHandler";
 
 export default class GithubService {
 
@@ -19,7 +20,6 @@ export default class GithubService {
 
     createIssue(data : GitHubIssueBody) : Promise<IssueResponse> {
         delete data.milestone
-
         return nodeFetch(`https://api.github.com/repos/${config.github.owner}/${config.github.repo}/issues`, {
                 method: 'POST',
                 body: JSON.stringify(data),

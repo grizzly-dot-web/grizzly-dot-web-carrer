@@ -31,7 +31,7 @@ export default class Bootstrap {
     listen() {
         this._router.listen();
         this._app.use(['*'], (req, res) => {
-            res.sendFile(path.resolve('.', 'public', 'index.html'));
+            res.sendFile(path.resolve('www', 'public', 'index.html'));
         });
     }
 }   
