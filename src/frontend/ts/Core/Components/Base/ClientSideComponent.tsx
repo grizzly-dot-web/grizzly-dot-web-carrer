@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import CmsComponentHandler from './CmsComponentHandler';
-import { NavState } from './Router/Navigation';
-
+import { NavState } from '../Navigation';
+import FrontendComponentManager from '../../FrontendComponentManager';
 
 export interface ChildComponentConfig {
     [className:string] : { 
@@ -29,7 +28,7 @@ export interface CmsState {
     navigations?: {[className:string] : React.ReactElement<NavState>[]}
 }
 
-export default class CmsControlledComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends React.Component<Props, State> {
+export default class ClientSideComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends React.Component<Props, State> {
     
 
     protected get workWithUser() {
@@ -51,8 +50,8 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
         this.handler.addComponent(this);
     }
 
-    protected get handler() : CmsComponentHandler {
-        return CmsComponentHandler.getInstance();
+    protected get handler() : FrontendComponentManager {
+        return FrontendComponentManager.getInstance();
     }
     
     public get appElement() {
@@ -100,7 +99,7 @@ export default class CmsControlledComponent<Props extends CmsProps<any> = CmsPro
     } 
 }
 
-export class ChildComponent extends CmsControlledComponent {
+export class ChildComponent extends ClientSideComponent {
     className : string
 
     constructor(props: CmsProps<any>, className : string, context?: any) {

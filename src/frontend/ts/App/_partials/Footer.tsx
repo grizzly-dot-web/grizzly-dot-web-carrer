@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
+import ClientSideComponent, { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
 
 export interface FooterProps extends CmsProps<any> {
 }
@@ -8,7 +8,7 @@ export interface FooterState extends CmsState {
 
 }
 
-class Footer extends CmsControlledComponent<FooterProps, FooterState> {
+class Footer extends ClientSideComponent<FooterProps, FooterState> {
 
 	constructor(props : any) {
 		super(props);

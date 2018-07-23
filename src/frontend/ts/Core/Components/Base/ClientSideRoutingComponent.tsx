@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import Router from '../Router';
-import CmsComponentHandler from '../CmsComponentHandler';
-import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComponent';
-import { NavigationLink, NavState } from './Navigation';
-import NavigationRegistry from './NavigationRegistry';
+import Router from '../../Router';
+import FrontendComponentManager from '../../FrontendComponentManager';
+import { NavigationLink, NavState } from '../Navigation';
+import NavigationRegistry from '../../Router/NavigationRegistry';
+import ClientSideComponent, { CmsProps, CmsState } from './ClientSideComponent';
 
-export default abstract class CmsRoutingComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends CmsControlledComponent<Props, State> {
+export default abstract class CmsRoutingComponent<Props extends CmsProps<any> = CmsProps<any>, State extends CmsState = CmsState> extends ClientSideComponent<Props, State> {
     
     abstract get ref() : HTMLElement|null
     abstract navigationId() : string|false

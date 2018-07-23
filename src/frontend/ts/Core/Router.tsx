@@ -1,5 +1,5 @@
-import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
-import CmsControlledComponent, { CmsState, CmsProps } from "./CmsControlledComponent";
+import CmsRoutingComponent from "./Components/Base/ClientSideRoutingComponent";
+import { CmsProps, CmsState } from "./Components/Base/ClientSideComponent";
 
 export default class Router {
 

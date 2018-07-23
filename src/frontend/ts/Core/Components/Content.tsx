@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Markdown from 'markdown-to-jsx';
 
-import CmsControlledComponent, { CmsState, CmsProps } from '../CmsControlledComponent';
 import HtmlTag from './HtmlTag';
+import ClientSideComponent, { CmsProps, CmsState } from './Base/ClientSideComponent';
 
 export interface TextProps extends CmsProps<string> {
 	classes?: string[]
@@ -16,7 +16,7 @@ export interface TextState extends CmsState {
 	forceBlock : boolean
 }
 
-export default class Content extends CmsControlledComponent<TextProps, TextState> {
+export default class Content extends ClientSideComponent<TextProps, TextState> {
 	getInitialState() {
 		return { 
 			forceBlock: this.props.forceBlock || false

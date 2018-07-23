@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CmsRoutingComponent from '../Core/Router/AbstractRoutingComponent';
-import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
+import CmsRoutingComponent from '../../Core/Components/Base/ClientSideRoutingComponent';
+import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
 
 export interface ExperienceLevel {
     name : string
@@ -19,7 +19,7 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
     link() {
         return {
             url: '/experiences',
-            title: 'Skills und Referenzen',
+            title: 'Skills und Refserenzen',
             text: (<span><span className="skills">Skills</span> <span className="circle">&</span> <span className="references">Referenzen</span></span>),
             classes: ['experience-link']
         };

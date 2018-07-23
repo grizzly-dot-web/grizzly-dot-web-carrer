@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
-import Content from '../../Core/Components/Content';
-import CmsRoutingComponent from '../../Core/Router/AbstractRoutingComponent';
+import CmsRoutingComponent from '../../Core/Components/Base/ClientSideRoutingComponent';
 import { GitHubIssueBody } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
 import DebugIssueResponse, { IssueResponse, ContributerResponse, LabelResponse } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 import { IssueTrackerRepoInfo } from '../../../../backend/Components/IssueTracker/IssueTracker';
-import {Label} from './Label';
 import { Issue } from './Issue';
 import { Form } from './Form';
 import browser from 'browser-detect';
+import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
 
 export interface GitHubProps extends CmsProps<undefined> {
     

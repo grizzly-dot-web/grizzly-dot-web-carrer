@@ -1,6 +1,6 @@
 FROM node:9.3.0
 WORKDIR /usr/src/app
-VOLUME /usr/src/app/www/persistant
+VOLUME /usr/src/app/www/persistent
 
 COPY package*.json ./
 

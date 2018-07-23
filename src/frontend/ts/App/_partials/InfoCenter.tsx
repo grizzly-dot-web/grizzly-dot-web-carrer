@@ -1,7 +1,6 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
 import DefaultInfo from './InfoCenter/DefaultInfo';
-import { resolve } from 'dns';
+import ClientSideComponent, { CmsState, CmsProps } from '../../Core/Components/Base/ClientSideComponent';
 
 export interface InfoCenterProps extends CmsProps<any> {
 }
@@ -12,7 +11,7 @@ export interface InfoCenterState extends CmsState {
 	visibleRegions: VisibleRegions
 }
 
-export default class InfoCenter extends CmsControlledComponent<InfoCenterProps, InfoCenterState> {
+export default class InfoCenter extends ClientSideComponent<InfoCenterProps, InfoCenterState> {
 
 	constructor(props : any) {
 		super(props);

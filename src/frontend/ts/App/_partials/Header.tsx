@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
-import { Navigation } from '../../Core/Router/Navigation';
+import { Navigation } from '../../Core/Components/Navigation';
+import ClientSideComponent, { CmsState, CmsProps } from '../../Core/Components/Base/ClientSideComponent';
 
 export interface HeaderProps extends CmsProps<any> {
 }
@@ -9,7 +9,7 @@ export interface HeaderState extends CmsState {
 	navigations : any 
 }
 
-export default class Header extends CmsControlledComponent<HeaderProps, HeaderState> {
+export default class Header extends ClientSideComponent<HeaderProps, HeaderState> {
 
 	constructor(props : any) {
 		super(props);

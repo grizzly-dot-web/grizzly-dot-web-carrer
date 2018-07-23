@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavigationLink, NavProps, NavState, Navigation } from "./Navigation";
+import { NavigationLink, NavProps, NavState, Navigation } from "../Components/Navigation";
 
 export interface NavRegistryItem {
     instance? : Navigation

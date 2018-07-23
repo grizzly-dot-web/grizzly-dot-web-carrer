@@ -3,13 +3,13 @@ import * as React from 'react';
 import Content from '../Core/Components/Content';
 import Introduction from './Start/Introduction';
 
-export default class Start extends Introduction {
+export default class Imprint extends Introduction {
     
     link() { 
         return {
-            url: '/',
+            url: '/imprint',
             title: '',
-            text: 'Start',
+            text: 'Impressum',
         }
     }
     navigationId() {
@@ -47,7 +47,6 @@ export default class Start extends Introduction {
                         },
                     })
                 }
-                {this.props.children}
             </div>
         );
     }

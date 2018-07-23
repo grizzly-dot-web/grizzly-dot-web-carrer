@@ -1,13 +1,9 @@
 import * as React from 'react';
-import * as check from 'check-types';
-import slugify from 'slugify'
-
 import moment from 'moment';
 
 import Experiences from './Entry/Experiences';
-import ScrollRoutingComponent from '../../../Core/Router/ScrollRoutingComponent';
-import CmsControlledComponent, { CmsState, CmsProps, ChildComponentConfig } from '../../../Core/CmsControlledComponent';
 import Details from './Entry/Details';
+import ClientSideComponent, { ChildComponentConfig, CmsProps, CmsState } from '../../../Core/Components/Base/ClientSideComponent';
 
 export interface Institution {
 	begin_date: string,
@@ -46,7 +42,7 @@ export interface HistoryEntryState extends CmsState {
 	experiencesOriginPosition: { x : number, y : number }|null
 }
 
-class HistoryEntry extends CmsControlledComponent<HistoryEntryProps, HistoryEntryState> {
+class HistoryEntry extends ClientSideComponent<HistoryEntryProps, HistoryEntryState> {
 	url: string;
 
 	ref: HTMLElement | null;

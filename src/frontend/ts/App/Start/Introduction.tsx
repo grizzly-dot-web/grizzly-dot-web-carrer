@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { NavigationLink } from '../Core/Router/Navigation';
-import { CmsProps, CmsState } from '../Core/CmsControlledComponent';
-import TimeQualityCostSwitch from './Components/TimeQualityCostSwitch';
-import Content from '../Core/Components/Content';
-import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
+import Content from '../../Core/Components/Content';
+import ScrollRoutingComponent from '../../Core/Components/Base/ClientSideScrollRoutingComponent';
+import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
 
 export interface IntroProps extends CmsProps<undefined> {
 }

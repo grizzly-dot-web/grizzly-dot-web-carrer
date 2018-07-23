@@ -1,5 +1,5 @@
 import * as React from 'react';
-import NavigationRegistry from './NavigationRegistry';
+import NavigationRegistry from '../Router/NavigationRegistry';
 
 export interface NavigationLink {
     

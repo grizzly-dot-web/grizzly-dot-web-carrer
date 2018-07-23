@@ -1,10 +1,10 @@
 import Router from "./Router";
-import CmsControlledComponent, { CmsState, CmsProps } from "./CmsControlledComponent";
-import CmsRoutingComponent from "./Router/AbstractRoutingComponent";
+import CmsRoutingComponent from "./Components/Base/ClientSideRoutingComponent";
 import User from "../../../backend/Core/Component/User/Shared/Models/User";
+import ClientSideComponent, { CmsProps, CmsState } from "./Components/Base/ClientSideComponent";
 
-export default class CmsComponentHandler {
-    static _instance : CmsComponentHandler;
+export default class FrontendComponentManager {
+    static _instance : FrontendComponentManager;
     
     private _user : Promise<User|boolean>|undefined
 
@@ -34,17 +34,17 @@ export default class CmsComponentHandler {
     }
 
     static getInstance() {
-        if (!CmsComponentHandler._instance) {
-            CmsComponentHandler._instance = new this();
+        if (!FrontendComponentManager._instance) {
+            FrontendComponentManager._instance = new this();
         }
 
-        return CmsComponentHandler._instance;
+        return FrontendComponentManager._instance;
     }
 
     public appElement : HTMLElement|null;
 
     private _router : Router|null
-    private _components : CmsControlledComponent<CmsProps<any>, CmsState>[]
+    private _components : ClientSideComponent<CmsProps<any>, CmsState>[]
 
     private constructor() {
         this.appElement = null;

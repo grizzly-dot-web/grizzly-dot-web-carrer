@@ -1,17 +1,8 @@
 import * as React from 'react';
 
-import moment from 'moment';
-import * as check from 'check-types';
-
-import HistoryEntry, { HistoryEntryData, Institution } from './Components/History/HistoryEntry';
-import ScrollRoutingComponent from '../Core/Router/ScrollRoutingComponent';
-import { CmsState, CmsProps } from '../Core/CmsControlledComponent';
-import { NavigationLink } from '../Core/Router/Navigation';
-
-import { ScrollWatcher } from '../Helper/cross-scroll-contorl';
-import scroll from 'scroll';
-import page from 'scroll-doc';
-import { PositionChecker } from '../Helper/PositioningHelper';
+import HistoryEntry, { HistoryEntryData, Institution } from '../Components/History/HistoryEntry';
+import ScrollRoutingComponent from '../../Core/Components/Base/ClientSideScrollRoutingComponent';
+import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
 
 
 export interface HistoryProps extends CmsProps<HistoryEntryData[]> {

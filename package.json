@@ -60,6 +60,7 @@
     "crypto": "^1.0.1",
     "detector": "^2.5.0",
     "express-session": "^1.15.6",
+    "fs": "0.0.1-security",
     "github-create-issue": "^2.0.0",
     "guid-typescript": "^1.0.7",
     "hammerjs": "^2.0.8",

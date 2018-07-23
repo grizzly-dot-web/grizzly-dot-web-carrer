@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import CmsControlledComponent, { CmsProps, CmsState } from '../CmsControlledComponent';
-
 export interface HtmlTagProps {
 	tag:string, 
 	id?: string

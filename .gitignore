@@ -3,7 +3,7 @@
 
 www/compiled/*
 www/persistent/config/*
-www/persistent/sessions/*
+www/persistent/session/*
 
 
 .vscode/*

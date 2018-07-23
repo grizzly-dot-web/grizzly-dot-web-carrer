@@ -1,8 +1,6 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsProps, CmsState } from '../../../Core/CmsControlledComponent';
 import Content from '../../../Core/Components/Content';
-import { resolve } from 'dns';
-import User from '../../../../../backend/Core/Component/User/Shared/Models/User';
+import ClientSideComponent, { CmsState, CmsProps } from '../../../Core/Components/Base/ClientSideComponent';
 
 export interface DefaultInfoProps extends CmsProps<string> {
 	order : number,
@@ -22,7 +20,7 @@ export interface DefaultInfoState extends CmsState {
 	cookieAutoRenew: boolean
 }
 
-export default class DefaultInfo extends CmsControlledComponent<DefaultInfoProps, DefaultInfoState> {
+export default class DefaultInfo extends ClientSideComponent<DefaultInfoProps, DefaultInfoState> {
 
 	constructor(props : any) {
 		super(props);

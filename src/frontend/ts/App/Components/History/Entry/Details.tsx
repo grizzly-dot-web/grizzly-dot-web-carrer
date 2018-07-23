@@ -1,15 +1,14 @@
 import * as React from 'react';
-import CmsControlledComponent, { CmsState } from "../../../../Core/CmsControlledComponent";
 import Content from '../../../../Core/Components/Content';
 
 import Hammer from 'hammerjs';
-import animateCss from '../../../../Helper/animate';
+import ClientSideComponent, { CmsState, CmsProps } from '../../../../Core/Components/Base/ClientSideComponent';
 
 export interface DetailsState extends CmsState {
 	isActive : boolean
 } 
 
-class Details extends CmsControlledComponent<{}, DetailsState> {
+class Details extends ClientSideComponent<CmsProps<any>, DetailsState> {
 
 	ref : HTMLElement|null = null
 
