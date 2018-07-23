@@ -26,6 +26,8 @@ export interface FormState {
 
 export class Form extends React.Component<FormProps, FormState> {
 
+    ref : HTMLFormElement|null = null
+
     constructor(props : FormProps) {
         super(props);
         
@@ -36,7 +38,7 @@ export class Form extends React.Component<FormProps, FormState> {
             form: {
                 title: '',
                 body: '',
-                assignees: [],
+                assignee: '',
                 labels: [],
                 milestone: 0
             }
@@ -46,43 +48,88 @@ export class Form extends React.Component<FormProps, FormState> {
     render() {
         let labels = this.renderCheckboxList('Label: ', 'labels', this.props.labels.map( e => {
             return {
-                id : e.id.toString(),
+                value : e.name,
                 name: e.name,
-                label: (<Label {...e} />)
+                label: (<Label className={'From_CheckboxList_Item_Label'} {...e} />)
             }
         }));
 
-        let collaborators = this.renderCheckboxList('Zuweisen: ', 'assignees', this.props.contribs.map( e => {
+        let collaborators = this.renderCheckboxList('Zuweisen: ', 'assignee', this.props.contribs.map( e => {
             return {
-                id : e.id.toString(),
+                value : e.login,
                 name: e.login,
-                label: (<Contributer {...e} />)
+                label: (<Contributer className={'From_CheckboxList_Item_Label'} {...e} />)
             }
-        }));
+        }), false);
 
         return (
-            <form onSubmit={this.handleSubmit} className={`Form IssueTracker_From ${this.props.classes.join(' ')}`}>
+            <form ref={ref => this.ref = ref} onSubmit={this.handleSubmit} className={`Form IssueTracker_From ${this.props.classes.join(' ')}`}>
                 <fieldset className="Form_Fieldset">
                     <legend className={`Form_Fieldset_Legend`}>Erstellen Sie hier das entsprechende Ticket.</legend>
-                    <input className="Form_TextInput IssueTracker_Form_TextInput-Title" placeholder={`Titel des Tickets`} type="text" name="title" value={this.state.form.title} onChange={(e) => this.handleChange(e)}  />
-                    {labels}
-                    <div>
-                        <label className={'Form_MarkdownEditor'}>
-                            <span className={`Form_Label_Inner`}>Beschreibung:</span>
-                            <textarea placeholder={`Geben Sie hier eine Beschreibung der Angelegenheit an.`} className={'Form_Textarea'} name="body" value={this.state.form.body} onChange={(e) => this.handleChange(e)} />
-                            <Content classes={['Form_Markdown_Preview']}  allowedHeadlineLevel={3} forceBlock={true} data={this.state.form.body} />
-                        </label>
+                    <div className="Form_LayoutContainer">
+                        <div className="Form_LayoutContainer IssueTracker_From_ElementWrap">
+                            <input required={true} className="Form_Element Form_TextInput IssueTracker_Form_TextInput-Title" placeholder={`Titel des Tickets`} type="text" name="title" value={this.state.form.title} onChange={(e) => this.handleChange(e)}  />
+                            <div className={`Form_LayoutContainer_ElementWrapper Form_LayoutContainer_ElementWrapper-Half`}>
+                                <label className={'Form_Element Form_MarkdownEditor'}>
+                                    <span className={`Form_Label_Inner`}>Beschreibung:</span>
+                                    <textarea required={true} placeholder={`Geben Sie hier eine Beschreibung der Angelegenheit an.`} className={'Form_Element Form_Textarea'} name="body" value={this.state.form.body} onChange={(e) => this.handleChange(e)} />
+                                    <Content classes={['Form_Markdown_Preview']}  allowedHeadlineLevel={3} forceBlock={true} data={this.state.form.body} />
+                                </label>
+                            </div>
+                            <div className={`Form_LayoutContainer_ElementWrapper Form_LayoutContainer_ElementWrapper-Half`}>
+                                {labels}
+                                {collaborators}
+                            </div>
+                        </div>
                     </div>
-                    {collaborators}
                 </fieldset>
-                <button onClick={this.handleSubmit} className={`Form_Button`} type="submit">Absenden</button>
+                <button onClick={this.handleSubmit} className={`Form_Element Form_Button`} type="submit">Absenden</button>
             </form>
+        );
+    }
+    
+    renderCheckboxList(label : string, key : string, checkboxItems : {value : string, name:string, label: React.ReactElement<any>}[], multiChoice : boolean = true): any {
+        let rendered = [];
+        let form : any = this.state.form;
+        for (let item of checkboxItems) {
+            if (checkboxItems.length == 1) {
+                if (multiChoice) {
+                    form[key].push(item.value);
+                } else {
+                    form[key] = item.value;
+                }
+            }
+            
+            let checked = form[key].indexOf(item.value) !== -1 ? true : false;
+
+            rendered.push(
+                <label key={item.name} className={`From_CheckboxList_Item`}>
+                    <input className="Form_Element" name={item.name} value={item.value} checked={checked} type="checkbox" onChange={(e) => this.handleChange(e, key, multiChoice)}/> {item.label}
+                </label>
+            );
+        }
+
+        if (rendered.length <= 0) {
+            return null;
+        }
+
+        return (
+            <div className={`Form_Element From_CheckboxList`}>
+                <span className={`Form_Label_Inner`}>{label}</span>
+                {rendered}
+            </div>
         );
     }
 
     handleSubmit(event : React.FormEvent<HTMLFormElement|HTMLButtonElement>) {
+        let ref = this.ref as HTMLFormElement;
+
         let formClasses = [];
         let form = this.state.form;
+
+        for (let input of ref.querySelectorAll('select, input, textarea') as NodeListOf<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) {
+            this.handleElementErrors(input);
+        }
 
         if (!form.title) {
             formClasses.push('IssueTracker_Form_Title-invalid');
@@ -97,75 +144,57 @@ export class Form extends React.Component<FormProps, FormState> {
         }
 
         this.props.onSubmit(event, form);
+        ref.reset()
 
         return event.preventDefault();
 
     }
 
-    handleChange(event : React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>, isArray = false) {
+    handleElementErrors(element : HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement) {
+        element.classList.remove('Form_Element-invalid')
+        
+        if (element.getAttribute('required') === null) {
+            return;
+        }
+
+        if (element.value && element.value.trim() != '' || element.innerText != '') {
+            return;
+        }
+
+        element.classList.add('Form_Element-invalid')
+    }
+
+    handleChange(event : React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>, formKey? : string, multiChoice = true) {
         let form = this.state.form as any;
-        if (form[event.target.name] === undefined) {
+        let stateFormKey = formKey || event.target.name;
+
+        if (form[stateFormKey] === undefined) {
             throw new Error(`Form property did not exists: ${event.target.name}`)
+        }
+
+        this.handleElementErrors(event.target);
+
+        // handle value as array
+        let value : string[]|string= form[stateFormKey];
+        if (multiChoice && formKey && typeof value != "string") {
+            let index = value.indexOf(event.target.value);
+            if (index !== -1) {
+                value.splice(index, 1)
+            } else {
+                value.push(event.target.value);
+            }
+        } else {
+            value = event.target.value
         }
 
         let formUpdate = {
             ...this.state.form,
-            [event.target.name]: (isArray) ? form[event.target.name].push(event.target.value) : event.target.value
+            [stateFormKey]: value
         }
 
         this.setState({
             ...this.state,
             form: formUpdate
         });
-    }
-
-    renderSelect(label : string, key : string, value : string, options : {value:string, text:string}[]) {
-        let rendered = [];
-        for (let item of options) {
-            rendered.push(
-                <option selected={value === item.value} value={item.value}>{item.text}</option>
-            );
-        }
-
-        if (rendered.length <= 0) {
-            return null;
-        }
-
-        return (
-            <select value={value} name={key} onChange={(e) => this.handleChange(e)}>
-                {rendered}
-            </select>
-        );
-    }
-    
-
-    renderCheckboxList(label : string, key : string, checkboxItems : {id : string, name:string, label: React.ReactElement<any>}[]): any {
-        let rendered = [];
-        for (let item of checkboxItems) {
-            let from : any = this.state.form;
-
-            if (checkboxItems.length == 1) {
-                from[key].push(item.id);
-            }
-            
-            let checked = from[key].indexOf(item.id) !== -1 ? true : false;
-
-            rendered.push(
-                <label key={item.name} className={`From_CheckboxList_Item`}>
-                    <input name={name} value={item.id} checked={checked} type="checkbox" onChange={(e) => this.handleChange(e, true)}/> {item.label}
-                </label>
-            );
-        }
-
-        if (rendered.length <= 0) {
-            return null;
-        }
-
-        return (
-            <label className={`From_CheckboxList`}>
-                <span className={`Form_Label_Inner`}>{label}</span>
-                {rendered}
-            </label>
-        );
     }
 }

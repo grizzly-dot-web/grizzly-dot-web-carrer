@@ -11,7 +11,7 @@ export class Issue extends React.Component<IssueResponse> {
         }
 
         return (
-            <a target="_blank" className="IssueTracker_IssueLink" href={this.props.url}>
+            <a target="_blank" className="IssueTracker_IssueLink" href={this.props.html_url}>
                 {this.props.title}
                 <span className={'IssueTracker_IssueLink_Labels'}>
                     {renderedLabels}

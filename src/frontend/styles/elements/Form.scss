@@ -1,28 +1,62 @@
 .Form {
+
+
     .Form_Fieldset {
         border: none;
         margin: 0;
         padding: 0;
-
-        display: flex;
-        flex-direction: column;
 
         .Form_Fieldset_Legend {
             margin-bottom: 1em;
         }
     }
 
+
+
+    .Form_LayoutContainer {
+        display: flex;
+        flex-wrap: wrap;
+
+        .Form_LayoutContainer_ElementWrapper {
+            width: 100%;
+            flex-grow: 2;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .Form_Element {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    
+        @media (min-width: $MobileNavBreak) {
+            .Form_LayoutContainer_ElementWrapper-Half {
+                flex-grow: 1;
+                width: 50%;
+            }
+        }
+    }
+
+
+
     .Form_Button {
         margin-top: 1em; 
         @include Button();
     }
 
-    .From_CheckboxList {
-        display: block;
+
+
+    .Form_Label_Inner, .Form_Label {
+        margin-bottom: 0.5em;
     }
 
+
+
     .Form_Textarea, .Form_Markdown_Preview {
-        padding: 0.5em 1em;
+        padding: 0.25em 0.5em;
         margin-bottom: 1em;
 
         &:last-child {
@@ -30,9 +64,66 @@
         }
     } 
 
-    .Form_Label_Inner, .Form_Label {
-        margin-bottom: 0.5em;
+
+
+
+    .From_CheckboxList {
+        padding: 0.5em;
+        margin-bottom: 1em;
+        
+        .Form_Label_Inner {
+            width: 100%;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        .From_CheckboxList_Item {
+            cursor: pointer;
+            float: left;
+            display: block;
+            margin-right: 0.5em;
+            margin-bottom: 0.25em;
+            max-width: calc(50% - 0.5em - 1px);
+
+            input {
+                visibility: hidden;
+                position: absolute;
+
+                &:checked ~ .From_CheckboxList_Item_Label {
+                    opacity: 1;
+                
+                    &:before {
+                        content: '✔';
+                    }
+                }
+            }
+
+            .From_CheckboxList_Item_Label {
+                opacity: 0.4;
+                position: relative;
+                display: inline-block;
+                transition: opacity 0.1s ease-in;
+            
+                &:before, &:after {
+                    left: 0;
+                    top: 50%;
+                    padding: 0.25em;
+                }
+
+
+                &:hover {
+                    opacity: 1;
+                }
+                
+                &:before {
+                    content: '✘';
+                }
+            }
+        }
     }
+
+
+
 
     .Form_MarkdownEditor {
         display: flex;
@@ -45,21 +136,9 @@
           border: 1px solid rgba($ColorPrimary, 0.5);
         }
 
-        .Form_Label_Inner, .Form_Markdown_Preview:before {
-            padding: 0.5em 0;
+        .Form_Label_Inner {
             width: 100%;
             display: block;
-
-            top: 0;
-            left: 0;
-            position: absolute;
-
-            color: $ColorBackgroundContent;
-            background-color: $ColorBackgroundDark;
-        }
-
-        .Form_Label_Inner {
-            padding-left: 0.5em;
         }
 
         .Form_Textarea, .Form_Markdown_Preview {
@@ -67,42 +146,47 @@
 
             width: 100%;
             display: block;
-            min-height: 30vh;
-            padding-top: 3em;
             margin-bottom: 0;
         }
 
         .Form_Textarea {
+            min-height: 20vh;
+            border-bottom: 1px dotted $ColorBackgroundDark;
+            
             &:focus {
                 outline: none;
             }
         }
 
         .Form_Markdown_Preview {
+            padding-top: 1.5em;
             position: relative;
+            color: #fff;
             
+            p {
+                margin-bottom: 0;
+            }
+
             &:before {
                 content: 'Preview (Markdown)';
+                font-size: 0.7em;
+                top: 0.5em;
+                left: 0.5em;
+                position: absolute;
                 background-color: transparent;
             }
         }
+    }
 
-        @media (min-width: $MobileNavBreak) {
-            flex-direction: row;
 
-            .Form_Textarea, .Form_Markdown_Preview {
-                width: 50%;
-                display: block;
-            }
+    
 
-            .Form_Textarea {
-                border-right: 1px dotted $ColorBackgroundDark;
+    .Form_Element {
+        border: 2px transparent solid;
+        transition: border 0.3s ease;
 
-                &:before {
-                    content: ' ';
-                    display: block;
-                }
-            }
+        &.Form_Element-invalid {
+            border: 2px solid $ColorError;
         }
     }
 }

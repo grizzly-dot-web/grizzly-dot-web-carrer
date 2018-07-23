@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { ContributerResponse } from "../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses";
 
-export class Contributer extends React.Component<ContributerResponse> {
+export interface ContributerProps extends ContributerResponse {
+    className?: string
+}
+
+export class Contributer extends React.Component<ContributerProps> {
     render() {
         return (
-            <div className={`IssueTracker_Contributer`} >
+            <div className={`IssueTracker_Contributer ${this.props.className || ''}`} >
                 <span>{this.props.login}</span>
             </div>
         );

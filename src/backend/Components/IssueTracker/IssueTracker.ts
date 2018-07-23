@@ -41,8 +41,8 @@ export default class IssueTracker extends ServerSideComponent {
     }
     
     createRepositoryIssue(req: express.Request, res: express.Response, next : express.NextFunction) {
-        this.service.createIssue(req.body).then(users => {
-            res.send(users);
+        this.service.createIssue(req.body).then(issue => {
+            res.send(issue);
         });
     }
     

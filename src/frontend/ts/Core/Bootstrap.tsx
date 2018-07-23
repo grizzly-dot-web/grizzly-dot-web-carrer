@@ -13,7 +13,7 @@ import NavigationRegistry from './Router/NavigationRegistry';
 import Introduction from '../App/Introduction';
 import Start from '../App/Start';
 import InfoCenter from '../App/_partials/InfoCenter';
-import IssueTracker from '../App/IssueTracker/index';
+import IssueTracker from '../App/IssueTracker/IssueTracker';
 
 export default class Bootstrap extends React.Component {
    

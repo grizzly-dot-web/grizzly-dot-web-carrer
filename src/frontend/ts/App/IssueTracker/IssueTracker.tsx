@@ -3,17 +3,20 @@ import { CmsProps, CmsState } from '../../Core/CmsControlledComponent';
 import Content from '../../Core/Components/Content';
 import CmsRoutingComponent from '../../Core/Router/AbstractRoutingComponent';
 import { GitHubIssueBody } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
-import { IssueResponse, ContributerResponse, LabelResponse } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
+import DebugIssueResponse, { IssueResponse, ContributerResponse, LabelResponse } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 import { IssueTrackerRepoInfo } from '../../../../backend/Components/IssueTracker/IssueTracker';
 import {Label} from './Label';
 import { Issue } from './Issue';
 import { Form } from './Form';
+import browser from 'browser-detect';
 
 export interface GitHubProps extends CmsProps<undefined> {
     
 }
 
 export interface GitHubState extends CmsState {
+    createdIssue?: IssueResponse
+    lastCreatedIssue?: IssueResponse
     formClasses: string[],
     issues : IssueResponse[]
     contribs : ContributerResponse[]
@@ -46,7 +49,7 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
                 title: '',
                 body: '',
                 labels: [],
-                assignees: [],
+                assignee: '',
                 milestone: 0, 
             },
             formClasses: []
@@ -56,6 +59,7 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
         this.handleFormSubmit = this.handleFormSubmit.bind(this);  
     }
 
+
     render() {
 
         return (
@@ -63,15 +67,66 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
                 <div className={`IssueTracker_Inner`}>
                     <h2 className={`h1`}>Hinterlassen Sie gerne Ihr Feedback.</h2>
                     {this.renderIssues()}
-                    {this.renderForm()}
-                    <button className="IssueTracker_CloseButton" onClick={this.leave.bind(this)}>Schließen</button>
+                    <Form classes={this.state.formClasses} form={this.state.form} onSubmit={this.handleFormSubmit} labels={this.state.labels} contribs={this.state.contribs}></Form>
+                    <a className="IssueTracker_CloseButton" href="/">Schließen</a>
                 </div>
+                {this.renderResponseMessage()}
             </section>
         );
     }
 
-    renderForm() {
-        return <Form classes={this.state.formClasses} form={this.state.form} onSubmit={this.handleFormSubmit} labels={this.state.labels} contribs={this.state.contribs}></Form>
+    renderResponseMessage() {
+        if (!this.ref) {
+            return;
+        }
+        let ref = this.ref as HTMLElement;
+        let message = null;
+
+        
+        let handleCloseResponseMessage = (e : Event) => {
+            ref.classList.remove('IssueTracker_ResponseMessage-isActive'); 
+            ref.classList.add('IssueTracker_ResponseMessage-isInactive'); 
+
+            this.setState(Object.assign(this.state, {
+                ...this.state,
+                createdIssue: undefined,
+                lastCreatedIssue: this.state.createdIssue,
+            }));
+            console.log( handleCloseResponseMessage);
+
+            document.removeEventListener('click', handleCloseResponseMessage);
+        }
+
+        let statusClass = '';
+        if (this.state.createdIssue != undefined) {
+            this.ref.classList.add('IssueTracker_ResponseMessage-isActive');
+            this.ref.classList.remove('IssueTracker_ResponseMessage-isInactive');
+            document.addEventListener('click', handleCloseResponseMessage);
+
+            if (this.state.createdIssue.html_url) {
+                statusClass = 'IssueTracker_ResponseMessage-Successful';
+                message = (
+                    <p>
+                        Danke für Ihr Feedback<br />
+                        Hier ist der <a target="_blank" href={this.state.createdIssue.html_url}>Link zum Ticket</a>
+                    </p>
+                );
+            } else {
+                statusClass = 'IssueTracker_ResponseMessage-Unsuccessful';
+                message = (
+                    <p>
+                        Leider is etwas schief gegangen.<br />
+                        Es wäre nett wenn Sie mir per Email bescheid. <a target="_blank" href="mailto:info@sebgrizzly.com">info@sebgrizzly.com</a> 
+                    </p>
+                )
+            }
+        } 
+
+        return (
+            <div className={`IssueTracker_ResponseMessage ${statusClass}`}>
+                {message}
+            </div>
+        )
     }
 
     componentDidMount() {
@@ -86,21 +141,54 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
                     return;
                 }
 
-                console.log(this.state)
                 this.setState({
                     ...this.state,
                     ...json
-                }, () => {
-                    console.log(this.state)
                 });
             })
             .catch(err => console.error(err));
     }
 
     handleFormSubmit(event : React.FormEvent<HTMLFormElement|HTMLButtonElement>, form : GitHubIssueBody) {
+        if (this.state.lastCreatedIssue && this.state.lastCreatedIssue.title === form.title) {
+            return;
+        }
+
+        let submitForm = {
+            ...form,
+            body: `
+# Description
+
+${form.body}
+
+## Browserinformation
+| Info |  |
+| :-- | :-- |
+| Browser | ${browser().name} |
+| OS | ${browser().os} |
+| Version | ${browser().version} - ${browser().versionNumber} | 
+            `
+        }; 
+
+        if (form.title.indexOf('DEBUGONLY') !== -1) {
+            this.handleCreatedIssue(DebugIssueResponse);
+            return event.preventDefault();
+        }
+
+        this.setState({
+            ...this.state,
+            form: {
+                title: '',
+                body: '',
+                labels: [],
+                assignee: '',
+                milestone: 0,
+            }
+        });
+
         this.fetch('/issue_tracker/issues/create', {
                 method: "POST",
-                body: JSON.stringify(form),
+                body: JSON.stringify(submitForm),
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -116,7 +204,17 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
     }
 
     handleCreatedIssue(issue : IssueResponse) {
-        console.log('success', issue.url)
+        if (!issue.html_url) {
+            return;
+        }
+        let ref = this.ref as HTMLElement;
+
+        let issues = this.state.issues; 
+        this.setState(Object.assign(this.state, {
+            ...this.state,
+            createdIssue: issue,
+            issues: issues
+        }));
     }
 
     renderIssues() {
@@ -128,6 +226,7 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
         for (let issue of this.state.issues) {
             rendered.push(<Issue key={issue.id} {...issue}/>)
         }
+        
 
         return (
             <div className="IssueTracker_Issues">
@@ -171,8 +270,6 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
         });
 
         this.ref.classList.add('IssueTracker_isActive');
-		this.appElement.classList.remove('history__is-active');
-		this.appElement.classList.add('header__right-dark');
     }
     
     leave(): void {
@@ -181,6 +278,5 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
         }
 
         this.ref.classList.remove('IssueTracker_isActive');
-        this.appElement.classList.remove('header__bg-active');
     }
 }

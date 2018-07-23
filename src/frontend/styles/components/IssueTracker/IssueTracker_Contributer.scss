@@ -1,0 +1,11 @@
+.IssueTracker_Contributor {
+    padding-left: 2em;
+    position: relative;
+    background-color: $ColorBackgroundDark;
+
+    + input {
+        visibility: hidden;
+    }
+
+    
+}
