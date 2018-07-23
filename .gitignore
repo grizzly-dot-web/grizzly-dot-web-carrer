@@ -1,7 +1,7 @@
 
 compiled/*
 .vscode/*
-
+config/*
 /sessions/*
 
 # Created by .ignore support plugin (hsz.mobi)
