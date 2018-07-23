@@ -13,4 +13,5 @@ RUN npm run-script build:content
 
 EXPOSE 80 9000
 
+VOLUME /storage
 CMD [ "npm", "start" ]
