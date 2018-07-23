@@ -46,7 +46,9 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: { httpOnly: false, secure: false, maxAge: 3600000 },
-  store: new FileStore(),
+  store: new FileStore({
+    path: path.resolve('www', 'persistent', 'session')
+  }),
 }));
 
 

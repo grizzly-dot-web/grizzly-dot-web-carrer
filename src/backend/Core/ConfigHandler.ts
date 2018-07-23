@@ -10,7 +10,7 @@ class ConfigHandler {
   private _config : any
 
   private _multiFile = false
-  basePath = 'www/persistent'
+  basePath = path.resolve('www', 'persistent')
 
   static get() {
     if (!this._instance) {
