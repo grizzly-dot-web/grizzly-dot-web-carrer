@@ -512,31 +512,45 @@
 			}
 		},
 		{
-			"url": "/carrer/praktika",
-			"title": "Praktika",
+			"url": "/carrer/berufskolleg-kempen",
+			"title": "Informationstechnik",
 			"institutions": [
 				{
-					"begin_date": "2006-08",
-					"end_date": "2006-11",
+					"begin_date": "2007-08",
+					"end_date": "2009-07",
 					"type": "education",
-					"title": "Akzent Sporthotel Grefrather Hof",
+					"title": "Berufskolleg Kempen",
 					"url": "",
-					"job_title": "Praktikum als Koch",
+					"job_title": "nicht abgeschlossene Fachhochschulreife Informationstechnik",
 					"industry": "Informationstechnik",
 					"company_size": "1-10",
 					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				}
+			],
+			"experiences": [
+				{
+					"url": "https://www.apple.com/de/mac/compare/",
+					"title": "Mac OS",
+					"level": 500,
+					"category": "Betriebssystem",
+					"type": "Tool"
 				},
 				{
-					"begin_date": "2007-02",
-					"end_date": "2007-08",
-					"type": "education",
-					"title": "VARION Agentur für Kommunikationsdesign",
+					"icon": null,
 					"url": "",
-					"job_title": "Praktikum als Mediengestalter",
-					"industry": "Informationstechnik",
-					"company_size": "1-10",
-					"form_of_employment": "FULL_TIME_EMPLOYEE"
-				},
+					"title": "Actionsscript 2.0/3.0",
+					"level": 100,
+					"category": "Sprache",
+					"type": "Frontend"
+				}
+			],
+			"childrenInfo": {
+			}
+		},
+		{
+			"url": "/carrer/findung",
+			"title": null,
+			"institutions": [
 				{
 					"begin_date": "2010-09",
 					"end_date": "2010-10",
@@ -569,37 +583,6 @@
 					"industry": "Informationstechnik",
 					"company_size": "1-10",
 					"form_of_employment": "FULL_TIME_EMPLOYEE"
-				}
-			],
-			"experiences": [],
-			"childrenInfo": {
-			}
-		},
-		{
-			"url": "/carrer/berufskolleg-kempen",
-			"title": "Schulbildung",
-			"institutions": [
-				{
-					"begin_date": "2000-08",
-					"end_date": "2006-07",
-					"type": "education",
-					"title": "Johannes Keppler Realschule",
-					"url": "",
-					"job_title": "Fachoberschulreife",
-					"industry": "Informationstechnik",
-					"company_size": "1-10",
-					"form_of_employment": "FULL_TIME_EMPLOYEE"
-				},
-				{
-					"begin_date": "2007-08",
-					"end_date": "2009-07",
-					"type": "education",
-					"title": "Berufskolleg Kempen",
-					"url": "",
-					"job_title": "nicht abgeschlossene Fachhochschulreife Informationstechnik",
-					"industry": "Informationstechnik",
-					"company_size": "1-10",
-					"form_of_employment": "FULL_TIME_EMPLOYEE"
 				},
 				{
 					"begin_date": "2010-05",
@@ -614,22 +597,59 @@
 				}
 			],
 			"experiences": [
+			],
+			"childrenInfo": {
+			}
+		},
+		{
+			"url": "/carrer/varion",
+			"title": "Praktikum Mediengestalter",
+			"institutions": [
 				{
-					"url": "https://www.apple.com/de/mac/compare/",
-					"title": "Mac OS",
-					"level": 500,
-					"category": "Betriebssystem",
-					"type": "Tool"
+					"begin_date": "2007-02",
+					"end_date": "2007-08",
+					"type": "education",
+					"title": "VARION Agentur für Kommunikationsdesign",
+					"url": "",
+					"job_title": "Praktikum als Mediengestalter",
+					"industry": "Informationstechnik",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
+				}
+				
+			],
+			"experiences": [],
+			"childrenInfo": {
+			}
+		},
+		{
+			"url": "career/schule",
+			"title": null,
+			"institutions": [
+				{
+					"begin_date": "2006-08",
+					"end_date": "2006-11",
+					"type": "education",
+					"title": "Akzent Sporthotel Grefrather Hof",
+					"url": "",
+					"job_title": "Praktikum als Koch",
+					"industry": "Informationstechnik",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
 				},
 				{
-					"icon": null,
+					"begin_date": "2000-08",
+					"end_date": "2006-07",
+					"type": "education",
+					"title": "Johannes Keppler Realschule",
 					"url": "",
-					"title": "Actionsscript 2.0/3.0",
-					"level": 100,
-					"category": "Sprache",
-					"type": "Frontend"
+					"job_title": "Fachoberschulreife",
+					"company_size": "1-10",
+					"form_of_employment": "FULL_TIME_EMPLOYEE"
 				}
+				
 			],
+			"experiences": [],
 			"childrenInfo": {
 			}
 		}
