@@ -1,9 +1,25 @@
-# Fullstack Webdeveloper
-Ich sehe mich selbst als Full Stack Web Entwickler. 
-Wobei mein Interessenschwerpunkt eher im Frontend liegt.
+# Willkommen.
+Ich möchte Ihnen mit dieser Seite etwas über mich erzählen und einen Eindruck geben, was ich kann.
 
-## Mein Können
-Ich habe viel gelernt und bin immer wieder über mich selbst hinausgewachsen. Habe durch die Arbeit mit Werbeagenturen viel über die Medienbranche gelernt.
+## Zu meiner Person
+Ich sehe mich selbst als **Full Stack Web Entwickler** Ich kenne beide Seiten gut, sowohl das Frontend als auch das Backend.
+
+### Frontend
+Ich kenne mich gut mit den aktuellen Browsern aus und kenne die gemeinen Fallstricke des ein oder anderen.
+Bewege mich gerne am bleeding Edge und kenne mich mit den gängigen Frameworks und Technologien aus.
+
+### Backend
+Im Backend habe ich schon Anwendungen mit Content Management Systemen oder Frameworks gebaut. Ich bin versiert im Umgang mit dem **.NET Framework**
+Programmiere aber auch in PHP mit **Symfony**
+
+
+## Was ich mitbringe
+Ich bin wissbegierig und pflichtbewusst, habe ein starkes durchhaltevermögen und liebe es Probleme zu lösen.
+Durch die Arbeit in Werbeagenturen kenne ich mich in der Medienbranche gut aus.
+
+Ich habe in unterschiedlichen Projekten schon breit gefächerte Erfahrungen sammeln können. Bei meinen unterschiedlichen Arbeitgebern habe ich auch schon Erfahrung mit dem unterstützen von Auszubildenden zu tun gehabt. 
+Auch die Erstellung von technischen Konzepten ist mir nicht völlig fremd.
+
 Ich bin vertraut in folgenden Sprachen:
 
 - PHP
@@ -19,19 +35,18 @@ Ich habe mich mit unterschiedlichen Frameworks und Content Management Systemen a
 - React
 - ...
 
-Schau dir dazu doch einfach mal meine [Skills und Referenzen](/experiences) an, oder wie ich diese in meiner bisherigen [Karriere](/career) erlernt habe. :sunglasses:
-Ich habe in unterschiedlichen Projekten schon breit gefächerte Erfahrungen sammeln können. Bei meinen unterschiedlichen Arbeitgebern habe ich auch schon Erfahrung mit dem unterstützen von Auszubildenden zu tun gehabt. 
-Auch die Erstellung von technischen Konzepten ist mir nicht völlig fremd.
+Schau Sie sich hierzu auch gerne *meine [Skills und Referenzen](/experiences)* an, oder wie ich diese in meiner bisherigen *[Karriere](/career)* erlernt habe.
 
-# Wo will ich hin
+## Wo will ich hin
 Ich suche eine Stelle, in der neue Herausforderungen auf mich warten. 
 Ich möchte neue Arbeitsweisen und Methoden kennenlernen, die in meiner bisherigen Karriere noch nicht vorkamen.
 
-Mir ist die Qualität des Produktes das wichtigste. Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzläufige Projekte mit einer maximalen Entwicklungszeit von 1 - 2 Monaten umgesetzt habe.
+Mir ist die Qualität des Produktes das wichtigste.
+Bisher habe ich in Werbeagenturen gearbeitet, in denen ich vorrangig kurzläufige Projekte mit einer maximalen Entwicklungszeit von 1 - 2 Monaten umgesetzt habe.
 
-Ich suche ein Unternehmen, welches Projekte mit längeren Laufzeiten betreut. 
-Gerne auch über mehrere Jahre.
+Ich suche ein Unternehmen, welches Projekte mit längeren Laufzeiten betreut, die gerne auch über mehrere Jahre gehen.
+An diesen Projekten möchte ich in einem *agilen Team* nach dem *Scrum* Prinzip arbeiten. 
+
 Eine Entwicklungsabteilung die dazu auffordert und motiviert getestete Qualitativ hochwertige Software zu schreiben.
-Ein Unternehmen mit einem angenehmen Arbeitsklima, in dem ich mich wohlfühlen kann. Denn nur dann kann ich die Qualität und den Anspruch den ich an mich Stelle erfüllen.*
-So kann ich nicht nur das Unternehmen voranbringen und gute Arbeit leisten sondern auch selber wachsen.
-Solange ich mit an Anwendungen entwickeln und programmieren kann bin ich gerne dabei. :smile:
+
+Ich suche einen Arbeitgeber, dem ein angenehmes Arbeitsklima wichtig ist, in dem man sich wohlfühlen kann. 
