@@ -5,8 +5,8 @@ Ich möchte Ihnen mit dieser Seite etwas über mich erzählen und einen Eindruck
 <div class="textarea_block">
 <img class="left" src="/img/sebastian-mueller-foto.png" srcset="/img/sebastian-mueller-foto.png 2x" alt="Ich während ich arbeite">
 ## Zu meiner Person
-Ich bin wissbegierig, pflichtbewusst und bin flexibel.<br/>
-Ich habe ein starkes durchhaltevermögen und liebe es Probleme zu lösen.
+Ich bin Sebastian Müller, wissbegierig, pflichtbewusst und flexibel.<br/>
+Zu meinen guten Eigenschaften zähle ich mein starkes Durchhaltevermögen und dass ich es liebe Probleme zu lösen.
 
 Durch die Arbeit in Werbeagenturen kenne ich mich in der Medienbranche gut aus.
 
@@ -57,5 +57,5 @@ An diesen Projekten möchte ich in einem **agilen Team nach dem Scrum Prinzip** 
 
 Eine Entwicklungsabteilung die dazu auffordert und motiviert getestete Qualitativ hochwertige Software zu schreiben.
 
-Ich suche einen Arbeitgeber, dem ein angenehmes Arbeitsklima wichtig ist, in dem man sich wohlfühlen kann. 
+Einen Arbeitgeber, dem ein angenehmes Arbeitsklima wichtig ist, in dem man sich wohlfühlen kann. 
 </div>
