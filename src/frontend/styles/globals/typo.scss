@@ -4,27 +4,27 @@ time {
 	font-weight: 300;
 }
 
-h1, .h1, .AtomicsCCM_tag-h1__overridden {
+h1, .h1, .AtomicsCCM_tagH1-overridden {
 	margin: 0;
 	color: inherit;
 	font-size: 2em;
 	font-weight: 700;
 }
 
-h2, .h2, .AtomicsCCM_tag-h2__overridden {
+h2, .h2, .AtomicsCCM_tagH2-overridden {
 	margin: 0;
 	font-size: 1em;
 	color: $ColorPrimary;
 }
 
-h3, .h3, .AtomicsCCM_tag-h3__overridden {
+h3, .h3, .AtomicsCCM_tagH3-overridden {
 	margin: 0;
 	color: inherit;
 	font-weight: 700;
 	text-transform: uppercase;
 }
 
-h4, .h4, .AtomicsCCM_tag-h4__overridden {
+h4, .h4, .AtomicsCCM_tagH4-overridden {
 	margin: 0;
 	color: inherit;
 	font-weight: 400;
@@ -65,6 +65,13 @@ dl {
 	justify-content: space-between;
 }
 
+strong {
+	font-weight: 700;
+	a {
+		font-weight: 700;
+	}
+}
+
 a {
 	&[target=_blank] {
 	}
@@ -92,4 +99,7 @@ ul {
 	margin-bottom: 0.5em;
 	margin-left: 0.8em;
 	padding-left: 0.4em;
+
+	break-inside: avoid;
+	page-break-inside: avoid;
 }
