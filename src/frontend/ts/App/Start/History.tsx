@@ -94,8 +94,11 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 		let additionalClasses = [];
 
 		return ( 
-			<section ref={ref => this.ref = ref} className={ `history` }> 
-				{ this.renderHistoryEntries() } 
+			<section ref={ref => this.ref = ref} className={ `history` }>
+				<h1 className="History_Title history-main">Mein Lebenslauf</h1>
+				<div className="History_Inner">
+					{ this.renderHistoryEntries() }
+				</div> 
 			</section>
 		);
 	}

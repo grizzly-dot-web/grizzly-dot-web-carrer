@@ -74,6 +74,16 @@ class HistoryEntry extends ClientSideComponent<HistoryEntryProps, HistoryEntrySt
 		let startDate = this.stringToDate(this.props.data.institutions[0].begin_date);
 		let endDate = this.stringToDate(this.props.data.institutions[this.props.data.institutions.length -1].end_date);
 
+		let renderedTitle = null;
+		if (this.props.data.title) {
+			renderedTitle = (
+				<div className={'history-header'}>
+					<h2 className="h1 history-title">{this.props.data.title}</h2>
+				</div>
+			)
+		}
+
+
 
 		let classes : string[] = [];
 		// render the prepared section
@@ -87,9 +97,7 @@ class HistoryEntry extends ClientSideComponent<HistoryEntryProps, HistoryEntrySt
 						<time className="date">{endDate.format('MMMM YYYY')}</time>
 					</span>
 					<header className="history-institutions">
-						<div className={'history-header'}>
-							<h1 className="history-title">{this.props.data.title}</h1>
-						</div>
+						{renderedTitle}
 						{this.renderInstitutions()}
 					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
@@ -126,11 +134,18 @@ class HistoryEntry extends ClientSideComponent<HistoryEntryProps, HistoryEntrySt
 
 	componentDidMount() {
 		let ref = this.ref as HTMLElement;
-		let historyHeader = ref.querySelector('.history-header') as HTMLElement;
+		let historyHeader = ref.querySelector('.history-header') as HTMLElement|null;
+
+		let blockingElements = [];
+		let experiencePosition = { x: 0, y: 0 }
+		if (historyHeader) {
+			blockingElements.push(historyHeader)
+			experiencePosition = { x: historyHeader.offsetLeft / 2, y: historyHeader.offsetTop / 2 };
+		}
 
 		this.setState(Object.assign(this.state, {
-			experiencesOriginPosition: { x: historyHeader.offsetLeft / 2, y: historyHeader.offsetTop / 2 },
-			experienceBlockingElements: [historyHeader]
+			experiencesOriginPosition: experiencePosition,
+			experienceBlockingElements: blockingElements
 		}));
 	}
 

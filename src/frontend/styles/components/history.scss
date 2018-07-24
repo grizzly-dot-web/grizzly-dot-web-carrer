@@ -6,4 +6,12 @@
 .history {
 	width: 100%;
 	overflow: hidden;
+	
+	.History_Title {
+		font-size: 3.4em;
+		width: $HistoryMainWidth;
+		background-color: $Color1;
+		padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
+		padding-top: 1.3em;
+	}
 }
