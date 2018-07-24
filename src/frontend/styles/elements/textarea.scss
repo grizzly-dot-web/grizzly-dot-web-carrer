@@ -41,7 +41,7 @@
 	}
 
 	img {
-		max-width: 490px;
+		max-width: 100%;
 
 		&.left {
 			float: left;
@@ -52,6 +52,13 @@
 			float: right;
 			padding-left: 3em;
 			padding-bottom: 0.5em;
+		}
+
+		@media (max-width: $MobileNavBreak) {
+			float: none;
+			&.left, &.right {
+				float: none;
+			}
 		}
 	}
 

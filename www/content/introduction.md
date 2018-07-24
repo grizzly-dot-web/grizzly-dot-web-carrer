@@ -1,9 +1,11 @@
 <div class="textarea_block">
 # Willkommen und viel Spaß beim umsehen.
 Ich möchte Ihnen mit dieser Seite etwas über mich erzählen und einen Eindruck geben, was ich kann.
+
+Sollten Ihnen Unstimmigkeiten auffallen oder sollten Sie Fragen haben, können Sie diese unten im Footer unter anbringen.(<a href="/feedback">Feedback</a>) 
 </div>
 <div class="textarea_block">
-<img class="left" src="/img/sebastian-mueller-foto.png" srcset="/img/sebastian-mueller-foto.png 2x" alt="Ich während ich arbeite">
+<img class="left" src="/img/sebastian-mueller-foto.png" width="512" srcset="/img/sebastian-mueller-foto.png 2x" alt="Ich während ich arbeite">
 ## Zu meiner Person
 Ich bin Sebastian Müller, wissbegierig, pflichtbewusst und flexibel.<br/>
 Zu meinen guten Eigenschaften zähle ich mein starkes Durchhaltevermögen und dass ich es liebe Probleme zu lösen.
