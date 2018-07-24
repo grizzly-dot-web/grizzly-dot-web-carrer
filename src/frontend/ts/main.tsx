@@ -12,8 +12,6 @@ import Header from './App/_partials/Header';
 import Footer from './App/_partials/Footer';
 import InfoCenter from './App/_partials/InfoCenter';
 import Start from './App/Start';
-import Imprint from './App/Imprint';
-import Introduction from './App/Start/Introduction';
 import History from './App/Start/History';
 import IssueTracker from './App/IssueTracker/IssueTracker';
 import ExperienceOverview from './App/Start/ExperienceOverview';
@@ -35,8 +33,7 @@ bootstrap.render((data : any) => {
 			<Header data={data.header} />
 			<main>
 				<ExperienceOverview data={data.history} />
-				<Start data={data.start} />
-				<Introduction data={data.introduction} />
+				<Start data={data.introduction} />
 				<History data={data.history} />
 			</main>
 			<InfoCenter data={data.infoCenter} />	

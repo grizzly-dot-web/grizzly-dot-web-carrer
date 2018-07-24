@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Content from '../Core/Components/Content';
-import Introduction from './Start/Introduction';
+import Introduction from './Start';
 
 export default class Imprint extends Introduction {
     
