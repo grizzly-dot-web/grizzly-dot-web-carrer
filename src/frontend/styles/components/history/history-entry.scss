@@ -118,6 +118,7 @@ $HistoryMain_MinHeight: 75vh;
 		margin-left: $Timeline_PositionLeft;
 
 		display: flex;
+		flex-wrap: wrap;
 		padding: 1em getGridSize(2, horizontal);
 		flex-direction: column;
 		justify-content: center;
@@ -125,6 +126,7 @@ $HistoryMain_MinHeight: 75vh;
 		transition: flex-grow 0.5s ease-in-out;
 
 		.institution {
+			min-width: 100px;
 			margin-bottom: 4em;
 			transition: opacity 0.5s ease-in-out;
 		}
@@ -153,5 +155,56 @@ $HistoryMain_MinHeight: 75vh;
 		}
 	}
 	
+    &:last-child {
+		.history-header {
+			top: -5vh;
+			left: $Timeline_PositionLeft;
+			transform: translate(-50%, -50%);
+			position: absolute;
+		}
+
+		.history-institutions {
+			display: flex;
+			flex-direction: row;
+			align-items: stretch;
+			justify-content: space-evenly;
+			width: 100%;
+			max-width: 100%;
+			margin: 10vh 0;
+			transform: translate(0);
+			padding: 0 getGridSize(2, horizontal);
+		}
+
+		.timespan.end {
+            display: none;
+        }
+		
+		.history-details {
+			z-index: 3;
+			position: relative;
+			width: $HistoryMainWidth;
+            color: $ColorBackgroundDark;
+
+            &:before {
+                content: '';
+                z-index: 1;
+                height: 20vh;
+                width: 100%;
+                display: block;
+                background-image: linear-gradient(to bottom, rgba($Color1,1) 0% ,rgba($Color1,0) 100%);
+			}
+			
+            .close {
+                display: none;
+            }
+
+            .textarea {
+				padding: 2em 4em;
+				margin: 0 getGridSize(2, horizontal);
+				margin-top: -30vh;
+				background-color: $ColorBackgroundContent;
+            }
+        }
+    }
 }
 

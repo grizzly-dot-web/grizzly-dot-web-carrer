@@ -1,21 +1,5 @@
 {
 	"header": {
-		"first_name": "Sebastian",
-		"last_name": "Müller",
-		"display_name": "Sebastian Müller",
-		"occupation_title": "Web Developer",
-		"address": {
-			"street": null,
-			"zip_code": "47798",
-			"city": "Krefeld",
-			"province": "Nordrhein-Westfalen",
-			"country": "DE",
-			"email": "info@sebgrizzly.de",
-			"fax": null,
-			"phone": null,
-			"mobile_phone": null
-		},
-		"business_address": null
 	},
 	"footer": {
 		"social_links": [
@@ -98,15 +82,25 @@
 	},
 	"history": [
 		{
-			"url": "/carrer/grizzly.web",
-			"title": "grizzly.web",
+			"url": "/carrer/suche",
+			"title": "Arbeitgeber suche",
 			"institutions": [
 				{
-					"begin_date": "2018-01",
+					"begin_date": "2018-04",
 					"end_date": null,
 					"type": "company",
-					"title": "Selbständigkeit",
-					"job_title": "Web Developer",
+					"title": "atomicCCMS",
+					"job_title": "Projekt",
+					"industry": "Internet und Onlinemedien",
+					"company_size": "1",
+					"form_of_employment": "self_employee"
+				},
+				{
+					"begin_date": "2018-04",
+					"end_date": null,
+					"type": "company",
+					"title": "career.grizzly.web",
+					"job_title": "Projekt",
 					"industry": "Internet und Onlinemedien",
 					"company_size": "1",
 					"form_of_employment": "self_employee"
@@ -157,6 +151,14 @@
 				}
 			],
 			"childrenInfo": {
+				"default": [
+					{
+						"className": "Content",
+						"props": {
+							"data": ""
+						}
+					}
+				]
 			}
 		},
 		{

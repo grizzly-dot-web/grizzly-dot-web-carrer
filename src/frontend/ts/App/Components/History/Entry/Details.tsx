@@ -4,11 +4,14 @@ import Content from '../../../../Core/Components/Content';
 import Hammer from 'hammerjs';
 import ClientSideComponent, { CmsState, CmsProps } from '../../../../Core/Components/Base/ClientSideComponent';
 
+export interface DetailsProps extends CmsProps<any> {
+	enableScrollHandling : boolean
+} 
 export interface DetailsState extends CmsState {
 	isActive : boolean
 } 
 
-class Details extends ClientSideComponent<CmsProps<any>, DetailsState> {
+class Details extends ClientSideComponent<DetailsProps, DetailsState> {
 
 	ref : HTMLElement|null = null
 
@@ -38,7 +41,7 @@ class Details extends ClientSideComponent<CmsProps<any>, DetailsState> {
 			'Content': { 
 				class: Content, props: { 
 					allowedHeadlineLevel: 3, 
-					classes: ['columns'],
+					classes: ['textarea', 'textarea_columns'],
 				} 
 			} 
 		});
@@ -64,10 +67,13 @@ class Details extends ClientSideComponent<CmsProps<any>, DetailsState> {
 
 		let article = this.ref.querySelector('.history-details-content') as HTMLElement;
 		this.initialPosX = article.offsetLeft;
-		this.activitionHammer =  new Hammer(article);
+		if (this.props.enableScrollHandling) {
+			this.activitionHammer =  new Hammer(article);
 
-		if (!this.state.isActive) {
-			this.activitionHammer.on('pan', this.handleActiveStateByDrag)
+
+			if (!this.state.isActive) {
+				this.activitionHammer.on('pan', this.handleActiveStateByDrag)
+			}
 		}
 	}
 
@@ -132,7 +138,7 @@ class Details extends ClientSideComponent<CmsProps<any>, DetailsState> {
 	}
 
 	activate(e? : Event) {
-		if (!this.ref || this.state.isActive) {
+		if (!this.ref || this.state.isActive || !this.props.enableScrollHandling) {
 			return;
 		}
 
@@ -141,7 +147,6 @@ class Details extends ClientSideComponent<CmsProps<any>, DetailsState> {
 		}));
 		
 		this.ref.classList.add('is-active');
-
 		if (this.activitionHammer) {
 			this.activitionHammer.off('pan', this.handleActiveStateByDrag)
 			this.activitionHammer.on('pan', this.handleColumnScrollByDrag)

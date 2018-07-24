@@ -3,6 +3,7 @@ import * as React from 'react';
 import HistoryEntry, { HistoryEntryData, Institution } from '../Components/History/HistoryEntry';
 import ScrollRoutingComponent from '../../Core/Components/Base/ClientSideScrollRoutingComponent';
 import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
+import HistoryLastEntry from '../Components/History/HistoryLastEntry';
 
 
 export interface HistoryProps extends CmsProps<HistoryEntryData[]> {
@@ -81,6 +82,14 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 		for (let i = 0; i < this.state.historyEntries.length; i++) {
 			let classes = [];
 			let item = this.state.historyEntries[i];
+
+			if ( i >= this.state.historyEntries.length -1) {
+			
+				history.push(
+					<HistoryLastEntry key={ i } data={ item }/>
+				);	
+				continue;
+			}
 
 			history.push(
 				<HistoryEntry key={ i } data={ item }/>
