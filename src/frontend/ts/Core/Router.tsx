@@ -87,7 +87,7 @@ export default class Router {
         }
         
         let anchorTags = this._appElement.querySelectorAll('a:not(.reload):not([tarrget=_blank])');
-        anchorTags.forEach((a) => {
+        for (let a of anchorTags) {
             a.addEventListener('click', (e) => {
                 let title = a.getAttribute('title');
                 if (!title) {
@@ -103,7 +103,7 @@ export default class Router {
                 e.preventDefault();
                 return false;
             });
-        });
+        }
 
         window.onpopstate = () => {
             this.activateComponentByUrl();

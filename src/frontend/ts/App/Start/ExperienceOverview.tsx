@@ -255,7 +255,7 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
                     return resolve();
                 }
 
-                elements.forEach((element) => {
+                for (let element of elements) {
                     setTimeout(() => {
                         let levelCode = element.getAttribute('data-level-code') as string;
 
@@ -271,7 +271,7 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
                     }, delay * counter);
 
                     counter++;
-                });
+                }
             });
         }
 

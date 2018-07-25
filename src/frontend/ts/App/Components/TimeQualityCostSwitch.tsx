@@ -44,10 +44,11 @@ export default class TimeQualityCostSwitch extends React.Component {
         
             current.classList.add('is-active')
         };
-        buttons.forEach((b) => {
+
+        for (let b of buttons) {
             qualitiyCheck(b);
             b.addEventListener('click', () => qualitiyCheck(b));
-        });
+        }
     }
 	
 }
