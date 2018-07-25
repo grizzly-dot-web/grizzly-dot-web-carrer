@@ -64,7 +64,7 @@ export default class HistoryLastEntry extends HistoryEntry  {
 					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
-				<Details enableScrollHandling={false} data={this.props.data} />
+				<Details data={this.props.data} />
 			</article>
 		);
 	}

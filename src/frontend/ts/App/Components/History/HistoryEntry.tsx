@@ -102,7 +102,7 @@ class HistoryEntry extends ClientSideComponent<HistoryEntryProps, HistoryEntrySt
 					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
-				<Details enableScrollHandling={true} data={this.props.data} />
+				<Details data={this.props.data} />
 			</article>
 		);
 	}

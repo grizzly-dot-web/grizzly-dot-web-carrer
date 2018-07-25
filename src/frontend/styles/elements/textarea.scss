@@ -2,21 +2,6 @@
 	margin-bottom: 2em;
 	padding:  0 getGridSize(2, horizontal);
 
-	$WidthSingleColumn: 20vw;
-	$WidthColumnGap: 2vw;
-	$HeightSingleColumn: 100%;
-	&.textarea-columns {
-		-webkit-column-fill: auto;
-		-webkit-column-width: $WidthSingleColumn;
-		-webkit-column-gap: $WidthColumnGap;
-		-moz-column-fill: auto;
-		-moz-column-width: $WidthSingleColumn;
-		-moz-column-gap: $WidthColumnGap;
-		height: 100%;
-		text-align: justify;
-		width: auto;
-	}
-
 	.textarea_block {
 		max-width: 1200px;
 		margin-bottom: 1.25em;

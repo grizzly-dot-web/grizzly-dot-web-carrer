@@ -1,5 +1,8 @@
 $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
 $DetailsHeight: $HistoryMain_MinHeight - 20vh;
+        
+$LeftPosition_From: $HistoryMainWidth - $HistoryDetailsOverlap;
+$LeftPosition_To: getGridSize(2, horizontal);
 
 
 .history-entry {
@@ -14,10 +17,7 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
             top: 0;
             left: 0;
             position: absolute;
-        
-            $LeftPosition_From: $HistoryMainWidth - $HistoryDetailsOverlap;
-            $LeftPosition_To: getGridSize(2, horizontal);
-            &:not(.is-active) .history-details-content:not(.is-dragging) {
+            &:not(.is-active) .history-details-content {
                 left: $LeftPosition_From !important;
             }
             &.is-active .history-details-content {
@@ -33,27 +33,16 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
                 color: $ColorBackgroundDark;
                 background-color: $ColorBackgroundContent;
                 
-                cursor: move;
                 height: $DetailsHeight;
-                width: 300vw;
+                width: calc(100vw - #{$LeftPosition_To});
                 position: relative;
-                padding: 4em 4em 2em;
+                padding: 4em 0 2em;
                 
                 top: 50%;
                 position: absolute;
                 transform: translate3d(0, -50%, 0);
         
                 transition: left 0.2s ease-out;
-        
-                &:after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    left: 0;
-                    height: 100%; /* match columns */
-                    z-index: 0;
-                }
         
                 .close {
                     @include CloseButton();
@@ -65,40 +54,29 @@ $DetailsHeight: $HistoryMain_MinHeight - 20vh;
                     position: absolute;
                     transition: opacity 0.3s ease-in-out;
                 }
-        
-                .columns {
-                    -webkit-column-width: 80vw;
-                    -webkit-column-gap: 10vw;
-                    -moz-column-width: 80vw;
-                    -moz-column-gap: 10vw;
-                    
-                    &:after {
-                        height: 100%;
-                    }
-                    
-                    @media (min-width: $MobileNavBreak) {
-                        max-width: 600px;
-                        -webkit-column-width: 50vw;
-                        -moz-column-width: 50vw;
-                    }
-        
-                    header {
-                        h3,
-                        h4 {
-                            display: inline-block;
-                        }
-        
-                        h4 {
-                            color: $ColorPrimary;
-        
-                            &:before {
-                                content: ' | ';
-                                white-space: pre;
-                            }
-                        }
+            }
+        }
+
+        .textarea {
+            height: 100%;
+            overflow: auto;
+	    	max-width: 1000px;
+            margin-right: $LeftPosition_To; 
+
+            header {
+                h3,
+                h4 {
+                    display: inline-block;
+                }
+
+                h4 {
+                    color: $ColorPrimary;
+
+                    &:before {
+                        content: ' | ';
+                        white-space: pre;
                     }
                 }
-        
             }
         }
     }
