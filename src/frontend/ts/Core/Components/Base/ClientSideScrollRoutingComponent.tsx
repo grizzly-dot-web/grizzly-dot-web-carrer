@@ -31,15 +31,20 @@ export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>
 
 	acitveStateCondition(): boolean {
         let scrollTop = window.scrollY;
-        let scrollBottom = scrollTop + window.innerHeight;
 		if (this.ref == null) {
             throw new Error('ref is not defined');
-		}
+        }
+        
+        let compStyles =  window.getComputedStyle(this.ref);
+        
+        let elementHeight = this.ref.clientHeight;
 
-        let compTop = this.ref.offsetTop;
-        let compBottom = this.ref.offsetTop + this.ref.offsetHeight;
+        let marginBottom = parseInt(compStyles.marginBottom || '0');
+        let marginTop = parseInt(compStyles.marginTop || '0');
+        let compTop = this.ref.offsetTop + marginTop;
+        let compBottom = this.ref.offsetTop + elementHeight + marginBottom;
 
-        //scroll down - is active when not upper viewport position is not in between component 
+        //scroll down - is active when upper viewport position is not in between component 
         return scrollTop <= compBottom && scrollTop >= compTop
 	}
 }
