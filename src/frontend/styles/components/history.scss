@@ -8,11 +8,43 @@
 	overflow: hidden;
 	margin-bottom: $ComponentMarginBottom;
 	
-	.History_Title {
-		font-size: 3.4em;
+	.History_Header {
+		font-size: 1.4em;
 		width: $HistoryMainWidth;
-		background-color: $Color1;
+
 		padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
 		padding-top: 1.3em;
+
+		position: relative;
+
+		background-color: $Color1;
+
+		.History_Header_Title {
+			margin-left: $Timeline_PositionLeft;
+		}
+
+		&:before {
+			content: '';
+			top: 1px;
+			left: $Timeline_PositionLeft;
+			width: $Timeline-Line_Width;
+			height: 100vh;
+			display: block;
+			position: absolute;
+			transform: translateX(50%);
+			background-color: $Timeline_BackgroundColor;
+		}
+
+		@media (max-width: $MobileNavBreak) {
+			font-size: 1em;
+
+			.History_Header_Title {
+				margin-left: 0;
+			}
+
+			&:before {
+				display: none;
+			}
+		}
 	}
 }

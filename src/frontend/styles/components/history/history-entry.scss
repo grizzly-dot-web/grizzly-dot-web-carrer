@@ -1,12 +1,23 @@
 $HistoryMain_MinHeight: 75vh;
 
 .history-entry {
-	margin-top: -1px;
 	width: 100%;
 	overflow: hidden;
 	position: relative;
 
+	&:nth-child(odd) .history-main .timespan .date {
+		padding-left: 0;
+		padding-right: calc(#{$Timeline_Marker_Width + ($Timeline_Marker_Width / 2)});
+		transform: translateX(-100%);
+		left: calc(#{$Timeline_PositionLeft} + #{$Timeline-Line_Width / 2});
+		&:before {
+			left: auto;
+			right: 0;
+		}
+	}
+
 	.history-main {
+		margin-top: -1px;
 		min-height: $HistoryMain_MinHeight;
 		position: relative;
 		width: $HistoryMainWidth;
@@ -18,11 +29,7 @@ $HistoryMain_MinHeight: 75vh;
 		transition: min-height 0.5s ease-in-out, padding 0.2s 0.2s ease-in-out;
 
 		background-color: $Color1;
-		background-image: radial-gradient(
-			circle at 65% 50%,
-			$Color2 1%,
-			$Color1 75%
-		);
+		background-image: $HistoryGradient;
 
 		&:after, &:before {
 			content: '';
@@ -46,13 +53,9 @@ $HistoryMain_MinHeight: 75vh;
 		z-index: 2;
 		order: 1;
 		flex-grow: 2;
-		height: 7em;
+		min-height: 10em;
 		overflow: hidden;
 		position: relative;
-
-		&:before, .date {
-			transition: left 0.3s ease-in-out;
-		}
 
 		&:before {
 			content: '';
@@ -67,11 +70,10 @@ $HistoryMain_MinHeight: 75vh;
 		}
 
 		&.start {
-			min-height: 10em;
 			order: 1;
 
 			.date {
-				bottom: 0;				
+				top: 1em;				
 			}
 		}
 
@@ -79,34 +81,29 @@ $HistoryMain_MinHeight: 75vh;
 			order: 3;
 
 			.date {
-				top: 0;				
+				bottom: 1em;				
 			}
 		}
 
 		.date {
+			font-size: 1.07em;
 			color: $Timeline_BackgroundColor;
 			
-			padding: 0.8em 0;
-			padding-left: $Timeline_Marker_Width;
+			padding-left: calc(#{$Timeline_Marker_Width + ($Timeline_Marker_Width / 2)});
 			
-			left: calc(#{$Timeline_PositionLeft});
+			left: calc(#{$Timeline_PositionLeft} + #{$Timeline-Line_Width + $Timeline-Line_Width / 2});
 			position: absolute;
 
-			&:before, &:after {
+			&:before {
 				content: '';
 				top: 50%;
-				left: $Timeline-Line_Width / 2;
+				left: 0;
 				height: $Timeline-Line_Width;
-				width: $Timeline_Marker_Width / 2;
+				width: $Timeline_Marker_Width;
 				display: block;
 				position: absolute;
-				background-color: $Timeline_BackgroundColor;
-				transform: translate(-100%, -50%);
-			}
-
-			&:after {
-				left: $Timeline-Line_Width / 2 + $Timeline-Line_Width;
 				transform: translateY(-50%);
+				background-color: $Timeline_BackgroundColor;
 			}
 		}
 	}
@@ -129,6 +126,10 @@ $HistoryMain_MinHeight: 75vh;
 			min-width: 100px;
 			margin-bottom: 4em;
 			transition: opacity 0.5s ease-in-out;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 
 		.history-title, .duration, .timespan {
@@ -157,10 +158,15 @@ $HistoryMain_MinHeight: 75vh;
 	
     &:last-child {
 		.history-header {
-			top: -5vh;
+			top: -10vh;
+			text-align: center;
 			left: $Timeline_PositionLeft;
 			transform: translate(-50%, -50%);
 			position: absolute;
+
+			.history-title {
+				margin-bottom: 0;
+			}
 		}
 
 		.history-institutions {
@@ -170,7 +176,7 @@ $HistoryMain_MinHeight: 75vh;
 			justify-content: space-evenly;
 			width: 100%;
 			max-width: 100%;
-			margin: 10vh 0;
+			margin: 20vh 0 10vh;
 			transform: translate(0);
 			padding: 0 getGridSize(2, horizontal);
 		}

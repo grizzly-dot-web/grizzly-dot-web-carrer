@@ -77,6 +77,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.3.2",
     "react-render-html": "^0.6.0",
+    "react-router": "^4.3.1",
     "sass-loader": "^7.0.1",
     "scroll": "^2.0.3",
     "scroll-doc": "^0.2.1",
