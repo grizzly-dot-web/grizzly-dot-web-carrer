@@ -1,4 +1,5 @@
 import scroll from 'scroll';
+import scrollDoc from 'scroll-doc';
 
 import { CmsProps, CmsState } from './ClientSideComponent';
 import CmsRoutingComponent from './ClientSideRoutingComponent';
@@ -22,7 +23,7 @@ export default abstract class ScrollRoutingComponent<Props extends CmsProps<any>
         }
         
         this.handler.disableComponentConditionRouting();
-        scroll.top(document.scrollingElement, this.ref.offsetTop, () => {
+        scroll.top(scrollDoc(), this.ref.offsetTop, () => {
             this.handler.enableComponentConditionRouting();
             this.hasScrolledOnce = true;
             return super.dispatchEnter();
