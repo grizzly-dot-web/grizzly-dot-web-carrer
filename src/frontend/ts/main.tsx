@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import * as React from 'react';
 
 import 'whatwg-fetch';
@@ -31,11 +30,11 @@ bootstrap.render((data : any) => {
 	return (
 		<div>
 			<Header data={data.header} />
-			<main>
+			<div className="main-wrap">
 				<ExperienceOverview data={data.history} />
 				<Start data={data.introduction} />
 				<History data={data.history} />
-			</main>
+			</div>
 			<InfoCenter data={data.infoCenter} />	
 			<IssueTracker data={data.gitHub} />	
 			<Footer data={data.footer} />	
