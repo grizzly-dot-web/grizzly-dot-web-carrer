@@ -50,6 +50,7 @@ Navigation
 
 ***/
 nav.main {
+	z-index: 5;
 	> ul {
 		display: flex;
 		flex-wrap: nowrap;
@@ -67,24 +68,18 @@ nav.main {
 
 		li {
 			list-style: none;
-		}
-	}
+			color: $ColorBackgroundContent;
+			font-size: 0.9em;
+			transition: $HeaderColorTansition;
 
-	a {
-		color: $ColorBackgroundContent;
-		font-size: 0.9em;
-		margin-left: getGridSize(1, horizontal);
-		transition: $HeaderColorTansition;
+			&:hover {
+				color: $ColorPrimary;
+			}
 
-		&:hover {
-			color: $ColorPrimary;
-		}
-	}
-
-	&.active {
-		a {
-			color: $ColorPrimary;
-			font-weight: bold;
+			&.is-active {
+				color: $ColorPrimary;
+				font-weight: bold;
+			}
 		}
 	}
 
@@ -151,11 +146,18 @@ nav.main {
 	
 	***/
 	@media (min-width: $MobileNavBreak) {
+		padding: 0.5em;
 		.burger-icon {
 			display: none;
 		}
-
-		.experience-link a {
+		
+		li {
+			margin-left: getGridSize(1, horizontal);
+			&:nth-child(2) {
+				margin-left: 0;
+			}
+		}
+		.experience-link {
 			top: 50%;
 			transform: translateY(-50%);
 			left: calc(#{$Timeline_PositionLeft} - #{getGridSize(2, horizontal)});
@@ -176,7 +178,7 @@ nav.main {
 			top: 0;
 			right: -100%;
 			position: fixed;
-			padding-top: 7em;
+			padding-top: 2em;
 			background-color: $ColorBackgroundDark;
 			flex-direction: column;
 			align-items: stretch;
@@ -223,6 +225,7 @@ $burgerColorHover: $ColorPrimary;
 $burgerHeight: ($burgerLineHeight * 3) + ($burgerLineGap * 2);
 
 .burger-icon {
+  z-index: 5;
   cursor: pointer;
   width: $burgerLineWidth;
   height: $burgerHeight;
@@ -272,28 +275,7 @@ Header States
 	}
 
 	.burger-icon {
-		span {
-			&:nth-child(1) {
-			  top: $burgerLineGap + $burgerLineHeight;
-			  width: 0;
-			  left: 50%;
-			}
-	  
-			&:nth-child(2) {
-			  transform: rotate(45deg);
-			}
-	  
-			&:nth-child(3) {
-			  top: ceil(($burgerHeight / 2) - $burgerLineHeight);
-			  transform: rotate(-45deg);
-			}
-	  
-			&:nth-child(4) {
-			  top: 18px;
-			  width: 0;
-			  left: 50%;
-			}
-		  }
+		display: none;
 	}
 }
 
@@ -320,6 +302,8 @@ Header States
 		}
 	}
 
+	 
+
 	&.header__left-dark header#page-header {
 		.logo, .experience-link, .experience-link .circle {
 			color: $ColorBackgroundDark;
@@ -334,13 +318,9 @@ Header States
 			}
 		}
 		@media (min-width: $MobileNavBreak) {
-			nav.main a:not(.active):not(:hover) {
-				font-weight: 400;
-				color: $ColorBackgroundDark;
-	
-				&.experience-link {
-					color: $ColorBackgroundLight;
-				}
+			nav.main {
+				border-radius: 0.3em;
+				background-color: $ColorBackgroundDark;
 			}
 
 		}
