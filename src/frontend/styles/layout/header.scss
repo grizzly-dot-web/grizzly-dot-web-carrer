@@ -3,7 +3,7 @@ header#page-header {
 	width: 100%;
 	position: fixed;
 	transition: $HeaderColorTansition;
-	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
+	padding:  $ComponentPadding_Vertical $ComponentPadding_Horizontal;
 
 	a {
 		text-decoration: none;

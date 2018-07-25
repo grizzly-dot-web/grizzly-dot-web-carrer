@@ -115,21 +115,13 @@
 
 		display: flex;
 		flex-wrap: wrap;
-		padding: 1em getGridSize(2, horizontal);
+		padding: 1em  $ComponentPadding_Horizontal;
 		flex-direction: column;
 		justify-content: center;
 
 		transition: flex-grow 0.5s ease-in-out;
 
-		.institution {
-			min-width: 100px;
-			margin-bottom: 4em;
-			transition: opacity 0.5s ease-in-out;
-
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
+		
 
 		.history-title, .duration, .timespan {
 			color: $LightCopy_Color;
@@ -139,77 +131,23 @@
 		.history-title {
 			margin-bottom: 1em;
 		}
-
-		.institution-title {
-		}
-
-		.institution-subtitle {
-			
-		}
-
-		.duration {
-			display: block;
-			padding-bottom: getGridSize(1, vertical) / 1.8;
-			margin-bottom: getGridSize(1, vertical) / 3;
-			border-bottom: 1px solid $ColorSecondary;
-		}
 	}
 	
-    &:last-child {
-		.history-header {
-			top: -10vh;
-			text-align: center;
-			left: $Timeline_PositionLeft;
-			transform: translate(-50%, -50%);
-			position: absolute;
+	.institution {
+		min-width: 100px;
+		margin-bottom: 4em;
+		transition: opacity 0.5s ease-in-out;
 
-			.history-title {
-				margin-bottom: 0;
-			}
+		&:last-child {
+			margin-bottom: 0;
 		}
+	}
 
-		.history-institutions {
-			display: flex;
-			flex-direction: row;
-			align-items: stretch;
-			justify-content: space-evenly;
-			width: 100%;
-			max-width: 100%;
-			margin: 20vh 0 10vh;
-			transform: translate(0);
-			padding: 0 getGridSize(2, horizontal);
-		}
-
-		.timespan.end {
-            display: none;
-        }
-		
-		.history-details {
-			z-index: 3;
-			position: relative;
-			width: $HistoryMainWidth;
-            color: $ColorBackgroundDark;
-
-            &:before {
-                content: '';
-                z-index: 1;
-                height: 20vh;
-                width: 100%;
-                display: block;
-                background-image: linear-gradient(to bottom, rgba($Color1,1) 0% ,rgba($Color1,0) 100%);
-			}
-			
-            .close {
-                display: none;
-            }
-
-            .textarea {
-				padding: 2em 4em;
-				margin: 0 getGridSize(2, horizontal);
-				margin-top: -30vh;
-				background-color: $ColorBackgroundContent;
-            }
-        }
-    }
+	.duration {
+		display: block;
+		padding-bottom: getGridSize(1, vertical) / 1.8;
+		margin-bottom: getGridSize(1, vertical) / 3;
+		border-bottom: 1px solid $ColorSecondary;
+	}
 }
 

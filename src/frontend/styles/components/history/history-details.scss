@@ -1,15 +1,24 @@
 $DetailsWidth: 100 - $HistoryMainWidth + $HistoryDetailsOverlap;
-$DetailsHeight: $HistoryMain_MinHeight - 20vh;
+$Details_MaxHeight: $HistoryMain_MinHeight - 20vh;
         
 $LeftPosition_From: $HistoryMainWidth - $HistoryDetailsOverlap;
 $LeftPosition_To: getGridSize(2, horizontal);
 
 
 .history-entry {
-    &:not(:last-child) {
+    .history-details {
+        .history-details-content {
+            z-index: 4;
+            padding: 4em 0 2em;
+            color: $ColorBackgroundDark;
+            background-color: $ColorBackgroundContent;
+        }
+    }
+
+    &:not(.history-last-entry) {
         .history-details {
             opacity: 1;
-        
+    
             width: 100%;
             height: 100%;
             transition: opacity 0.5s 0.5s ease-in-out;
@@ -18,25 +27,20 @@ $LeftPosition_To: getGridSize(2, horizontal);
             left: 0;
             position: absolute;
             &:not(.is-active) .history-details-content {
-                left: $LeftPosition_From !important;
+                left: $LeftPosition_From;
             }
             &.is-active .history-details-content {
-                left: $LeftPosition_To !important;
+                left: $LeftPosition_To;
         
                 .close {
                     opacity: 1;
                 }
             }
-        
+            
             .history-details-content {
-                z-index: 4;
-                color: $ColorBackgroundDark;
-                background-color: $ColorBackgroundContent;
-                
-                height: $DetailsHeight;
+                max-height: $Details_MaxHeight;
                 width: calc(100vw - #{$LeftPosition_To});
                 position: relative;
-                padding: 4em 0 2em;
                 
                 top: 50%;
                 position: absolute;
@@ -55,28 +59,10 @@ $LeftPosition_To: getGridSize(2, horizontal);
                     transition: opacity 0.3s ease-in-out;
                 }
             }
-        }
 
-        .textarea {
-            height: 100%;
-            overflow: auto;
-	    	max-width: 1000px;
-            margin-right: $LeftPosition_To; 
-
-            header {
-                h3,
-                h4 {
-                    display: inline-block;
-                }
-
-                h4 {
-                    color: $ColorPrimary;
-
-                    &:before {
-                        content: ' | ';
-                        white-space: pre;
-                    }
-                }
+            .textarea {
+                overflow: auto;
+                margin-right: $LeftPosition_To; 
             }
         }
     }

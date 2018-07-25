@@ -50,7 +50,7 @@ export default class HistoryLastEntry extends HistoryEntry  {
 		let classes : string[] = [];
 		// render the prepared section
 		return (
-			<article ref={ (ref) => this.ref = ref} className={`history-entry ${classes.join(' ')}`} >
+			<article ref={ (ref) => this.ref = ref} className={`history-entry history-last-entry ${classes.join(' ')}`} >
 				<div className={'history-main'}>
 					<span className="timespan start">
 						<time className="date">{startDate.format('MMMM YYYY')}</time>
@@ -60,11 +60,16 @@ export default class HistoryLastEntry extends HistoryEntry  {
 					</span>
 					<header className="history-institutions">
 						{renderedTitle}
-						{this.renderInstitutions()}
 					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
-				<Details data={this.props.data} />
+				<div className="history-info-wrap">
+					<div className="history-projects">
+						<h3 className="project-title">Projekte</h3>
+						{this.renderInstitutions()}
+					</div>
+					<Details data={this.props.data} />
+				</div>
 			</article>
 		);
 	}

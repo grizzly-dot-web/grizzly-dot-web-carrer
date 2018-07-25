@@ -44,6 +44,8 @@ $HistoryMain_MinHeight: 100vh;
 
 $HistoryDetailsOverlap: 5%;
 $ComponentMarginBottom: 10vh;
+$ComponentPadding_Vertical: getGridSize(1, vertical);
+$ComponentPadding_Horizontal: getGridSize(2, horizontal);
 
 $Timeline_Width: 10%;
 $Timeline-Line_Width: 0.7vmin;
