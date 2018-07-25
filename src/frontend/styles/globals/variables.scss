@@ -40,11 +40,13 @@ $ColorMastered: $ColorPrimary;
 $MobileNavBreak: 700px;
 
 $HistoryMainWidth: 80%;
+$HistoryMain_MinHeight: 100vh;
+
 $HistoryDetailsOverlap: 5%;
 $ComponentMarginBottom: 10vh;
 
 $Timeline_Width: 10%;
-$Timeline-Line_Width: 1vmin;
+$Timeline-Line_Width: 0.7vmin;
 $Timeline_PositionLeft: getGridSize(13, horizontal);
 $Timeline_Marker_Width: getGridSize(1, horizontal);
 

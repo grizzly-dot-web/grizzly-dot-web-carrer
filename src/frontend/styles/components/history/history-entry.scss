@@ -1,5 +1,3 @@
-$HistoryMain_MinHeight: 75vh;
-
 .history-entry {
 	width: 100%;
 	overflow: hidden;
@@ -71,6 +69,7 @@ $HistoryMain_MinHeight: 75vh;
 
 		&.start {
 			order: 1;
+			flex-grow: 3;
 
 			.date {
 				top: 1em;				
