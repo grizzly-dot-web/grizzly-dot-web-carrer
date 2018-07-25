@@ -36,7 +36,7 @@ export default class Header extends ClientSideComponent<HeaderProps, HeaderState
 		return (
 			<header id="page-header">
 				<div className="container">
-					<a className="logo" href="/">
+					<a className="logo" href="/start">
 						<h1>
 							<div className="name">
 								Sebastian<br /> 
@@ -44,9 +44,6 @@ export default class Header extends ClientSideComponent<HeaderProps, HeaderState
 							</div>
 							<div className="company">{spanPerCharacter('grizzly.web')}</div>
 						</h1>
-						<h2>
-							
-						</h2>
 					</a>
 					<Navigation identifier={'main'} />
 				</div>
