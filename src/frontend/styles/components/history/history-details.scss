@@ -13,6 +13,10 @@ $LeftPosition_To: getGridSize(2, horizontal);
             color: $ColorBackgroundDark;
             background-color: $ColorBackgroundContent;
         }
+
+        .textarea {
+            max-width: 1200px;
+        }
     }
 
     &:not(.history-last-entry) {
@@ -38,7 +42,6 @@ $LeftPosition_To: getGridSize(2, horizontal);
             }
             
             .history-details-content {
-                max-height: $Details_MaxHeight;
                 width: calc(100vw - #{$LeftPosition_To});
                 position: relative;
                 
@@ -62,6 +65,7 @@ $LeftPosition_To: getGridSize(2, horizontal);
 
             .textarea {
                 overflow: auto;
+                max-height: $Details_MaxHeight;
                 margin-right: $LeftPosition_To; 
             }
         }
