@@ -241,32 +241,6 @@ ${form.body}
             return;
         }
 
-        let clickOutsideHandler = (e : Event) => {
-            this.leave.bind(this);
-            document.removeEventListener('click', clickOutsideHandler);
-        };
-
-        document.addEventListener("click", (evt) => {  
-            if (!this.ref) {
-                return;
-            }
-            const flyoutElement = this.ref.querySelector('.IssueTracker_Inner') as HTMLElement;
-            let targetElement = evt.target as Node|null; 
-        
-            do {
-                if (targetElement == flyoutElement) {
-                    // This is a click inside. Do nothing, just return.
-                  
-                    return;
-                }
-                // Go up the DOM
-                targetElement = targetElement ? targetElement.parentNode : null;
-            } while (targetElement);
-        
-            // This is a click outside.
-     //       this.leave();
-        });
-
         this.ref.classList.add('IssueTracker_isActive');
     }
     

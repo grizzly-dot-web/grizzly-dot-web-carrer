@@ -66,17 +66,17 @@ export class Form extends React.Component<FormProps, FormState> {
             <form ref={ref => this.ref = ref} onSubmit={this.handleSubmit} className={`Form IssueTracker_From ${this.props.classes.join(' ')}`}>
                 <fieldset className="Form_Fieldset">
                     <legend className={`Form_Fieldset_Legend`}>Erstellen Sie hier das entsprechende Ticket.</legend>
-                    <div className="Form_LayoutContainer">
-                        <div className="Form_LayoutContainer IssueTracker_From_ElementWrap">
+                    <div className="LayoutContainer">
+                        <div className="LayoutContainer IssueTracker_From_ElementWrap">
                             <input required={true} className="Form_Element Form_TextInput IssueTracker_Form_TextInput-Title" placeholder={`Titel des Tickets`} type="text" name="title" value={this.state.form.title} onChange={(e) => this.handleChange(e)}  />
-                            <div className={`Form_LayoutContainer_ElementWrapper Form_LayoutContainer_ElementWrapper-Half`}>
+                            <div className={`LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half`}>
                                 <label className={'Form_Element Form_MarkdownEditor'}>
                                     <span className={`Form_Label_Inner`}>Beschreibung:</span>
                                     <textarea required={true} placeholder={`Geben Sie hier eine Beschreibung der Angelegenheit an.`} className={'Form_Element Form_Textarea'} name="body" value={this.state.form.body} onChange={(e) => this.handleChange(e)} />
                                     <Content classes={['Form_Markdown_Preview']}  allowedHeadlineLevel={3} forceBlock={true} data={this.state.form.body} />
                                 </label>
                             </div>
-                            <div className={`Form_LayoutContainer_ElementWrapper Form_LayoutContainer_ElementWrapper-Half`}>
+                            <div className={`LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half`}>
                                 {labels}
                                 {collaborators}
                             </div>
