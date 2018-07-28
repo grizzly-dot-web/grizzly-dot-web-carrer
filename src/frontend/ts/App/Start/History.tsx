@@ -64,9 +64,19 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 			entries = this.props.data;
 		}
 		entries.map((e) => {
-			e.institutions = this.orderAscending<Institution>(e.institutions, (a) => a.begin_date);
+			e.institutions = this.orderAscending<Institution>(e.institutions, (e) => e.begin_date);
 		});
-		entries = this.orderAscending<HistoryEntryData>(entries, (a) => a.institutions[0].begin_date);
+		entries = this.orderAscending<HistoryEntryData>(entries, (e) => {
+			if (e.institutions.length > 0) {
+				return e.institutions[0].begin_date;
+			}
+			
+			if (e.begin_date) {
+				return e.begin_date
+			}
+
+			return '';
+		});
 
 		
 		this.state = {
@@ -100,8 +110,6 @@ class History extends ScrollRoutingComponent<HistoryProps, HistoryState> {
 	}
 
 	render() {
-		let additionalClasses = [];
-
 		return ( 
 			<section ref={ref => this.ref = ref} className={ `history` }>
 				<header className="History_Header">

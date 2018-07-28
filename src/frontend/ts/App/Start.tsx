@@ -29,7 +29,7 @@ export default class Start extends ScrollRoutingComponent<IntroProps, IntroState
     
     render() {
         return (
-            <div ref={ref => this.ref = ref} className={`start`}>
+            <div ref={ref => this.ref = ref} className={`intro`}>
                 {
                    this.renderChildren({
                         'Content' : {

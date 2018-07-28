@@ -82,30 +82,11 @@
 	},
 	"history": [
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "/carrer/suche",
 			"title": "Arbeitgeber suche",
-			"institutions": [
-				{
-					"begin_date": "2018-04",
-					"end_date": null,
-					"type": "company",
-					"title": "atomicCCMS",
-					"job_title": "Projekt",
-					"industry": "Internet und Onlinemedien",
-					"company_size": "1",
-					"form_of_employment": "self_employee"
-				},
-				{
-					"begin_date": "2018-04",
-					"end_date": null,
-					"type": "company",
-					"title": "career.grizzly.web",
-					"job_title": "Projekt",
-					"industry": "Internet und Onlinemedien",
-					"company_size": "1",
-					"form_of_employment": "self_employee"
-				}
-			],
+			"institutions": [],
 			"experiences": [
 				{
 					"url": "https://jestjs.io/",
@@ -162,6 +143,8 @@
 			}
 		},
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "/carrer/kodehaus",
 			"title": "Kodehaus UG",
 			"institutions": [
@@ -250,17 +233,11 @@
 				}
 			],
 			"childrenInfo": {
-				"default": [
-					{
-						"className": "Content",
-						"props": {
-							"data": ""
-						}
-					}
-				]
 			}
 		},
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "/carrer/anymotion",
 			"title": "anyMOTION GRAPHICS GmbH",
 			"institutions": [
@@ -514,6 +491,8 @@
 			}
 		},
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "/carrer/berufskolleg-kempen",
 			"title": "Informationstechnik",
 			"institutions": [
@@ -550,6 +529,8 @@
 			}
 		},
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "/carrer/findung",
 			"title": null,
 			"institutions": [
@@ -604,6 +585,8 @@
 			}
 		},
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "/carrer/varion",
 			"title": "Praktikum Mediengestalter",
 			"institutions": [
@@ -625,6 +608,8 @@
 			}
 		},
 		{
+			"begin_date": "2018-01",
+			"end_date": null,
 			"url": "career/schule",
 			"title": null,
 			"institutions": [

@@ -33,8 +33,7 @@ export default class HistoryLastEntry extends HistoryEntry  {
 		}
 
 		//prepare working duration
-		let startDate = this.stringToDate(this.props.data.institutions[0].begin_date);
-		let endDate = this.stringToDate(this.props.data.institutions[this.props.data.institutions.length -1].end_date);
+		let startDate = this.stringToDate(this.props.data.begin_date);
 
 		let renderedTitle = null;
 		if (this.props.data.title) {
@@ -55,19 +54,9 @@ export default class HistoryLastEntry extends HistoryEntry  {
 					<span className="timespan start">
 						<time className="date">{startDate.format('MMMM YYYY')}</time>
 					</span>
-					<span className="timespan end">
-						<time className="date">{endDate.format('MMMM YYYY')}</time>
-					</span>
-					<header className="history-institutions">
-						{renderedTitle}
-					</header>
 					<Experiences data={ this.props.data.experiences } originPosition={this.state.experiencesOriginPosition} show={this.state.showExperiences} blockingElements={this.state.experienceBlockingElements} />
 				</div>
 				<div className="history-info-wrap">
-					<div className="history-projects">
-						<h3 className="project-title">Projekte</h3>
-						{this.renderInstitutions()}
-					</div>
 					<Details data={this.props.data} />
 				</div>
 			</article>

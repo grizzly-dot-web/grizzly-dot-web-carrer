@@ -1,4 +1,8 @@
 .history-last-entry {    
+    .history-main {
+        height: 10vh;
+        min-height: auto;
+    }
 
     .history-institutions {
         text-align: center;
@@ -7,8 +11,10 @@
         }
     }
     
-    .timespan.end {
-        display: none;
+    .timespan {
+        .end {
+            display: none;
+        }
     }
   
     .history-info-wrap {

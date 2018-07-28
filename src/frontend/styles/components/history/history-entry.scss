@@ -51,7 +51,6 @@
 		z-index: 2;
 		order: 1;
 		flex-grow: 2;
-		min-height: 10em;
 		overflow: hidden;
 		position: relative;
 
@@ -69,7 +68,6 @@
 
 		&.start {
 			order: 1;
-			flex-grow: 3;
 
 			.date {
 				top: 1em;				

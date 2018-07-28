@@ -27,6 +27,8 @@ export interface Experience {
 export interface HistoryEntryData {
 	url: string,
 	title: string
+	begin_date? : string
+	end_date? : string
 	childrenInfo: ChildComponentConfig
 	institutions: Institution[],
 	experiences: Experience[]
@@ -70,9 +72,13 @@ class HistoryEntry extends ClientSideComponent<HistoryEntryProps, HistoryEntrySt
 			return;
 		}
 
-		//prepare working duration
-		let startDate = this.stringToDate(this.props.data.institutions[0].begin_date);
-		let endDate = this.stringToDate(this.props.data.institutions[this.props.data.institutions.length -1].end_date);
+		let startDate = this.stringToDate(this.props.data.begin_date);
+		let endDate = this.stringToDate(this.props.data.end_date);
+		if (this.props.data.institutions.length > 0) {
+			startDate = this.stringToDate(this.props.data.institutions[0].begin_date);
+			endDate = this.stringToDate(this.props.data.institutions[this.props.data.institutions.length -1].end_date);
+		}
+
 
 		let renderedTitle = null;
 		if (this.props.data.title) {
