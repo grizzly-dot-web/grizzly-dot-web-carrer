@@ -12,6 +12,20 @@
     }
 
 
+
+    .LayoutContainer {
+        .LayoutContainer_ElementWrapper {
+
+            > * {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+
+
     .Form_Button {
         margin-top: 1em; 
         @include Button();

@@ -22,21 +22,24 @@ Bewege mich gerne am bleeding Edge und kenne mich mit den gängigen Frameworks u
 Im Backend habe ich schon Anwendungen mit Content Management Systemen oder Frameworks gebaut. Ich bin versiert im Umgang mit dem **.NET Framework**
 programmiere aber auch in PHP mit **Symfony**
 </div>
-<div class="textarea_block">
+<div class="textarea_block LayoutContainer">
 
 ## Was ich mitbringe
 
 Ich habe in unterschiedlichen Projekten schon breit gefächerte Erfahrungen sammeln können. Bei meinen unterschiedlichen Arbeitgebern habe ich auch schon Erfahrung mit dem unterstützen von Auszubildenden zu tun gehabt. 
 Auch die Erstellung von technischen Konzepten ist mir nicht völlig fremd.
 
-<div class="textarea_block">
+
+<div class="LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half">
 Ich bin vertraut in folgenden Sprachen:
 
 - PHP
 - Javascript / Typescript
-- .NET Framework/C#
-- HTML und CSS
-
+- C#
+- HTML
+- CSS / SCSS
+</div>
+<div class="LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half">
 Ich habe mich mit unterschiedlichen Frameworks und Content Management Systemen auseinandergesetzt:
 
 - Symfony
@@ -46,6 +49,6 @@ Ich habe mich mit unterschiedlichen Frameworks und Content Management Systemen a
 - ...
 </div>
 
-für eine detailierte Aufstellung einfach mal hier schauen **[Skills und Referenzen](/experiences)** 
+Für eine detailierte Aufstellung einfach mal hier schauen **[Skills und Referenzen](/experiences)** 
 
 </div>
