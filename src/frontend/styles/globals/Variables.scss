@@ -1,0 +1,80 @@
+//#region Colors
+$ColorPrimary: #ff9c00;
+$ColorSecondary: #9c9b9b;
+$ColorThird: #475157;
+
+$ColorError: #ff0000;
+
+$ColorSecondaryDark: darken($ColorSecondary, 5%);
+$ColorSecondaryDarker: darken($ColorSecondary, 25%);
+
+$ColorSecondaryLight: lighten($ColorSecondary, 20%);
+$ColorSecondaryLighter: lighten($ColorSecondary, 35%);
+
+$ColorBackgroundContent: #fff;
+$ColorBackgroundLight: #f4f4f4;
+$ColorBackgroundDark: #282828;
+
+$DarkCopy_Color: $ColorSecondaryDark;
+$LightCopy_Color: $ColorBackgroundContent;
+
+$Color1: #6310ca;
+$Color2: #5e77f0;
+$HistoryGradient: radial-gradient(
+	circle at 65% 50%,
+	$Color2 1%,
+	$Color1 75%
+);
+
+$Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.7);
+$Timeline-Active_BackgroundColor: $ColorBackgroundContent;
+
+$ColorDiscarded: #F1235A;
+$ColorUntrained: #40A7D1;
+$ColorInterested: lighten($ColorUntrained, 20%);
+$ColorAssess: #5CB449;
+$ColorMastered: $ColorPrimary;
+//#endregion
+
+//#region Sizes and Positions
+$MobileNavBreak: 700px;
+
+$HistoryMainWidth: 80%;
+$HistoryMain_MinHeight: 100vh;
+
+$HistoryDetailsOverlap: 5%;
+$ComponentMarginBottom: 10vh;
+$ComponentPadding_Vertical: getGridSize(1, vertical);
+$ComponentPadding_Horizontal: getGridSize(2, horizontal);
+
+$Timeline_Width: 10%;
+$Timeline-Line_Width: 0.7vmin;
+$Timeline_PositionLeft: getGridSize(13, horizontal);
+$Timeline_Marker_Width: getGridSize(1, horizontal);
+
+$EndMarker_PositionTop: getGridSize(3, vertical);
+$BeginMarker_PositionBottom: getGridSize(3, vertical);
+
+$Timespan_Height: (
+	Previous: getGridSize(18, vertical),
+	Next: getGridSize(10, vertical),
+);
+
+$CurrentTimeSpan_Height: 100 - (map-get($Timespan_Height, Previous) + map-get($Timespan_Height, Next));
+
+//#subregion after Animation
+$Timespan-NavigationPrevActive_Height: (
+	Previous: getGridSize(19, vertical),
+	Next: getGridSize(8, vertical),
+);
+$Timespan_NavigationNextActive_Height: (
+	Previous: getGridSize(8, vertical),
+	Next: getGridSize(19, vertical),
+);
+//#endsubregion
+
+//#endsubregion
+//#endregion
+
+//Transitions
+$HeaderColorTansition: color 0.3s ease-in-out, background-color 0.4s ease-in-out;

@@ -1,0 +1,13 @@
+.App {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+	
+	> * {
+        flex-grow: 1;
+	}
+
+    .App_Main {
+        flex-grow: 2;
+    }
+}

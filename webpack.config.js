@@ -9,7 +9,7 @@ var frontendConfig = {
 	mode: debug ? 'development' : 'production',
 	devtool: debug ? "inline-source-map" : false,
 	entry: {
-		main: ['babel-polyfill','./src/frontend/ts/main.tsx']
+		main: ['babel-polyfill','./src/frontend/ts/index.tsx']
 	},
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json']

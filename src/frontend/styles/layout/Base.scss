@@ -22,22 +22,3 @@ body {
 img {
 	max-width: 100%;
 }
-
-#app .App {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
-	
-	> * {
-        flex-grow: 1;
-	}
-
-    .App_Main {
-        flex-grow: 2;
-
-        > * {
-            transition: 0.5s ease-in-out;
-            transition-property: margin-top;
-        }
-    }
-}
