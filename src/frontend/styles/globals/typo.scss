@@ -94,3 +94,7 @@ ul {
 	break-inside: avoid;
 	page-break-inside: avoid;
 }
+
+.button {
+	@include Button();
+}

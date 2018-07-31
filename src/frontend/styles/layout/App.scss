@@ -2,9 +2,6 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    
-	color: $ColorBackgroundContent;
-	background-color: $ColorBackgroundDark;
 	
 	> * {
         flex-grow: 1;

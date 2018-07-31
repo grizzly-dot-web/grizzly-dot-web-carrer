@@ -10,6 +10,11 @@ import { Issue } from './Issue';
 import { Form } from './Form';
 
 
+export interface GitHubProps {
+    isActive: boolean
+    onClose: (e:React.MouseEvent<HTMLButtonElement>) => void
+}
+
 export interface GitHubState {
     createdIssue?: IssueResponse
     lastCreatedIssue?: IssueResponse
@@ -20,7 +25,7 @@ export interface GitHubState {
     form : GitHubIssueBody
 }
 
-export default class IssueTracker extends React.Component<any, GitHubState> {
+export default class IssueTracker extends React.Component<GitHubProps, GitHubState> {
   
     ref: HTMLElement | null;
 
@@ -47,14 +52,18 @@ export default class IssueTracker extends React.Component<any, GitHubState> {
 
 
     render() {
+        let activeClass = '';
+        if (this.props.isActive) {
+            activeClass = 'IssueTracker_isActive'
+        }
 
         return (
-            <section ref={ref => this.ref = ref} className={`IssueTracker`}>
+            <section ref={ref => this.ref = ref} className={`IssueTracker ${activeClass}`}>
                 <div className={`IssueTracker_Inner`}>
                     <h2 className={`h1`}>Hinterlassen Sie gerne Ihr Feedback.</h2>
                     {this.renderIssues()}
                     <Form classes={this.state.formClasses} form={this.state.form} onSubmit={this.handleFormSubmit} labels={this.state.labels} contribs={this.state.contribs}></Form>
-                    <a className="IssueTracker_CloseButton" href="/">Schließen</a>
+                    <button className="IssueTracker_CloseButton" onClick={this.props.onClose}>Schließen</button>
                 </div>
                 {this.renderResponseMessage()}
             </section>

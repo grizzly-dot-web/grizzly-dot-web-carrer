@@ -4,6 +4,7 @@
 	width: 100%;
 	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
 
+	color: $ColorBackgroundContent;
 	background-color: $ColorBackgroundDark;
 	transition: $HeaderColorTansition;
 
@@ -41,12 +42,11 @@
 	}
 
 	.meta-nav {
-		width: 30vw;
-
-		a {
+		text-align: right;
+		a, button {
+			float:  right;
+			clear: both;
 			display: block;
-			font-size: 0.8em;
-			text-align: right;
 			margin-bottom: 0.35em;
 		}
 	}

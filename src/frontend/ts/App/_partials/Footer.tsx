@@ -9,6 +9,7 @@ export interface SocialLink {
 }
 
 export interface FooterProps {
+	onFeedbackClick: (e : React.MouseEvent<HTMLButtonElement>) => void
 	socialLinks: SocialLink[]
 }
 
@@ -35,8 +36,8 @@ export default class Footer extends React.Component<FooterProps> {
 					</div>
 					<nav className="meta-nav">
 						<h4>Zu dieser Seite</h4>
-						<a href="/feedback">Feedback / Bug report</a>
-						<a href="https://github.com/sebgrizzly/LifeCareer" target="_blank">Opensource (github.com)</a>
+						<button onClick={this.props.onFeedbackClick}>Feedback / Bug report</button>
+						<a href="https://github.com/grizzlydotweb/grizzly-dot-web-career" target="_blank">Opensource (github.com)</a>
 					</nav>
 				</div>
 			</footer>

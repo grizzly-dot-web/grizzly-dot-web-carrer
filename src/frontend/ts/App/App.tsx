@@ -9,6 +9,7 @@ import IssueTracker from './Components/IssueTracker/_index';
 import ExperienceOverview, { HistoryEntry } from './Components/ExperienceOverview/_index';
 
 export interface AppState {
+    isssueTrackerIsActive : boolean
     history: HistoryEntry[] 
     socialLinks: SocialLink[]
 }
@@ -19,22 +20,28 @@ export default class App extends React.Component<any, AppState> {
         super(props, context);
         
         this.state = {
+            isssueTrackerIsActive: false,
             history: [],
             socialLinks: [],
         }
+
+        this.handleFeedbackClick = this.handleFeedbackClick.bind(this);
     }
 
     render() {
-        console.log(this.state);
-
         return (
             <div className="App">
                 <Header />
                 <div className="App_Main">
+                    <div className="Textarea">
+                        <h2>Welcome to this website,</h2>
+                        <p>here you have the possibillity to get an exact overview over my skillset.</p>
+                        <p>For example here are some predifined Filters to check them out.</p>
+                    </div>
                     <ExperienceOverview data={this.state.history} />
-                    <IssueTracker />
+                    <IssueTracker isActive={this.state.isssueTrackerIsActive} onClose={this.handleFeedbackClick}/>
                 </div>
-                <Footer socialLinks={this.state.socialLinks} />
+                <Footer socialLinks={this.state.socialLinks} onFeedbackClick={this.handleFeedbackClick}/>
             </div>
         )
     }
@@ -45,6 +52,15 @@ export default class App extends React.Component<any, AppState> {
                 Object.assign(this.state, data)
             );
         });
+    }
+
+    handleFeedbackClick(e : React.MouseEvent<HTMLButtonElement>) {
+        this.setState({
+            ...this.state,
+            isssueTrackerIsActive: !this.state.isssueTrackerIsActive
+        });
+
+        e.preventDefault();
     }
 
     fetchData() {
