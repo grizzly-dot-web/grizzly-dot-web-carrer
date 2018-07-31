@@ -10,7 +10,6 @@ RUN npm install
 COPY . .
 
 RUN npm run-script build
-RUN npm run-script build:content
 
 EXPOSE 80 9000
 
