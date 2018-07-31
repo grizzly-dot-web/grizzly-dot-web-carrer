@@ -1,47 +1,5 @@
 import * as React from 'react';
 
-export interface Institution {
-	begin_date: string,
-	end_date?: string,
-	type: string
-	title: string,
-	url: string,
-	job_title: string,
-	industry: string,
-	company_size: string,
-}
-
-export interface Experience {
-	url: string,
-	title: string,
-	level: string
-	category: string,
-	type: string,
-}
-
-export interface HistoryEntry {
-	url: string,
-	title: string
-	begin_date? : string
-	end_date? : string
-	institutions: Institution[],
-	experiences: Experience[]
-}
-
-export interface ExperienceLevel {
-    name : string
-    className : string 
-    description: string
-}
-
-export interface ExperiencesProps {
-	data : HistoryEntry[]
-}
-
-export interface ExperiencesState {
-	visibleExperienceLevel : number
-}
-
 export default class ExperienceOverview extends React.Component<ExperiencesProps, ExperiencesState> {
 
     ref: HTMLElement | null;
@@ -127,21 +85,19 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         
         return (
             <div ref={ref => this.ref = ref} className={`experience-overview`}>
-                <div className="inner">
-                    <section className={`skills`}>
+                <section className={`skills`}>
                     <h3 className="experience-overview--title">Skills</h3>
-                        {this._renderLegend()}
-                        <section className="experience-item-wrapper">
-                            {this._renderTypeRows(otherExperiences)}
-                        </section>
+                    {this._renderLegend()}
+                    <section className="experience-item-wrapper">
+                        {this._renderTypeRows(otherExperiences)}
                     </section>
-                    <section className={`references`}>
-                        <h3 className="experience-overview--title">Referenzen</h3>
-                        <div className="experience-item-wrapper">
-                           { this._renderExperiences(referenceExperiences)}
-                        </div>
-                    </section>
-                </div>
+                </section>
+                <section className={`references`}>
+                    <h3 className="experience-overview--title">Referenzen</h3>
+                    <div className="experience-item-wrapper">
+                        { this._renderExperiences(referenceExperiences)}
+                    </div>
+                </section>
             </div>
         );
     }
@@ -316,3 +272,45 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         this.assignActiveLegendLevels(levelCode);
     }
 } 
+
+export interface Institution {
+	begin_date: string,
+	end_date?: string,
+	type: string
+	title: string,
+	url: string,
+	job_title: string,
+	industry: string,
+	company_size: string,
+}
+
+export interface Experience {
+	url: string,
+	title: string,
+	level: string
+	category: string,
+	type: string,
+}
+
+export interface HistoryEntry {
+	url: string,
+	title: string
+	begin_date? : string
+	end_date? : string
+	institutions: Institution[],
+	experiences: Experience[]
+}
+
+export interface ExperienceLevel {
+    name : string
+    className : string 
+    description: string
+}
+
+export interface ExperiencesProps {
+	data : HistoryEntry[]
+}
+
+export interface ExperiencesState {
+	visibleExperienceLevel : number
+}
