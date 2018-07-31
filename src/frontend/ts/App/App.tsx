@@ -5,8 +5,8 @@ import React from "react";
 import Header from './_partials/Header';
 import Footer, { SocialLink } from './_partials/Footer';
 
-import IssueTracker from './Components/IssueTracker';
-import ExperienceOverview, { HistoryEntry } from './Components/ExperienceOverview';
+import IssueTracker from './Components/IssueTracker/_index';
+import ExperienceOverview, { HistoryEntry } from './Components/ExperienceOverview/_index';
 
 export interface AppState {
     history: HistoryEntry[] 

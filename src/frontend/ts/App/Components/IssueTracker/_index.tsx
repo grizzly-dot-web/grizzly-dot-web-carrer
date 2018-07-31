@@ -3,11 +3,11 @@ import browser from 'browser-detect';
 
 import * as React from 'react';
 
-import { GitHubIssueBody } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
-import DebugIssueResponse, { IssueResponse, ContributerResponse, LabelResponse } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
-import { IssueTrackerRepoInfo } from '../../../../backend/Components/IssueTracker/IssueTracker';
-import { Issue } from './IssueTracker/Issue';
-import { Form } from './IssueTracker/Form';
+import { GitHubIssueBody } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
+import DebugIssueResponse, { IssueResponse, ContributerResponse, LabelResponse } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
+import { IssueTrackerRepoInfo } from '../../../../../backend/Components/IssueTracker/IssueTracker';
+import { Issue } from './Issue';
+import { Form } from './Form';
 
 
 export interface GitHubState {
