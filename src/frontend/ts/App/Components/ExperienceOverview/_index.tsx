@@ -132,11 +132,17 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         return rendered;
     }
 
-    _renderExperiences(experiences : Experience[]) {
+    _renderExperiences(experiences : Skill[]) {
         let counter = 0;
         let rendered = [];
         for (let exp of experiences) {
             counter++;
+
+            let reference = exp as Reference;
+            if (reference.type === 'reference') {
+                rendered.push(this._renderSingleReference(reference, counter.toString()));
+                continue;
+            }
 
             if (
                 (!exp.level || this.state.filter.level > parseInt(exp.level)) &&
@@ -145,13 +151,13 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
                 continue;
             }
 
-            rendered.push(this._renderSingleExp(exp, counter.toString()));
+            rendered.push(this._renderSingleSkill(exp, counter.toString()));
         }
 
         return rendered;
     }
 
-    _renderSingleExp(experience : Experience, key : string) {
+    _renderSingleSkill(experience : Skill, key : string) {
         let expLevel = null;
         
         let handleLevelClick = (id : string, filterKey : string, isMulti : boolean) => {
@@ -194,6 +200,21 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
                 </a>
                 {expLevel}
                 {expTags}
+            </div>
+        );
+    }
+    
+    _renderSingleReference(experience : Reference, key : string) {
+        let inner : any = experience.title;
+        if (experience.icon) {
+            inner = <img src={experience.icon} />;
+        }
+
+        return (
+            <div key={key} className="experience-item">
+                <a href={experience.url} target={'_blank'}>
+                    {inner}
+                </a>
             </div>
         );
     }
@@ -260,13 +281,19 @@ export interface Institution {
 	company_size: string,
 }
 
-export interface Experience {
+export interface BaseExperience {
 	url: string,
 	title: string,
+	category: string,
+	type: 'reference'|'skill',
+}
+export interface Skill extends BaseExperience {
 	level?: string
 	tags?: string[]
-	category: string,
-	type: string,
+	type: 'skill',
+}
+export interface Reference extends BaseExperience {
+	icon?: string
 }
 
 export interface HistoryEntry {
@@ -275,7 +302,7 @@ export interface HistoryEntry {
 	begin_date? : string
 	end_date? : string
 	institutions: Institution[],
-	experiences: Experience[]
+	experiences: BaseExperience[]
 }
 
 export interface ExperienceTag {

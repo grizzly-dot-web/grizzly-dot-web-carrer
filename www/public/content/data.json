@@ -117,8 +117,15 @@
 					"type": "Tool"
 				},
 				{
-					"url": "https://www.docker.com/",
-					"title": "Docker",
+					"url": "https://www.vagrantup.com/",
+					"title": "Vagrant",
+					"icon": "/img/svg/reference-oygo.svg",
+					"category": "Virtualization",
+					"type": "reference"
+				},
+				{
+					"url": "https://oygo.com/",
+					"title": "Oygo",
 					"level": 400,
 					"tags": ["interested"],
 					"category": "Virtualization",

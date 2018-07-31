@@ -122,10 +122,10 @@
 
 			.experience-item {
 				width: 10em;
-				min-width: 20vw;
+				min-width: 25vw;
+				max-width: 200px;
 				
 				a {    
-					display: table-cell;
 					vertical-align: middle;
 					text-align: center;
 					width: 20em;
