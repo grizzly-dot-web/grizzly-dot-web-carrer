@@ -61,14 +61,14 @@ export class Filter extends React.Component<FilterProps, FilterEntries> {
         return (
             <div className="experience-overview-filter">
                 <div className="experience-tags">
-                    <header>
-                        <h3 className="h3">Filter</h3><h4 className="h2">tags</h4>
-                    </header>
+                    <h4 className="experience-filter-header">
+                        <span className="h3">Tag</span> <span className="h4">filter</span>
+                    </h4>
                     {tags}
                 </div>
-                <header>
-                    <h3 className="h3">Filter</h3><h4 className="h2">skill level</h4>
-                </header>
+                <h4 className="experience-filter-header">
+                    <span className="h3">Skill level</span> <span className="h4">filter</span>
+                </h4>
                 <hr className="experience-filter-seperator" />
                 <div className="experience-level-legend">
                     <div className="legend-frame">{legendItems}</div>

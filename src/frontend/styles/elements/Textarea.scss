@@ -1,6 +1,5 @@
 .Textarea {
-	margin-bottom: 2em;
-	padding:  0 getGridSize(2, horizontal);
+	padding:  $ComponentPadding_Vertical $ComponentPadding_Horizontal 0;
 
 	.Textarea_Block {
 		max-width: 1200px;

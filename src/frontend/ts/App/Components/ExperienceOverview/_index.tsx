@@ -73,14 +73,14 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         return (
             <div ref={ref => this.ref = ref} className={`experience-overview`}>
                 <section className={`skills`}>
-                    <h2 className="experience-overview--title">Skills</h2>
+                    <h3 className="h2">Skills</h3>
                     <Filter availableLevels={this.experienceLevels} availableTags={this.experienceTags} filter={this.state.filter} onChange={this.handleFilterChange} />
                     <section className="experience-item-wrapper">
                         {this._renderTypeRows(otherExperiences)}
                     </section>
                 </section>
                 <section className={`references`}>
-                    <h2 className="experience-overview--title">Referenzen</h2>
+                    <h3 className="h2">Referenzen</h3>
                     <div className="experience-item-wrapper">
                         { this._renderExperiences(referenceExperiences)}
                     </div>

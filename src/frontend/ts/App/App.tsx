@@ -42,7 +42,7 @@ export default class App extends React.Component<any, AppState> {
                     <div className="App_Main">
                         <div className="Textarea">
                             <div className="Textarea_Block">
-                                <h2>Welcome to this website,</h2>
+                                <h2>Welcome!</h2>
                                 <p>
                                     here you have the possibillity to get an exact overview of my skillset.<br />
                                     For example here are some predefined filters to check them out.
@@ -62,6 +62,20 @@ export default class App extends React.Component<any, AppState> {
                             </div>
                         </div>
                     <ExperienceOverview data={this.state.history} filter={this.state.filter} />
+                    <div className="Textarea">
+                        <div className="Textarea_Block">
+                            <h2>Imprint</h2>
+                            <p>
+                                grizzly.web (Sebastian Müller)<br />
+                                Ostwall 125<br />
+                                47798 Krefeld<br />
+                            </p>
+                            <p>
+                                Inhaberin: Sebastian Müller<br />
+                                Umsatzsteuer-IdNr gem. § 27 a Umsatzsteuergesetz: 942/0588/6738<br />
+                            </p>
+                        </div>
+                    </div>
                     <IssueTracker isActive={this.state.isssueTrackerIsActive} onClose={this.handleFeedbackClick}/>
                 </div>
                 <Footer socialLinks={this.state.socialLinks} onFeedbackClick={this.handleFeedbackClick}/>

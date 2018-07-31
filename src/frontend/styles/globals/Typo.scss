@@ -1,25 +1,33 @@
-h1, .h1, .AtomicsCCM_tagH1-overridden {
+h1, .h1 {
 	margin: 0;
 	color: inherit;
 	font-size: 2em;
 	font-weight: 700;
+	text-transform: uppercase;
 }
 
-h2, .h2, .AtomicsCCM_tagH2-overridden {
+h2, .h2 {
 	margin: 0;
-	font-weight: 300;
-	font-size: 1em;
-	color: $ColorPrimary;
+	font-size: 1.5em;
+	color: inherit;
+	font-weight: 400;
 }
 
-h3, .h3, .AtomicsCCM_tagH3-overridden {
+h3, .h3 {
 	margin: 0;
 	color: inherit;
 	font-weight: 700;
 	text-transform: uppercase;
 }
 
-h4, .h4, .AtomicsCCM_tagH4-overridden {
+h4, .h4 {
+	margin: 0;
+	font-size: 1em;
+	font-weight: 300;
+	color: $ColorPrimary;
+}
+
+h5, .h5 {
 	margin: 0;
 	color: inherit;
 	font-weight: 400;

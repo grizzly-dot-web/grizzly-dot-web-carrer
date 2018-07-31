@@ -1,6 +1,5 @@
 .experience-overview {
-	
-	padding:   getGridSize(1, horizontal) getGridSize(2, horizontal) 0;
+	padding:  $ComponentPadding_Vertical $ComponentPadding_Horizontal $ComponentMarginBottom;
 	overflow: hidden;
 	
 	display: flex;
@@ -52,6 +51,8 @@
 				}
 
 				.experience-overview--type-title {
+					color: $ColorBackgroundContent;
+
 					&:after {
 						content: '';
 						width: 100%;
