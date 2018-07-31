@@ -124,13 +124,11 @@
 			.experience-item {
 				width: 10em;
 				min-width: 25vw;
-				max-width: 200px;
 				
-				a {    
-					vertical-align: middle;
+				a {
+					display: block;    
 					text-align: center;
-					width: 20em;
-					height: 6em;
+					max-width: 300px;
 
 					img {
 						max-width: 100%;

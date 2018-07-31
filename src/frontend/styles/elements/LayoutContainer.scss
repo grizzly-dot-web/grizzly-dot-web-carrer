@@ -15,6 +15,13 @@
         .LayoutContainer_ElementWrapper-Half {
             flex-grow: 1;
             width: 50%;
+            
+            &:nth-child(odd) {
+                padding-right: 1em;
+            }
+            &:nth-child(even) {
+                padding-left: 1em;
+            }
         }
     }
 }

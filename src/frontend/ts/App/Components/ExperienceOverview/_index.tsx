@@ -3,6 +3,7 @@ import { Filter, FilterEntries } from './Filter';
 import { Level } from './Level';
 
 export interface ExperiencesProps {
+    filter : FilterEntries
 	data : HistoryEntry[]
 }
 
@@ -21,10 +22,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
 
             
         this.state = { 
-            filter: {
-                tags: ['interested'],
-                level: 200
-            }
+            filter: this.props.filter
         };
 
         this.ref = null;
@@ -47,6 +45,12 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         }
 
         return experiences;
+    }
+
+    componentWillReceiveProps(nextProps : ExperiencesProps) {
+          this.setState(Object.assign(this.state, { 
+              filter: nextProps.filter 
+        }));
     }
 
     render() {
