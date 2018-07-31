@@ -20,6 +20,10 @@
 		border-radius: 50%;
 	}
 
+	&.tag_interested {
+		background-color: $ColorInterested;
+	}
+
 	&.tag_discarded {
 		background-color: $ColorDiscarded;
 	}
@@ -28,8 +32,8 @@
 		background-color: $ColorUntrained;
 	}
 
-	&.tag_interested {
-		background-color: $ColorInterested;
+	&.tag_learned {
+		background-color: $ColorLearned;
 	}
 
 	&.tag_assess {

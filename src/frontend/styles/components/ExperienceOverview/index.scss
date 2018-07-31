@@ -103,14 +103,14 @@
 		background-color: $ColorBackgroundContent;
 
 		.experience-overview--title {
-			color: $DarkCopy_Color;
+			color: $ColorBackgroundDark;
 			&:after {
 				content: '';
 				width: 100%;
 				height: 0.3rem;
 				display: block;
-				margin-top: 0.5em;
-				background-color: $DarkCopy_Color;
+				margin-top: 0.3em;
+				background-color: $ColorBackgroundDark;
 			}
 		}
 
@@ -142,5 +142,4 @@
 
 	@import './ExperienceOverview_Level';
 	@import './ExperienceOverview_Filter';
-	@import './ExperienceOverview_SingleExp';
 }

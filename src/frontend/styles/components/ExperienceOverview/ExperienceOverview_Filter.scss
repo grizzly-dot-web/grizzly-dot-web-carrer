@@ -109,6 +109,10 @@
 				width: 0;
 				transition: width 0.1s ease;
 			}
+		
+			&.tag_interested:after {
+				background-color: $ColorInterested;
+			}
 	
 			&.tag_discarded:after {
 				background-color: $ColorDiscarded;
@@ -118,8 +122,8 @@
 				background-color: $ColorUntrained;
 			}
 		
-			&.tag_interested:after {
-				background-color: $ColorInterested;
+			&.tag_learned:after {
+				background-color: $ColorLearned;
 			}
 		
 			&.tag_assess:after {

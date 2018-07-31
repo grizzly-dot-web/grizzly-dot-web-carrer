@@ -238,25 +238,31 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
             className : "tag_discarded", 
             id: '100',
             name: "discarded",
-            description: "Entweder ist dieser Skill nicht mehr Zeitgemäß oder ich habe entschieden ihn zu verwerfen."
+            description: "this skill has been discarded because it had been deprecated or I had decided to discard it."
         },
         200:  { 
             className : "tag_untrained", 
             id: '200',
             name: "untrained", 
-            description: "Hiermit habe ich mich länger nicht beschäftigt, bzw. bin ich in meiner Karriere nicht oft dazu gekommen."
+            description: "It's been quite a while I had worked with it or I had not been much contact with it in my career."
+        },
+        300:  { 
+            className : "tag_assess", 
+            id: '300',
+            name: "assess", 
+            description: "I already have quite well Experience with this skill, but i'm not shure to work with it in daily basis."
         },
         400:  { 
-            className : "tag_assess", 
+            className : "tag_learned", 
             id: '400',
-            name: "assess", 
-            description: "Ich habe bereits einige Erfahrung mit diesem Skill, bin allerdings nicht sicher ob ich ihn in meinen Alltag aufnehme."
+            name: "learned", 
+            description: "I have learned this skill, but it is not part of my daily basis."
         },
         500:  { 
             className : "tag_mastered", 
             id: '500',
             name: "mastered", 
-            description: "Dieser Skill ist teil meines Alltags, ich kenne mich hiermit sehr gut aus."
+            description: "This skill is part of my daily routine and I am quite good at it."
         },
     }
 
@@ -265,7 +271,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
             className : "tag_interested", 
             id: "interested",
             name: "interested", 
-            description: "Ich bin an diesem Skill interessiert, habe allerdings noch keine bis wenig Übung darin."
+            description: "I am very interested in this Skill"
         }
     }
 } 

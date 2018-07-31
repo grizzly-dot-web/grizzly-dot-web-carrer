@@ -27,6 +27,7 @@ export default class Header extends React.Component {
 		return (
 			<header className="App_Header">
 				<div className="container">
+					<h2 className="h1">Skills & References</h2>
 					<a className="logo" href="/start">
 						<h1>
 							<div className="name">

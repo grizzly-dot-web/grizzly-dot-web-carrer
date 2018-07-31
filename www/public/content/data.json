@@ -27,8 +27,17 @@
 				{
 					"url": "https://jestjs.io/",
 					"title": "jest",
-					"level": 400,
+					"tags": ["interested"],
+					"level": 300,
 					"category": "Debugger / Testing",
+					"type": "Tool"
+				},
+				{
+					"url": "https://www.docker.com/",
+					"title": "Docker",
+					"level": 200,
+					"tags": ["interested"],
+					"category": "Virtualization",
 					"type": "Tool"
 				},
 				{
@@ -50,6 +59,7 @@
 				{
 					"url": "https://www.wolkenkit.io/",
 					"title": "Node",
+					"tags": ["interested"],
 					"level": 400,
 					"category": "Sprache",
 					"type": "Backend"
@@ -59,7 +69,7 @@
 					"title": "Domain Driven Development",
 					"tags": ["interested"],
 					"level": 200,
-					"category": "Arbeitsweise",
+					"category": "Working Approach",
 					"type": "Design Pattern / Methode"
 				},
 				{
@@ -104,7 +114,7 @@
 				{
 					"url": "http://getbem.com/introduction/",
 					"title": "BEM",
-					"level": 400,
+					"level": 300,
 					"tags": ["interested"],
 					"category": "Pattern",
 					"type": "Design Pattern / Methode"
@@ -112,24 +122,23 @@
 				{
 					"url": "https://www.vagrantup.com/",
 					"title": "Vagrant",
-					"level": 400,
+					"level": 300,
 					"category": "Virtualization",
 					"type": "Tool"
 				},
 				{
-					"url": "https://www.vagrantup.com/",
-					"title": "Vagrant",
-					"icon": "/img/svg/reference-oygo.svg",
-					"category": "Virtualization",
-					"type": "reference"
+					"url": "https://en.wikipedia.org/wiki/Kanban",
+					"title": "Kanban",
+					"level": 300,
+					"category": "Working Approach",
+					"type": "Design Pattern / Methode"
 				},
 				{
 					"url": "https://oygo.com/",
 					"title": "Oygo",
-					"level": 400,
-					"tags": ["interested"],
+					"icon": "/img/svg/reference-oygo.svg",
 					"category": "Virtualization",
-					"type": "Tool"
+					"type": "reference"
 				},
 				{
 					"url": "https://github.com/inuitcss/inuitcss",
@@ -142,7 +151,8 @@
 				{
 					"url": "https://symfony.com/",
 					"title": "Symfony",
-					"level": 400,
+					"level": 300,
+					"tags": ["interested"],
 					"category": "Framework / CMS",
 					"type": "Backend"
 				},
@@ -171,12 +181,14 @@
 					"url": "https://www.npmjs.com/",
 					"title": "npm",
 					"level": 500,
+					"tags": ["interested"],
 					"category": "Package Manager",
 					"type": "Tool"
 				},
 				{
 					"url": "https://getcomposer.org/",
 					"title": "composer",
+					"tags": ["interested"],
 					"level": 500,
 					"category": "Package Manager",
 					"type": "Tool"
@@ -225,14 +237,14 @@
 				{
 					"url": "https://www.microsoft.com/net/learn/what-is-dotnet",
 					"title": ".NET Framework",
-					"level": 200,
+					"level": 300,
 					"category": "Framework / CMS",
 					"type": "Backend"
 				},
 				{
 					"url": "https://docs.microsoft.com/de-de/dotnet/framework/data/adonet/ef/overview",
 					"title": "Entity Framework",
-					"level": 200,
+					"level": 300,
 					"category": "Framework / CMS",
 					"type": "Backend"
 				},
@@ -240,27 +252,36 @@
 					"url": "http://sass-lang.com/",
 					"title": "SASS",
 					"level": 500,
+					"tags": ["interested"],
 					"category": "Sprache",
 					"type": "Frontend"
 				},
 				{
+					"url": "https://en.wikipedia.org/wiki/Scrum_(software_development)",
+					"title": "Scrum",
+					"level": 300,
+					"tags": ["interested"],
+					"category": "Working Approach",
+					"type": "Design Pattern / Methode"
+				},
+				{
 					"url": "https://docs.microsoft.com/de-de/dotnet/csharp/getting-started/introduction-to-the-csharp-language-and-the-net-framework",
 					"title": "CSharp",
-					"level": 200,
+					"level": 300,
 					"category": "Sprache",
 					"type": "Backend"
 				},
 				{
 					"url": "https://pimcore.com/de",
 					"title": "Pimcore",
-					"level": 400,
+					"level": 300,
 					"category": "Framework / CMS",
 					"type": "Backend"
 				},
 				{
 					"url": "http://lesscss.org/",
 					"title": "LESS",
-					"level": 200,
+					"level": 300,
 					"category": "Sprache",
 					"type": "Frontend"
 				},
@@ -294,13 +315,14 @@
 				{
 					"url": "https://www.ubuntu.com/server",
 					"title": "Ubuntu Server",
-					"level": 400,
+					"level": 300,
 					"category": "Server",
 					"type": "Tool"
 				},
 				{
 					"url": "https://www.typescriptlang.org/",
 					"title": "TypeScript",
+					"tags": ["interested"],
 					"level": 500,
 					"category": "Sprache",
 					"type": "Frontend"
@@ -308,6 +330,7 @@
 				{
 					"url": "https://www.typescriptlang.org/",
 					"title": "JavaScript",
+					"tags": ["interested"],
 					"level": 400,
 					"category": "Sprache",
 					"type": "Frontend"
@@ -315,7 +338,7 @@
 				{
 					"url": "https://jquery.com/",
 					"title": "jQuery",
-					"level": 100,
+					"level": 300,
 					"category": "Framework / CMS",
 					"type": "Frontend"
 				},
@@ -328,14 +351,14 @@
 				{
 					"url": "https://gulpjs.com/",
 					"title": "Gulp",
-					"level": 500,
+					"level": 300,
 					"category": "Task Runner",
 					"type": "Tool"
 				},
 				{
 					"url": "https://xdebug.org/",
 					"title": "XDebug",
-					"level": 200,
+					"level": 300,
 					"category": "Debugger / Testing",
 					"type": "Tool"
 				},
@@ -363,6 +386,7 @@
 				{
 					"url": "https://developer.mozilla.org/de/Learn/Getting_started_with_the_web/CSS_basics",
 					"title": "CSS",
+					"tags": ["interested"],
 					"level": 500,
 					"category": "Sprache",
 					"type": "Frontend"
@@ -377,6 +401,7 @@
 				{
 					"url": "https://developer.mozilla.org/de/Learn/HTML",
 					"title": "HTML",
+					"tags": ["interested"],
 					"level": 500,
 					"category": "Sprache",
 					"type": "Frontend"
@@ -406,6 +431,7 @@
 					"url": "https://php.net/",
 					"title": "PHP",
 					"level": 500,
+					"tags": ["interested"],
 					"category": "Sprache",
 					"type": "Backend"
 				},
@@ -464,6 +490,7 @@
 					"url": "https://www.apple.com/de/mac/compare/",
 					"title": "Mac OS",
 					"level": 500,
+					"tags": ["interested"],
 					"category": "Betriebssystem",
 					"type": "Tool"
 				},
