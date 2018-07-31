@@ -60,7 +60,7 @@ export default class IssueTracker extends React.Component<GitHubProps, GitHubSta
         return (
             <section ref={ref => this.ref = ref} className={`IssueTracker ${activeClass}`}>
                 <div className={`IssueTracker_Inner`}>
-                    <h2 className={`h1`}>Hinterlassen Sie gerne Ihr Feedback.</h2>
+                    <h2 className={`h1`}>Please leave your feedback.</h2>
                     {this.renderIssues()}
                     <Form classes={this.state.formClasses} form={this.state.form} onSubmit={this.handleFormSubmit} labels={this.state.labels} contribs={this.state.contribs}></Form>
                     <button className="IssueTracker_CloseButton" onClick={this.props.onClose}>Schließen</button>
@@ -101,16 +101,16 @@ export default class IssueTracker extends React.Component<GitHubProps, GitHubSta
                 statusClass = 'IssueTracker_ResponseMessage-Successful';
                 message = (
                     <p>
-                        Danke für Ihr Feedback<br />
-                        Hier ist der <a target="_blank" href={this.state.createdIssue.html_url}>Link zum Ticket</a>
+                        Thanks for your feedback<br />
+                        Here is the<a target="_blank" href={this.state.createdIssue.html_url}>Link to your Ticket</a>
                     </p>
                 );
             } else {
                 statusClass = 'IssueTracker_ResponseMessage-Unsuccessful';
                 message = (
                     <p>
-                        Leider is etwas schief gegangen.<br />
-                        Es wäre nett wenn Sie mir per Email bescheid. <a target="_blank" href="mailto:info@sebgrizzly.com">info@sebgrizzly.com</a> 
+                        Sorry, something went wrong.<br />
+                        It would be awesome if you let me now. <a target="_blank" href="mailto:info@grizzlydotweb.com">info@grizzlydotweb.com</a> 
                     </p>
                 )
             }
@@ -224,7 +224,7 @@ ${form.body}
 
         return (
             <div className="IssueTracker_Issues">
-                <p>Hier sind andere Tickets, die bereits erstellt worden sind, es wäre nett einmal einen Abgleich zumachen, um zu vermeiden Duplikate zu erstellen.</p>
+                <p>Please check first the tickets below to avoid duplicates</p>
                 <div className="IssueTracker_Issues_Inner">
                     {rendered}
                 </div>
