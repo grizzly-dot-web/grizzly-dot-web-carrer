@@ -11,9 +11,11 @@
 
 	.experience-overview--title {
 		width: 100%;
+		font-size: 1.4em;
+		font-weight: 700;
+		margin-bottom: 0.65em;
 		color: $ColorBackgroundContent;
 		text-transform: uppercase;
-		margin-bottom: 0.65em;
 	}
 	.experience-overview--type-title {
 		margin-bottom: 1em;
@@ -26,18 +28,6 @@
 			position: relative;
 			margin-bottom: 0;
 			padding-bottom: 0.65em;
-
-			&:after {
-				content: '';
-				display: block;
-				bottom: 0;
-				left: 0;
-				height: 0.25em;
-				width: 100vw;
-				margin-left: calc((100vw - 100%) / 2 * -1);
-				position: absolute;
-				background-color: $ColorBackgroundContent;
-			}
 		}
 
 		> .experience-item-wrapper {
@@ -78,6 +68,10 @@
 						margin-bottom: 0.8em;
 						page-break-inside: avoid;
 						break-inside: avoid;
+
+						> *:first-child {
+							margin-top: 0;
+						}
 					}
 
 					.experience-item, .category-headline {
@@ -91,21 +85,6 @@
 						margin-right: 0.2em;
 						margin-bottom: 0.3em;
 						display: inline-block;
-
-						.experience-level {
-							top: 0;
-							right: 0;
-							width: 1.5em;
-							height: 1.5em;
-							padding: 0;
-							font-size: 0.7em;
-							line-height: 1.6em;
-							text-align: center;
-							position: absolute;
-							font-weight: 300;
-							border-radius: 50%;
-							transform: translate(50%, -50%);
-						}
 					}
 					
 					.category-headline {
@@ -162,6 +141,6 @@
 	}
 
 	@import './ExperienceOverview_Level';
-	@import './ExperienceOverview_Legend';
+	@import './ExperienceOverview_Filter';
 	@import './ExperienceOverview_SingleExp';
 }

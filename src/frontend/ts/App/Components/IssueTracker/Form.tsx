@@ -5,6 +5,7 @@ import { Label } from './Label';
 import { Contributer } from './Contributer';
 import { GitHubIssueBody } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
 import { LabelResponse, ContributerResponse } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
+import CheckboxList from '../CheckboxList';
 
 export interface FormProps {
 
@@ -90,36 +91,18 @@ export class Form extends React.Component<FormProps, FormState> {
     }
     
     renderCheckboxList(label : string, key : string, checkboxItems : {value : string, name:string, label: React.ReactElement<any>}[], multiChoice : boolean = true): any {
-        let rendered = [];
         let form : any = this.state.form;
-        for (let item of checkboxItems) {
-            if (checkboxItems.length == 1) {
-                if (multiChoice) {
-                    form[key].push(item.value);
-                } else {
-                    form[key] = item.value;
-                }
+        let value = form[key];
+        
+        if (checkboxItems.length == 1) {
+            if (multiChoice) {
+                value.push(checkboxItems[0].value);
+            } else {
+                value = checkboxItems[0].value;
             }
-            
-            let checked = form[key].indexOf(item.value) !== -1 ? true : false;
-
-            rendered.push(
-                <label key={item.name} className={`From_CheckboxList_Item`}>
-                    <input className="Form_Element" name={item.name} value={item.value} checked={checked} type="checkbox" onChange={(e) => this.handleChange(e, key, multiChoice)}/> {item.label}
-                </label>
-            );
         }
 
-        if (rendered.length <= 0) {
-            return null;
-        }
-
-        return (
-            <div className={`Form_Element From_CheckboxList`}>
-                <span className={`Form_Label_Inner`}>{label}</span>
-                {rendered}
-            </div>
-        );
+        return <CheckboxList label={label} name={key} key={key} value={value} checkboxItems={checkboxItems} multiChoice={multiChoice} onChange={this.handleChange}/>
     }
 
     handleSubmit(event : React.FormEvent<HTMLFormElement|HTMLButtonElement>) {

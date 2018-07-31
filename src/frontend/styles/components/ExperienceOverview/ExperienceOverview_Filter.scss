@@ -1,0 +1,148 @@
+.experience-overview-filter {
+	font-size: 0.7em;
+
+	header {
+		*:first-child {
+			padding-right: 0.5em;
+		}
+
+		> * {
+			font-size: 1.5em;
+			float: left;
+			display: block;
+		}
+
+		&:after {
+			content: '';
+			float: none;
+			clear: both;
+			display: block;
+		}
+	}
+
+	.experience-level-toggle {
+		cursor: pointer;
+		padding: 0.5em 0 0.5em;
+		font-weight: 700;
+		line-height: 1.7em;
+		font-style: italic;
+		min-width: 200px;
+		position: relative;
+		transition: 0.35s ease-in-out;
+		transition-property: color, opacity;
+	
+		.experience-level {
+			margin-left: 0;
+			margin-right: 0.25em;
+			border-radius: 1.2em;
+		}
+
+		&:not(.is-active) {
+			text-decoration: line-through;
+			color: rgba($color:$ColorBackgroundContent, $alpha: 0.3);
+			
+			.experience-level {
+				background-color: $ColorBackgroundDark;
+			}
+		}
+	}
+
+	.experience-tags {
+		margin-bottom: 1em;
+	}
+	
+	.experience-filter-seperator {
+		content: '';
+		font-size: 0.7em;
+		display: block;
+		bottom: 0;
+		left: 0;
+		height: 0.4em;
+		width: 100vw;
+		margin: 0;
+		margin-left: calc((100vw - 100%) / 2 * -1);
+		background-color: $ColorBackgroundContent;
+	}
+
+	.experience-level-legend {
+		margin-bottom: 2em;
+		position: relative;
+		
+		width: 100vw;
+		position: relative;
+		margin-left: calc(((100vw - 100%) / 2) * -1);
+		
+		@media (max-width: 900px) {
+			overflow-x: scroll;
+		}
+	
+		.legend-frame {
+			display: flex;
+			align-items: stretch;
+			justify-content: space-between;
+		}
+	
+		.experience-level-toggle {
+			padding: 1em;
+		
+			&:first-child {
+				padding-left: calc(1em + 20px)
+			}
+			
+			&:last-child {
+				padding-right: calc(1em + 20px)
+			}
+	
+			&:after, &:before {
+				content: '';
+				z-index: 2;
+				display: block;
+				bottom: 0;
+				left: 0;
+				height: 0.4em;
+				width: 100%;
+				position: absolute;
+				background-color: $ColorBackgroundContent;
+			}
+	
+			&:after {
+				width: 0;
+				transition: width 0.1s ease;
+			}
+	
+			&.tag_discarded:after {
+				background-color: $ColorDiscarded;
+			}
+		
+			&.tag_untrained:after {
+				background-color: $ColorUntrained;
+			}
+		
+			&.tag_interested:after {
+				background-color: $ColorInterested;
+			}
+		
+			&.tag_assess:after {
+				background-color: $ColorAssess;
+			}
+		
+			&.tag_mastered:after {
+				background-color: $ColorMastered;
+			}
+	
+			&.is-active {
+				text-decoration: underline;
+				.experience-level {
+					text-decoration: none;
+				}
+	
+				&:after {
+					width: 100%;
+				}
+			}
+		}
+		.experience-level-toggle.is-active ~ .experience-level-toggle:not(.is-active) {
+			text-decoration: none;
+		}
+	}
+}

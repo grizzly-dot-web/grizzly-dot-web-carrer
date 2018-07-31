@@ -34,6 +34,7 @@
 				{
 					"url": "https://webpack.js.org/",
 					"title": "Webpack",
+					"tags": ["interested"],
 					"level": 400,
 					"category": "Task Runner",
 					"type": "Tool"
@@ -41,7 +42,8 @@
 				{
 					"url": "https://www.wolkenkit.io/",
 					"title": "wolkenkit",
-					"level": 300,
+					"tags": ["interested"],
+					"level": 200,
 					"category": "Framework / CMS",
 					"type": "Backend"
 				},
@@ -55,14 +57,16 @@
 				{
 					"url": "http://workingdraft.de/314/",
 					"title": "Domain Driven Development",
-					"level": 300,
+					"tags": ["interested"],
+					"level": 200,
 					"category": "Arbeitsweise",
 					"type": "Design Pattern / Methode"
 				},
 				{
 					"url": "http://workingdraft.de/314/",
 					"title": "CQRS",
-					"level": 300,
+					"tags": ["interested"],
+					"level": 200,
 					"category": "Pattern",
 					"type": "Design Pattern / Methode"
 				}
@@ -100,7 +104,8 @@
 				{
 					"url": "http://getbem.com/introduction/",
 					"title": "BEM",
-					"level": 300,
+					"level": 400,
+					"tags": ["interested"],
 					"category": "Pattern",
 					"type": "Design Pattern / Methode"
 				},
@@ -114,14 +119,16 @@
 				{
 					"url": "https://www.docker.com/",
 					"title": "Docker",
-					"level": 300,
+					"level": 400,
+					"tags": ["interested"],
 					"category": "Virtualization",
 					"type": "Tool"
 				},
 				{
 					"url": "https://github.com/inuitcss/inuitcss",
 					"title": "inuitcss",
-					"level": 300,
+					"level": 200,
+					"tags": ["interested"],
 					"category": "Framework / CMS",
 					"type": "Frontend"
 				},
@@ -266,7 +273,8 @@
 				{
 					"url": "https://angularjs.org/",
 					"title": "AngularJS",
-					"level": 300,
+					"level": 200,
+					"tags": ["interested"],
 					"category": "Framework / CMS",
 					"type": "Frontend"
 				},
