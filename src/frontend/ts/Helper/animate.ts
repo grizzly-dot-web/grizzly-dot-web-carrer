@@ -1,7 +1,7 @@
 export default function animateCss(element : HTMLElement, reverse : boolean = false) {
     return new Promise((resolve) => {
         var eventName = (function(el) {
-            var animations = {
+            var animations : any = {
               animation: 'animationend',
               OAnimation: 'oAnimationEnd',
               MozAnimation: 'mozAnimationEnd',
@@ -9,7 +9,7 @@ export default function animateCss(element : HTMLElement, reverse : boolean = fa
             };
       
             for (var t in animations) {
-              if (el.style[t] !== undefined) {
+              if (Object.keys(el.style).indexOf(t) !== -1) {
                 return animations[t];
               }
             }
