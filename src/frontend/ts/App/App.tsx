@@ -44,7 +44,7 @@ export default class App extends React.Component<any, AppState> {
                             <div className="Textarea_Block">
                                 <h2>Welcome to this website,</h2>
                                 <p>
-                                    here you have the possibillity to get an exact overview over my skillset.<br />
+                                    here you have the possibillity to get an exact overview of my skillset.<br />
                                     For example here are some predefined filters to check them out.
                                 </p>
                                 <div className="LayoutContainer">
