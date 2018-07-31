@@ -14,7 +14,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         this.legendIsStateChanging = false;
         
         this.state = {
-            visibleExperienceLevel: parseInt(Object.keys(ExperienceOverview.Tags)[1])
+            visibleExperienceLevel: 200
         };
 
         this.handleLegendClick = this.handleLegendClick.bind(this)
@@ -45,7 +45,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
             className : "level_mastered", 
             name: "mastered", 
             description: "Dieser Skill ist teil meines Alltags, ich kenne mich hiermit sehr gut aus."
-        }
+        },
     }
 
     _groupExperienceDataByProperty(data : any[], property : string) {
@@ -196,10 +196,17 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
 
     _renderLegend() {
         let legendItems = [];
-        for (let levelCode in ExperienceOverview.Tags) {
+        for (let levelCode of Object.keys(ExperienceOverview.Tags).sort((a,b) => a < b ? 1 : -1)) {
             let currentLevel = ExperienceOverview.Tags[levelCode];
+
+
+            let activeClass = '';
+            if (parseInt(levelCode) >= this.state.visibleExperienceLevel) {
+                activeClass = 'active';
+            }
+
             legendItems.push(
-                <button key={levelCode} className={`experience-level-toggle ${currentLevel.className}`} data-level-code={levelCode} onClick={(e) => this.handleLegendClick(e, parseInt(levelCode), currentLevel)} >
+                <button key={levelCode} className={`experience-level-toggle ${currentLevel.className} ${activeClass}`} data-level-code={levelCode} onClick={(e) => this.handleLegendClick(e, parseInt(levelCode), currentLevel)} >
                     <span className={`experience-level ${currentLevel.className}`}>
                         {currentLevel.name}
                     </span>
@@ -211,7 +218,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         return <nav className="experience-level-legend"><div className="legend-frame">{legendItems}</div></nav>;
     }
 
-    _mapExperienceLevel(level : string) {
+    _mapExperienceLevel(level : number) {
         if (!ExperienceOverview.Tags.hasOwnProperty(level)) {
             throw new Error(`Experience Level not valid: ${level}`);
         }
@@ -234,7 +241,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
                     return resolve();
                 }
 
-                for (let element of elements) {
+                for (let element of elements.reverse()) {
                     setTimeout(() => {
                         let levelCode = element.getAttribute('data-level-code') as string;
 

@@ -41,7 +41,7 @@
 			z-index: 2;
 			display: block;
 			bottom: 0;
-			right: 0;
+			left: 0;
 			height: 0.4em;
 			width: 100%;
 			position: absolute;
@@ -89,7 +89,7 @@
             }
 
 			&:after {
-				width: 100%;
+                width: 100%;
             }
 		}
 
