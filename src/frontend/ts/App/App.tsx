@@ -71,8 +71,8 @@ export default class App extends React.Component<any, AppState> {
                                 47798 Krefeld<br />
                             </p>
                             <p>
-                                Inhaberin: Sebastian Müller<br />
-                                Umsatzsteuer-IdNr gem. § 27 a Umsatzsteuergesetz: 942/0588/6738<br />
+                                Owner: Sebastian Müller<br />
+                                identification number: 942/0588/6738<br />
                             </p>
                         </div>
                     </div>
