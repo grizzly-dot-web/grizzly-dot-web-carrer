@@ -6,7 +6,6 @@
     "test": "",
     "start": "node www/compiled/server/index.js",
     "build": "webpack -p --verbose",
-    "build:content": "node www/compiled/build/index.js",
     "watch": "webpack --watch --progress",
     "watch:server": "nodemon www/compiled/server/index.js",
     "docker:build": "docker build . -t grizzlydotweb/gizzlydotweb-career:latest",

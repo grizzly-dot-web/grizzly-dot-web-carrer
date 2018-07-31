@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ContributerResponse } from "../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses";
+import { ContributerResponse } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 
 export interface ContributerProps extends ContributerResponse {
     className?: string

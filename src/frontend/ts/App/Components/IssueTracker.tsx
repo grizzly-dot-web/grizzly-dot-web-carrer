@@ -1,18 +1,16 @@
+import 'whatwg-fetch';
+import browser from 'browser-detect';
+
 import * as React from 'react';
-import CmsRoutingComponent from '../../Core/Components/Base/ClientSideRoutingComponent';
+
 import { GitHubIssueBody } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
 import DebugIssueResponse, { IssueResponse, ContributerResponse, LabelResponse } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 import { IssueTrackerRepoInfo } from '../../../../backend/Components/IssueTracker/IssueTracker';
-import { Issue } from './Issue';
-import { Form } from './Form';
-import browser from 'browser-detect';
-import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
+import { Issue } from './IssueTracker/Issue';
+import { Form } from './IssueTracker/Form';
 
-export interface GitHubProps extends CmsProps<undefined> {
-    
-}
 
-export interface GitHubState extends CmsState {
+export interface GitHubState {
     createdIssue?: IssueResponse
     lastCreatedIssue?: IssueResponse
     formClasses: string[],
@@ -22,23 +20,13 @@ export interface GitHubState extends CmsState {
     form : GitHubIssueBody
 }
 
-export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHubState> {
-    
-    navigationId() { return '' };
-
-    link() { 
-        return {
-            url: '/feedback',
-            title: '',
-            text: 'Feedback',
-        }
-    }
-
+export default class IssueTracker extends React.Component<any, GitHubState> {
+  
     ref: HTMLElement | null;
 
     constructor(props : any) {
         super(props);
-        
+
         this.state = {
             issues: [],
             labels: [],
@@ -90,7 +78,6 @@ export default class IssueTracker extends CmsRoutingComponent<GitHubProps, GitHu
                 createdIssue: undefined,
                 lastCreatedIssue: this.state.createdIssue,
             }));
-            console.log( handleCloseResponseMessage);
 
             document.removeEventListener('click', handleCloseResponseMessage);
         }
@@ -236,19 +223,12 @@ ${form.body}
         )
     }
 
-    enter(): void {
-        if (!this.ref) {
-            return;
+    fetch(route : string, req : RequestInit = {}) {
+        let requestInit = {
+            ...{ method: 'GET', credentials: 'same-origin' },
+            ...req
         }
 
-        this.ref.classList.add('IssueTracker_isActive');
-    }
-    
-    leave(): void {
-        if (!this.ref) {
-            return;
-        }
-
-        this.ref.classList.remove('IssueTracker_isActive');
+        return fetch(route, requestInit as RequestInit);
     }
 }

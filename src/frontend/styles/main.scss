@@ -3,12 +3,17 @@
 @import '../../../node_modules/normalize-scss/sass/normalize';
 @include normalize();
 
-@media screen {
-    @import './globals';
+@import './globals/mixins';
+@import './globals/variables';
+@import './globals/typo';
+@import './globals/keyframes';
 
-    @import './components';
+@import './layout/general';
+@import './layout/header';
+@import './layout/footer';
 
-    @import './layout';
-}
+@import './elements/layout-container';
+@import './elements/Form';
 
-@import './print';
+@import './components/IssueTracker';
+@import './components/ExperienceOverview';

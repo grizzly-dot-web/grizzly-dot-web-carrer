@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { LabelResponse, IssueResponse } from "../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses";
 import { Label } from './Label';
+import { IssueResponse } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 
 
 export class Issue extends React.Component<IssueResponse> {

@@ -117,7 +117,7 @@
         }
     }
 
-    @import './IssueTracker_Label';
-    @import './IssueTracker_Issues';
-    @import './IssueTracker_Contributer';
+    @import './IssueTracker/IssueTracker_Label';
+    @import './IssueTracker/IssueTracker_Issues';
+    @import './IssueTracker/IssueTracker_Contributer';
 }

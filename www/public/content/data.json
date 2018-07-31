@@ -1,85 +1,21 @@
 {
-	"header": {
-	},
-	"footer": {
-		"social_links": [
-			{
-				"name": "Github",
-				"icon": "/img/svg/github-logo.svg",
-				"url": "https://github.com/grizzly-web"
-			},
-			{
-				"name": "Xing",
-				"icon": "/img/svg/xing-logo.svg",
-				"url": "https://www.xing.com/profile/Sebastian_Mueller498"
-			},
-			{
-				"name": "Codepen",
-				"icon": "/img/svg/codepen-logo.svg",
-				"url": "https://codepen.io/grizzly-web"
-			}
-		]
-	},
-	"infoCenter": {
-		"childrenInfo": {
-			"bottom": [
-				{
-					"infoLevelClass": "attention",
-					"className": "DefaultInfo",
-					"props": {
-						"cookieName": "cookie_warning",
-						"button": "Annehmen",
-						"data": "Durch die Nutzung der Webseite stimmen Sie deren Verwendung zu. Für Details zu den verwendeten Cookies schauen sie [hier](/imprint#privacy)\n\nDer Grund warum ihr dies seht: [EU Cookie Richtline](http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm)"
-					}
-				},
-				{
-					"className": "DefaultInfo",
-					"props": {
-						"deleteCookieAfterSeconds": 5,
-						"cookieName": "supported_browser_info",
-						"data": "Diese Seite ist für folgende Browser in der neusten Version optimiert (Microsoft Edge, Google Chrome und Mozilla Firefox)"
-					}
-				}
-			]
+	"socialLinks": [
+		{
+			"name": "Github",
+			"icon": "/img/svg/github-logo.svg",
+			"url": "https://github.com/grizzly-web"
+		},
+		{
+			"name": "Xing",
+			"icon": "/img/svg/xing-logo.svg",
+			"url": "https://www.xing.com/profile/Sebastian_Mueller498"
+		},
+		{
+			"name": "Codepen",
+			"icon": "/img/svg/codepen-logo.svg",
+			"url": "https://codepen.io/grizzly-web"
 		}
-	},
-	"start": {
-		"childrenInfo": {
-			"default": [
-				{
-					"className": "Content",
-					"props": {
-						"data": ""
-					}
-				}
-			]
-		}
-	},
-	"introduction": {
-		"childrenInfo": {
-			"default": [
-				{
-					"className": "Content",
-					"props": {
-						"data": ""
-					}
-				}
-			]
-		}
-	},
-	"contact": {
-		"childrenInfo": {
-			"default": [
-				{
-					
-					"className": "Content",
-					"props": {
-						"data": ""
-					}
-				}
-			]
-		}
-	},
+	],
 	"history": [
 		{
 			"begin_date": "2018-01",
@@ -579,10 +515,7 @@
 					"form_of_employment": "FULL_TIME_EMPLOYEE"
 				}
 			],
-			"experiences": [
-			],
-			"childrenInfo": {
-			}
+			"experiences": []
 		},
 		{
 			"begin_date": "2018-01",
@@ -603,9 +536,7 @@
 				}
 				
 			],
-			"experiences": [],
-			"childrenInfo": {
-			}
+			"experiences": []
 		},
 		{
 			"begin_date": "2018-01",
@@ -636,9 +567,7 @@
 				}
 				
 			],
-			"experiences": [],
-			"childrenInfo": {
-			}
+			"experiences": []
 		}
 	]
 }

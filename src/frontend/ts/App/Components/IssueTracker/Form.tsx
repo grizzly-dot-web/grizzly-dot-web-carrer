@@ -1,9 +1,10 @@
+import Markdown from 'markdown-to-jsx';
 import * as React from 'react';
-import Content from '../../Core/Components/Content';
-import { GitHubIssueBody } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
-import { ContributerResponse, LabelResponse } from '../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
+
 import { Label } from './Label';
 import { Contributer } from './Contributer';
+import { GitHubIssueBody } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubIssueBody';
+import { LabelResponse, ContributerResponse } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 
 export interface FormProps {
 
@@ -73,7 +74,7 @@ export class Form extends React.Component<FormProps, FormState> {
                                 <label className={'Form_Element Form_MarkdownEditor'}>
                                     <span className={`Form_Label_Inner`}>Beschreibung:</span>
                                     <textarea required={true} placeholder={`Geben Sie hier eine Beschreibung der Angelegenheit an.`} className={'Form_Element Form_Textarea'} name="body" value={this.state.form.body} onChange={(e) => this.handleChange(e)} />
-                                    <Content classes={['Form_Markdown_Preview']}  allowedHeadlineLevel={3} forceBlock={true} data={this.state.form.body} />
+                                    <Markdown className={'Form_Markdown_Preview'}  options={ { forceBlock: true } }>{this.state.form.body}</Markdown>
                                 </label>
                             </div>
                             <div className={`LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half`}>

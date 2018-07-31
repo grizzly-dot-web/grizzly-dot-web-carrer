@@ -1,6 +1,32 @@
 import * as React from 'react';
-import CmsRoutingComponent from '../../Core/Components/Base/ClientSideRoutingComponent';
-import { CmsProps, CmsState } from '../../Core/Components/Base/ClientSideComponent';
+
+export interface Institution {
+	begin_date: string,
+	end_date?: string,
+	type: string
+	title: string,
+	url: string,
+	job_title: string,
+	industry: string,
+	company_size: string,
+}
+
+export interface Experience {
+	url: string,
+	title: string,
+	level: string
+	category: string,
+	type: string,
+}
+
+export interface HistoryEntry {
+	url: string,
+	title: string
+	begin_date? : string
+	end_date? : string
+	institutions: Institution[],
+	experiences: Experience[]
+}
 
 export interface ExperienceLevel {
     name : string
@@ -8,30 +34,22 @@ export interface ExperienceLevel {
     description: string
 }
 
-export interface ExperienceOverviewProps extends CmsProps<any> {
+export interface ExperiencesProps {
+	data : HistoryEntry[]
 }
-export interface ExperienceOverviewState extends CmsState {
+
+export interface ExperiencesState {
 	visibleExperienceLevel : number
 }
 
-export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOverviewProps, ExperienceOverviewState> {
-
-    link() {
-        return {
-            url: '/experiences',
-            title: 'Skills und Refserenzen',
-            text: (<span><span className="skills">Skills</span> <span className="circle">&</span> <span className="references">Referenzen</span></span>),
-            classes: ['experience-link']
-        };
-    }
-    navigationId() { return 'main' };
+export default class ExperienceOverview extends React.Component<ExperiencesProps, ExperiencesState> {
 
     ref: HTMLElement | null;
 
     appClassSlug = 'experience-overview';
     legendIsStateChanging : boolean;
 
-    constructor(props: ExperienceOverviewProps, context?: any) {
+    constructor(props: ExperiencesProps, context?: any) {
         super(props, context);
 
         this.ref = null;
@@ -92,6 +110,11 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
 
     render() {
         let experiences : any[] = [];
+       
+        if (this.props.data.length <= 0) {
+            return null;
+        }
+
         for (let historyEntry of this.props.data) {
             experiences = experiences.concat(historyEntry.experiences);
         }
@@ -291,20 +314,5 @@ export default class ExperienceOverview extends CmsRoutingComponent<ExperienceOv
         }));
 
         this.assignActiveLegendLevels(levelCode);
-    }
-
-    enter(): void {       
-        this.handler.disableComponentConditionRouting();
-
-        this.assignActiveLegendLevels();
-        this.appElement.classList.add(`${this.appClassSlug}__active`);
-        this.appElement.classList.add(`${this.appClassSlug}__entered`);
-    }
-    
-    leave(): void {
-        this.handler.enableComponentConditionRouting();
-
-        this.appElement.classList.remove(`${this.appClassSlug}__active`);
-        this.appElement.classList.remove(`${this.appClassSlug}__entered`);
     }
 } 

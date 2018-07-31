@@ -1,6 +1,6 @@
-@import './layout/info-center';
-@import './layout/header';
-@import './layout/footer';
+* {
+	box-sizing: border-box;
+}
 
 html, body {
 	width: 100%;
@@ -23,7 +23,7 @@ img {
 	max-width: 100%;
 }
 
-#app > div {
+#app .App {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -32,7 +32,7 @@ img {
         flex-grow: 1;
 	}
 
-    .main-wrap {
+    .App_Main {
         flex-grow: 2;
 
         > * {

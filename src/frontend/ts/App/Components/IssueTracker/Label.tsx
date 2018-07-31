@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LabelResponse } from "../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses";
+import { LabelResponse } from '../../../../../backend/Components/IssueTracker/_shared/Models/GitHubResponses';
 
 export interface LabelProps extends LabelResponse {
     className?: string

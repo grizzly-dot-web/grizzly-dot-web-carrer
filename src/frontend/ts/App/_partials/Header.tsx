@@ -1,15 +1,6 @@
 import * as React from 'react';
-import { Navigation } from '../../Core/Components/Navigation';
-import ClientSideComponent, { CmsState, CmsProps } from '../../Core/Components/Base/ClientSideComponent';
 
-export interface HeaderProps extends CmsProps<any> {
-}
-
-export interface HeaderState extends CmsState {
-	navigations : any 
-}
-
-export default class Header extends ClientSideComponent<HeaderProps, HeaderState> {
+export default class Header extends React.Component {
 
 	constructor(props : any) {
 		super(props);
@@ -34,7 +25,7 @@ export default class Header extends ClientSideComponent<HeaderProps, HeaderState
 		}
 
 		return (
-			<header id="page-header">
+			<header className="App_Header">
 				<div className="container">
 					<a className="logo" href="/start">
 						<h1>
@@ -45,13 +36,8 @@ export default class Header extends ClientSideComponent<HeaderProps, HeaderState
 							<div className="company">{spanPerCharacter('grizzly.web')}</div>
 						</h1>
 					</a>
-					<Navigation identifier={'main'} />
 				</div>
 			</header>
 		);
-	}
-
-	componentDidMount() {
-		//this.updateNavigationState('main')
 	}
 }
