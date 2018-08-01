@@ -44,7 +44,7 @@ app.use(session({
   name: 'grizzly.web-session',
   secret: 'grizzly-web-secret',
   resave: true,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: { httpOnly: false, secure: false, maxAge: 3600000 },
   store: new FileStore({
     path: path.resolve('www', 'persistent', 'session')
