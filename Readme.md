@@ -16,7 +16,10 @@ If you come from there, be welcome. Look around, to see my style to code.
 This website is developed with React and ExpressJS
 My backend code can be found under `src/backend`, the frontend part is found here `src/ts/frontend`.
 
-# Originally reason for this project
+### The emotjis :smiley:
+In my private projects i use [gitmojii](https://gitmoji.carloscuesta.me/) to "categorize" my commits for a better overview.
+
+### Originally reason for this project
 Originally I used this project to create an [CCMS](https://en.wikipedia.org/wiki/Component_content_management_system) based on:
 - [React](https://reactjs.org/) for the client side. 
 - [nodejs](https://nodejs.org/en/) and [expressjs](http://expressjs.com/de/) on the Server side.
