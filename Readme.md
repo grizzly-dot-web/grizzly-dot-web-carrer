@@ -2,11 +2,22 @@
 It is a website to show my life career for companies who are interested in me.
 If you come from there, be welcome. Look around, to see my style to code.
 
+## Setup
+Create a new File: `www/persistent/config/github.yml`
+
+```
+
+token: ---API_TOKEN-----------
+owner: ---GitHub_User---------
+repo: ----GitHub_Repository---
+
+```
+
 ## Development
 - `npm install`
 - `npm run watch`
 - `npm run watch:server`
-- 
+
 ## Production
 - `npm install`
 - `npm run build`
