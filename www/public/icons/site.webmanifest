@@ -1,19 +1,19 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "grizzly.web",
+    "short_name": "grizzly.web",
     "icons": [
         {
-            "src": "/icons/android-chrome-192x192.png?v=dLmR042K9A",
+            "src": "/icons/android-chrome-192x192.png?v=alQBeNN6GL",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/icons/android-chrome-384x384.png?v=dLmR042K9A",
+            "src": "/icons/android-chrome-384x384.png?v=alQBeNN6GL",
             "sizes": "384x384",
             "type": "image/png"
         }
     ],
-    "theme_color": "#7f18ff",
-    "background_color": "#7f18ff",
+    "theme_color": "#6310ca",
+    "background_color": "#6310ca",
     "display": "standalone"
 }
