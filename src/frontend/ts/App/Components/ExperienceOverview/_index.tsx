@@ -20,7 +20,6 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
     constructor(props: ExperiencesProps, context?: any) {
         super(props, context);
 
-            
         this.state = { 
             filter: this.props.filter
         };
@@ -73,14 +72,12 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
         return (
             <div ref={ref => this.ref = ref} className={`experience-overview`}>
                 <section className={`skills`}>
-                    <h3 className="h2">Skills</h3>
                     <Filter availableLevels={this.experienceLevels} availableTags={this.experienceTags} filter={this.state.filter} onChange={this.handleFilterChange} />
                     <section className="experience-item-wrapper">
                         {this._renderTypeRows(otherExperiences)}
                     </section>
                 </section>
                 <section className={`references`}>
-                    <h3 className="h2">Referenzen</h3>
                     <div className="experience-item-wrapper">
                         { this._renderExperiences(referenceExperiences)}
                     </div>
@@ -168,16 +165,24 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
             let filter = this.state.filter as any;
 
             if (isMulti) {
-                filter[filterKey].push(id);
+                if (filter[filterKey].indexOf(id) === -1) {
+                    filter[filterKey].push(id);
+                } else {
+                    filter[filterKey].splice(filter[filterKey].indexOf(id));
+                }
             } else {
                 filter[filterKey] = id;
             }
 
+            let newFilter =  {
+                ...this.state.filter,
+                filterKey: filter[filterKey]
+            };
+
             this.setState(Object.assign(
                 this.state,
                 {
-                    ...this.state.filter,
-                    filter: filter[filterKey]
+                    filter: newFilter           
                 }
             ));
         }
@@ -242,19 +247,19 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
             className : "tag_discarded", 
             id: '100',
             name: "discarded",
-            description: "this skill has been discarded because it had been deprecated or I had decided to discard it."
+            description: "it had been deprecated or I decided to discard it."
         },
         200:  { 
             className : "tag_untrained", 
             id: '200',
             name: "untrained", 
-            description: "It's been quite a while I had worked with it or I had not been much contact with it in my career."
+            description: "It's been a while since I used it, or I havent been much in contact with this."
         },
         300:  { 
             className : "tag_assess", 
             id: '300',
             name: "assess", 
-            description: "I already have quite well Experience with this skill, but i'm not shure to work with it in daily basis."
+            description: "I already have Experience with it, but I didnt approve it for me."
         },
         400:  { 
             className : "tag_learned", 
@@ -266,7 +271,7 @@ export default class ExperienceOverview extends React.Component<ExperiencesProps
             className : "tag_mastered", 
             id: '500',
             name: "mastered", 
-            description: "This skill is part of my daily routine and I am quite good at it."
+            description: "This skill is part of my daily routine."
         },
     }
 

@@ -105,4 +105,8 @@ ul {
 
 .button {
 	@include Button();
+
+	&.button_small {
+		padding: 0.15em;
+	}
 }

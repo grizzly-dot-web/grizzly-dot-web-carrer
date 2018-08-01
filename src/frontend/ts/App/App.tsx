@@ -44,18 +44,18 @@ export default class App extends React.Component<any, AppState> {
                             <div className="Textarea_Block">
                                 <h2>Welcome!</h2>
                                 <p>
-                                    here you have the possibillity to get an exact overview of my skillset.<br />
-                                    For example here are some predefined filters to check them out.
+                                    here you have the possibillity to get an insight into my skillset.<br />
+                                    For example here are some predefined filters.
                                 </p>
                                 <div className="LayoutContainer">
                                     <div className="LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half">
                                         <p>
-                                            To watch my learned skills and those im interested in <button className="button" onClick={() => this.handleFilterChange(300, ['interested'])}>click here!</button>
+                                            To watch my learned skills and those im interested in <button className="button button_small" onClick={() => this.handleFilterChange(300, ['interested'])}>click here!</button>
                                         </p>
                                     </div>
                                     <div className="LayoutContainer_ElementWrapper LayoutContainer_ElementWrapper-Half">
                                         <p>
-                                            Show only the skills, i have masterd and work with them on a daily basis <button className="button" onClick={() => this.handleFilterChange(500, [])}>click here!</button>
+                                            Show only the skills, i have masterd and work with them on a daily basis <button className="button button_small" onClick={() => this.handleFilterChange(500, [])}>click here!</button>
                                         </p>
                                     </div>
                                 </div>
@@ -63,18 +63,16 @@ export default class App extends React.Component<any, AppState> {
                         </div>
                     <ExperienceOverview data={this.state.history} filter={this.state.filter} />
                     <div className="Textarea">
-                        <div className="Textarea_Block">
-                            <h2>Imprint</h2>
-                            <p>
-                                grizzly.web (Sebastian Müller)<br />
-                                Ostwall 125<br />
-                                47798 Krefeld<br />
-                            </p>
-                            <p>
-                                Owner: Sebastian Müller<br />
-                                identification number: 942/0588/6738<br />
-                            </p>
-                        </div>
+                        <h2>Imprint</h2>
+                        <p>
+                            grizzly.web (Sebastian Müller)<br />
+                            Ostwall 125<br />
+                            47798 Krefeld<br />
+                        </p>
+                        <p>
+                            Owner: Sebastian Müller<br />
+                            identification number: 942/0588/6738<br />
+                        </p>
                     </div>
                     <IssueTracker isActive={this.state.isssueTrackerIsActive} onClose={this.handleFeedbackClick}/>
                 </div>
