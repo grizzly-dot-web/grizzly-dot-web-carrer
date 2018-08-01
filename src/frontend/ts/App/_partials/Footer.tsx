@@ -31,11 +31,11 @@ export default class Footer extends React.Component<FooterProps> {
 			<footer className="App_Footer">
 				<div className="container">
 					<div className="social-links">
-						<h4>Du findest mich auch auf</h4>
+						<h4>you find me on</h4>
 						{socialLinks}
 					</div>
 					<nav className="meta-nav">
-						<h4>Zu dieser Seite</h4>
+						<h4>about this website</h4>
 						<button onClick={this.props.onFeedbackClick}>Feedback / Bug report</button>
 						<a href="https://github.com/grizzlydotweb/grizzly-dot-web-career" target="_blank">Opensource (github.com)</a>
 					</nav>
