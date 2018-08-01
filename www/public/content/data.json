@@ -33,6 +33,22 @@
 					"type": "Tool"
 				},
 				{
+					"url": "https://laravel.com/docs/5.6/eloquent",
+					"title": "eloquent",
+					"tags": ["interested"],
+					"level": 200,
+					"category": "Framework / CMS",
+					"type": "Backend"
+				},
+				{
+					"url": "https://laravel.com/",
+					"title": "laravel",
+					"tags": ["interested"],
+					"level": 200,
+					"category": "Framework / CMS",
+					"type": "Backend"
+				},
+				{
 					"url": "https://www.docker.com/",
 					"title": "Docker",
 					"level": 200,
@@ -70,7 +86,7 @@
 					"tags": ["interested"],
 					"level": 200,
 					"category": "Working Approach",
-					"type": "Design Pattern / Methode"
+					"type": "Design Pattern / Method"
 				},
 				{
 					"url": "http://workingdraft.de/314/",
@@ -78,7 +94,7 @@
 					"tags": ["interested"],
 					"level": 200,
 					"category": "Pattern",
-					"type": "Design Pattern / Methode"
+					"type": "Design Pattern / Method"
 				}
 			],
 			"childrenInfo": {
@@ -117,7 +133,15 @@
 					"level": 300,
 					"tags": ["interested"],
 					"category": "Pattern",
-					"type": "Design Pattern / Methode"
+					"type": "Design Pattern / Method"
+				},
+				{
+					"url": "https://graphql.org/",
+					"title": "graphql",
+					"tags": ["interested"],
+					"level": 300,
+					"category": "Working Approach",
+					"type": "Design Pattern / Method"
 				},
 				{
 					"url": "https://www.vagrantup.com/",
@@ -131,7 +155,7 @@
 					"title": "Kanban",
 					"level": 300,
 					"category": "Working Approach",
-					"type": "Design Pattern / Methode"
+					"type": "Design Pattern / Method"
 				},
 				{
 					"url": "https://oygo.com/",
@@ -149,9 +173,17 @@
 					"type": "Frontend"
 				},
 				{
+					"url": "https://reactjs.org/",
+					"title": "react",
+					"level": 400,
+					"tags": ["interested"],
+					"category": "Framework / CMS",
+					"type": "Frontend"
+				},
+				{
 					"url": "https://symfony.com/",
 					"title": "Symfony",
-					"level": 300,
+					"level": 400,
 					"tags": ["interested"],
 					"category": "Framework / CMS",
 					"type": "Backend"
@@ -228,6 +260,36 @@
 			],
 			"experiences": [
 				{
+					"url": "https://de.wikipedia.org/wiki/Representational_State_Transfer",
+					"title": "REST",
+					"tags": ["interested"],
+					"level": 400,
+					"category": "Working Approach",
+					"type": "Design Pattern / Method"
+				},
+				{
+					"url": "https://en.wikipedia.org/wiki/Representational_state_transfer",
+					"title": "Repository",
+					"level": 400,
+					"category": "Pattern",
+					"type": "Design Pattern / Method"
+				},
+				{
+					"url": "https://en.wikipedia.org/wiki/Service_layer_pattern",
+					"title": "Service",
+					"level": 400,
+					"category": "Pattern",
+					"type": "Design Pattern / Method"
+				},
+				{
+					"url": "https://en.wikipedia.org/wiki/Object-relational_mapping",
+					"title": "ORM",
+					"tags": ["interested"],
+					"level": 400,
+					"category": "Pattern",
+					"type": "Design Pattern / Method"
+				},
+				{
 					"url": "https://framework.zend.com/manual/1.11/de/manual.html",
 					"title": "Zend Framework 1.2",
 					"level": 100,
@@ -262,7 +324,7 @@
 					"level": 300,
 					"tags": ["interested"],
 					"category": "Working Approach",
-					"type": "Design Pattern / Methode"
+					"type": "Design Pattern / Method"
 				},
 				{
 					"url": "https://docs.microsoft.com/de-de/dotnet/csharp/getting-started/introduction-to-the-csharp-language-and-the-net-framework",
@@ -274,7 +336,7 @@
 				{
 					"url": "https://pimcore.com/de",
 					"title": "Pimcore",
-					"level": 300,
+					"level": 400,
 					"category": "Framework / CMS",
 					"type": "Backend"
 				},
@@ -331,7 +393,7 @@
 					"url": "https://www.typescriptlang.org/",
 					"title": "JavaScript",
 					"tags": ["interested"],
-					"level": 400,
+					"level": 500,
 					"category": "Sprache",
 					"type": "Frontend"
 				},
@@ -347,6 +409,13 @@
 					"url": "https://www.patientenberatung.de/",
 					"title": "UPD | Unabhängige Patientenberatung Deutschland",
 					"type": "reference"
+				},
+				{
+					"url": "https://getbootstrap.com/",
+					"title": "bootstrap",
+					"level": 300,
+					"category": "Framework / CMS",
+					"type": "Frontend"
 				},
 				{
 					"url": "https://gulpjs.com/",
@@ -367,7 +436,7 @@
 					"title": "CRUD",
 					"level": 500,
 					"category": "Pattern",
-					"type": "Design Pattern / Methode"
+					"type": "Design Pattern / Method"
 				},
 				{
 					"url": "https://cakephp.org/",
@@ -394,7 +463,7 @@
 				{
 					"url": "http://compass-style.org/",
 					"title": "Compass",
-					"level": 500,
+					"level": 100,
 					"category": "Framework / CMS",
 					"type": "Frontend"
 				},
