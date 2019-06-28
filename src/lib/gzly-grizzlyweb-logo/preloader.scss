@@ -1,54 +1,55 @@
 $loops: 38;
-$reverseCounter: $loops;
+$reverse-counter: $loops;
 $color-primary: rgb(255, 170, 0);
 $color-highlight: rgb(72, 137, 255);
 
-svg#gzly_logo {
-	overflow: visible;
+svg.gzly_logo {
+  overflow: visible;
 
-	polygon {
-		fill: $color-primary !important;
-		transition: fill ease-in-out 1s;
-		transform: rotateY(0);
-		animation-duration: 1s;
-		animation-timing-function: ease-in-out;
-		animation-fill-mode: both;
-		transform-origin: top left;
+  polygon {
+    fill: $color-primary !important;
+    transition: fill ease-in-out 1s;
+    transform: rotateY(0);
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    transform-origin: top left;
 
-		.gzly_logo__polygon--isLoading & {
-			fill: $color-highlight !important;
-		}
+    .gzly_logo__polygon--isLoading & {
+      fill: $color-highlight !important;
+    }
 
-		.gzly_logo__polygon--stoppedLoading & {
-			fill: $color-highlight !important;
-		}
-	}
+    .gzly_logo__polygon--stoppedLoading & {
+      fill: $color-highlight !important;
+    }
+  }
+
+  &.gzly_logo__polygon--animationReverse {
+    polygon {
+      transform: rotateY(0);
+      animation-direction: reverse;
+    }
+  }
+
+  &.gzly_logo__polygon--startedAnimation {
+    polygon {
+      animation-name: gzlyflip !important;
+    }
+  }
 
 
 
-	@for $i from 0 through $loops {
-		#gzly_logo__polygon_#{$i+1} {
-			animation-delay: 0.05s*$i;
-		}
-		$reverseCounter: $reverseCounter - 1;
-	}
-
-	&.gzly_logo__polygon--animationReverse {
-		polygon {
-			transform: rotateY(0);
-			animation-direction: reverse;
-		}
-	}
-
-	&.gzly_logo__polygon--startedAnimation {
-		polygon {
-			animation-name: gzlyflip !important;
-		}
-	}
+  @for $i from 0 through $loops {
+    #gzly_logo__polygon_#{$i+1} {
+      animation-delay: 0.05s*$i;
+    }
+    /* stylelint-disable-next-line */
+    $reverse-counter: $reverse-counter - 1;
+  }
 }
 
 @keyframes gzlyflip {
-	100% {
-		transform: rotateY(180deg) translate3d(500px, 0, 10px);
-	}
+  100% {
+    transform: rotateY(180deg) translate3d(500px, 0, 10px);
+  }
 }

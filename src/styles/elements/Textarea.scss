@@ -1,84 +1,88 @@
+/* stylelint-disable */
 .Textarea {
-	padding:  $ComponentPadding_Vertical $ComponentPadding_Horizontal 0;
+  padding: $ComponentPadding_Vertical $ComponentPadding_Horizontal 0;
 
-	.Textarea_Block {
-		max-width: 1200px;
-		margin-bottom: 1.25em;
-		padding-bottom: 1.25em;
+  .Textarea_Block {
+    max-width: 1200px;
+    margin-bottom: 1.25em;
+    padding-bottom: 1.25em;
 
-		&:after {
-			content: '';
-			display: block;
-			clear: both;
-		}
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
 
-		&.Textarea_Block-2column {
-			max-width: 100%;
-			padding-bottom: 4em;
-			margin-bottom: 3em;
-			border-bottom: 0.5em dotted rgba($ColorBackgroundDark, 0.8);
+    &.Textarea_Block-2column {
+      max-width: 100%;
+      padding-bottom: 4em;
+      margin-bottom: 3em;
+      border-bottom: 0.5em dotted rgba($ColorBackgroundDark, 0.8);
 
-			&:last-child {
-				border-bottom: none;
-			}
-	
-			@media (min-width: $MobileNavBreak) {
-				column-gap: getGridSize(1, horizontal);
-			
-				column-width: auto;
-				-o-column-width: auto;
-				-moz-column-width: auto;
-				-webkit-column-width: auto;
-			
-				column-count: 2;
-				-o-column-count: 2;
-				-moz-column-count: 2;
-				-webkit-column-count: 2;
-			}
-		}
-	}
+      &:last-child {
+        border-bottom: none;
+      }
 
-	img {
-		max-width: 100%;
+      @media (min-width: $MobileNavBreak) {
+        column-gap: getGridSize(1, horizontal);
 
-		&.left {
-			float: left;
-			padding-right: 3em;
-			padding-bottom: 0.5em;
-		}
-		&.right {
-			float: right;
-			padding-left: 3em;
-			padding-bottom: 0.5em;
-		}
+        column-width: auto;
+        -o-column-width: auto;
+        -moz-column-width: auto;
+        -webkit-column-width: auto;
 
-		@media (max-width: $MobileNavBreak) {
-			float: none;
-			&.left, &.right {
-				float: none;
-			}
-		}
-	}
+        column-count: 2;
+        -o-column-count: 2;
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+      }
+    }
+  }
 
-	h2 {
-		column-span: all;
-		margin-bottom: 0.5em;
+  img {
+    max-width: 100%;
 
-		&:not(:first-child) {
-			margin-top: 1em;
-		}
-	}
+    &.left {
+      float: left;
+      padding-right: 3em;
+      padding-bottom: 0.5em;
+    }
 
-	h3 {
-		color: inherit;
-		column-span: all;
-		margin-bottom: 0.5em;
-	}
+    &.right {
+      float: right;
+      padding-left: 3em;
+      padding-bottom: 0.5em;
+    }
 
-	h4 {
-		@extend .h3;
-		color: inherit;
-		margin-bottom: 0.5em;
-		margin-top: 0.5em;
-	}
+    @media (max-width: $MobileNavBreak) {
+      float: none;
+
+      &.left,
+      &.right {
+        float: none;
+      }
+    }
+  }
+
+  h2 {
+    column-span: all;
+    margin-bottom: 0.5em;
+
+    &:not(:first-child) {
+      margin-top: 1em;
+    }
+  }
+
+  h3 {
+    color: inherit;
+    column-span: all;
+    margin-bottom: 0.5em;
+  }
+
+  h4 {
+    @extend .h3;
+    color: inherit;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+  }
 }

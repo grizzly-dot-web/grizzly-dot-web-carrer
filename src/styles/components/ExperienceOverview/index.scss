@@ -1,145 +1,150 @@
+/* stylelint-disable */
 .experience-overview {
-	padding:  $ComponentPadding_Vertical $ComponentPadding_Horizontal $ComponentMarginBottom;
-	overflow: hidden;
-	
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  padding: $ComponentPadding_Vertical $ComponentPadding_Horizontal $ComponentMarginBottom;
+  overflow: hidden;
 
-	background-color: $ColorThird;
-	color: $ColorBackgroundContent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-	.experience-overview--title {
-		width: 100%;
-		font-size: 1.4em;
-		font-weight: 700;
-		margin-bottom: 0.65em;
-		color: $ColorBackgroundContent;
-		text-transform: uppercase;
-	}
-	.experience-overview--type-title {
-		margin-bottom: 1em;
-	}
+  background-color: $ColorThird;
+  color: $ColorBackgroundContent;
 
-	.skills {
-		flex-grow: 2;
+  .experience-overview--title {
+    width: 100%;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 0.65em;
+    color: $ColorBackgroundContent;
+    text-transform: uppercase;
+  }
 
-		.experience-overview--title {
-			position: relative;
-			margin-bottom: 0;
-			padding-bottom: 0.65em;
-		}
+  .experience-overview--type-title {
+    margin-bottom: 1em;
+  }
 
-		> .experience-item-wrapper {
-			display: flex;
-			flex-wrap: wrap;
-			flex-direction: row;
+  .skills {
+    flex-grow: 2;
 
-			.experience-type {
-				order: 2;
-				width: 100%;
-				margin-bottom: 10vmin;
+    .experience-overview--title {
+      position: relative;
+      margin-bottom: 0;
+      padding-bottom: 0.65em;
+    }
 
-				&.Frontend, &.Backend {
-					order: 1;
-				}
+    > .experience-item-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
 
-				@media (min-width: 460px) {
-					width: calc(50% - 10vmin);
-					margin-right: 10vmin;
-					margin-bottom: 5vmin;
-				}
+      .experience-type {
+        order: 2;
+        width: 100%;
+        margin-bottom: 10vmin;
 
-				.experience-overview--type-title {
-					color: $ColorBackgroundContent;
+        &.Frontend,
+        &.Backend {
+          order: 1;
+        }
 
-					&:after {
-						content: '';
-						width: 100%;
-						height: 0.3rem;
-						display: block;
-						margin-top: 0.5em;
-						background-color: $ColorBackgroundContent;
-					}
-				}
+        @media (min-width: 460px) {
+          width: calc(50% - 10vmin);
+          margin-right: 10vmin;
+          margin-bottom: 5vmin;
+        }
 
-				.experience-item-wrapper {
-					columns: 2 200px;
+        .experience-overview--type-title {
+          color: $ColorBackgroundContent;
 
-					.category-wrap {
-						margin-bottom: 0.8em;
-						page-break-inside: avoid;
-						break-inside: avoid;
+          &::after {
+            content: '';
+            width: 100%;
+            height: 0.3rem;
+            display: block;
+            margin-top: 0.5em;
+            background-color: $ColorBackgroundContent;
+          }
+        }
 
-						> *:first-child {
-							margin-top: 0;
-						}
-					}
+        .experience-item-wrapper {
+          columns: 2 200px;
 
-					.experience-item, .category-headline {
-						padding: 0 0.5em;
-						font-size: 0.75em;
-						margin-bottom: 0.2em;
-					}
+          .category-wrap {
+            margin-bottom: 0.8em;
+            page-break-inside: avoid;
+            break-inside: avoid;
 
-					.experience-item {
-						position: relative;
-						margin-right: 0.2em;
-						margin-bottom: 0.3em;
-						display: inline-block;
-					}
-					
-					.category-headline {
-						color: $ColorPrimary;
-					}
-				}
-			}
-		}
-	}
+            > *:first-child {
+              margin-top: 0;
+            }
+          }
 
-	.references {
-		width: 100vw;
-		position: relative;
-		left: calc((100vw - 100%) / 2 * -1);
-		padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
-		background-color: $ColorBackgroundContent;
+          .experience-item,
+          .category-headline {
+            padding: 0 0.5em;
+            font-size: 0.75em;
+            margin-bottom: 0.2em;
+          }
 
-		.experience-overview--title {
-			color: $ColorBackgroundDark;
-			&:after {
-				content: '';
-				width: 100%;
-				height: 0.3rem;
-				display: block;
-				margin-top: 0.3em;
-				background-color: $ColorBackgroundDark;
-			}
-		}
+          .experience-item {
+            position: relative;
+            margin-right: 0.2em;
+            margin-bottom: 0.3em;
+            display: inline-block;
+          }
 
-		.experience-item-wrapper {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			justify-content: space-evenly;
+          .category-headline {
+            color: $ColorPrimary;
+          }
+        }
+      }
+    }
+  }
 
-			.experience-item {
-				width: 10em;
-				min-width: 25vw;
-				
-				a {
-					display: block;    
-					text-align: center;
-					max-width: 300px;
+  .references {
+    width: 100vw;
+    position: relative;
+    left: calc((100vw - 100%) / 2 * -1);
+    padding: getGridSize(1, vertical) getGridSize(2, horizontal);
+    background-color: $ColorBackgroundContent;
 
-					img {
-						max-width: 100%;
-						max-height: 100%;
-					}
-				}
-			}
-		}
-	}
+    .experience-overview--title {
+      color: $ColorBackgroundDark;
 
-	@import './ExperienceOverview_Level';
-	@import './ExperienceOverview_Filter';
+      &::after {
+        content: '';
+        width: 100%;
+        height: 0.3rem;
+        display: block;
+        margin-top: 0.3em;
+        background-color: $ColorBackgroundDark;
+      }
+    }
+
+    .experience-item-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .experience-item {
+        width: 10em;
+        min-width: 25vw;
+
+        a {
+          display: block;
+          text-align: center;
+          max-width: 300px;
+
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @import './ExperienceOverview_Level';
+  @import './ExperienceOverview_Filter';
 }

@@ -1,24 +1,26 @@
+/* stylelint-disable */
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-	width: 100%;
-	height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-	font-family: 'Work Sans', sans-serif;
-	color: $ColorBackgroundDark;
-	background-color: $ColorBackgroundLight;
+  font-family: 'Work Sans', sans-serif;
+  color: $ColorBackgroundDark;
+  background-color: $ColorBackgroundLight;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    @media screen and (min-width: 800px) and (min-height: 520px) {
-        font-size: 18px;
-    }
+  @media screen and (min-width: 800px) and (min-height: 520px) {
+    font-size: 18px;
+  }
 }
 
 img {
-	max-width: 100%;
+  max-width: 100%;
 }

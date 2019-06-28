@@ -7,64 +7,62 @@
 </template>
 
 <script>
-	import {mapState, mapGetters} from 'vuex';
+import { mapState, mapGetters } from 'vuex'
 
-	import LoaderSvg from './preloader.svg?inline';
-	import GzlyDesignMark from "./gzly-design-mark";
+import LoaderSvg from './preloader.svg?inline'
+import GzlyDesignMark from './gzly-design-mark'
 
-	export default {
-		name: "grizzlyweb-logo",
+export default {
+  name: 'grizzlyweb-logo',
 		  components: {
-			LoaderSvg,
+    LoaderSvg
 		  },
-		data() {
-			return {
+  data () {
+    return {
 
-			};
-		},
-		computed: {
-			preloader() {
-				return new GzlyDesignMark(this.$refs.logo)
-			},
-			...mapGetters([
-				'translate',
-			]),
-			...mapState([
-				'settings',
-			]),
-		},
-		mounted() {
-
-			this.preloader.startLoading();
-			setTimeout(() => {
-				this.preloader.stopLoading();
-			}, 4000)
-		},
+    }
+  },
+  computed: {
+    preloader () {
+      return new GzlyDesignMark(this.$refs.logo)
+    },
+    ...mapGetters([
+      'translate'
+    ]),
+    ...mapState([
+      'settings'
+    ])
+  },
+  mounted () {
+    this.preloader.startLoading()
+    setTimeout(() => {
+      this.preloader.stopLoading()
+    }, 4000)
+  },
 	    methods: {
-			start() {
-				this.preloader.startLoading();
-			},
-			stop() {
-				this.preloader.stopLoading();
-			}
+    start () {
+      this.preloader.startLoading()
+    },
+    stop () {
+      this.preloader.stopLoading()
+    }
 	    },
-		props: {
-			msg: String
-		}
-	};
+  props: {
+    msg: String
+  }
+}
 </script>
 
 <style scoped lang="scss">
-	@import 'preloader';
+  @import 'preloader';
 
-	.container {
-		width: 70vmin;
-		height: 70vmin;
-		top: 50%;
-		left: 50%;
-		position: absolute;
-		transform: translate(-50%, -50%);
-	}
-
+  .container {
+    width: 70vmin;
+    height: 70vmin;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
 
 </style>

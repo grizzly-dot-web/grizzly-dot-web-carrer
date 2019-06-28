@@ -1,176 +1,178 @@
+/* stylelint-disable */
 .Form {
+  .Form_Fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
 
-
-    .Form_Fieldset {
-        border: none;
-        margin: 0;
-        padding: 0;
-
-        .Form_Fieldset_Legend {
-            margin-bottom: 1em;
-        }
+    .Form_Fieldset_Legend {
+      margin-bottom: 1em;
     }
+  }
 
 
 
-    .LayoutContainer {
-        .LayoutContainer_ElementWrapper {
-
-            > * {
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-    }
-
-
-
-    .Form_Button {
-        margin-top: 1em;
-        @include Button();
-    }
-
-
-
-    .Form_Label_Inner, .Form_Label {
-        margin-bottom: 0.5em;
-    }
-
-
-
-    .Form_Textarea, .Form_Markdown_Preview {
-        padding: 0.25em 0.5em;
-        margin-bottom: 1em;
-
+  .LayoutContainer {
+    .LayoutContainer_ElementWrapper {
+      > * {
         &:last-child {
-            margin-bottom: 0;
+          margin-bottom: 0;
         }
+      }
+    }
+  }
+
+
+
+  .Form_Button {
+    @include Button();
+    margin-top: 1em;
+  }
+
+
+
+  .Form_Label_Inner,
+  .Form_Label {
+    margin-bottom: 0.5em;
+  }
+
+
+
+  .Form_Textarea,
+  .Form_Markdown_Preview {
+    padding: 0.25em 0.5em;
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+
+
+
+  .From_CheckboxList {
+    padding: 0.5em;
+    margin-bottom: 1em;
+
+    .Form_Label_Inner {
+      width: 100%;
+      display: block;
+      margin-bottom: 0.5em;
     }
 
+    .From_CheckboxList_Item {
+      cursor: pointer;
+      float: left;
+      display: block;
+      margin-right: 0.5em;
+      margin-bottom: 0.25em;
+      max-width: calc(50% - 0.5em - 1px);
 
+      input {
+        visibility: hidden;
+        position: absolute;
 
+        &:checked ~ .From_CheckboxList_Item_Label {
+          opacity: 1;
 
-    .From_CheckboxList {
-        padding: 0.5em;
-        margin-bottom: 1em;
-
-        .Form_Label_Inner {
-            width: 100%;
-            display: block;
-            margin-bottom: 0.5em;
+          &::before {
+            content: '✔';
+          }
         }
+      }
 
-        .From_CheckboxList_Item {
-            cursor: pointer;
-            float: left;
-            display: block;
-            margin-right: 0.5em;
-            margin-bottom: 0.25em;
-            max-width: calc(50% - 0.5em - 1px);
-
-            input {
-                visibility: hidden;
-                position: absolute;
-
-                &:checked ~ .From_CheckboxList_Item_Label {
-                    opacity: 1;
-
-                    &:before {
-                        content: '✔';
-                    }
-                }
-            }
-
-            .From_CheckboxList_Item_Label {
-                opacity: 0.4;
-                position: relative;
-                display: inline-block;
-                transition: opacity 0.1s ease-in;
-
-                &:before, &:after {
-                    left: 0;
-                    top: 50%;
-                    padding: 0.25em;
-                }
-
-
-                &:hover {
-                    opacity: 1;
-                }
-
-                &:before {
-                    content: '✘';
-                }
-            }
-        }
-    }
-
-
-
-
-    .Form_MarkdownEditor {
-        display: flex;
-        overflow: auto;
+      .From_CheckboxList_Item_Label {
+        opacity: 0.4;
         position: relative;
-        flex-direction: column;
-        border: 1px solid rgba($ColorBackgroundDark, 1);
+        display: inline-block;
+        transition: opacity 0.1s ease-in;
 
-        &:focus-within {
-          border: 1px solid rgba($ColorPrimary, 0.5);
+        &::before,
+        &::after {
+          left: 0;
+          top: 50%;
+          padding: 0.25em;
         }
 
-        .Form_Label_Inner {
-            width: 100%;
-            display: block;
+
+        &:hover {
+          opacity: 1;
         }
 
-        .Form_Textarea, .Form_Markdown_Preview {
-            border: none;
-
-            width: 100%;
-            display: block;
-            margin-bottom: 0;
+        &::before {
+          content: '✘';
         }
+      }
+    }
+  }
 
-        .Form_Textarea {
-            min-height: 20vh;
-            border-bottom: 1px dotted $ColorBackgroundDark;
 
-            &:focus {
-                outline: none;
-            }
-        }
 
-        .Form_Markdown_Preview {
-            padding-top: 1.5em;
-            position: relative;
-            color: $color-base;
 
-            p {
-                margin-bottom: 0;
-            }
+  .Form_MarkdownEditor {
+    display: flex;
+    overflow: auto;
+    position: relative;
+    flex-direction: column;
+    border: 1px solid rgba($ColorBackgroundDark, 1);
 
-            &:before {
-                content: 'Preview (Markdown)';
-                font-size: 0.7em;
-                top: 0.5em;
-                left: 0.5em;
-                position: absolute;
-                background-color: transparent;
-            }
-        }
+    &:focus-within {
+      border: 1px solid rgba($ColorPrimary, 0.5);
     }
 
-
-
-
-    .Form_Element {
-        border: 2px transparent solid;
-        transition: border 0.3s ease;
-
-        &.Form_Element-invalid {
-            border: 2px solid $ColorError;
-        }
+    .Form_Label_Inner {
+      width: 100%;
+      display: block;
     }
+
+    .Form_Textarea,
+    .Form_Markdown_Preview {
+      border: none;
+
+      width: 100%;
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .Form_Textarea {
+      min-height: 20vh;
+      border-bottom: 1px dotted $ColorBackgroundDark;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .Form_Markdown_Preview {
+      padding-top: 1.5em;
+      position: relative;
+      color: $color-base;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        content: 'Preview (Markdown)';
+        font-size: 0.7em;
+        top: 0.5em;
+        left: 0.5em;
+        position: absolute;
+        background-color: transparent;
+      }
+    }
+  }
+
+
+
+
+  .Form_Element {
+    border: 2px transparent solid;
+    transition: border 0.3s ease;
+
+    &.Form_Element-invalid {
+      border: 2px solid $ColorError;
+    }
+  }
 }

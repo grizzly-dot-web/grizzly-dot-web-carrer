@@ -1,27 +1,29 @@
+/* stylelint-disable */
 .LayoutContainer {
+  display: flex;
+  flex-wrap: wrap;
+
+  .LayoutContainer_ElementWrapper {
+    width: 100%;
+    flex-grow: 2;
+
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .LayoutContainer_ElementWrapper {
-        width: 100%;
-        flex-grow: 2;
+  @media (min-width: $MobileNavBreak) {
+    .LayoutContainer_ElementWrapper-Half {
+      flex-grow: 1;
+      width: 50%;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      &:nth-child(odd) {
+        padding-right: 1em;
+      }
+
+      &:nth-child(even) {
+        padding-left: 1em;
+      }
     }
-
-    @media (min-width: $MobileNavBreak) {
-        .LayoutContainer_ElementWrapper-Half {
-            flex-grow: 1;
-            width: 50%;
-            
-            &:nth-child(odd) {
-                padding-right: 1em;
-            }
-            &:nth-child(even) {
-                padding-left: 1em;
-            }
-        }
-    }
+  }
 }

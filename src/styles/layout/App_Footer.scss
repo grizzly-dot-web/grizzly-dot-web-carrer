@@ -1,54 +1,57 @@
+/* stylelint-disable */
 .App_Footer {
-	z-index: 5;
-	
-	width: 100%;
-	padding:  getGridSize(1, vertical) getGridSize(2, horizontal);
+  z-index: 5;
 
-	color: $ColorBackgroundContent;
-	background-color: $ColorBackgroundDark;
-	transition: $HeaderColorTansition;
+  width: 100%;
+  padding: getGridSize(1, vertical) getGridSize(2, horizontal);
 
-	.container {
-		z-index: 2;
-		display: flex;
-		flex-wrap: nowrap;
-		position: relative;
-		flex-direction: row;
-		align-content: center;
-		justify-content: space-between;
-	}
+  color: $ColorBackgroundContent;
+  background-color: $ColorBackgroundDark;
+  transition: $HeaderColorTansition;
 
-	h4 {
-		margin-bottom: 0.3em;
-	}
+  .container {
+    z-index: 2;
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+  }
 
-	.social-links {
-		width: 50vw;
+  h4 {
+    margin-bottom: 0.3em;
+  }
 
-		a {
-			width: auto;
-			height: 1.5em;
-			margin-right: 10px;
-			display: inline-block;
+  .social-links {
+    width: 50vw;
 
-			img {
-				width: 1.5em;
-				height: 1.5em;
-				margin-right: 0.5em;
-				display: inline-block;
-				transform: translateY(25%);
-			}
-		}
-	}
+    a {
+      width: auto;
+      height: 1.5em;
+      margin-right: 10px;
+      display: inline-block;
 
-	.meta-nav {
-		text-align: right;
-		a, button {
-			float:  right;
-			clear: both;
-			display: block;
-			margin-bottom: 0.35em;
-		}
-	}
+      img {
+        width: 1.5em;
+        height: 1.5em;
+        margin-right: 0.5em;
+        display: inline-block;
+        transform: translateY(25%);
+      }
+    }
+  }
+
+  .meta-nav {
+    text-align: right;
+
+    a,
+    button {
+      float: right;
+      clear: both;
+      display: block;
+      margin-bottom: 0.35em;
+    }
+  }
 
 }

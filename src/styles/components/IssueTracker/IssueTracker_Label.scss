@@ -1,13 +1,14 @@
+/* stylelint-disable */
 .IssueTracker_Label {
-    display: inline-block;
-    font-size: 0.8em;
-    font-weight: 700;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: 700;
 
-    padding: 0.2em;
-    color: $ColorBackgroundDark;
+  padding: 0.2em;
+  color: $ColorBackgroundDark;
 }
 
 .From_CheckboxList_Item .IssueTracker_Label {
-    border-top-left-radius: 2em;
-    border-bottom-left-radius: 2em;
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
 }

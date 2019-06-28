@@ -3,9 +3,9 @@ $ColorPrimary: #ff9c00;
 $ColorSecondary: #9c9b9b;
 $ColorThird: #475157;
 
-$color-base: #ffffff;
+$color-base: #fff;
 
-$ColorError: #ff0000;
+$ColorError: #f00;
 
 $ColorSecondaryDark: darken($ColorSecondary, 5%);
 $ColorSecondaryDarker: darken($ColorSecondary, 25%);
@@ -24,19 +24,17 @@ $LightCopy_Color: $ColorBackgroundContent;
 
 $Color1: #6310ca;
 $Color2: #5e77f0;
-$HistoryGradient: radial-gradient(
-	circle at 65% 50%,
-	$Color2 1%,
-	$Color1 75%
-);
+$HistoryGradient: radial-gradient(circle at 65% 50%,
+$Color2 1%,
+$Color1 75%);
 
 $Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.7);
 $Timeline-Active_BackgroundColor: $ColorBackgroundContent;
 
-$ColorDiscarded: #F1235A;
-$ColorInterested: #40A7D1;
+$ColorDiscarded: #f1235a;
+$ColorInterested: #40a7d1;
 $ColorUntrained: darken($ColorInterested, 20%);
-$ColorLearned:  #5CB449;
+$ColorLearned: #5cb449;
 $ColorAssess: lighten($ColorInterested, 20%);
 $ColorMastered: $ColorPrimary;
 //#endregion
