@@ -21,8 +21,8 @@
     padding-top: 3em;
     margin: 0 auto;
     position: relative;
-    color: $ColorBackgroundDark;
-    background-color: $ColorBackgroundContent;
+    color: $BackgroundColor-Content--isDark;
+    background-color: $BackgroundColor-Content;
 
     .IssueTracker_CloseButton {
       @include CloseButton();
@@ -36,8 +36,8 @@
   .IssueTracker_From_ElementWrap {
     padding: 0.5em;
     border-radius: 0.25em;
-    color: $ColorBackgroundContent;
-    background-color: $ColorBackgroundDark;
+    color: $BackgroundColor-Content;
+    background-color: $BackgroundColor-Content--isDark;
   }
 
   .Form_Textarea {
@@ -53,11 +53,11 @@
     padding-bottom: 0.1em;
     margin-bottom: 0.2em;
     border: none;
-    border-bottom: 2px solid $ColorBackgroundDark;
+    border-bottom: 2px solid $BackgroundColor-Content--isDark;
 
     &:focus {
       outline: none;
-      border-bottom: 2px solid $ColorPrimary;
+      border-bottom: 2px solid $Color-Primary;
     }
   }
 
@@ -72,7 +72,7 @@
     position: fixed;
     transform: translate(-50%, -50%);
 
-    background-color: $ColorBackgroundDark_Alpha;
+    background-color: $BackgroundColor-Content--isDarkAlpha;
   }
 
   .IssueTracker_ResponseMessage {
@@ -84,8 +84,8 @@
     padding: 1em;
     visibility: hidden;
     transform: translate(-50%, -50%);
-    color: $ColorBackgroundDark;
-    background-color: $ColorBackgroundContent;
+    color: $BackgroundColor-Content--isDark;
+    background-color: $BackgroundColor-Content;
   }
 
   /**

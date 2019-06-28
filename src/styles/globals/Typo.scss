@@ -28,7 +28,7 @@ h4,
   margin: 0;
   font-size: 1em;
   font-weight: 300;
-  color: $ColorPrimary;
+  color: $Color-Primary;
 }
 
 h5,
@@ -63,7 +63,7 @@ dl {
     display: block;
     margin-left: 0.5em;
     padding-left: 0.5em;
-    border-left: 0.1em solid $ColorBackgroundDark;
+    border-left: 0.1em solid $BackgroundColor-Content--isDark;
     margin-bottom: 1em;
   }
 }

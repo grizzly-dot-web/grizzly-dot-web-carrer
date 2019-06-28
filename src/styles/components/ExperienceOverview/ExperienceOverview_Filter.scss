@@ -3,7 +3,7 @@
   font-size: 0.7em;
 
   .experience-filter-header {
-    color: $ColorBackgroundContent;
+    color: $BackgroundColor-Content;
 
     *:first-child {
       padding-right: 0.5em;
@@ -43,10 +43,10 @@
 
     &:not(.is-active) {
       text-decoration: line-through;
-      color: $ColorBackgroundContent_Alpha;
+      color: $BackgroundColor-Content--isAlpha;
 
       .experience-level {
-        background-color: $ColorBackgroundDark;
+        background-color: $BackgroundColor-Content--isDark;
       }
     }
   }
@@ -65,7 +65,7 @@
     width: 100vw;
     margin: 0;
     margin-left: calc((100vw - 100%) / 2 * -1);
-    background-color: $ColorBackgroundContent;
+    background-color: $BackgroundColor-Content;
   }
 
   .experience-level-legend {
@@ -106,7 +106,7 @@
         height: 0.4em;
         width: 100%;
         position: absolute;
-        background-color: $ColorBackgroundContent;
+        background-color: $BackgroundColor-Content;
       }
 
       &::after {
@@ -115,27 +115,27 @@
       }
 
       &.tag_interested::after {
-        background-color: $ColorInterested;
+        background-color: $Color-Interested;
       }
 
       &.tag_discarded::after {
-        background-color: $ColorDiscarded;
+        background-color: $Color-Discarded;
       }
 
       &.tag_untrained::after {
-        background-color: $ColorUntrained;
+        background-color: $Color-Untrained;
       }
 
       &.tag_learned::after {
-        background-color: $ColorLearned;
+        background-color: $Color-Learned;
       }
 
       &.tag_assess::after {
-        background-color: $ColorAssess;
+        background-color: $Color-Assess;
       }
 
       &.tag_mastered::after {
-        background-color: $ColorMastered;
+        background-color: $Color-Mastered;
       }
 
       &.is-active {

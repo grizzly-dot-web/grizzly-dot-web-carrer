@@ -1,6 +1,6 @@
 /* stylelint-disable */
 .Textarea {
-  padding: $ComponentPadding_Vertical $ComponentPadding_Horizontal 0;
+  padding: $PaddingVertical-Component $PaddingHorizontal-Component 0;
 
   .Textarea_Block {
     max-width: 1200px;
@@ -17,13 +17,13 @@
       max-width: 100%;
       padding-bottom: 4em;
       margin-bottom: 3em;
-      border-bottom: 0.5em dotted rgba($ColorBackgroundDark, 0.8);
+      border-bottom: 0.5em dotted rgba($BackgroundColor-Content--isDark, 0.8);
 
       &:last-child {
         border-bottom: none;
       }
 
-      @media (min-width: $MobileNavBreak) {
+      @media (min-width: $Breakpoint-Nav--isMobile) {
         column-gap: getGridSize(1, horizontal);
 
         column-width: auto;
@@ -54,7 +54,7 @@
       padding-bottom: 0.5em;
     }
 
-    @media (max-width: $MobileNavBreak) {
+    @media (max-width: $Breakpoint-Nav--isMobile) {
       float: none;
 
       &.left,

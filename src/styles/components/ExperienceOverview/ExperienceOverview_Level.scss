@@ -22,26 +22,26 @@
   }
 
   &.tag_interested {
-    background-color: $ColorInterested;
+    background-color: $Color-Interested;
   }
 
   &.tag_discarded {
-    background-color: $ColorDiscarded;
+    background-color: $Color-Discarded;
   }
 
   &.tag_untrained {
-    background-color: $ColorUntrained;
+    background-color: $Color-Untrained;
   }
 
   &.tag_learned {
-    background-color: $ColorLearned;
+    background-color: $Color-Learned;
   }
 
   &.tag_assess {
-    background-color: $ColorAssess;
+    background-color: $Color-Assess;
   }
 
   &.tag_mastered {
-    background-color: $ColorMastered;
+    background-color: $Color-Mastered;
   }
 }

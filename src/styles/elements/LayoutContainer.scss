@@ -12,7 +12,7 @@
     justify-content: space-between;
   }
 
-  @media (min-width: $MobileNavBreak) {
+  @media (min-width: $Breakpoint-Nav--isMobile) {
     .LayoutContainer_ElementWrapper-Half {
       flex-grow: 1;
       width: 50%;

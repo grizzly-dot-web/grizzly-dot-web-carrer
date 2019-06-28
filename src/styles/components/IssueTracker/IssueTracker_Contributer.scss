@@ -2,7 +2,7 @@
 .IssueTracker_Contributor {
   padding-left: 2em;
   position: relative;
-  background-color: $ColorBackgroundDark;
+  background-color: $BackgroundColor-Content--isDark;
 
   + input {
     visibility: hidden;

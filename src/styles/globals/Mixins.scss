@@ -36,14 +36,14 @@ $Viewport_Padding_Horizontal: getPercatageOfDefaultSize(($Default_Width % $Defau
     border-radius: 50%;
     display: inline-block;
     margin-right: 0.4em;
-    color: $ColorBackgroundContent;
-    background-color: $ColorBackgroundDark;
+    color: $BackgroundColor-Content;
+    background-color: $BackgroundColor-Content--isDark;
     transition: background-color 0.2s ease-in-out;
   }
 
   &:hover {
     &::after {
-      background-color: $ColorPrimary;
+      background-color: $Color-Primary;
     }
   }
 }
@@ -51,12 +51,12 @@ $Viewport_Padding_Horizontal: getPercatageOfDefaultSize(($Default_Width % $Defau
   padding: 0.5em;
   border-radius: 0.25em;
   font-weight: 700;
-  color: $ColorBackgroundContent;
-  background-color: $ColorBackgroundDark;
+  color: $BackgroundColor-Content;
+  background-color: $BackgroundColor-Content--isDark;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: $ColorPrimary;
+    background-color: $Color-Primary;
   }
 }
 

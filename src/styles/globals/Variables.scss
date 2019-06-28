@@ -1,52 +1,47 @@
 //#region Colors
-$ColorPrimary: #ff9c00;
-$ColorSecondary: #9c9b9b;
-$ColorThird: #475157;
+$Color-Primary: #ff9c00;
+$Color-Secondary: #9c9b9b;
+$Color-Third: #475157;
 
-$color-base: #fff;
+$Color-Error: #f00;
 
-$ColorError: #f00;
+$Color-Secondary--isDark: darken($Color-Secondary, 5%);
+$Color-Secondary--isDarker: darken($Color-Secondary, 25%);
 
-$ColorSecondaryDark: darken($ColorSecondary, 5%);
-$ColorSecondaryDarker: darken($ColorSecondary, 25%);
+$Color-Secondary--isLight: lighten($Color-Secondary, 20%);
+$Color-Secondary--Lighter: lighten($Color-Secondary, 35%);
 
-$ColorSecondaryLight: lighten($ColorSecondary, 20%);
-$ColorSecondaryLighter: lighten($ColorSecondary, 35%);
+$BackgroundColor-Content: #fff;
+$BackgroundColor-Content--isAlpha: rgba($color: $BackgroundColor-Content, $alpha: 0.3);
+$BackgroundColor-Content--isLight: #f4f4f4;
+$BackgroundColor-Content--isDark: #282828;
+$BackgroundColor-Content--isDarkAlpha: rgba($BackgroundColor-Content--isDark, 0.5);
 
-$ColorBackgroundContent: #fff;
-$ColorBackgroundContent_Alpha: rgba($color:$ColorBackgroundContent, $alpha: 0.3);
-$ColorBackgroundLight: #f4f4f4;
-$ColorBackgroundDark: #282828;
-$ColorBackgroundDark_Alpha: rgba($ColorBackgroundDark, 0.5);
+$Color-Copy--isDark: $Color-Secondary--isDark;
+$Color-Copy--isLight: $BackgroundColor-Content;
 
-$DarkCopy_Color: $ColorSecondaryDark;
-$LightCopy_Color: $ColorBackgroundContent;
+$Gradient-Color1: #6310ca;
+$Gradient-Color2: #5e77f0;
+$Gradient-History: radial-gradient(circle at 65% 50%, $Gradient-Color2 1%, $Gradient-Color1 75%);
 
-$Color1: #6310ca;
-$Color2: #5e77f0;
-$HistoryGradient: radial-gradient(circle at 65% 50%,
-$Color2 1%,
-$Color1 75%);
+$BackgroundColor-Timeline: rgba($BackgroundColor-Content, 0.7);
+$BackgroundColor-Timeline--isActive: $BackgroundColor-Content;
 
-$Timeline_BackgroundColor: rgba($ColorBackgroundContent, 0.7);
-$Timeline-Active_BackgroundColor: $ColorBackgroundContent;
-
-$ColorDiscarded: #f1235a;
-$ColorInterested: #40a7d1;
-$ColorUntrained: darken($ColorInterested, 20%);
-$ColorLearned: #5cb449;
-$ColorAssess: lighten($ColorInterested, 20%);
-$ColorMastered: $ColorPrimary;
+$Color-Discarded: #f1235a;
+$Color-Interested: #40a7d1;
+$Color-Untrained: darken($Color-Interested, 20%);
+$Color-Learned: #5cb449;
+$Color-Assess: lighten($Color-Interested, 20%);
+$Color-Mastered: $Color-Primary;
 //#endregion
 
 //#region Sizes and Positions
-$MobileNavBreak: 700px;
-$ComponentMarginBottom: 10vh;
-$ComponentPadding_Vertical: getGridSize(1, vertical);
-$ComponentPadding_Horizontal: getGridSize(2, horizontal);
-
-//#endsubregion
+$Breakpoint-Nav--isMobile: 700px;
+$MarginBottom-Component: 10vh;
+$PaddingVertical-Component: getGridSize(1, vertical);
+$PaddingHorizontal-Component: getGridSize(2, horizontal);
 //#endregion
 
-//Transitions
-$HeaderColorTansition: color 0.3s ease-in-out, background-color 0.4s ease-in-out;
+//#region Transitions
+$Transition-Header: color 0.3s ease-in-out, background-color 0.4s ease-in-out;
+//#endregion

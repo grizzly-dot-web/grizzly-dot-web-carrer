@@ -1,21 +1,21 @@
 /* stylelint-disable */
 .experience-overview {
-  padding: $ComponentPadding_Vertical $ComponentPadding_Horizontal $ComponentMarginBottom;
+  padding: $PaddingVertical-Component $PaddingHorizontal-Component $MarginBottom-Component;
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  background-color: $ColorThird;
-  color: $ColorBackgroundContent;
+  background-color: $Color-Third;
+  color: $BackgroundColor-Content;
 
   .experience-overview--title {
     width: 100%;
     font-size: 1.4em;
     font-weight: 700;
     margin-bottom: 0.65em;
-    color: $ColorBackgroundContent;
+    color: $BackgroundColor-Content;
     text-transform: uppercase;
   }
 
@@ -54,7 +54,7 @@
         }
 
         .experience-overview--type-title {
-          color: $ColorBackgroundContent;
+          color: $BackgroundColor-Content;
 
           &::after {
             content: '';
@@ -62,7 +62,7 @@
             height: 0.3rem;
             display: block;
             margin-top: 0.5em;
-            background-color: $ColorBackgroundContent;
+            background-color: $BackgroundColor-Content;
           }
         }
 
@@ -94,7 +94,7 @@
           }
 
           .category-headline {
-            color: $ColorPrimary;
+            color: $Color-Primary;
           }
         }
       }
@@ -106,10 +106,10 @@
     position: relative;
     left: calc((100vw - 100%) / 2 * -1);
     padding: getGridSize(1, vertical) getGridSize(2, horizontal);
-    background-color: $ColorBackgroundContent;
+    background-color: $BackgroundColor-Content;
 
     .experience-overview--title {
-      color: $ColorBackgroundDark;
+      color: $BackgroundColor-Content--isDark;
 
       &::after {
         content: '';
@@ -117,7 +117,7 @@
         height: 0.3rem;
         display: block;
         margin-top: 0.3em;
-        background-color: $ColorBackgroundDark;
+        background-color: $BackgroundColor-Content--isDark;
       }
     }
 

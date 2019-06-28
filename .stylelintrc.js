@@ -57,9 +57,12 @@ module.exports = {
     'plugin/selector-bem-pattern': {
       preset: 'suit',
       presetOptions: {
-        namespace: 'twt'
+        namespace: 'gzly'
       }
     },
-    'selector-class-pattern': null
+    'selector-class-pattern': null,
+    'scss/dollar-variable-pattern': /(?:[A-Z][a-z]+)+(-[A-Z][a-z]+)+(_[a-z]+[A-Z]?[a-z]+)*(--[a-z]+[A-Z]?[a-z]+)?/, // $CssProperty-Component_element--hasState
+    'scss/at-function-pattern': /(?:[a-z][A-Z]?[a-z]+)+/,
+    'scss/at-mixin-pattern': /(?:[a-z][A-Z]?[a-z]+)+/,
   }
 }

@@ -2,8 +2,8 @@
 .App_Header {
   z-index: 4;
   width: 100%;
-  transition: $HeaderColorTansition;
-  padding: $ComponentPadding_Vertical $ComponentPadding_Horizontal;
+  transition: $Transition-Header;
+  padding: $PaddingVertical-Component $PaddingHorizontal-Component;
 
   a {
     text-decoration: none;
@@ -20,7 +20,7 @@
 
     .logo {
       float: left;
-      transition: $HeaderColorTansition;
+      transition: $Transition-Header;
 
       h1,
       h2 {
@@ -35,7 +35,7 @@
           text-transform: uppercase;
           margin-bottom: 5px;
           padding-bottom: 5px;
-          border-bottom: 3px $ColorPrimary solid;
+          border-bottom: 3px $Color-Primary solid;
         }
 
         .company {

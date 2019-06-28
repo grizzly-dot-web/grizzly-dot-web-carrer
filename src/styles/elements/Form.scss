@@ -115,10 +115,10 @@
     overflow: auto;
     position: relative;
     flex-direction: column;
-    border: 1px solid rgba($ColorBackgroundDark, 1);
+    border: 1px solid rgba($BackgroundColor-Content--isDark, 1);
 
     &:focus-within {
-      border: 1px solid rgba($ColorPrimary, 0.5);
+      border: 1px solid rgba($Color-Primary, 0.5);
     }
 
     .Form_Label_Inner {
@@ -137,7 +137,7 @@
 
     .Form_Textarea {
       min-height: 20vh;
-      border-bottom: 1px dotted $ColorBackgroundDark;
+      border-bottom: 1px dotted $BackgroundColor-Content--isDark;
 
       &:focus {
         outline: none;
@@ -147,7 +147,7 @@
     .Form_Markdown_Preview {
       padding-top: 1.5em;
       position: relative;
-      color: $color-base;
+      color: $Color_Theme-isLight;
 
       p {
         margin-bottom: 0;
@@ -172,7 +172,7 @@
     transition: border 0.3s ease;
 
     &.Form_Element-invalid {
-      border: 2px solid $ColorError;
+      border: 2px solid $Color-Error;
     }
   }
 }

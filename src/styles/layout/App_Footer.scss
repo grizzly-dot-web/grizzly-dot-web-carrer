@@ -5,9 +5,9 @@
   width: 100%;
   padding: getGridSize(1, vertical) getGridSize(2, horizontal);
 
-  color: $ColorBackgroundContent;
-  background-color: $ColorBackgroundDark;
-  transition: $HeaderColorTansition;
+  color: $BackgroundColor-Content;
+  background-color: $BackgroundColor-Content--isDark;
+  transition: $Transition-Header;
 
   .container {
     z-index: 2;

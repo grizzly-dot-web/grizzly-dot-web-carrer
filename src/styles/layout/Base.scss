@@ -11,8 +11,8 @@ body {
 
 body {
   font-family: 'Work Sans', sans-serif;
-  color: $ColorBackgroundDark;
-  background-color: $ColorBackgroundLight;
+  color: $BackgroundColor-Content--isDark;
+  background-color: $BackgroundColor-Content--isLight;
 
   font-size: 14px;
 
