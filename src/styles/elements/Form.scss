@@ -27,7 +27,7 @@
 
 
     .Form_Button {
-        margin-top: 1em; 
+        margin-top: 1em;
         @include Button();
     }
 
@@ -46,7 +46,7 @@
         &:last-child {
             margin-bottom: 0;
         }
-    } 
+    }
 
 
 
@@ -54,7 +54,7 @@
     .From_CheckboxList {
         padding: 0.5em;
         margin-bottom: 1em;
-        
+
         .Form_Label_Inner {
             width: 100%;
             display: block;
@@ -75,7 +75,7 @@
 
                 &:checked ~ .From_CheckboxList_Item_Label {
                     opacity: 1;
-                
+
                     &:before {
                         content: '✔';
                     }
@@ -87,7 +87,7 @@
                 position: relative;
                 display: inline-block;
                 transition: opacity 0.1s ease-in;
-            
+
                 &:before, &:after {
                     left: 0;
                     top: 50%;
@@ -98,7 +98,7 @@
                 &:hover {
                     opacity: 1;
                 }
-                
+
                 &:before {
                     content: '✘';
                 }
@@ -115,7 +115,7 @@
         position: relative;
         flex-direction: column;
         border: 1px solid rgba($ColorBackgroundDark, 1);
-        
+
         &:focus-within {
           border: 1px solid rgba($ColorPrimary, 0.5);
         }
@@ -136,7 +136,7 @@
         .Form_Textarea {
             min-height: 20vh;
             border-bottom: 1px dotted $ColorBackgroundDark;
-            
+
             &:focus {
                 outline: none;
             }
@@ -145,8 +145,8 @@
         .Form_Markdown_Preview {
             padding-top: 1.5em;
             position: relative;
-            color: #fff;
-            
+            color: $color-base;
+
             p {
                 margin-bottom: 0;
             }
@@ -163,7 +163,7 @@
     }
 
 
-    
+
 
     .Form_Element {
         border: 2px transparent solid;

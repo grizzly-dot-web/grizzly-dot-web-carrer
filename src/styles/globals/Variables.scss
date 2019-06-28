@@ -3,6 +3,8 @@ $ColorPrimary: #ff9c00;
 $ColorSecondary: #9c9b9b;
 $ColorThird: #475157;
 
+$color-base: #ffffff;
+
 $ColorError: #ff0000;
 
 $ColorSecondaryDark: darken($ColorSecondary, 5%);
@@ -12,8 +14,10 @@ $ColorSecondaryLight: lighten($ColorSecondary, 20%);
 $ColorSecondaryLighter: lighten($ColorSecondary, 35%);
 
 $ColorBackgroundContent: #fff;
+$ColorBackgroundContent_Alpha: rgba($color:$ColorBackgroundContent, $alpha: 0.3);
 $ColorBackgroundLight: #f4f4f4;
 $ColorBackgroundDark: #282828;
+$ColorBackgroundDark_Alpha: rgba($ColorBackgroundDark, 0.5);
 
 $DarkCopy_Color: $ColorSecondaryDark;
 $LightCopy_Color: $ColorBackgroundContent;

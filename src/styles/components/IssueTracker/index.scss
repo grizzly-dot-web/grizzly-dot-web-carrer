@@ -72,7 +72,7 @@
         position: fixed;
         transform: translate(-50%, -50%);
 
-        background-color: rgba($ColorBackgroundDark, 0.5);
+        background-color: $ColorBackgroundDark_Alpha;
     }
 
     .IssueTracker_ResponseMessage {
